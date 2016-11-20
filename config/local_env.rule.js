@@ -11,7 +11,7 @@ module.exports = {
   "environment": "development",
 
   // 程序运行接口
-  "port": "8008",
+  "port": "8088",
 
  
   // 开发环境下的热加载配置

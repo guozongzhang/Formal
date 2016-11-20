@@ -1,5 +1,4 @@
 <template lang="jade">
-
   div.news-vue
     h1.title 新闻列表
     ul(v-for="item in newscontent")
@@ -9,11 +8,11 @@
 </template>
 
 <script>
-  //import TestComponent from '../test/test.vue';
+  import TestComponent from '../test/test.vue';
   export default {
-    // components: { 
-    //   'test-vue': TestComponent 
-    // },
+    components: { 
+      'test-vue': TestComponent 
+    },
     props:['newscontent'],
     data() {
       return {
