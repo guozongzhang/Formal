@@ -52,10 +52,10 @@ require('vendor_css/swiper.min.css');
 
 <style lang="sass">
 .swiper-vue{
-  height: 400px;
+  height: 640px;
   .swiper-container {
     width: 100%;
-    height: 400px;
+    height: 640px;
   }
   .swiper-slide {
     background-position: center;
