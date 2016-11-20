@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    include ./header.jade
+  body
+    div#app
+      include ./nav.jade 
+      div.banner-box
+        block banner
+      div.container
+        block con
+      footer
+        include ./footer.jade
+
+
