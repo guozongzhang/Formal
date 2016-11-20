@@ -1,27 +1,26 @@
 extends ../layouts/layout.jade
 block banner
   <vue-swiper></vue-swiper>
-  //- <vue-footer></vue-footer>
 block con 
   <vue-news :msg='msgs'></vue-news>
   //- 家具商城
-  div
+  div(v-clock)
     <vue-blocktitle :msg='goodsArr'></vue-blocktitle>
     div(style="width:100%;height:250px;")
   
   //- 装修设计
-  div
+  div(v-clock)
     <vue-blocktitle :msg='designArr'></vue-blocktitle>
     div(style="width:100%;height:250px;")
   
   //- 软件工具
-  div
+  div(v-clock)
     <vue-blocktitle :msg='softwareArr'></vue-blocktitle>
     div(style="width:100%;height:250px;")
       <vue-video></vue-video>
   
   //- 服务支持
-  div
+  div(v-clock)
     <vue-blocktitle :msg='serviceArr'></vue-blocktitle>
     div(style="width:100%;height:250px;")
 
