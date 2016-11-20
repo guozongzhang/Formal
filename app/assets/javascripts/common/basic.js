@@ -1,4 +1,6 @@
 let model;
+import vuefooter from '../../../components/footer/footer.vue';
+import vuetoplab from '../../../components/home/toplab.vue';
 /**
  * 基础类，包含一些公用的方法和属性
  */
@@ -11,7 +13,11 @@ class Basic {
     model = this
     
     let mvvmDefault = {
-      el: '#app'
+      el: '#app',
+      components: {
+        'vue-footer': vuefooter,
+        'vue-toplab': vuetoplab,
+      }
     }
 
 

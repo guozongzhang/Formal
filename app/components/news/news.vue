@@ -1,19 +1,15 @@
 <template lang="jade">
   div.news-vue
     h1.title 新闻列表
-    ul(v-for="item in newscontent")
-      li {{item}}
-    div
-      test-vue
+    ul
+      li(v-for="item in msg.list") 
+        span {{item.name}}
+        span {{item.number}}
 </template>
 
 <script>
-  import TestComponent from '../test/test.vue';
   export default {
-    components: { 
-      'test-vue': TestComponent 
-    },
-    props:['newscontent'],
+    props:['msg'],
     data() {
       return {
         items: ['tome', 'lili', 'hxh']

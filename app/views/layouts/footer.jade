@@ -1,7 +1,9 @@
-//- div(style="position:fixed;bottom: 0px;width:100%;text-align:center;padding:20px 0;background-color:#ecf0f5") 
-//-   | Copyright©2014-2016 
-//-   a(href="http://www.dpjia.com" target="_blank") 搭配家（dpjia.com） 
-//-   | 版权所有v1.5.0 
+div(style="width:100%;text-align:center;padding:20px 0;background-color:#ecf0f5") 
+  <vue-footer></vue-footer>
+  div(style="display:block;width:100%;text-align:center;padding:20px 0;")
+    | Copyright©2014-2016 
+    a(href="http://www.dpjia.com" target="_blank") 搭配家（dpjia.com） 
+    | 版权所有v1.5.0 
 each item in development.assets.vendor.javascripts
   script(src="/assets/javascripts/#{item}.js")
 
