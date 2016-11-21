@@ -11,7 +11,8 @@ module.exports = {
   resolve: {
     alias: {
       vendor_css: '../../../vendor/stylesheets',
-      vendor_js: '../../../vendor/javascripts'
+      vendor_js: '../../../vendor/javascripts',
+      com_root: '../../../components'
     }
   },
   module: {

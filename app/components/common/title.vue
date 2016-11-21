@@ -1,18 +1,18 @@
 <template lang="jade">
   div.title-vue
     p 
-      label {{msg.title}}
-      span {{msg.subtitle}}
-      a(:href="msg.link_url") {{msg.link_text}}
+      label {{title.title}}
+      span {{title.subtitle}}
+      a(:href="title.link_url") {{title.link_text}}
     ul.list-style.clear 
-      li.list-text.list-style(v-for="item in msg.listdata") 
+      li.list-text.list-style(v-for="item in title.listdata") 
         span {{item.icon}}
         span {{item.text}}
 </template>
 
 <script>
   export default {
-    props:['msg'],
+    props:['title'],
     data() {
       return {
         items: {}

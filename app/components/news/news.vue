@@ -2,14 +2,14 @@
   div.news-vue
     h1.title 新闻列表
     ul
-      li(v-for="item in msg.list") 
+      li(v-for="item in news.list") 
         span {{item.name}}
         span {{item.number}}
 </template>
 
 <script>
   export default {
-    props:['msg'],
+    props:['news'],
     data() {
       return {
         items: ['tome', 'lili', 'hxh']
