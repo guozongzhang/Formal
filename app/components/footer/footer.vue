@@ -1,14 +1,15 @@
 <template lang="jade">
   div.footer-vue.vue-component
-    ul.title-ul.list-style.clear
-      li.list-style(v-for="item in dataArr")
-        label {{item.title}}
-        ul.text-ul.list-style
-          li.list-style(v-for="msg in item.content")
-            a(:href="msg.url") {{msg.text}}
-      li.list-style 
-        label(style="display:block") 关注我们
-        img(src="")
+    div.dpjia-content
+      ul.title-ul.list-style.clear
+        li.list-style(v-for="item in dataArr")
+          label {{item.title}}
+          ul.text-ul.list-style
+            li.list-style(v-for="msg in item.content")
+              a(:href="msg.url") {{msg.text}}
+        li.list-style 
+          label(style="display:block") 关注我们
+          img(src="")
 </template>
 
 <script>
@@ -107,16 +108,37 @@
 
 </script>
 <style lang="sass">
+@import "../../assets/stylesheets/function.scss";
+
 .footer-vue{
-  .title-ul{
-    li{
-      width: 20%;
-      float:left;
-      .text-ul{
-        li{
-          clear:both;
-          width: 100%;
+  width: pxTorem(1200);
+  margin: 0 auto;
+  .dpjia-content{
+    .title-ul{
+      li{
+        width: 20%;
+        float:left;
+        label{
+          font-size: pxTorem(16);
         }
+        .text-ul{
+          li{
+            clear:both;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .frends-link{
+    label{
+      float: left;
+    }
+    ul{
+      li{
+        display: inline-block;
+        float: left;
+        margin-left: pxTorem(10);
       }
     }
   }

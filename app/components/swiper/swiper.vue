@@ -44,7 +44,7 @@ require('vendor_css/swiper.min.css');
         prevButton: '.swiper-button-prev',
         spaceBetween: 30,
         loop:true,
-        effect: 'coverflow'
+        effect: 'overflow'
       });
     }
   }

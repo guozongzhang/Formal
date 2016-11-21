@@ -1,10 +1,40 @@
 <template lang="jade">
-  div.goods-vue.vue-component
+  div.service-vue.vue-component
     <vue-title :title='serviceArr'></vue-title>
-    div.row
-      div.col-md-7
-      
-      div.col-md-5
+    div.service-box.clear
+      div.left-box
+        img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+      div.right-box
+        ul.list-style 
+          li.list-style  
+            span.icon
+            p.icon-text 家具产品设计
+          li.list-style  
+            span.icon
+            p.icon-text 装修效果设计
+          li.list-style  
+            span.icon
+            p.icon-text 展厅效果设计
+
+          li.list-style 
+            span.icon
+            p.icon-text 家具产品设计
+          li.list-style  
+            span.icon
+            p.icon-text 装修效果设计
+          li.list-style  
+            span.icon
+            p.icon-text 展厅效果设计
+
+          li.list-style  
+            span.icon
+            p.icon-text 家具产品设计
+          li.list-style  
+            span.icon
+            p.icon-text 装修效果设计
+          li.list-style  
+            span.icon
+            p.icon-text 展厅效果设计
       
 </template>
 
@@ -46,8 +76,42 @@
 
 </script>
 <style lang="sass">
-.goods-vue{
+@import "../../assets/stylesheets/function.scss";
 
+.service-vue{
+  .service-box{
+    height: pxTorem(420);
+    .left-box{
+      float:left;
+      width: pxTorem(660);
+      img {
+        width:pxTorem(660);
+        height: pxTorem(420);
+      }
+    }
+    .right-box{
+      float:left;
+      width: pxTorem(540);
+      ul{
+        li{
+          float: left;
+          width: pxTorem(180);
+          height: pxTorem(140);
+          border-top: pxTorem(1) solid #ccc;
+          border-right: pxTorem(1) solid #ccc;
+          .icon{
+            display: inline-block;
+            width: pxTorem(100);
+            height: pxTorem(100);
+            margin: 0 auto;
+          }
+          .icon-text{
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 

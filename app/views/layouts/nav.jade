@@ -1,18 +1,18 @@
 nav.navbar.navbar-light.bg-faded
   div.container
     <vue-toplab></vue-toplab>
-    div#navbar-header.collapse.navbar-toggleable-xs 
-      a(class="navbar-brand" href="#") CVHub
-      ul.nav.navbar-nav
-
-      ul.nav.navbar-nav.pull-right
-        li.nav-item
-          if mem
-            a(href="/mem"): img.avatar(src="#{mem.avatar}")
-          else
-            a.nav-link(href="/signin") 登录
-              
-    
-    div.clearfix
-    button.navbar-toggler.hidden-sm-up(type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header")  &#9776;
+    div.navbar-header.collapse.navbar-toggleable-xs 
+      a.home-logo(href="/") 
+        img(src="/assets/images/logo_h.png")
+      ul.nav.navbar-nav.nav-tab
+        li
+          a(href="") 首页
+        li
+          a(href="") 家具商城
+        li
+          a(href="") 装修设计
+        li
+          a(href="") 软件工具
+        li
+          a(href="") 服务支持
       
