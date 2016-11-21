@@ -1,8 +1,21 @@
 <template lang="jade">
-  div.goods-vue
+  div.goods-vue.vue-component
     <vue-title :title='softwareArr'></vue-title>
-    div
-      <vue-video></vue-video>
+    div.row
+      div.col-md-3
+        label 此处有文案张
+        p 关于介绍视频，搭配家的8大神器的使用介绍
+      div.col-md-5
+        <vue-video></vue-video>
+      div.col-md-4
+        ul.list-style 
+          li.list-style.list-tab 云量房
+          li.list-style.list-tab 云设计
+          li.list-style.list-tab 云展示
+          li.list-style.list-tab 云制造
+        div
+          img(src="")
+          img(src="")
       
 </template>
 
@@ -47,7 +60,11 @@
 </script>
 <style lang="sass">
 .goods-vue{
-
+  .list-tab{
+    display:inline-block;
+    width:25%;
+    text:center;
+  }
 }
 </style>
 

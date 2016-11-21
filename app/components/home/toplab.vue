@@ -1,7 +1,7 @@
 <template lang="jade">
-  div.toplab-vue
+  div.toplab-vue.vue-component
     ul.list-style 
-      li.list-text.list-style(v-for="item in items") {{item.text}}
+      li.list-style.list-text(v-for="item in items") {{item.text}}
       li.list-style.list-right(v-for="msg in initdata") {{msg.text}}
     div.clear
 </template>
@@ -69,27 +69,16 @@
 </script>
 <style lang="sass">
 .toplab-vue{
-  .list-style{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-  }
-  .list-text{
+  li{
     display: inline-block;
+  }
+  li.list-text{
     float:left;
     margin-right: 20px;
   }
-  .list-right{
+  li.list-right{
     float:right;
     margin-left:20px;
-  }
-  .clear:before,
-  .clear:after{
-    display: block !important;
-    clear: both !important;
-    content: "" !important;
-    visibility: hidden !important;
-    height: 0 !important;
   }
 }
 </style>

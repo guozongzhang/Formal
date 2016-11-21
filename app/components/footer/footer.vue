@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.footer-vue
+  div.footer-vue.vue-component
     ul.title-ul.list-style.clear
       li.list-style(v-for="item in dataArr")
         label {{item.title}}
@@ -108,19 +108,6 @@
 </script>
 <style lang="sass">
 .footer-vue{
-  .clear:before,
-  .clear:after{
-    display: block !important;
-    clear: both !important;
-    content: "" !important;
-    visibility: hidden !important;
-    height: 0 !important;
-  }
-  .list-style{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-  }
   .title-ul{
     li{
       width: 20%;

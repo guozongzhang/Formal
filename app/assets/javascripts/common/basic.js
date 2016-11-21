@@ -7,6 +7,7 @@ import vuetoplab from '../../../components/home/toplab.vue';
 
 class Basic {
   constructor(initData = {}){
+    require('../../stylesheets/layout.scss')
     require('../../stylesheets/' + SITE.router.controller + '.scss')
 
 

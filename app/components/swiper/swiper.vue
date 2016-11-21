@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.swiper-vue
+  div.swiper-vue.vue-component
     div.swiper-container
       div.swiper-wrapper
         template(v-for="item in items")

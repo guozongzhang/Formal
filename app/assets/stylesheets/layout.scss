@@ -4,6 +4,23 @@ body{
   font-size: .8rem;
 }
 
+/*组件公共样式*/
+.vue-component{
+  .list-style{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+  }
+  .clear:before,
+  .clear:after{
+    display: block !important;
+    clear: both !important;
+    content: "" !important;
+    visibility: hidden !important;
+    height: 0 !important;
+  }
+}
+
 
 
 //- bootstrap patch

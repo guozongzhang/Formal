@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.news-vue
+  div.news-vue.vue-component
     h1.title 新闻列表
     ul
       li(v-for="item in news.list") 

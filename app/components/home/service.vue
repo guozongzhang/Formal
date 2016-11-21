@@ -1,7 +1,10 @@
 <template lang="jade">
-  div.goods-vue
+  div.goods-vue.vue-component
     <vue-title :title='serviceArr'></vue-title>
-    div
+    div.row
+      div.col-md-7
+      
+      div.col-md-5
       
 </template>
 

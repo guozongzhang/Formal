@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.goods-vue
+  div.goods-vue.vue-component
     <vue-title :title='designArr'></vue-title>
     div.row
       div.col-md-6
@@ -65,11 +65,6 @@
 </script>
 <style lang="sass">
 .goods-vue{
-  .list-style{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-  }
   .swiper-box{
     img{
       height:540px;
@@ -86,14 +81,6 @@
         height:250px;
       }
     }
-  }
-  .clear:before,
-  .clear:after{
-    display: block !important;
-    clear: both !important;
-    content: "" !important;
-    visibility: hidden !important;
-    height: 0 !important;
   }
 }
 </style>
