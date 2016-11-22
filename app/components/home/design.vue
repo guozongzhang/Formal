@@ -4,32 +4,22 @@
     div.desgin-box.clear
       div.left-box
         div.left-btns
-          ul.list-style 
-            li.list-style 效果图
-            li.list-style 户型图
-            li.list-style 模型库
-            li.list-style 设计师
+          ul.list-style
+            li.list-style(v-for="tmp in datas.lists") {{tmp.name}}
         div.swiper-box
           <vue-swiper></vue-swiper>
           div.swiper-text
-            p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+            p {{datas.renderdata.loopdata.text}}
       div.right-box
         ul.list-style.design-right
-          li.list-style
-            a.img-box(href="") 
-              img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-          li.list-style
-            a.img-box(href="") 
-              img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+          li.list-style(v-for="top in datas.renderdata.rightdata.topdata")
+            a.img-box(:href="top.link_url") 
+              img(:src="top.img_url")
         ul.list-style.design-right
-          li.list-style
-            a.img-box(href="") 
-              img(src="http://cimg.dpjia.com/files/banners/14752079983317.jpg")
-          li.list-style
-            a.img-box(href="") 
-              img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+          li.list-style(v-for="bottom in datas.renderdata.rightdata.bottomdata")
+            a.img-box(:href="bottom.link_url") 
+              img(:src="bottom.img_url")
               
-    <vue-line></vue-line>
 </template>
 
 <script>
@@ -42,7 +32,51 @@
     },
     data() {
       return {
-         designArr:{
+        datas:{
+          lists:[
+            {
+              name:'效果图',//render
+            },
+            {
+              name:'户型图',
+            },
+            {
+              name:'模型图',
+            },
+            {
+              name:'设计师',
+            }
+          ],
+          renderdata:{
+            loopdata:{
+              imgs:[],
+              text:'商品名称会很长，所有应该会换行额度，可能还有有省略号',
+            },
+            rightdata:{
+              topdata:[
+                {
+                  link_url:'',
+                  img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
+                },
+                {
+                  link_url:'',
+                  img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
+                }
+              ],
+              bottomdata:[
+                {
+                  link_url:'',
+                  img_url:'http://cimg.dpjia.com/files/banners/14752079983317.jpg'
+                },
+                {
+                  link_url:'',
+                  img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg'
+                }
+              ]
+            }
+          }
+        },
+        designArr:{
           title:'装修设计',
           subtitle:'挑了心仪的家具不知道整体效果如何？放在我的房间看看效果吧！',
           link_text:'查看更多',

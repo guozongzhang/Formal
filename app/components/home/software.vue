@@ -4,24 +4,21 @@
     div.software-box.clear
       div.video
         div.video-content
-          label 此处有文案张
-          p 关于介绍视频，搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍
+          label {{datas.roomdatas.video.title}}
+          p {{datas.roomdatas.video.content}}
         div.video-box
           <vue-video></vue-video>
       div.download-box
         div.tab-box
           ul.list-style 
-            li.list-style 云量房
-            li.list-style 云设计
-            li.list-style 云展示
-            li.list-style 云制造
+            li.list-style(v-for="tmp in datas.lists") {{tmp.name}}
         div.loadurl-box
           ul.list-style 
             li.list-style.left-load 
-              img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+              img(:src="datas.roomdatas.loaddata.android.url")
               p 搭配家云设计Android </b>(ipad/手机端均可下载)
             li.list-style 
-              img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+              img(:src="datas.roomdatas.loaddata.ios.url")
               p 搭配家云设计iOS </b>(ipad/手机端均可下载)
       
 </template>
@@ -36,6 +33,39 @@
     },
     data() {
       return {
+        datas:{
+          lists:[
+            {
+              name:'云量房'
+            },
+            {
+              name:'云设计'
+            },
+            {
+              name:'云展示'
+            },
+            {
+              name:'云制造'
+            }
+          ],
+          roomdatas:{
+            video:{
+              title:'此处有文案张',
+              content:'关于介绍视频，搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍',
+              video_url:''
+            },
+            loaddata:{
+              android:{
+                url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+                tips:''
+              },
+              ios:{
+                url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg',
+                tips:''
+              }
+            }
+          }
+        },
         softwareArr:{
           title:'软件工具',
           subtitle:'这么好的效果是怎么搭出来的？快来试试搭配家六大神器！',

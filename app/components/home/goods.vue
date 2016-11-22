@@ -3,61 +3,33 @@
     <vue-title :title='goodsArr'></vue-title>
     div.tab-group
       ul.list-style 
-        li.list-style 办公商品
-        li.list-style 民用商品
-        li.list-style 家具品牌
-        li.list-style 线下体验店
+        li.list-style(v-for="tmp in datas.lists") {{tmp.name}}
     div.goods-imgs-box.clear
       div.left-box
         div.left-top
-          img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+          img(:src="datas.officedata.left_url")
         div.left-bottom
           ul.list-style 
-            li.list-style
-              a(href="#")
+            li.list-style(v-for="tmp in datas.officedata.leftdata")
+              a(:href="tmp.link_url")
                 div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style
-              a(href="#")
-                div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+                  img(:src="tmp.img_url")
+                p {{tmp.content}}
       div.right-box
         div.goods-right-imgs
           ul.list-style 
-            li.list-style
-              a(href="#")
+            li.list-style(v-for="item in datas.officedata.righttop")
+              a(:href="item.link_url")
                 div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style
-              a(href="#")
-                div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style
-              a(href="#")
-                div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+                  img(:src="item.img_url")
+                p {{item.content}}
         div.goods-right-imgs
           ul.list-style 
-            li.list-style
-              a(href="#")
+            li.list-style(v-for="msg in datas.officedata.rightbottom")
+              a(:href="msg.link_url")
                 div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style
-              a(href="#")
-                div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style
-              a(href="#")
-                div.img-box
-                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+                  img(:src="msg.img_url")
+                p {{msg.content}}
     
     
 </template>
@@ -70,6 +42,72 @@
     },
     data() {
       return {
+        datas:{
+          lists:[
+            {
+              name:'办公家具'
+            },
+            {
+              name:'民用家具'
+            },
+            {
+              name:'品牌精选'
+            },
+            {
+              name:'线下体验'
+            }
+          ],
+          officedata:{
+            left_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+            leftdata:[
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              },
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              }
+            ],
+            righttop:[
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              },
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              },
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              }
+            ],
+            rightbottom:[
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              },
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              },
+              {
+                link_url:'',
+                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+              }
+            ]
+          }
+          
+        },
         goodsArr:{
           title:'家具商城',
           subtitle:'买家居用品又贵又麻烦？来搭配家线上3D体验，线下尊享服务！',
@@ -119,6 +157,10 @@
         text-align: center;
         border-right: pxTorem(1) solid #ccc;
         color: #666;
+      }
+      li.active{
+        background-color: #f14f4f;
+        color: #fff;
       }
       li:nth-child(4){
         border-right: none;

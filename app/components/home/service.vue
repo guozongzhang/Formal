@@ -3,38 +3,12 @@
     <vue-title :title='serviceArr'></vue-title>
     div.service-box.clear
       div.left-box
-        img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+        img(:src="service.img_url")
       div.right-box
         ul.list-style 
-          li.list-style  
-            span.icon
-            p.icon-text 家具产品设计
-          li.list-style  
-            span.icon
-            p.icon-text 装修效果设计
-          li.list-style  
-            span.icon
-            p.icon-text 展厅效果设计
-
-          li.list-style 
-            span.icon
-            p.icon-text 家具产品设计
-          li.list-style  
-            span.icon
-            p.icon-text 装修效果设计
-          li.list-style  
-            span.icon
-            p.icon-text 展厅效果设计
-
-          li.list-style  
-            span.icon
-            p.icon-text 家具产品设计
-          li.list-style  
-            span.icon
-            p.icon-text 装修效果设计
-          li.list-style  
-            span.icon
-            p.icon-text 展厅效果设计
+          li.list-style(v-for="tmp in service.listdatas")
+            a(:href="tmp.link_url")
+              img(:src="tmp.img_nomal_url")
       
 </template>
 
@@ -46,6 +20,56 @@
     },
     data() {
       return {
+        service:{
+          img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+          listdatas:[
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            },
+            {
+              link_url:'',
+              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_hover_url:''
+            }
+          ]
+        },
         serviceArr:{
           title:'服务支持',
           subtitle:'传统家居企业向赶上互联网快车？搭配家为您弯道超车加油助力！',
@@ -99,14 +123,16 @@
           height: pxTorem(140);
           border-top: pxTorem(1) solid #ccc;
           border-right: pxTorem(1) solid #ccc;
-          .icon{
+          a{
             display: inline-block;
             width: pxTorem(100);
             height: pxTorem(100);
-            margin: 0 auto;
-          }
-          .icon-text{
-            text-align: center;
+            margin: pxTorem(20) pxTorem(40);
+            img{
+              text-align: center;
+              width: pxTorem(100);
+              height: pxTorem(100);
+            }
           }
         }
         li:nth-last-child(1),

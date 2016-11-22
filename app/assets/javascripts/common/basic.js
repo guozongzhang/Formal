@@ -1,6 +1,7 @@
 let model;
 import vuefooter from '../../../components/footer/footer.vue';
 import vuetoplab from '../../../components/home/toplab.vue';
+import vueheader from '../../../components/home/header.vue';
 /**
  * 基础类，包含一些公用的方法和属性
  */
@@ -18,6 +19,7 @@ class Basic {
       components: {
         'vue-footer': vuefooter,
         'vue-toplab': vuetoplab,
+        'vue-header': vueheader
       }
     }
 
