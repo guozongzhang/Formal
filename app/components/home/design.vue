@@ -29,8 +29,7 @@
             a.img-box(href="") 
               img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
               
-    div(style="display:none;")
-      p ///////////////////////
+    <vue-line></vue-line>
 </template>
 
 <script>
@@ -39,7 +38,7 @@
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-swiper': SwiperVue
+      'vue-swiper': SwiperVue 
     },
     data() {
       return {
@@ -93,6 +92,7 @@
             width: 25%;
             text-align: center;
             border-right: pxTorem(1) solid #ccc;
+            color: #666;
           }
           li:nth-child(4){
             border-right: none;
@@ -106,10 +106,11 @@
         }
         .swiper-text{
           height: pxTorem(50);
-          background-color: #eee;
+          background-color: #f1f1f1;
           p {
             margin: 0;
             padding: pxTorem(10);
+            color: #333;
           }
         }
       }

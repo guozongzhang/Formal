@@ -14,53 +14,59 @@
         div.left-bottom
           ul.list-style 
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
       div.right-box
         div.goods-right-imgs
           ul.list-style 
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
         div.goods-right-imgs
           ul.list-style 
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
             li.list-style
-              div.img-box
-                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
-              p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-
-
-    div(style="display:none;")
-      p ///////////////////////
+              a(href="#")
+                div.img-box
+                  img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+                p 商品名称会很长，所有应该会换行额度，可能还有有省略号
+    
+    
 </template>
 
 <script>
   import TitleVue from '../common/title.vue';
   export default {
     components: { 
-      'vue-title': TitleVue, 
+      'vue-title': TitleVue,  
     },
     data() {
       return {
@@ -112,6 +118,7 @@
         width: 25%;
         text-align: center;
         border-right: pxTorem(1) solid #ccc;
+        color: #666;
       }
       li:nth-child(4){
         border-right: none;
@@ -141,15 +148,19 @@
             margin: pxTorem(10);
             width: pxTorem(220);
             height: pxTorem(280);
-            background-color: #eee;
-            img{
-              width: pxTorem(220);
-              height: pxTorem(220);
-            }
-            p{
-              margin: 0;
-              padding: pxTorem(10);
-              line-height: pxTorem(22)
+            background-color: #f1f1f1;
+            a{
+              text-decoration: none;
+              img{
+                width: pxTorem(220);
+                height: pxTorem(220);
+              }
+              p{
+                margin: 0;
+                padding: pxTorem(10);
+                line-height: pxTorem(22);
+                color: #333;
+              }
             }
           }
         }
@@ -166,15 +177,19 @@
             margin: 0 0 pxTorem(20) pxTorem(20);
             width: pxTorem(220);
             height: pxTorem(280);
-            background-color: #eee;
-            img{
-              width: pxTorem(220);
-              height: pxTorem(220);
-            }
-            p{
-              margin: 0;
-              padding: pxTorem(10);
-              line-height: pxTorem(22)
+            background-color: #f1f1f1;
+            a{
+              text-decoration: none;
+              img{
+                width: pxTorem(220);
+                height: pxTorem(220);
+              }
+              p{
+                margin: 0;
+                padding: pxTorem(10);
+                line-height: pxTorem(22);
+                color: #333;
+              }
             }
           }
         }

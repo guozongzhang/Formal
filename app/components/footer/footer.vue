@@ -113,6 +113,7 @@
 .footer-vue{
   width: pxTorem(1200);
   margin: 0 auto;
+  padding-bottom: pxTorem(30);
   .dpjia-content{
     .title-ul{
       li{
@@ -120,11 +121,15 @@
         float:left;
         label{
           font-size: pxTorem(16);
+          color: #333;
         }
         .text-ul{
           li{
             clear:both;
             width: 100%;
+            a{
+               color: #555;
+            }
           }
         }
       }

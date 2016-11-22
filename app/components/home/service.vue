@@ -109,6 +109,11 @@
             text-align: center;
           }
         }
+        li:nth-last-child(1),
+        li:nth-last-child(2),
+        li:nth-last-child(3){
+           border-bottom: pxTorem(1) solid #ccc;
+        }
       }
     }
   }

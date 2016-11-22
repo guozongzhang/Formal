@@ -4,7 +4,7 @@
       span.goods-icon
       label {{title.title}}
       a(:href="title.link_url") 
-        span {{title.link_text}}
+        span.link-text {{title.link_text}}
         span > 
     div.sub-box
       span.subtitle {{title.subtitle}}
@@ -51,12 +51,14 @@
       margin: 0;
       padding: 0;
       font-size: pxTorem(16);
+      color: #333;
     }
     a{
       position: absolute;
       bottom: pxTorem(10);
       right: 0;
       font-size: pxTorem(12);
+      color: #999;
     }
   }
   .sub-box{
@@ -66,6 +68,7 @@
       float: left;
       font-size: pxTorem(12);
       margin-right: pxTorem(45);
+      color: #666;
     }
     ul{
       height: pxTorem(45);
@@ -83,6 +86,7 @@
         }
         .tab-text{
           font-size: pxTorem(12);
+          color: #999;
         }
       }
     }

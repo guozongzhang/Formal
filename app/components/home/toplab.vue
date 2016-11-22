@@ -1,8 +1,11 @@
 <template lang="jade">
   div.toplab-vue.vue-component
-    ul.list-style 
-      li.list-style.list-text(v-for="item in items") {{item.text}}
-      li.list-style.list-right(v-for="msg in initdata") {{msg.text}}
+    div.top-box
+      ul.list-style 
+        li.list-style.list-text(v-for="item in items") 
+          a(:href="item.url") {{item.text}}
+        li.list-style.list-right(v-for="msg in initdata") 
+          a(:href="msg.url") {{msg.text}}
 </template>
 
 <script>
@@ -70,19 +73,28 @@
 @import "../../assets/stylesheets/function.scss";
 
 .toplab-vue{
-  ul{
-    height: pxTorem(30);
-    line-height: pxTorem(30);
-    li{
-      display: inline-block;
-    }
-    li.list-text{
-      float:left;
-      margin-right: pxTorem(10);
-    }
-    li.list-right{
-      float:right;
-      margin-left:pxTorem(10);
+  background-color: #f1f1f1;
+  .top-box{
+    max-width: pxTorem(1200);
+    margin: 0 auto;
+    ul{
+      height: pxTorem(30);
+      line-height: pxTorem(30);
+      li{
+        display: inline-block;
+        a{
+          text-decoration: none;
+          color:#999;
+        }
+      }
+      li.list-text{
+        float:left;
+        margin-right: pxTorem(10);
+      }
+      li.list-right{
+        float:right;
+        margin-left:pxTorem(10);
+      }
     }
   }
 }

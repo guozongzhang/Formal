@@ -3,6 +3,8 @@ import GoodsVue from 'com_root/home/goods.vue';
 import DesignVue from 'com_root/home/design.vue';
 import SoftwareVue from 'com_root/home/software.vue';
 import ServiceVue from 'com_root/home/service.vue';
+import LineVue from 'com_root/common/line.vue';
+
 let model
 
 class Index extends Basic {
@@ -15,7 +17,8 @@ class Index extends Basic {
           'vue-goods': GoodsVue,
           'vue-design': DesignVue,
           'vue-software': SoftwareVue,
-          'vue-service': ServiceVue
+          'vue-service': ServiceVue,
+          'vue-line':LineVue
         }
       }
     })
