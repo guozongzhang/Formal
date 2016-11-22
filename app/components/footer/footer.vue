@@ -1,14 +1,15 @@
 <template lang="jade">
-  div.footer-vue
-    ul.title-ul.list-style
-      li.list-style(v-for="item in dataArr")
-        label {{item.title}}
-        ul.text-ul.list-style 
-          li.list-style(v-for="msg in item.content")
-            a(:href="msg.url") {{msg.text}}
-      li.list-style 
-        label(style="display:block") 关注我们
-        img(src="")
+  div.footer-vue.vue-component
+    div.dpjia-content
+      ul.title-ul.list-style.clear
+        li.list-style(v-for="item in dataArr")
+          label {{item.title}}
+          ul.text-ul.list-style
+            li.list-style(v-for="msg in item.content")
+              a(:href="msg.url") {{msg.text}}
+        li.list-style 
+          label(style="display:block") 关注我们
+          img(src="")
 </template>
 
 <script>
@@ -107,21 +108,42 @@
 
 </script>
 <style lang="sass">
+@import "../../assets/stylesheets/function.scss";
+
 .footer-vue{
-  .list-style{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-  }
-  .title-ul{
-    li{
-      width: 20%;
-      float:left;
-      .text-ul{
-        li{
-          clear:both;
-          width: 100%;
+  width: pxTorem(1200);
+  margin: 0 auto;
+  padding-bottom: pxTorem(30);
+  .dpjia-content{
+    .title-ul{
+      li{
+        width: 20%;
+        float:left;
+        label{
+          font-size: pxTorem(16);
+          color: #333;
         }
+        .text-ul{
+          li{
+            clear:both;
+            width: 100%;
+            a{
+               color: #555;
+            }
+          }
+        }
+      }
+    }
+  }
+  .frends-link{
+    label{
+      float: left;
+    }
+    ul{
+      li{
+        display: inline-block;
+        float: left;
+        margin-left: pxTorem(10);
       }
     }
   }

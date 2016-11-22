@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.video-vue
+  div.video-vue.vue-component
     div
       video(:src="video.video_url" autoplay="true")
         您的浏览器不支持 video 标签。

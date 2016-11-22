@@ -1,7 +1,17 @@
-//- div(style="position:fixed;bottom: 0px;width:100%;text-align:center;padding:20px 0;background-color:#ecf0f5") 
-//-   | Copyright©2014-2016 
-//-   a(href="http://www.dpjia.com" target="_blank") 搭配家（dpjia.com） 
-//-   | 版权所有v1.5.0 
+div.footer-style(style="text-align:center;background-color:#868686;padding:20px 0 0 0;margin-top:55px;") 
+  <vue-footer></vue-footer>
+  div.frends-link
+    div.frends-box
+      p 友情链接：
+        a(href="#") 链接1
+        a(href="#") 链接2
+        a(href="#") 友情链接3
+        a(href="#") 友情链接4
+          
+    div(style="display:block;width:100%;text-align:center;padding: 0;color:#999;")
+      | Copyright©2014-2016 
+      a(href="http://www.dpjia.com" target="_blank" style="color:#999") 搭配家（dpjia.com） 
+      | 版权所有v1.5.0 
 each item in development.assets.vendor.javascripts
   script(src="/assets/javascripts/#{item}.js")
 

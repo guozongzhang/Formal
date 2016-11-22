@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.swiper-vue
+  div.swiper-vue.vue-component
     div.swiper-container
       div.swiper-wrapper
         template(v-for="item in items")
@@ -44,7 +44,7 @@ require('vendor_css/swiper.min.css');
         prevButton: '.swiper-button-prev',
         spaceBetween: 30,
         loop:true,
-        effect: 'coverflow'
+        effect: 'overflow'
       });
     }
   }
@@ -52,10 +52,9 @@ require('vendor_css/swiper.min.css');
 
 <style lang="sass">
 .swiper-vue{
-  height: 400px;
   .swiper-container {
     width: 100%;
-    height: 400px;
+    height:100%;
   }
   .swiper-slide {
     background-position: center;

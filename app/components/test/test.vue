@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.test-vue
+  div.test-vue.vue-component
     p.title {{testcontent}}
 </template>
 

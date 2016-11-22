@@ -1,17 +1,26 @@
 let model;
+import vuefooter from '../../../components/footer/footer.vue';
+import vuetoplab from '../../../components/home/toplab.vue';
+import vueheader from '../../../components/home/header.vue';
 /**
  * 基础类，包含一些公用的方法和属性
  */
 
 class Basic {
   constructor(initData = {}){
+    require('../../stylesheets/layout.scss')
     require('../../stylesheets/' + SITE.router.controller + '.scss')
 
 
     model = this
     
     let mvvmDefault = {
-      el: '#app'
+      el: '#app',
+      components: {
+        'vue-footer': vuefooter,
+        'vue-toplab': vuetoplab,
+        'vue-header': vueheader
+      }
     }
 
 

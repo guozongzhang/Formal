@@ -1,23 +1,24 @@
-import vuenews from '../../../components/news/news.vue'
-import vueswiper from '../../../components/swiper/swiper.vue'
-import vuefooter from '../../../components/footer/footer.vue'
-import vueblocktitle from '../../../components/home/title.vue'
-import vuevideo from '../../../components/video/video.vue';
+import vueswiper from 'com_root/swiper/swiper.vue';
+import GoodsVue from 'com_root/home/goods.vue';
+import DesignVue from 'com_root/home/design.vue';
+import SoftwareVue from 'com_root/home/software.vue';
+import ServiceVue from 'com_root/home/service.vue';
+import LineVue from 'com_root/common/line.vue';
+
 let model
 
 class Index extends Basic {
   constructor(){
     super({
       vue: {
-        data:{
-          newscontent:['11','22','33'],
-        },
+        data:{},
         components: {
-          'vue-news': vuenews,
           'vue-swiper': vueswiper,
-          'vue-footer':vuefooter,
-          'vue-blocktitle':vueblocktitle,
-          'vue-video':vuevideo,
+          'vue-goods': GoodsVue,
+          'vue-design': DesignVue,
+          'vue-software': SoftwareVue,
+          'vue-service': ServiceVue,
+          'vue-line':LineVue
         }
       }
     })
