@@ -13,34 +13,42 @@
           img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
         div.left-bottom
           ul.list-style 
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
       div.right-box
         div.goods-right-imgs
           ul.list-style 
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
         div.goods-right-imgs
           ul.list-style 
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079855355.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
-            li.list-style.img-box
-              img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
+            li.list-style
+              div.img-box
+                img(src="http://cimg.dpjia.com/files/banners/14752079902872.jpg")
               p 商品名称会很长，所有应该会换行额度，可能还有有省略号
 
 
