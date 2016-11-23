@@ -109,25 +109,26 @@
           }
         },
         softwareArr:{
+          color:'#558fee',
           title:'软件工具',
           subtitle:'这么好的效果是怎么搭出来的？快来试试搭配家六大神器！',
           link_text:'查看更多',
           link_url:'',
           listdata:[
             {
-              icon:'',
+              icon:'#558fee',
               text:'1分钟手机量出户型',
             },
             {
-              icon:'',
+              icon:'#558fee',
               text:'2分钟导入户型搭房间',
             },
             {
-              icon:'',
+              icon:'#558fee',
               text:'3分钟出渲染图看效果',
             },
             {
-              icon:'',
+              icon:'#558fee',
               text:'一键导出清单下订单',
             }
           ]

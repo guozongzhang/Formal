@@ -71,25 +71,26 @@
           ]
         },
         serviceArr:{
+          color:'#33bebc',
           title:'服务支持',
           subtitle:'传统家居企业向赶上互联网快车？搭配家为您弯道超车加油助力！',
           link_text:'查看更多',
           link_url:'',
           listdata:[
             {
-              icon:'',
+              icon:'#33bebc',
               text:'23年家具行业经验',
             },
             {
-              icon:'',
+              icon:'#33bebc',
               text:'十多个跨行业成功案例',
             },
             {
-              icon:'',
+              icon:'#33bebc',
               text:'近百家专业专注的团队',
             },
             {
-              icon:'',
+              icon:'#33bebc',
               text:'24小时不间断贴心服务',
             }
           ]

@@ -1,7 +1,7 @@
 <template lang="jade">
   div.title-vue.vue-component
     p 
-      span.goods-icon
+      span.goods-icon(v-bind:style="{backgroundColor:title.color}")
       label {{title.title}}
       a(:href="title.link_url") 
         span.link-text {{title.link_text}}
@@ -10,7 +10,7 @@
       span.subtitle {{title.subtitle}}
       ul.list-style.clear
         li.list-text.list-style(v-for="item in title.listdata") 
-          span.goods-icon {{item.icon}}
+          span.goods-icon(v-bind:style="{backgroundColor:item.icon}")
           span.tab-text {{item.text}}
 </template>
 
@@ -39,11 +39,11 @@
     padding: 0;
     .goods-icon{
       position: absolute;
-      bottom:pxTorem(10);
+      bottom: pxTorem(12);
       display: inline-block;
       width: pxTorem(20);
       height: pxTorem(20);
-      //background:url('./') no-repeat;
+      border-radius: 50%;
     }
     label {
       position: absolute;
@@ -80,14 +80,17 @@
         float:left;
         margin-right: pxTorem(15);
         .goods-icon{
+          position: relative;
+          top: pxTorem(3);
           display: inline-block;
-          width: pxTorem(20);
-          height: pxTorem(20);
-          //background:url('') no-repeat;
+          width: pxTorem(16);
+          height: pxTorem(16);
+          border-radius: 50%;
         }
         .tab-text{
           font-size: pxTorem(12);
           color: #999;
+          margin-left: pxTorem(5);
         }
       }
     }

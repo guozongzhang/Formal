@@ -117,7 +117,7 @@ nav.navbar{
 //页脚
 .frends-link{
   text-align: center;
-  background-color: #565656;
+  background-color: #4a4a4a;
   padding: pxTorem(15) 0;
   .frends-box{
     height:pxTorem(20);
@@ -125,11 +125,11 @@ nav.navbar{
     p{
       margin: 0;
       padding: 0;
-      color: #999;
+      color: #fff;
       a{
         display: inline-block;
         margin-right: pxTorem(20);
-        color: #999;
+        color: #fff;
       }
       a:nth-last-child(1){
         margin-right: 0;

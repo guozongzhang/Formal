@@ -11,9 +11,10 @@
 </template>
 
 <script>
-import Swiper from 'vendor_js/swiper.min.js';
+// import Swiper from 'vendor_js/swiper.min.js';
 require('vendor_css/swiper.min.css');
   export default {
+    props:['effect'],
     data() {
       return {
         items: [
@@ -37,6 +38,8 @@ require('vendor_css/swiper.min.css');
       }
     },
     mounted() {
+      console.log(this.effect)
+      let model = this;
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: true,
