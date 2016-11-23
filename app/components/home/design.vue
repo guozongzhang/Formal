@@ -8,7 +8,7 @@
       <!--效果图-->
       div.render-left-box(v-if="viewtype == 'render'")
         div.swiper-box
-          <vue-swiper :effect='"fade"'></vue-swiper>
+          <vue-swiper :flag='"homeDesgin"' :swiperdata='swiperArr' :autoplay='2000' :effect='"fade"'></vue-swiper>
           div.swiper-text
             p {{datas.renderdata.loopdata.text}}
       div.render-right-box(v-if="viewtype == 'render'")
@@ -282,6 +282,16 @@
             }
           ]
         },
+        swiperArr: [
+          {
+            url:'http://www.dpjia.com',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
+          },
+          {
+            url:'http://www.dpjia.com',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
+          }
+        ]
       }
     },
     methods: {

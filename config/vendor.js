@@ -4,9 +4,7 @@ module.exports = {
     'jquery.validate.min',
     'vue',
     'underscore-min',
-    'js.cookie',
-    'swiper.min'
-    // 'turbolinks'
+    'js.cookie'
   ],
   stylesheets: [
     'font-awesome.min',
