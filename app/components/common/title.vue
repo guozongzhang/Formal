@@ -29,10 +29,11 @@
 @import "../../assets/stylesheets/function.scss";
 
 .title-vue{
-  height: pxTorem(125);
+  height: pxTorem(120);
+  margin-bottom: pxTorem(10);
   p{
     position: relative;
-    height: pxTorem(80);
+    height: pxTorem(75);
     border-bottom: pxTorem(1) solid #ccc;
     margin: 0;
     padding: 0;

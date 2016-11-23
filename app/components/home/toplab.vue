@@ -82,6 +82,7 @@
       line-height: pxTorem(30);
       li{
         display: inline-block;
+        font-size: pxTorem(12);
         a{
           text-decoration: none;
           color:#999;

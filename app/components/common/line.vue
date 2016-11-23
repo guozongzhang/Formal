@@ -23,6 +23,7 @@
     line-height: pxTorem(20);
     margin: 0;
     padding: 0;
+    color: #ccc;
   }
 }
 </style>

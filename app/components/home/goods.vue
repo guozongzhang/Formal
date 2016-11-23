@@ -100,51 +100,51 @@
             }
           ],
           officedata:{
-            left_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+            left_url:'http://dpjia.com/images/new_index/jia.png',
             leftdata:[
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/679.jpg',
+                content:'亚美特 47-餐桌BM3101'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/666.jpg',
+                content:'亚美特 11-床头柜BM1304'
               }
             ],
             righttop:[
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/930.jpg',
+                content:'W11-2902双人床'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/917.jpg',
+                content:'W-8357组合厅柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/861.jpg',
+                content:'W12-0603餐桌'
               }
             ],
             rightbottom:[
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/821.jpg',
+                content:'W12-0304电视柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/917.jpg',
+                content:'W-8357组合厅柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/666.jpg',
+                content:'亚美特 11-床头柜BM1304'
               }
             ]
           },
@@ -152,53 +152,53 @@
             top:[
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/917.jpg',
+                content:'W-8357组合厅柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/861.jpg',
+                content:'W12-0603餐桌'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/821.jpg',
+                content:'W12-0304电视柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/917.jpg',
+                content:'W-8357组合厅柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/666.jpg',
+                content:'亚美特 11-床头柜BM1304'
               }
             ],
             bottom:[
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/930.jpg',
+                content:'W11-2902双人床'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/917.jpg',
+                content:'W-8357组合厅柜'
               },
               {
                 link_url:'',
-                img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-                content:'商品名称会很长，所有应该会换行额度，可能还有有省略号'
+                img_url:'http://dpjia.com/images/new_index/861.jpg',
+                content:'W12-0603餐桌'
               }
             ]
           },
           branddata:[
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家搭配家'
+              img_url:'http://cimg.dpjia.com/files/tempLogos/1440057177.jpg',
+              name:'东方百盛'
             },
             {
               link_url:'',
@@ -207,18 +207,18 @@
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/tempLogos/14567345924438.jpg',
+              name:'那里家居'
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家搭配家搭配家搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
+              name:'奥斯迪尔osidea'
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/57/logos/1449202608.png',
+              name:'小尼宅配'
             },
             {
               link_url:'',
@@ -227,8 +227,8 @@
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
+              name:'奥斯迪尔osidea'
             },
             {
               link_url:'',
@@ -242,8 +242,13 @@
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
+              name:'奥斯迪尔osidea'
+            },
+            {
+              link_url:'',
+              img_url:'http://cimg.dpjia.com/files/companys/66/logo@160w_120h.png',
+              name:'荣麟世佳'
             },
             {
               link_url:'',
@@ -252,8 +257,8 @@
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/63/logo@160w_120h.png',
+              name:'华日家居'
             },
             {
               link_url:'',
@@ -262,26 +267,27 @@
             },
             {
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
+              img_url:'http://cimg.dpjia.com/files/companys/63/logo@160w_120h.png',
+              name:'华日家居'
             }
           ],
           storedata:[
             {
-              name:'搭配家线下体验店学院路店',
+              name:'房山青龙湖镇店',
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_url:'http://cimg.dpjia.com/files/companys/57/stores/41/1445937534.jpg',
               address:'北京市',
             },
             {
-              name:'搭配家线下体验店学院路店',
+              name:'东方百盛明光店',
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_url:'http://cimg.dpjia.com/files/companys/70/stores/58/1446619834.jpg',
+              address:'北京市海淀区学院路7号弘彧大厦313',
+            },
+            {
+              name:'东方百盛城外城店',
+              link_url:'',
+              img_url:'http://cimg.dpjia.com/files/companys/70/stores/57/1446619268.jpg',
               address:'北京市海淀区学院路7号弘彧大厦313',
             },
             {
@@ -291,9 +297,21 @@
               address:'北京市海淀区学院路7号弘彧大厦313',
             },
             {
-              name:'搭配家线下体验店学院路店',
+              name:'那里家居--北京北四环店面',
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_url:'http://brand.dpjia.com/images/company/nljj/store_left.jpg',
+              address:'北京市海淀区学院路7号弘彧大厦313',
+            },
+            {
+              name:'通州马驹桥店',
+              link_url:'',
+              img_url:'http://cimg.dpjia.com/files/companys/57/stores/34/1445937415.jpg',
+              address:'北京市海淀区学院路7号弘彧大厦313',
+            },
+            {
+              name:'那里家居--北京城外城店面',
+              link_url:'',
+              img_url:'http://brand.dpjia.com/images/company/nljj/store_right.jpg',
               address:'北京市海淀区学院路7号弘彧大厦313',
             },
             {
@@ -303,27 +321,9 @@
               address:'北京市海淀区学院路7号弘彧大厦313',
             },
             {
-              name:'搭配家线下体验店学院路店',
+              name:'那里家居--北京大红门店面',
               link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+              img_url:'http://brand.dpjia.com/images/company/nljj/store_left.jpg',
               address:'北京市海淀区学院路7号弘彧大厦313',
             },
             {
@@ -383,6 +383,7 @@
         border: 1px solid #ccc;
         margin: 0 auto;
         li{
+          height: pxTorem(28);
           display: inline-block;
           width: 25%;
           text-align: center;

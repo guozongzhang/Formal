@@ -9,7 +9,7 @@
               a(:href="msg.url") {{msg.text}}
         li.list-style 
           label(style="display:block") 关注我们
-          img(src="")
+          img.qr-code(src="http://dpjia.com/images/new_index/erweima.jpg")
 </template>
 
 <script>
@@ -63,19 +63,19 @@
             title:'快速下载',
             content:[
               {
-                text:'云设计Android版',
-                url:'',
-              },
-              {
                 text:'云设计iOS版',
                 url:'',
               },
               {
-                text:'云设计Windows版',
+                text:'云量房Android版',
                 url:'',
               },
               {
-                text:'云量房Android版',
+                text:'云设计Android版',
+                url:'',
+              },
+              {
+                text:'云设计Windows版',
                 url:'',
               }
             ]
@@ -121,18 +121,23 @@
         float:left;
         label{
           font-size: pxTorem(16);
-          color: #333;
+          color: #fff;
         }
         .text-ul{
           li{
             clear:both;
             width: 100%;
             a{
-               color: #555;
+               color: #eee;
+               font-size: pxTorem(14);
             }
           }
         }
       }
+    }
+    .qr-code{
+      width: pxTorem(90);
+      height: pxTorem(90);
     }
   }
   .frends-link{
