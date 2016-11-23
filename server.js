@@ -60,4 +60,4 @@ app
 
 
 app.listen(localEnv.port)
-console.log('服务器启动...')
+console.log('服务器启动...', localEnv.port)
