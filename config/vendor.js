@@ -3,7 +3,8 @@ module.exports = {
     'jquery.min',
     'jquery.validate.min',
     'vue',
-    'underscore-min'
+    'underscore-min',
+    'js.cookie'
     // 'turbolinks'
   ],
   stylesheets: [

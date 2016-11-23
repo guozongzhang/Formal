@@ -2,69 +2,50 @@
   div.toplab-vue.vue-component
     div.top-box
       ul.list-style 
-        li.list-style.list-text(v-for="item in items") 
-          a(:href="item.url") {{item.text}}
-        li.list-style.list-right(v-for="msg in initdata") 
-          a(:href="msg.url") {{msg.text}}
+        li.list-style.list-text(v-for="item in items" v-show="item.visible == 0") 
+          a(:href="item.url") {{item.name}}
+        li.list-style.list-right(v-for="msg in configdata") 
+          a(:href="msg.url") {{msg.name}}
 </template>
 
 <script>
+  let HomePage = AV.extend('homepage_modules');//创建人
   export default {
     data() {
       return {
-        items: [
+        dataItem:{},
+        items: [],
+        configdata:[
           {
-            text:'投资者',
+            name:'厂家后台',
             url:''
           },
           {
-            text:'品牌商',
+            name:'我的搭配家',
             url:''
           },
           {
-            text:'销售商',
+            name:'注册',
             url:''
           },
           {
-            text:'生产商',
+            name:'登录',
             url:''
-          },
-          {
-            text:'设计师',
-            url:''
-          },
-          {
-            text:'业主',
-            url:''
-          },
-          {
-            text:'工长',
-            url:''
-          },
-          {
-            text:'求职者',
-            url:''
-          }
-        ],
-        initdata:[
-          {
-            text:'厂商后台',
-            url:'',
-          },
-          {
-            text:'我的搭配家',
-            url:'',
-          },
-          {
-            text:'注册',
-            url:'',
-          },
-          {
-            text:'登录',
-            url:'',
           }
         ]
       }
+    },
+    methods:{
+      // 获取数据（导航）
+      initData: function() {
+        HomePage.where({name:'topmenu'}).all((data)=> {
+          this.dataItem = data.items[0];
+          this.items = JSON.parse(data.items[0].config)
+        })
+      }
+    },
+    created() {
+      this.initData();
     }
   }
 
@@ -82,6 +63,7 @@
       line-height: pxTorem(30);
       li{
         display: inline-block;
+        font-size: pxTorem(12);
         a{
           text-decoration: none;
           color:#999;

@@ -21,7 +21,7 @@
     data() {
       return {
         service:{
-          img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+          img_url:'http://dpjia.com/images/gwbgjj/bg_2.jpg',
           listdatas:[
             {
               link_url:'',

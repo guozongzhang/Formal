@@ -11,15 +11,37 @@
       div.download-box
         div.tab-box
           ul.list-style 
-            li.list-style(v-for="tmp in datas.lists") {{tmp.name}}
-        div.loadurl-box
+            li.list-style(v-for="tmp in datas.lists" v-on:mouseover="changeTab(tmp.view)" v-bind:type="tmp.view" v-bind:class="tmp.view == viewtype ? 'active' : ''") {{tmp.name}}
+        <!--云量房-->
+        div.loadurl-box(v-if="viewtype == 'measureroom'")
           ul.list-style 
             li.list-style.left-load 
               img(:src="datas.roomdatas.loaddata.android.url")
-              p 搭配家云设计Android </b>(ipad/手机端均可下载)
+              p 搭配家云设计Android<br/>(ipad/手机端均可下载)
             li.list-style 
               img(:src="datas.roomdatas.loaddata.ios.url")
-              p 搭配家云设计iOS </b>(ipad/手机端均可下载)
+              p 搭配家云设计iOS<br/>(ipad/手机端均可下载)
+          
+        <!--云设计-->
+        div.design-box(v-if="viewtype == 'design'")
+          div
+            a(:href="datas.designdata.link_url")
+              img(:src="datas.designdata.img_url")
+              p {{datas.designdata.content}} 
+        
+        <!--云展示-->
+        div.exhibition-box(v-if="viewtype == 'exhibition'")
+          div
+            a(:href="datas.exhibitiondata.link_url")
+              img(:src="datas.exhibitiondata.img_url")
+              p {{datas.exhibitiondata.content}}
+        
+        <!--云制造-->
+        div.manufacture-box(v-if="viewtype == 'manufacture'")
+          div
+            a(:href="datas.manufacturedata.link_url")
+              img(:src="datas.manufacturedata.img_url")
+              p {{datas.manufacturedata.content}}
       
 </template>
 
@@ -33,18 +55,23 @@
     },
     data() {
       return {
+        viewtype:'measureroom',
         datas:{
           lists:[
             {
+              view:'measureroom',
               name:'云量房'
             },
             {
+              view:'design',
               name:'云设计'
             },
             {
+              view:'exhibition',
               name:'云展示'
             },
             {
+              view:'manufacture',
               name:'云制造'
             }
           ],
@@ -56,14 +83,29 @@
             },
             loaddata:{
               android:{
-                url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+                url:'http://dpjia.com/images/new_index/erweima.jpg',
                 tips:''
               },
               ios:{
-                url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg',
+                url:'http://dpjia.com/images/new_index/erweima.jpg',
                 tips:''
               }
             }
+          },
+          designdata:{
+            link_url:'',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
+            content:'云设计简介',
+          },
+          exhibitiondata:{
+            link_url:'',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
+            content:'云展示简介',
+          },
+          manufacturedata:{
+            link_url:'',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg',
+            content:'云制造简介',
           }
         },
         softwareArr:{
@@ -91,6 +133,12 @@
           ]
         }
       }
+    },
+    methods: {
+      changeTab: function (msg) {
+        if(msg == this.viewtype) return;
+        this.viewtype = msg;
+      }
     }
   }
 
@@ -101,6 +149,7 @@
 .software-vue{
   .software-box{
     height: pxTorem(360);
+    margin-bottom: pxTorem(30);
     .video{
       float: left;
       width: pxTorem(750);
@@ -108,14 +157,14 @@
       .video-content{
         float: left;
         width: pxTorem(280);
-        padding: pxTorem(20) pxTorem(10);
+        padding: pxTorem(20);
         label{
           color: #666;
           font-size: pxTorem(14);
         }
         p{
-          color: #999;
-          font-size: pxTorem(12);
+          color: #666;
+          font-size: pxTorem(14);
         }
       }
       .video-box{
@@ -129,6 +178,7 @@
       }
     }
     
+    /*云量房*/
     .download-box{
       float: left;
       width: pxTorem(420);
@@ -141,14 +191,19 @@
           width: pxTorem(420);
           height: pxTorem(30);
           line-height: pxTorem(30);
-          border: pxTorem(1) solid #ccc;
+          border: 1px solid #ccc;
           background-color: #fff;
           li{
+            height: pxTorem(28);
             display: inline-block;
             width: 25%;
             text-align: center;
-            border-right: pxTorem(1) solid #ccc;
-            color: #333;
+            border-right: 1px solid #ccc;
+            color: #666;
+          }
+          li.active{
+            background-color: #558fee;
+            color: #fff;
           }
           li:nth-child(4){
             border-right: none;
@@ -172,12 +227,34 @@
               text-align: center;
               margin: 0;
               padding: pxTorem(10) 0;
+              font-size: pxTorem(12);
+              color: #999;
             }
           }
           .left-load{
             margin-left: pxTorem(40);
             margin-right: pxTorem(20);
           }
+        }
+      }
+    }
+
+    /*云设计*/
+    .design-box,
+    .exhibition-box,
+    .manufacture-box{
+      a{
+        text-decoration: none;
+         img{
+          width: pxTorem(380);
+          height: pxTorem(240);
+          margin-top: pxTorem(20);
+          margin-left: pxTorem(20);
+        }
+        p{
+          margin: 0;
+          padding: pxTorem(20);
+          color: #999;
         }
       }
     }
