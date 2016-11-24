@@ -14,7 +14,7 @@
 import Swiper from 'vendor_js/swiper.js';
 require('vendor_css/swiper.min.css');
   export default {
-    props:['flag','swiperdata','autoplay','effect'],
+    props:['flag','swiperdata','autoplay','effect', 'pagenation', 'config'],
     data() {
       return {
         items:[],
@@ -22,8 +22,8 @@ require('vendor_css/swiper.min.css');
     },
     mounted() {
       let model = this;
-      var swiper = new Swiper('.'+ model.flag, {
-        pagination: '.swiper-pagination',
+      let default_config = {
+        pagination: model.pagenation || '.swiper-pagination',
         paginationClickable: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -31,7 +31,10 @@ require('vendor_css/swiper.min.css');
         autoplay: model.autoplay || 1000,
         loop:true,
         effect: model.effect || 'overflow'
-      });
+      }
+      default_config = _.extend(model.config || {}, default_config);
+      var swiper = new Swiper('.'+ model.flag, default_config);
+      
     }
   }
 </script>

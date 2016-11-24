@@ -3,13 +3,9 @@
     <vue-title :title='serviceArr'></vue-title>
     div.service-box.clear
       div.left-box
-        <vue-swiper :flag='"homeService"' :swiperdata='swiperArr' :autoplay='1000' :effect='"fade"'></vue-swiper>
-        <!--img(:src="service.img_url")-->
+        <vue-swiper :flag='"homeService"' :swiperdata='swiperArr' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
       div.right-box
-        ul.list-style
-          li.list-style(v-for="tmp in service.listdatas")
-            a(:href="tmp.link_url")
-              img(:src="tmp.img_nomal_url")
+        ul.list-style.home-swiper-pagenation
       
 </template>
 
@@ -22,54 +18,46 @@
       'vue-swiper': SwiperVue,
     },
     data() {
+      let model = this;
       return {
         service:{
           img_url:'http://dpjia.com/images/gwbgjj/bg_2.jpg',
           listdatas:[
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/test1.png'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/2.svg'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/3.svg'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/4.svg'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/5.svg'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/test1.png'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/7.svg'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/test1.png'
             },
             {
               link_url:'',
-              img_nomal_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              img_hover_url:''
+              img_url:'/assets/images/9.svg'
             }
           ]
         },
@@ -135,7 +123,12 @@
             url:'http://www.dpjia.com',
             img_url:'http://cimg.dpjia.com/files/md5/image/origin/69eaeaa692755e4c6b32db0016bdb9da.jpeg'
           }
-        ]
+        ],
+        swiperConf: {
+          paginationBulletRender: function (swiper, index, className) {
+            return '<li class="list-style '+ className +'"><span class="bg-img" style="background-image:url('+ model.service.listdatas[index].img_url + ');"></span></li>';
+          }
+        }
       }
     }
   }
@@ -165,22 +158,34 @@
           height: pxTorem(140);
           border-top: pxTorem(1) solid #ccc;
           border-right: pxTorem(1) solid #ccc;
-          a{
-            display: inline-block;
-            width: pxTorem(100);
-            height: pxTorem(100);
-            margin: pxTorem(20) pxTorem(40);
-            img{
-              text-align: center;
-              width: pxTorem(100);
-              height: pxTorem(100);
-            }
+          .bg-img{
+            display: block;
+            margin: pxTorem(22) pxTorem(42);
+            width: pxTorem(96);
+            height: pxTorem(96);
           }
         }
         li:nth-last-child(1),
         li:nth-last-child(2),
         li:nth-last-child(3){
            border-bottom: pxTorem(1) solid #ccc;
+        }
+      }
+      .home-swiper-pagenation{
+        .swiper-pagination-bullet{
+          border-radius: 0;
+          opacity: 1;
+          background-color: #f1f1f1;
+        }
+        li.swiper-pagination-bullet-active{
+          span {
+            background-position: 0px -96px;
+          }
+        }
+        li.swiper-pagination-bullet:hover{
+          .bg-img{
+            background-position: 0px -96px;
+          }
         }
       }
     }
