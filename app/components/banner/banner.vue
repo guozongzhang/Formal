@@ -1,18 +1,15 @@
 <template lang="jade">
   div.banner-vue.vue-component
-    div.swiper-container
-      div.swiper-wrapper
-        template(v-for="item in items")
-          a.swiper-slide(:href="item.url" target="_blank")
-            img(:src="item.img_url")
-      div.swiper-pagination.swiper-pagination-white
-      <!-- Add Arrows -->
-      div.swiper-button-next.swiper-button-white
-      div.swiper-button-prev.swiper-button-white
+    <vue-swiper :flag='"homeBanner"' :swiperdata='items' :autoplay='5000'></vue-swiper>
 </template>
 
 <script>
+  let HomePage = AV.extend('homepage_modules');
+  import SwiperVue from '../swiper/swiper.vue';
   export default {
+    components: { 
+      'vue-swiper': SwiperVue
+    },
     data() {
       return {
         items: []
@@ -23,6 +20,7 @@
         HomePage.where({name:'banner'}).all((data)=> {
           this.items = JSON.parse(data.items[0].config)
         })
+      }
     },
     created() {
       this.getPics()
@@ -31,7 +29,5 @@
 </script>
 
 <style lang="sass">
-.banner-vue{
-}
 </style>
 
