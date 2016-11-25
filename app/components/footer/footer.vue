@@ -121,14 +121,14 @@
         float:left;
         label{
           font-size: pxTorem(16);
-          color: #fff;
+          color: #555;
         }
         .text-ul{
           li{
             clear:both;
             width: 100%;
             a{
-               color: #eee;
+               color: #777;
                font-size: pxTorem(14);
             }
           }

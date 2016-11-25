@@ -1,8 +1,8 @@
 <template lang="jade">
   div.swiper-vue.vue-component
-    div.swiper-container
+    div.swiper-container(:class="flag")
       div.swiper-wrapper
-        template(v-for="item in items")
+        template(v-for="item in swiperdata")
           a.swiper-slide(:href="item.url" target="_blank")
             img(:src="item.img_url")
       div.swiper-pagination.swiper-pagination-white
@@ -11,41 +11,30 @@
 </template>
 
 <script>
-import Swiper from 'vendor_js/swiper.min.js';
+import Swiper from 'vendor_js/swiper.js';
 require('vendor_css/swiper.min.css');
   export default {
+    props:['flag','swiperdata','autoplay','effect', 'pagenation', 'config'],
     data() {
       return {
-        items: [
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
-          },
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
-          },
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079983317.jpg'
-          },
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg'
-          }
-        ]
+        items:[],
       }
     },
     mounted() {
-      var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
+      let model = this;
+      let default_config = {
+        pagination: model.pagenation || '.swiper-pagination',
         paginationClickable: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         spaceBetween: 30,
+        autoplay: model.autoplay || 1000,
         loop:true,
-        effect: 'overflow'
-      });
+        effect: model.effect || 'overflow'
+      }
+      default_config = _.extend(model.config || {}, default_config);
+      var swiper = new Swiper('.'+ model.flag, default_config);
+      
     }
   }
 </script>
