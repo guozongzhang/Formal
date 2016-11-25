@@ -3,42 +3,39 @@
     div.container-self
       div.navbar-header.collapse.navbar-toggleable-xs 
         a.home-logo(href="/") 
-          img(:src="datas.logo")
+          img(:src="logo")
         ul.nav.navbar-nav.nav-tab
-          li(v-for="item in datas.navlist")
+          li(v-for="item in menus")
             a(:href="item.url") {{item.name}}
+            div.sub-menu
+              a(:href="sub.url" v-for="sub in item.subs" ) {{sub.name}}
     
 </template>
 
 <script>
+  let HomePage = AV.extend('homepage_modules');//创建人
   export default {
     data() {
       return {
-        datas:{
-          logo:'/assets/images/logo_h.png',
-          navlist:[
-            // {
-            //   url:'',
-            //   name:'首页'
-            // },
-            {
-              url:'',
-              name:'家具商城'
-            },
-            {
-              url:'',
-              name:'装修设计'
-            },
-            {
-              url:'',
-              name:'软件工具'
-            },{
-              url:'',
-              name:'服务支持'
-            }
-          ]
-        }
+        logo: '',
+        menus: []
       }
+    },
+    methods: {
+      getLogo: function() {
+        HomePage.where({name:'logo'}).all((data)=> {
+          this.logo = data.items[0].config
+        })
+      },
+      getTopMenus() {
+        HomePage.where({name:'mainmenu'}).all((data)=> {
+          this.menus = JSON.parse(data.items[0].config)
+        })
+      }
+    },
+    created() {
+      this.getLogo()
+      this.getTopMenus()
     }
   }
 
@@ -46,7 +43,7 @@
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
 
-.header-vue{
+.header-vue {
   .navbar-header{
     height: pxTorem(85);
     .home-logo{
@@ -73,12 +70,34 @@
         float: left;
         font-size: pxTorem(18);
         border-right: pxTorem(1) solid #ccc;
+        &:hover {
+          .sub-menu {
+            display: block
+          }
+        }
         a{
           color: #333;
+          text-decoration: none
         }
       }
       li:nth-last-child(1) {
         border-right: none;
+      }
+
+      .sub-menu {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.86);
+        width: 10rem;
+        z-index: 100;
+        padding-top: pxTorem(10);
+        display: none;
+
+
+        a {
+          display: block;
+          border-bottom: #DDD 1px solid;
+          padding: pxTorem(8);
+        }
       }
     }
   }
