@@ -11,7 +11,26 @@ class Index extends Basic {
   constructor(){
     super({
       vue: {
-        data:{},
+        data:{
+          swiperArr: [
+            {
+              url:'http://www.dpjia.com',
+              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
+            },
+            {
+              url:'http://www.dpjia.com',
+              img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
+            },
+            {
+              url:'http://www.dpjia.com',
+              img_url:'http://cimg.dpjia.com/files/banners/14752079983317.jpg'
+            },
+            {
+              url:'http://www.dpjia.com',
+              img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg'
+            }
+          ]
+        },
         components: {
           'vue-swiper': vueswiper,
           'vue-goods': GoodsVue,

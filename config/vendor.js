@@ -5,7 +5,6 @@ module.exports = {
     'vue',
     'underscore-min',
     'js.cookie'
-    // 'turbolinks'
   ],
   stylesheets: [
     'font-awesome.min',

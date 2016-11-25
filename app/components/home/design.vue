@@ -8,7 +8,7 @@
       <!--效果图-->
       div.render-left-box(v-if="viewtype == 'render'")
         div.swiper-box
-          <vue-swiper></vue-swiper>
+          <vue-swiper :flag='"homeDesgin"' :swiperdata='swiperArr' :autoplay='2000' :effect='"fade"'></vue-swiper>
           div.swiper-text
             p {{datas.renderdata.loopdata.text}}
       div.render-right-box(v-if="viewtype == 'render'")
@@ -258,29 +258,40 @@
           ]
         },
         designArr:{
+          color: '#ffae00',
           title:'装修设计',
           subtitle:'挑了心仪的家具不知道整体效果如何？放在我的房间看看效果吧！',
           link_text:'查看更多',
           link_url:'',
           listdata:[
             {
-              icon:'',
+              icon:'#ffae00',
               text:'40000真实小区户型',
             },
             {
-              icon:'',
+              icon:'#ffae00',
               text:'1200张样板间效果图',
             },
             {
-              icon:'',
+              icon:'#ffae00',
               text:'9400个高清3D模型',
             },
             {
-              icon:'',
+              icon:'#ffae00',
               text:'310位设计师免费设计',
             }
           ]
         },
+        swiperArr: [
+          {
+            url:'http://www.dpjia.com',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
+          },
+          {
+            url:'http://www.dpjia.com',
+            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
+          }
+        ]
       }
     },
     methods: {
