@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import TitleVue from '../common/title.vue';
+  import TitleVue from './title.vue';
   import VideoVue from '../video/video.vue';
   export default {
     components: { 

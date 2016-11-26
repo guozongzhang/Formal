@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import TitleVue from '../common/title.vue';
+  import TitleVue from './title.vue';
   import SwiperVue from '../swiper/swiper.vue';
   let viewtimer;
   export default {
