@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Swiper from 'vendor_js/swiper.js';
-require('vendor_css/swiper.min.css');
+  import Swiper from 'vendor_js/swiper.js';
+  require('vendor_css/swiper.min.css');
   export default {
     props:['flag','swiperdata','autoplay','effect', 'pagenation', 'config', 'url_key', 'img_key'],
     data() {
@@ -41,7 +41,7 @@ require('vendor_css/swiper.min.css');
     watch: {
       swiperdata: function () {
         let model = this
-        if(this.isready) {
+        if(this.isready) { 
           setTimeout(function() {
             model.init() 
           }, 0)
@@ -50,6 +50,7 @@ require('vendor_css/swiper.min.css');
     },
     mounted() {
       this.isready = true
+      this.init()
     }
   }
 </script>

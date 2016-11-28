@@ -10,6 +10,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      vendor: '../../../vendor',
       vendor_css: '../../../vendor/stylesheets',
       vendor_js: '../../../vendor/javascripts',
       com_root: '../../../components'

@@ -1,72 +1,76 @@
 <template lang="jade">
   div.design-vue.vue-component
-    <vue-title :title='designArr'></vue-title>
+    <vue-title :title='items'></vue-title>
     div.desgin-box.clear
       div.tab-box
         ul.list-style
-          li.list-style(v-for="tmp in datas.lists" v-on:mouseover="changeTab(tmp.view)" v-bind:type="tmp.view" v-bind:class="tmp.view == viewtype ? 'active' : ''") {{tmp.name}}
+          li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
+      
       <!--效果图-->
-      div.render-left-box(v-if="viewtype == 'render'")
+      div.render-left-box(v-show="view == 0")
         div.swiper-box
-          <vue-swiper :flag='"homeDesgin"' :swiperdata='swiperArr' :autoplay='2000' :effect='"fade"'></vue-swiper>
-          div.swiper-text
-            p {{datas.renderdata.loopdata.text}}
-      div.render-right-box(v-if="viewtype == 'render'")
+          <vue-swiper :flag='"homeDesgin"' :swiperdata='swips' :autoplay='2000' :effect='"fade"'></vue-swiper>
+          //- div.swiper-text
+          //-   p {{datas.renderdata.loopdata.text}}
+
+      div.render-right-box(v-show="view == 0")
         ul.list-style.design-right.clear
-          li.list-style(v-for="top in datas.renderdata.rightdata.topdata")
-            a.img-box(:href="top.link_url") 
-              img(:src="top.img_url")
-        ul.list-style.design-right.clear
-          li.list-style.right-bottom(v-for="bottom in datas.renderdata.rightdata.bottomdata")
-            a.img-box(:href="bottom.link_url") 
-              img(:src="bottom.img_url")
+          li.list-style(v-for="item in items.lanmus[0].piclogo")
+            a.img-box(:href="item.url") 
+              img(:src="item.img")
       
       <!--户型图-->
-      div.house-box.clear(v-if="viewtype == 'house'")
+      div.house-box.clear(v-show="view == 1")
         ul.list-style
-          li.list-style(v-for="item in datas.housedata")
-            a(:href="item.link_url")
-              img(:src="item.img_url")
-              p.name {{item.house_type}} 
-              p.address 地址：{{item.address}}  
+          li.list-style(v-for="item in items.lanmus[1].pics")
+            a(:href="item.url")
+              img(:src="item.img")
+              p.name {{item.text}} 
+              p.address 地址：{{item.addr}}  
 
-      <!--模型图-->
-      div.modal-left-box(v-if="viewtype == 'modal'")
-        div.img-boxs
-          a(:href="datas.modaldata.leftimg.link_url")
-            div
-              img(:src="datas.modaldata.leftimg.img_url")
-            p {{datas.modaldata.leftimg.name}}
-      div.modal-right-box(v-if="viewtype == 'modal'")
-        ul.list-style.design-right.clear
-          li.list-style(v-for="msg in datas.modaldata.listdata")
-            a(:href="msg.link_url")
-              div
-                img(:src="msg.img_url") 
-              p {{msg.name}}
       
+      <!--模型图-->
+      div.modal-left-box(v-show="view == 2")
+        div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
+          a(:href="item.url")
+            div
+              img(:src="item.img")
+            p {{item.text}}
+
+      div.modal-right-box(v-show="view == 2")
+        ul.list-style.design-right.clear
+          li.list-style(v-for="item in  itempart(2, 1, 6)")
+            a(:href="item.url")
+              div
+                img(:src="item.img") 
+              p {{item.text}}
+      
+     
       <!--设计师-->
-      div.designer-box.clear(v-if="viewtype == 'designer'")
+      div.designer-box.clear(v-show="view == 3")
         ul.list-style.clear
-          li.list-style(v-for="msg in datas.designerdata")
-            a(:href="msg.link_url")
+          li.list-style(v-for="item in items.lanmus[3].pics")
+            a(:href="item.url")
               div.work-box
-                img(:src="msg.work_url")
+                img(:src="item.img")
               div.user-info
-                img(:src="msg.user_img")
-                p.name {{msg.name}}
-                p.address {{msg.address}} 
+                img(:src="item.header")
+                p.name {{item.name}}
+                p.address {{item.addr}} 
 
-              p.signature {{msg.signature}}
+              p.signature {{item.text}}
 
-              a.appointment(:href="msg.link_url") 预约
+              a.appointment(:href="item.url") 预约
+
 
 </template>
 
 <script>
   import TitleVue from './title.vue';
   import SwiperVue from '../swiper/swiper.vue';
+  let HomePage = AV.extend('homepage_modules');
   let viewtimer;
+  
   export default {
     components: { 
       'vue-title': TitleVue, 
@@ -74,237 +78,46 @@
     },
     data() {
       return {
-        viewtype:'render',
-        datas:{
-          lists:[
-            {
-              view:'render',
-              name:'效果图',
-            },
-            {
-              view:'house',
-              name:'户型图',
-            },
-            {
-              view:'modal',
-              name:'模型图',
-            },
-            {
-              view:'designer',
-              name:'设计师',
-            }
-          ],
-          renderdata:{
-            loopdata:{
-              imgs:[],
-              text:'商品名称会很长，所有应该会换行额度，可能还有有省略号',
-            },
-            rightdata:{
-              topdata:[
-                {
-                  link_url:'',
-                  img_url:'http://cimg.dpjia.com/files/md5/image/origin/69eaeaa692755e4c6b32db0016bdb9da.jpeg'
-                },
-                {
-                  link_url:'',
-                  img_url:'http://cimg.dpjia.com/files/md5/image/origin/e6186cbe69605e3e07a54eeffed1f28e.jpeg'
-                }
-              ],
-              bottomdata:[
-                {
-                  link_url:'',
-                  img_url:'http://cimg.dpjia.com/files/md5/image/origin/986c2f97b88d32dda2af5cae00c43807.jpeg'
-                },
-                {
-                  link_url:'',
-                  img_url:'http://cimg.dpjia.com/files/md5/image/origin/9fb6807573dff38d97d23faa6b4bb808.jpeg'
-                }
-              ]
-            }
-          },
-          housedata:[
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/paintings/14646013656733.dat@400w_400h',
-              house_type:'北京新建 左安漪园三室二厅101.5m',
-              address:'北京市，崇文区'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/paintings/14629301545568.dat@400w_400h',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs1.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs2.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs1.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs1.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/paintings/14629296969093.dat@400w_400h',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs1.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/paintings/14629296969093.dat@400w_400h',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            },
-            {
-              link_url:'',
-              img_url:'http://dpjia.com/images/new_index/bs2.jpg',
-              house_type:'北京新建 海淀新区三室两厅101.5m',
-              address:'北京市海淀区许愿路'
-            }
-          ],
-          modaldata:{
-            leftimg:{
-              link_url:'',
-              img_url:'http://brand.dpjia.com/images/company/nljj/left_img.jpg',
-              name:'那里家居-思洛尼系列-东方之恋圆椅'
-            },
-            listdata:[
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_top_left.jpg',
-                name:'那里家居-思洛尼系列-北欧风情茶几',
-              },
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_down_left.jpg',
-                name:'那里家居-思洛尼系列-慕尼黑沙发',
-              },
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_top_right.jpg',
-                name:'那里家居-思洛尼系列-纳斯卡书桌',
-              },
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_down_left.jpg',
-                name:'那里家居-思洛尼系列-慕尼黑沙发',
-              },
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_down_right.jpg',
-                name:'那里家居-思洛尼系列-印象米兰单支',
-              },
-              {
-                link_url:'',
-                img_url:'http://brand.dpjia.com/images/company/nljj/right_down_left.jpg',
-                name:'那里家居-思洛尼系列-慕尼黑沙发',
-              }
-            ]
-          },
-          designerdata:[
-            {
-              link_url:'',
-              work_url:'http://cimg.dpjia.com/files/md5/image/origin/69eaeaa692755e4c6b32db0016bdb9da.jpeg',
-              user_img:'http://cimg.dpjia.com/files/users/87/heads/1449719948.JPG',
-              name:'范亚宇',
-              address:'北京市',
-              signature:'一个方案要感动自己了才能给甲方看.',
-            },
-            {
-              link_url:'',
-              work_url:'http://cimg.dpjia.com/files/md5/image/origin/9fb6807573dff38d97d23faa6b4bb808.jpeg',
-              user_img:'http://cimg.dpjia.com/files/users/112/heads/1448244959.jpg',
-              name:'魏利交',
-              address:'北京市',
-              signature:'家具设计的首要目的在于满足客户的基本要求。',
-            },
-            {
-              link_url:'',
-              work_url:'http://cimg.dpjia.com/files/md5/image/origin/e6186cbe69605e3e07a54eeffed1f28e.jpeg',
-              user_img:'http://cimg.dpjia.com/files/users/82/heads/1448511102.jpg',
-              name:'刘晓凤',
-              address:'北京市',
-              signature:'您我一个机会 我还给您一个温馨舒适的港湾',
-            },
-            {
-              link_url:'',
-              work_url:'http://cimg.dpjia.com/files/md5/image/origin/986c2f97b88d32dda2af5cae00c43807.jpeg',
-              user_img:'http://cimg.dpjia.com/files/users/83/heads/1442282868.jpg',
-              name:'刘晶晶',
-              address:'北京市',
-              signature:'不喜欢主动是害怕最后会演变成自作多情.',
-            }
-          ]
-        },
-        designArr:{
-          color: '#ffae00',
-          title:'装修设计',
-          subtitle:'挑了心仪的家具不知道整体效果如何？放在我的房间看看效果吧！',
-          link_text:'查看更多',
-          link_url:'',
-          listdata:[
-            {
-              icon:'#ffae00',
-              text:'40000真实小区户型',
-            },
-            {
-              icon:'#ffae00',
-              text:'1200张样板间效果图',
-            },
-            {
-              icon:'#ffae00',
-              text:'9400个高清3D模型',
-            },
-            {
-              icon:'#ffae00',
-              text:'310位设计师免费设计',
-            }
-          ]
-        },
-        swiperArr: [
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
-          },
-          {
-            url:'http://www.dpjia.com',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
-          }
-        ]
+        view: 0,
+        items: {},
+        swips: []
       }
     },
     methods: {
-      changeTab: function (msg) {
-        if(msg == this.viewtype) return;
+      changeTab: function (tab) {
+        if(tab == this.view) return;
         let model = this
         clearTimeout(viewtimer)
         viewtimer = setTimeout(function () {
-          model.viewtype = msg;
-        }, 300)
+          model.view = tab;
+        }, 300) 
+      },
+      getList: function() {
+        HomePage.where({name: 'secondfloor'}).all((data)=> {
+          this.items = formatData(JSON.parse(data.items[0].config))
+          this.swips = this.items.lanmus[0].pics
+        })
+      },
+      itempart: function(lanmu, start, end){
+        let result = []
+        let model = this
+        for(let i = start; i <= end; i++) {
+          result.push(model.items.lanmus[lanmu].pics[i])
+        } 
+        return result
       }
+    },
+    created() {
+      this.getList()
     }
+  }
+
+  function formatData (items) {
+    items.lanmus[0].pics  = _.filter(items.lanmus[0].pics, item=> {
+      return item.visible == 0
+    })
+
+    return items
   }
 
 </script>

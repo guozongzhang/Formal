@@ -1,18 +1,36 @@
 <template lang="jade">
   div.video-vue.vue-component
     div
-      video(:src="video.video_url" autoplay="true")
-        您的浏览器不支持 video 标签。
+      video#videof(autoplay height="355" class="video-js vjs-default-skin")
+        source(:src="src" type="video/mp4" )
+        p.vjs-no-js
+          span To view this video please enable JavaScript, and consider upgrading to a web browser that 
+          a(href="http://videojs.com/html5-video-support/" target="_blank")
+            supports HTML5 video  
 </template>
 
 <script>
+  var videojs = require('video.js')
+  require('vendor/plugins/videojs/video-js.css') 
+  
   export default {
+    props: ['src', 'config'],
     data() {
       return {
-        video:{
-          video_url:'/assets/video/movie.ogg',
-        }
+        test: 'hello'
       }
+    },
+    methods: {
+      init: function() {
+        let default_config  = {}
+        
+        default_config = _.extend(this.config || {}, default_config);
+        videojs("videof", default_config, function(){
+        });
+      }
+    },
+    mounted(){
+      this.init()
     }
   }
 

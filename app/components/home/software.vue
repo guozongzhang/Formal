@@ -1,53 +1,32 @@
 <template lang="jade">
   div.software-vue.vue-component
-    <vue-title :title='softwareArr'></vue-title>
+    <vue-title :title='items'></vue-title>
     div.software-box.clear
       div.video
         div.video-content
-          label {{datas.roomdatas.video.title}}
-          p {{datas.roomdatas.video.content}}
+          img(:src="items.leftcont.img")
         div.video-box
-          <vue-video></vue-video>
+          <vue-video :src="items.leftcont.url" :config="videoconf"></vue-video>
       div.download-box
         div.tab-box
           ul.list-style 
-            li.list-style(v-for="tmp in datas.lists" v-on:mouseover="changeTab(tmp.view)" v-bind:type="tmp.view" v-bind:class="tmp.view == viewtype ? 'active' : ''") {{tmp.name}}
+            li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
+
         <!--云量房-->
-        div.loadurl-box(v-if="viewtype == 'measureroom'")
+        div.loadurl-box(v-show="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
-            li.list-style.left-load 
-              img(:src="datas.roomdatas.loaddata.android.url")
-              p 搭配家云设计Android<br/>(ipad/手机端均可下载)
-            li.list-style 
-              img(:src="datas.roomdatas.loaddata.ios.url")
-              p 搭配家云设计iOS<br/>(ipad/手机端均可下载)
-          
-        <!--云设计-->
-        div.design-box(v-if="viewtype == 'design'")
-          div
-            a(:href="datas.designdata.link_url")
-              img(:src="datas.designdata.img_url")
-              p {{datas.designdata.content}} 
-        
-        <!--云展示-->
-        div.exhibition-box(v-if="viewtype == 'exhibition'")
-          div
-            a(:href="datas.exhibitiondata.link_url")
-              img(:src="datas.exhibitiondata.img_url")
-              p {{datas.exhibitiondata.content}}
-        
-        <!--云制造-->
-        div.manufacture-box(v-if="viewtype == 'manufacture'")
-          div
-            a(:href="datas.manufacturedata.link_url")
-              img(:src="datas.manufacturedata.img_url")
-              p {{datas.manufacturedata.content}}
+            li.list-style(v-for="item in lanmu.pics")
+              img(:src="item.img")
+              p {{item.text}}
+
       
 </template>
 
 <script>
   import TitleVue from './title.vue';
   import VideoVue from '../video/video.vue';
+  let HomePage = AV.extend('homepage_modules');
+  let viewtimer;
   export default {
     components: { 
       'vue-title': TitleVue, 
@@ -55,93 +34,37 @@
     },
     data() {
       return {
-        viewtype:'measureroom',
-        datas:{
-          lists:[
-            {
-              view:'measureroom',
-              name:'云量房'
-            },
-            {
-              view:'design',
-              name:'云设计'
-            },
-            {
-              view:'exhibition',
-              name:'云展示'
-            },
-            {
-              view:'manufacture',
-              name:'云制造'
-            }
-          ],
-          roomdatas:{
-            video:{
-              title:'此处有文案张',
-              content:'关于介绍视频，搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍搭配家的8大神器的使用介绍',
-              video_url:''
-            },
-            loaddata:{
-              android:{
-                url:'http://dpjia.com/images/new_index/erweima.jpg',
-                tips:''
-              },
-              ios:{
-                url:'http://dpjia.com/images/new_index/erweima.jpg',
-                tips:''
-              }
-            }
-          },
-          designdata:{
-            link_url:'',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg',
-            content:'云设计简介',
-          },
-          exhibitiondata:{
-            link_url:'',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-            content:'云展示简介',
-          },
-          manufacturedata:{
-            link_url:'',
-            img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg',
-            content:'云制造简介',
-          }
-        },
-        softwareArr:{
-          color:'#558fee',
-          title:'软件工具',
-          subtitle:'这么好的效果是怎么搭出来的？快来试试搭配家六大神器！',
-          link_text:'查看更多',
-          link_url:'',
-          listdata:[
-            {
-              icon:'#558fee',
-              text:'1分钟手机量出户型',
-            },
-            {
-              icon:'#558fee',
-              text:'2分钟导入户型搭房间',
-            },
-            {
-              icon:'#558fee',
-              text:'3分钟出渲染图看效果',
-            },
-            {
-              icon:'#558fee',
-              text:'一键导出清单下订单',
-            }
-          ]
+        view: 0,
+        items: {},
+        videoconf: {
+          loop: true,
+          width: 480,
+          controls: true,
+          height: 360
         }
       }
     },
     methods: {
-      changeTab: function (msg) {
-        if(msg == this.viewtype) return;
-        this.viewtype = msg;
+      changeTab: function (tab) {
+        if(tab == this.view) return;
+        let model = this
+        clearTimeout(viewtimer)
+        viewtimer = setTimeout(function () {
+          model.view = tab;
+        }, 300) 
+      },
+      getList: function() {
+        HomePage.where({name: 'thirdfloor'}).all((data)=> {
+          this.items = JSON.parse(data.items[0].config)
+        })
       }
+    },
+    created() {
+      this.getList()
     }
   }
+
+
 
 </script>
 <style lang="sass">
@@ -158,10 +81,9 @@
       .video-content{
         float: left;
         width: pxTorem(280);
-        padding: pxTorem(20);
-        label{
-          color: #666;
-          font-size: pxTorem(14);
+        img{
+          width: pxTorem(280);
+          height: pxTorem(360)
         }
         p{
           color: #666;
@@ -174,7 +96,6 @@
         video{
           padding: 0;
           margin: 0;
-          width:pxTorem(470);
         }
       }
     }
@@ -220,6 +141,11 @@
             width: pxTorem(160);
             height: pxTorem(220);
             margin-top: pxTorem(55);
+            &:nth-child(1){
+              margin-left: pxTorem(40);
+              margin-right: pxTorem(20);
+              float: left;
+            }
             img{
               width: pxTorem(160);
               height: pxTorem(160);
@@ -232,10 +158,7 @@
               color: #999;
             }
           }
-          .left-load{
-            margin-left: pxTorem(40);
-            margin-right: pxTorem(20);
-          }
+          
         }
       }
     }

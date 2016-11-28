@@ -3,7 +3,7 @@
     <vue-title :title='serviceArr'></vue-title>
     div.service-box.clear
       div.left-box
-        <vue-swiper :flag='"homeService"' :swiperdata='swiperArr' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
+        <vue-swiper :img_key='"img_url"' :url_key='"link_url"' :flag='"homeService"' :swiperdata='swiperArr' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
       div.right-box
         ul.list-style.home-swiper-pagenation
       
