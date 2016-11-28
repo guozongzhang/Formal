@@ -64,8 +64,9 @@
 </template>
 
 <script>
-  import TitleVue from '../common/title.vue';
+  import TitleVue from './title.vue';
   import SwiperVue from '../swiper/swiper.vue';
+  let viewtimer;
   export default {
     components: { 
       'vue-title': TitleVue, 
@@ -297,7 +298,11 @@
     methods: {
       changeTab: function (msg) {
         if(msg == this.viewtype) return;
-        this.viewtype = msg;
+        let model = this
+        clearTimeout(viewtimer)
+        viewtimer = setTimeout(function () {
+          model.viewtype = msg;
+        }, 300)
       }
     }
   }

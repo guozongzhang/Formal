@@ -18,6 +18,9 @@ each item in development.assets.vendor.javascripts
 script(src="/tmp/assets/javascripts/common.js")
 script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
 
+//- 百度地图API
+script(src="http://api.map.baidu.com/api?v=2.0&ak=n0dzf54cjjE9TfBiijtOG5z7&services=&t=20160401164342")
+
 script.
   if(typeof APP.#{route.controller}.#{route.action} == 'function'){
     new APP.#{route.controller}.#{route.action}()

@@ -1,371 +1,127 @@
 <template lang="jade">
   div.goods-vue.vue-component
-    <vue-title :title='goodsArr'></vue-title>
+    <vue-title :title='items'></vue-title>
     div.tab-group
       ul.list-style 
-        li.list-style(v-for="tmp in datas.lists" v-bind:type="tmp.view" v-on:mouseover="changeTab(tmp.view)" v-bind:class="tmp.view == viewtype ? 'active' : ''") {{tmp.name}}
+        li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
     <!--办公家具-->
-    div.office-imgs-box.clear(v-if="viewtype == 'office'")
+    div.office-imgs-box.clear(v-show="view == 0")
       div.left-box
         div.left-top
-          img(:src="datas.officedata.left_url")
+          a(:href="item.url" v-for="item in itempart(0, 0 , 0)")
+            img(:src="item.img")
+        
         div.left-bottom
           ul.list-style 
-            li.list-style(v-for="tmp in datas.officedata.leftdata")
-              a(:href="tmp.link_url")
-                div.img-box
-                  img(:src="tmp.img_url")
-                p {{tmp.content}}
+            li.list-style(v-for="item in itempart(0, 4 , 5)")
+              <vue-item :item="item"></vue-item>
+
       div.right-box
         div.goods-right-imgs
           ul.list-style
-            li.list-style(v-for="item in datas.officedata.righttop")
-              a(:href="item.link_url")
-                div.img-box
-                  img(:src="item.img_url")
-                p {{item.content}}
+            li.list-style(v-for="item in itempart(0, 1 , 3)")
+              <vue-item :item="item"></vue-item>
+
         div.goods-right-imgs
           ul.list-style.right-bottom
-            li.list-style(v-for="msg in datas.officedata.rightbottom")
-              a(:href="msg.link_url")
-                div.img-box
-                  img(:src="msg.img_url")
-                p {{msg.content}}
+            li.list-style(v-for="item in itempart(0, 6 , 8)")
+              <vue-item :item="item"></vue-item>
+    
+    
     
     <!--民用家具-->
-    div.civil-img-box.clear(v-if="viewtype == 'civil'")
+    div.civil-img-box.clear(v-show="view == 1")
       div.top-box
         ul.list-style 
-          li.list-style(v-for="item in datas.civildata.top")
-            a(:href="item.link_url")
-              div.img-box
-                img(:src="item.img_url")
-              p {{item.content}}
+          li.list-style(v-for="item in itempart(1, 0 , 4)")
+            <vue-item :item="item"></vue-item>
+
       div.bottom-box
         div.bottom-left
-          a(href="")
-            img(src="http://cimg.dpjia.com/files/banners/14752079533334.jpg")
+          a(:href="item.url" v-for="item in itempart(1, 5 , 5)")
+            img(:src="item.img")
+
         ul.list-style 
-          li.list-style(v-for="item in datas.civildata.bottom")
-            a(:href="item.link_url")
-              div.img-box
-                img(:src="item.img_url")
-              p {{item.content}}
-    
+          li.list-style(v-for="item in itempart(1, 6, 8)")
+            <vue-item :item="item"></vue-item>
+   
     <!--品牌精选-->
-    div.brand-box.clear(v-if="viewtype == 'brand'")
+    div.brand-box.clear(v-show="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="msg in datas.branddata") 
-            a(:href="msg.link_url") 
-              img(:src="msg.img_url")
-              p {{msg.name}}
+          li.list-style(v-for="item in items.lanmus[2].pics") 
+            a(:href="item.url") 
+              img(:src="item.img")
+              p {{item.text}}
+    
     
     <!--线下体验店-->
-    div.store-box.clear(v-if="viewtype == 'store'")
+    div.store-box.clear(v-show="view == 3")
       div.store-list.clear
         ul.list-style.clear
-          li.list-style(v-for="msg in datas.storedata") 
-            a(:href="msg.link_url") 
-              img(:src="msg.img_url")
-              p {{msg.name}}
+          li.list-style(v-for="item in items.lanmus[3].pics") 
+            a(:href="item.url") 
+              img(:src="item.img")
+              p {{item.text}}
+
+    
+   
+
 </template>
 
 <script>
-  import TitleVue from '../common/title.vue';
+  import TitleVue from './title.vue';
+  let HomePage = AV.extend('homepage_modules');
+  let viewtimer;
+
   export default {
     components: { 
-      'vue-title': TitleVue,  
+      'vue-title': TitleVue,
+      'vue-item': {
+        props: ['item'],
+        template: '\
+          <a :href="item.url">\
+              <div class="img-box">\
+                <img :src="item.img" />\
+              </div>\
+              <p> {{item.text}} </p>\
+          </a>\
+        ',
+      }
     },
     data() {
       return {
-        viewtype:'office',
-        datas:{
-          lists:[
-            {
-              view:'office',
-              name:'办公家具'
-            },
-            {
-              view:'civil',
-              name:'民用家具'
-            },
-            {
-              view:'brand',
-              name:'品牌精选'
-            },
-            {
-              view:'store',
-              name:'线下体验'
-            }
-          ],
-          officedata:{
-            left_url:'http://dpjia.com/images/new_index/jia.png',
-            leftdata:[
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/679.jpg',
-                content:'亚美特 47-餐桌BM3101'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/666.jpg',
-                content:'亚美特 11-床头柜BM1304'
-              }
-            ],
-            righttop:[
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/930.jpg',
-                content:'W11-2902双人床'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/917.jpg',
-                content:'W-8357组合厅柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/861.jpg',
-                content:'W12-0603餐桌'
-              }
-            ],
-            rightbottom:[
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/821.jpg',
-                content:'W12-0304电视柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/917.jpg',
-                content:'W-8357组合厅柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/666.jpg',
-                content:'亚美特 11-床头柜BM1304'
-              }
-            ]
-          },
-          civildata:{
-            top:[
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/917.jpg',
-                content:'W-8357组合厅柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/861.jpg',
-                content:'W12-0603餐桌'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/821.jpg',
-                content:'W12-0304电视柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/917.jpg',
-                content:'W-8357组合厅柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/666.jpg',
-                content:'亚美特 11-床头柜BM1304'
-              }
-            ],
-            bottom:[
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/930.jpg',
-                content:'W11-2902双人床'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/917.jpg',
-                content:'W-8357组合厅柜'
-              },
-              {
-                link_url:'',
-                img_url:'http://dpjia.com/images/new_index/861.jpg',
-                content:'W12-0603餐桌'
-              }
-            ]
-          },
-          branddata:[
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/tempLogos/1440057177.jpg',
-              name:'东方百盛'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家wqe'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/tempLogos/14567345924438.jpg',
-              name:'那里家居'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
-              name:'奥斯迪尔osidea'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/57/logos/1449202608.png',
-              name:'小尼宅配'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家搭配家搭配家搭配家搭配家搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
-              name:'奥斯迪尔osidea'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/61/logo@160w_120h.png',
-              name:'奥斯迪尔osidea'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/66/logo@160w_120h.png',
-              name:'荣麟世佳'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/63/logo@160w_120h.png',
-              name:'华日家居'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              name:'搭配家'
-            },
-            {
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/63/logo@160w_120h.png',
-              name:'华日家居'
-            }
-          ],
-          storedata:[
-            {
-              name:'房山青龙湖镇店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/57/stores/41/1445937534.jpg',
-              address:'北京市',
-            },
-            {
-              name:'东方百盛明光店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/70/stores/58/1446619834.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'东方百盛城外城店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/70/stores/57/1446619268.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'那里家居--北京北四环店面',
-              link_url:'',
-              img_url:'http://brand.dpjia.com/images/company/nljj/store_left.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'通州马驹桥店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/companys/57/stores/34/1445937415.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'那里家居--北京城外城店面',
-              link_url:'',
-              img_url:'http://brand.dpjia.com/images/company/nljj/store_right.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'那里家居--北京大红门店面',
-              link_url:'',
-              img_url:'http://brand.dpjia.com/images/company/nljj/store_left.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            },
-            {
-              name:'搭配家线下体验店学院路店',
-              link_url:'',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg',
-              address:'北京市海淀区学院路7号弘彧大厦313',
-            }
-          ]
-        },
-        goodsArr:{
-          color: '#f14f4f',
-          title:'家具商城',
-          subtitle:'买家居用品又贵又麻烦？来搭配家线上3D体验，线下尊享服务！',
-          link_text:'查看更多',
-          link_url:'',
-          listdata:[
-            {
-              icon:'#f14f4f',
-              text:'3个自主注册品牌',
-            },
-            {
-              icon:'#f14f4f',
-              text:'核心区域城市合伙人',
-            },
-            {
-              icon:'#f14f4f',
-              text:'百家线下体验门店',
-            },
-            {
-              icon:'#f14f4f',
-              text:'2400件精挑细选商品',
-            }
-          ]
-        }
+        view: 0,
+        items: {}
       }
     },
+    
     methods: {
-      changeTab: function (msg) {
-        if(msg == this.viewtype) return;
-        this.viewtype = msg;
+      changeTab: function (tab) {
+        if(tab == this.view) return;
+        let model = this
+        clearTimeout(viewtimer)
+        viewtimer = setTimeout(function () {
+          model.view = tab;
+        }, 300) 
+      },
+
+      getList: function() {
+        HomePage.where({name: 'firstfloor'}).all((data)=> {
+          this.items = JSON.parse(data.items[0].config)
+        })
+      },
+      itempart: function(lanmu, start, end){
+        let result = []
+        let model = this
+        for(let i = start; i <= end; i++) {
+          result.push(model.items.lanmus[lanmu].pics[i])
+        } 
+        return result
       }
+    }, 
+    created() {
+      this.getList()
     }
   }
 </script>
