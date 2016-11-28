@@ -24,7 +24,7 @@ module.exports = {
     port: "2002",
 
     // browser-sync 本身的管理界面端口
-    ui: "2001"
+    ui: "2012"
 
   }
 }
