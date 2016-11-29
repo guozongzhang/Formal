@@ -1,9 +1,9 @@
 <template lang="jade">
   div.service-vue.vue-component
-    <vue-title :title='serviceArr'></vue-title>
+    <vue-title :title='items'></vue-title>
     div.service-box.clear
       div.left-box
-        <vue-swiper :img_key='"img_url"' :url_key='"link_url"' :flag='"homeService"' :swiperdata='swiperArr' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
+        <vue-swiper :img_key='"bigimg"'  :flag='"homeService"' :swiperdata='items.lanmus[0].pics' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
       div.right-box
         ul.list-style.home-swiper-pagenation
       
@@ -12,6 +12,7 @@
 <script>
   import TitleVue from './title.vue';
   import SwiperVue from '../swiper/swiper.vue';
+  let HomePage = AV.extend('homepage_modules');
   export default {
     components: { 
       'vue-title': TitleVue, 
@@ -20,6 +21,7 @@
     data() {
       let model = this;
       return {
+        items: {},
         service:{
           img_url:'http://dpjia.com/images/gwbgjj/bg_2.jpg',
           listdatas:[
@@ -124,12 +126,22 @@
             img_url:'http://cimg.dpjia.com/files/md5/image/origin/69eaeaa692755e4c6b32db0016bdb9da.jpeg'
           }
         ],
-        swiperConf: {
+        swiperConf: { 
           paginationBulletRender: function (swiper, index, className) {
-            return '<li class="list-style '+ className +'"><span class="bg-img" style="background-image:url('+ model.service.listdatas[index].img_url + ');"></span></li>';
+            return '<li class="list-style '+ className +'"><span class="bg-img" style="background-image:url('+ model.items.lanmus[0].pics[index].smallimg + ');"></span></li>';
           }
         }
       }
+    },
+    methods: {
+       getList: function() {
+        HomePage.where({name: 'fourthfloor'}).all((data)=> {
+          this.items = JSON.parse(data.items[0].config)
+        })
+      }
+    },
+    created() {
+      this.getList()
     }
   }
 
@@ -160,9 +172,8 @@
           border-right: pxTorem(1) solid #ccc;
           .bg-img{
             display: block;
-            margin: pxTorem(22) pxTorem(42);
-            width: pxTorem(96);
-            height: pxTorem(96);
+            width: 100%;
+            height: pxTorem(140);
           }
         }
         li:nth-last-child(1),
@@ -179,12 +190,12 @@
         }
         li.swiper-pagination-bullet-active{
           span {
-            background-position: 0px -96px;
+            background-position: 0px -140px;
           }
         }
         li.swiper-pagination-bullet:hover{
           .bg-img{
-            background-position: 0px -96px;
+            background-position: 0px -140px;
           }
         }
       }

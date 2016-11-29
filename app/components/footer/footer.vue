@@ -1,108 +1,52 @@
 <template lang="jade">
-  div.footer-vue.vue-component
-    div.dpjia-content
-      ul.title-ul.list-style.clear
-        li.list-style(v-for="item in dataArr")
-          label {{item.title}}
-          ul.text-ul.list-style
-            li.list-style(v-for="msg in item.content")
-              a(:href="msg.url") {{msg.text}}
-        li.list-style 
-          label(style="display:block") 关注我们
-          img.qr-code(src="http://dpjia.com/images/new_index/erweima.jpg")
+  div
+    div.footer-vue.vue-component
+      div.dpjia-content
+        ul.title-ul.list-style.clear
+          li.list-style(v-for="item in items")
+            label {{item.name}}
+            ul.text-ul.list-style
+              li.list-style(v-for="sub in item.subs")
+                a(:href="sub.url")
+                  span(v-if="sub.type == 'txt'") {{sub.name}}
+                  img.pic-item(:src="sub.img" v-if="sub.type == 'pic'" )
+  
+    div.frends-link
+      div.frends-box
+        p
+          | 友情链接：
+          a(:href="link.url" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
+      div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
+      | Copyright©2014-2016 
+      a(href="http://www.dpjia.com" target="_blank" style="color:#fff") 搭配家（dpjia.com） 
+      | 版权所有v1.5.0 
+
 </template>
 
 <script>
+  let HomePage = AV.extend('homepage_modules');
   export default {
     data() {
       return {
-        dataArr: [
-          {
-            title:'关于我们',
-            content:[
-              {
-                text:'品牌介绍',
-                url:'',
-              },
-              {
-                text:'媒体报道',
-                url:'',
-              },
-              {
-                text:'企业新闻',
-                url:'',
-              },
-              {
-                text:'联系我们',
-                url:'',
-              }
-            ]
-          },
-          {
-            title:'商务合作',
-            content:[
-              {
-                text:'厂商入驻',
-                url:'',
-              },
-              {
-                text:'城市合伙人',
-                url:'',
-              },
-              {
-                text:'签约设计师',
-                url:'',
-              },
-              {
-                text:'加入搭配家',
-                url:'',
-              }
-            ]
-          },
-          {
-            title:'快速下载',
-            content:[
-              {
-                text:'云设计iOS版',
-                url:'',
-              },
-              {
-                text:'云量房Android版',
-                url:'',
-              },
-              {
-                text:'云设计Android版',
-                url:'',
-              },
-              {
-                text:'云设计Windows版',
-                url:'',
-              }
-            ]
-          },
-          {
-            title:'帮助其他',
-            content:[
-              {
-                text:'帮助文档',
-                url:'',
-              },
-              {
-                text:'法律隐私',
-                url:'',
-              },
-              {
-                text:'联系我们',
-                url:'',
-              },
-              {
-                text:'在线反馈',
-                url:'',
-              }
-            ]
-          }
-        ]
+        items: [],
+        links: []
       }
+    },
+    methods: {
+       getMenus: function() {
+          HomePage.where({name: 'footer'}).all((data)=> {
+            this.items = JSON.parse(data.items[0].config)
+          })
+       },
+       getLinks: function() {
+          HomePage.where({name: 'link'}).all((data)=> {
+            this.links = JSON.parse(data.items[0].config)
+          })
+       }
+    },
+    created() {
+      this.getMenus()
+      this.getLinks()
     }
   }
 
@@ -135,7 +79,7 @@
         }
       }
     }
-    .qr-code{
+    .pic-item{
       width: pxTorem(90);
       height: pxTorem(90);
     }
@@ -152,6 +96,30 @@
       }
     }
   }
+}
+
+.frends-link{
+  text-align: center;
+  background-color: #4a4a4a;
+  padding: pxTorem(15) 0;
+  color: #fff;
+  .frends-box{
+    height:pxTorem(20);
+    line-height:pxTorem(20);
+    p{
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      a{
+        display: inline-block;
+        margin-right: pxTorem(20);
+        color: #fff;
+      }
+      a:nth-last-child(1){
+        margin-right: 0;
+      }
+    }
+  } 
 }
 </style>
 

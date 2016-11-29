@@ -113,27 +113,3 @@ nav.navbar{
 
 
 [v-cloak]{display: none;}
-
-//页脚
-.frends-link{
-  text-align: center;
-  background-color: #4a4a4a;
-  padding: pxTorem(15) 0;
-  .frends-box{
-    height:pxTorem(20);
-    line-height:pxTorem(20);
-    p{
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      a{
-        display: inline-block;
-        margin-right: pxTorem(20);
-        color: #fff;
-      }
-      a:nth-last-child(1){
-        margin-right: 0;
-      }
-    }
-  } 
-}
