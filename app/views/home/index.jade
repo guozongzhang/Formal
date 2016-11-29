@@ -1,26 +1,8 @@
 extends ../layouts/layout.jade
 block banner
-   <vue-banner></vue-banner>
-block con 
-  //- 家具商城
-  div
-    <vue-goods></vue-goods>
- 
-  <vue-line></vue-line>
-  //- 装修设计
-  div
-    <vue-design></vue-design>
-    
-  <vue-line></vue-line>
-  //- 软件工具
-  div
-    <vue-software></vue-software>
-  
-  <vue-line></vue-line>
-  //- 服务支持
-  div
-    <vue-service></vue-service>
-
-  
-    
-
+  div(v-for="(key, index) in headercoms")
+    component(v-bind:is= '"vue-" + key')
+block con
+  div(v-for="(key, index) in bodycoms")
+    component(v-bind:is= '"vue-" + key')
+    <vue-line v-if="index != bodycoms.length - 1"></vue-line>

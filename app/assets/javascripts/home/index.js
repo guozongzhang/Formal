@@ -7,37 +7,22 @@ import LineVue from 'com_root/common/line.vue'
 import BannerVue from 'com_root/banner/banner.vue'
 
 let model
+let HomePage = AV.extend('homepage_modules');
 
 class Index extends Basic {
   constructor(){
     super({
       vue: {
         data:{
-          swiperArr: [
-            {
-              url:'http://www.dpjia.com',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079902872.jpg'
-            },
-            {
-              url:'http://www.dpjia.com',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079855355.jpg'
-            },
-            {
-              url:'http://www.dpjia.com',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079983317.jpg'
-            },
-            {
-              url:'http://www.dpjia.com',
-              img_url:'http://cimg.dpjia.com/files/banners/14752079533334.jpg'
-            }
-          ]
+          bodycoms: [],
+          headercoms: []
         },
         components: {
           'vue-swiper': vueswiper,
-          'vue-goods': GoodsVue,
-          'vue-design': DesignVue,
-          'vue-software': SoftwareVue,
-          'vue-service': ServiceVue,
+          'vue-firstfloor': GoodsVue,
+          'vue-secondfloor': DesignVue,
+          'vue-thirdfloor': SoftwareVue,
+          'vue-fourthfloor': ServiceVue,
           'vue-line': LineVue,
           'vue-banner': BannerVue
         }
@@ -48,8 +33,19 @@ class Index extends Basic {
   }
 
   //初始数据
-  init() {
-     
+  init () {
+     //["topmenu","firstfloor","secondfloor","thirdfloor","footer","logo","mainmenu","link","hotlable"]
+    model.getConfig()
+  }
+
+
+  // 获取首页配置
+  getConfig () {
+    HomePage.where({name: 'homeconfig'}).all(data => {
+      let result = JSON.parse(data.items[0].config)
+      model.mvvm.bodycoms = _.without(result, 'banner')
+      model.mvvm.headercoms = result.indexOf('banner') > -1 ? ['banner'] : []
+    })
   }
 
 }
