@@ -11,7 +11,8 @@
 
 <script>
   var videojs = require('video.js')
-  require('vendor/plugins/videojs/video-js.css') 
+  import 'video.js/dist/video-js.css';
+  import SWF_PATH from 'video.js/dist/video-js.swf';
   
   export default {
     props: ['src', 'config'],
@@ -27,6 +28,8 @@
         default_config = _.extend(this.config || {}, default_config);
         videojs("videof", default_config, function(){
         });
+
+         videojs.options.flash.swf = SWF_PATH;
       }
     },
     mounted(){
