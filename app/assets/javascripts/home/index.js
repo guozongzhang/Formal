@@ -1,10 +1,10 @@
-import vueswiper from 'com_root/swiper/swiper.vue'
-import GoodsVue from 'com_root/home/goods.vue'
-import DesignVue from 'com_root/home/design.vue'
-import SoftwareVue from 'com_root/home/software.vue'
-import ServiceVue from 'com_root/home/service.vue'
-import LineVue from 'com_root/common/line.vue'
-import BannerVue from 'com_root/banner/banner.vue'
+import SwiperVue from 'com_root/swiper/swiper.vue';
+import GoodsVue from 'com_root/home/goods.vue';
+import DesignVue from 'com_root/home/design.vue';
+import SoftwareVue from 'com_root/home/software.vue';
+import ServiceVue from 'com_root/home/service.vue';
+import LineVue from 'com_root/common/line.vue';
+import BannerVue from 'com_root/banner/banner.vue';
 
 let model
 let HomePage = AV.extend('homepage_modules');
@@ -18,7 +18,7 @@ class Index extends Basic {
           headercoms: []
         },
         components: {
-          'vue-swiper': vueswiper,
+          'vue-swiper': SwiperVue,
           'vue-firstfloor': GoodsVue,
           'vue-secondfloor': DesignVue,
           'vue-thirdfloor': SoftwareVue,
