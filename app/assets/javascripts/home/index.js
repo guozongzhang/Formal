@@ -43,7 +43,7 @@ class Index extends Basic {
   getConfig () {
     HomePage.where({name: 'homeconfig'}).all(data => {
       let result = JSON.parse(data.items[0].config)
-      model.mvvm.bodycoms = _.without(result, 'banner')
+      model.mvvm.bodycoms = _.intersection(result, ["firstfloor","secondfloor", "thirdfloor", "fourthfloor"])
       model.mvvm.headercoms = result.indexOf('banner') > -1 ? ['banner'] : []
     })
   }
