@@ -36,6 +36,7 @@
        getMenus: function() {
           HomePage.where({name: 'footer'}).all((data)=> {
             this.items = JSON.parse(data.items[0].config)
+            this.menuSection = data
           })
        },
        getLinks: function() {

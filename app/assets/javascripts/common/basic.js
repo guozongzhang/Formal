@@ -9,8 +9,7 @@ import vueheader from '../../../components/home/header.vue';
 class Basic {
   constructor(initData = {}){
     require('../../stylesheets/layout.scss')
-    require('../../stylesheets/' + SITE.router.controller + '.scss')
-
+    require('../../stylesheets/' + SITE.router.controller + '/' + SITE.router.action +'.scss')
 
     model = this
     
