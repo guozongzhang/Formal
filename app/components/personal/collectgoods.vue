@@ -8,14 +8,14 @@
             p {{item.name}}
           span.delete-icon(v-on:click="deleteGoods(item.id)")
 
-    <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
+    <vue-cancelconfirm :info='deleteinfo'></vue-cancelconfirm>
 </template>
 
 <script>
-import DeleteconfirmVue from '../common/deleteconfirm.vue';
+import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
-      'vue-deleteconfirm': DeleteconfirmVue,
+      'vue-cancelconfirm': CancelconfirmVue,
     },
     data() {
       return {
