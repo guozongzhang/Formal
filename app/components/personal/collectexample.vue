@@ -14,7 +14,7 @@
                   span {{item.username}}
           span.delete-icon(v-on:click="deleteExample(item.id)")
 
-    <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
+    <vue-cancelconfirm :info='deleteinfo'></vue-cancelconfirm>
 </template>
 
 <script>
@@ -95,6 +95,7 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
     },
     methods:{
       deleteExample: function(id){
+        console.log(id)
         $('.deleteexample').modal('show');
       }
     }

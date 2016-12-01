@@ -65,7 +65,6 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
     },
     methods:{
       deleteGoods: function(id){
-        console.log(id);
         $('.deletegoods').modal('show');
       }
     }
