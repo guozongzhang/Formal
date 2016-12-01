@@ -16,7 +16,7 @@
         ul.list-style.clear
           li.list-style(v-for="item in houses")
             img(:src="item.img_url")
-            p.go-draw 去搭配
+            a.go-draw(:href="item.go_draw") 去搭配
             div.info-box
               p.name {{item.name}}
               p.address {{item.address}}
@@ -39,32 +39,38 @@ import AreaVue from '../common/area.vue';
         houses:[
           {
             img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
+            go_draw:'',
+            name:'哪里家具  米兰系列',
+            address:'北京市海淀区'
+          },
+          {
+            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
+            go_draw:'',
+            name:'哪里家具  米兰系列',
+            address:'北京市海淀区'
+          },
+          {
+            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
+            go_draw:'',
+            name:'哪里家具  米兰系列',
+            address:'北京市海淀区'
+          },
+          {
+            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
+            go_draw:'',
+            name:'哪里家具  米兰系列',
+            address:'北京市海淀区'
+          },
+          {
+            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
+            go_draw:'',
             name:'哪里家具  米兰系列',
             address:'北京市海淀区'
           },
           {
             img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
             name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            name:'哪里家具  米兰系列',
+            go_draw:'',
             address:'北京市海淀区'
           }
         ]
@@ -198,6 +204,7 @@ import AreaVue from '../common/area.vue';
             width: pxTorem(278);
             height: pxTorem(40);
             line-height: pxTorem(40);
+            text-decoration: none;
             text-align: center;
             background-color: rgba(0,0,0,0.5);
             color: #fff;

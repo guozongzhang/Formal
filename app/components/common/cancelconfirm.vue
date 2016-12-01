@@ -1,6 +1,6 @@
 <!-- 信息保存成功提示 -->
 <template lang="jade">
-  div.deleteconfirm-vue.vue-component
+  div.cancelconfirm-vue.vue-component
     div.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" v-bind:class="info.flags")
       div.modal-dialog(role="document")
         div.modal-content
@@ -10,7 +10,8 @@
           div.modal-body 
             div.container-fluid
               div.info-box
-                p {{info.tips}}
+                img(src="")
+                span {{info.tips}}
                 a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
                 a.cancle(href="javascript:;" data-dismiss="modal" aria-label="Close") 取消
 
@@ -29,7 +30,7 @@
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
 
-.deleteconfirm-vue{
+.cancelconfirm-vue{
   .modal-content{
     width: pxTorem(320);
     height: pxTorem(140);
@@ -46,10 +47,18 @@
     .modal-body {
       padding: 0;
       .info-box{
-        p{
-          margin: 0;
-          padding: 0;
-          text-align: center;
+        position: relative;
+        img{
+          position: absolute;
+          left: pxTorem(60);
+          top: pxTorem(0);
+          width: pxTorem(30);
+          height: pxTorem(30);
+        }
+        span{
+          position: absolute;
+          top: pxTorem(5);
+          left: pxTorem(100);
           font-size: pxTorem(14);
           color: #999;
         }

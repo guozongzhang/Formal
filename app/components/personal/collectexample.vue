@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import DeleteconfirmVue from '../common/deleteconfirm.vue';
+import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
-      'vue-deleteconfirm': DeleteconfirmVue,
+      'vue-cancelconfirm': CancelconfirmVue,
     },
     data() {
       return {
