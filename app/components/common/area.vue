@@ -1,10 +1,10 @@
 <template lang="jade">
   div.row
-    div(v-bind:class="showDistrict == true ? 'col-md-4' : 'col-md-6'")
+    div(v-bind:class="showDistrict == true ? 'col-md-4' : showCity == true ? 'col-md-6' : 'col-md-12'")
       select(class="form-control" v-model="province" @change="switchInit")
         option(value="-1") #{"=选择省="}
         option(v-for="p in provinces" v-bind:value="p.id") {{p.ProvinceName}}
-    div(v-bind:class="showDistrict == true ? 'col-md-4' : 'col-md-6'")
+    div(v-bind:class="showDistrict == true ? 'col-md-4' : 'col-md-6'" v-show="showCity")
       select(class="form-control"  v-model="city"  @change="switchInit")
         option(value="-1") #{"=选择市="}
         option(v-for="c in citys"  v-bind:value="c.id") {{c.CityName}}
@@ -22,7 +22,7 @@ let District = AV.extend('district');
 let isinit = true
 
 export default {
-  props: ['province', 'city', 'district', 'allowps', 'allowcs', 'allowds','showDistrict'],
+  props: ['province', 'city', 'district', 'allowps', 'allowcs', 'allowds','showDistrict', 'showCity'],
   data () {
     return {
       provinces: [],
