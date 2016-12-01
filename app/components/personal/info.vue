@@ -35,7 +35,7 @@
       div.line-box.input-warp.clear
         label.title 所在地：
         div.input-box
-          <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="false"></vue-area>
+          <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="false" :showCity="true"></vue-area>
         
     a.submit-btn(href="javascript:;" v-on:click="submitBtn()") 提交
   
