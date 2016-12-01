@@ -2,6 +2,7 @@
   div.leftmenue-vue.vue-component
     ul.list-style
       li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
+        span.triangle
         a(:href="item.link_url")
           span.icon
           span {{item.text}}
@@ -19,9 +20,9 @@
             type:'collection'
           },
           {
-            link_url:'',
+            link_url:'/personal/mydesign',
             text:'我的设计',
-            type:'design'
+            type:'mydesign'
           },
           {
             link_url:'',
@@ -52,10 +53,22 @@
   background-color: #fff;
   ul{
     li{
+      position: relative;
       width: pxTorem(180);
       height: pxTorem(50);
       padding: 0 pxTorem(15);
       border-bottom: 1px solid #f1f1f1;
+      border-left: 4px solid #fff;
+      .triangle{
+        position: absolute;
+        left: pxTorem(-4);
+        top: pxTorem(23);
+        width: 0;
+        height: 0;
+        border-top: 3px solid transparent;
+        border-right: 4px solid #fff;
+        border-bottom: 3px solid transparent;
+      }
       a{
         text-decoration: none;
         display: inline-block;
@@ -81,6 +94,7 @@
     }
     li:hover,
     li.active{
+      border-left: 4px solid #f14f4f;
       a{
         color: #f14f4f;
         .icon{
