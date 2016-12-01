@@ -4,7 +4,8 @@ module.exports = {
     'jquery.validate.min',
     'vue',
     'underscore-min',
-    'js.cookie'
+    'js.cookie',
+    'bootstrap.min'
   ],
   stylesheets: [
     'font-awesome.min',

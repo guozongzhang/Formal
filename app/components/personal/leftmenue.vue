@@ -1,7 +1,7 @@
 <template lang="jade">
   div.leftmenue-vue.vue-component
     ul.list-style
-      li.list-style(v-for="item in menues")
+      li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
         a(:href="item.link_url")
           span.icon
           span {{item.text}}
@@ -9,28 +9,34 @@
 
 <script>
   export default {
+    props:['type'],
     data() {
       return {
         menues:[
           {
-            link_url:'',
-            text:'我的收藏'
+            link_url:'/personal/index',
+            text:'我的收藏',
+            type:'collection'
           },
           {
             link_url:'',
-            text:'我的设计'
+            text:'我的设计',
+            type:'design'
           },
           {
             link_url:'',
-            text:'我的效果图'
+            text:'我的效果图',
+            type:'renderimg'
           },
           {
             link_url:'',
-            text:'我的消息'
+            text:'我的消息',
+            type:'messages'
           },
           {
-            link_url:'',
-            text:'账号设置'
+            link_url:'/personal/settings',
+            text:'账号设置',
+            type:'settings'
           }
         ]
       }
