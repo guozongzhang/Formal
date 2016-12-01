@@ -71,6 +71,7 @@
         height: pxTorem(30);
         line-height: pxTorem(30);
         margin-right: pxTorem(30);
+        text-align: center;
         color: #666;
       }
       a:hover,

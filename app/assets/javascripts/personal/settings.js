@@ -1,9 +1,9 @@
 import PerheaderVue from 'com_root/personal/perheader.vue';
-import PercollectionVue from 'com_root/personal/percollection.vue';
+import PersettingsVue from 'com_root/personal/persettings.vue';
 
 let model
 
-class Index extends Basic {
+class Settings extends Basic {
   constructor(){
     super({
       vue: {
@@ -11,7 +11,7 @@ class Index extends Basic {
         },
         components: {
           'vue-perheader': PerheaderVue,
-          'vue-percollection': PercollectionVue
+          'vue-persettings': PersettingsVue
         }
       }
     })
@@ -25,4 +25,4 @@ class Index extends Basic {
 }
 
 
-Core.expose('personal', 'index', Index)
+Core.expose('personal', 'settings', Settings)

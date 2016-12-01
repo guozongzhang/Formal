@@ -14,7 +14,7 @@
       return {
         menues:[
           {
-            link_url:'',
+            link_url:'/personal/index',
             text:'我的收藏',
             type:'collection'
           },
@@ -34,7 +34,7 @@
             type:'messages'
           },
           {
-            link_url:'',
+            link_url:'/personal/settings',
             text:'账号设置',
             type:'settings'
           }

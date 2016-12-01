@@ -53,7 +53,7 @@
     data() {
       return {
         success:{
-          tips:'资料保存',
+          tips:'收藏商品',
           flags:'infosave'
         },
         info:{

@@ -35,6 +35,7 @@
     width: pxTorem(440);
     height: pxTorem(230);
     border-radius: 0;
+    margin: 0 auto;
     .modal-header{
       padding: pxTorem(10) pxTorem(20);
     }
