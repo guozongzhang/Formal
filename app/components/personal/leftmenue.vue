@@ -30,9 +30,9 @@
             type:'myrenderimg'
           },
           {
-            link_url:'',
+            link_url:'/personal/mymessages',
             text:'我的消息',
-            type:'messages'
+            type:'mymessages'
           },
           {
             link_url:'/personal/settings',
