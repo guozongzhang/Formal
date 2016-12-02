@@ -10,8 +10,9 @@
           div.modal-body 
             div.container-fluid
               div.info-box
-                img(src="")
-                span {{info.tips}}
+                div.pic-text
+                  img(src="")
+                  span {{info.tips}}
                 a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
                 a.cancle(href="javascript:;" data-dismiss="modal" aria-label="Close") 取消
 
@@ -48,6 +49,11 @@
       padding: 0;
       .info-box{
         position: relative;
+        .pic-text{
+          position: absolute;
+          height: pxTorem(30);
+          line-height: pxTorem(30);
+        }
         img{
           position: absolute;
           left: pxTorem(60);
