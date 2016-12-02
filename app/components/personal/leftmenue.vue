@@ -25,9 +25,9 @@
             type:'mydesign'
           },
           {
-            link_url:'',
+            link_url:'/personal/myrenderimg',
             text:'我的效果图',
-            type:'renderimg'
+            type:'myrenderimg'
           },
           {
             link_url:'',
