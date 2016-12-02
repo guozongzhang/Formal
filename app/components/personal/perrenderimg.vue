@@ -9,7 +9,7 @@
           ul.list-style.clear
             li.list-style(v-for="item in renders")
               a.link-box(href="javascript:;")
-                img(:src="item.img_url")
+                img(:src="item.img_url" v-on:click="showImgs()")
                 span.edit(v-on:click="renameRender(item)")
                 span.delete(v-on:click="deleteRender(item.id)")
                 div.info-box
@@ -18,6 +18,7 @@
 
       <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
       <vue-rename :info="renameinfo"></vue-rename>
+      <vue-renderimgmodel :info="renderinfo"></vue-renderimgmodel>
 
 </template>
 
@@ -25,11 +26,13 @@
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
+  import RenderimgmodelVue from './renderimgmodel.vue';
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-deleteconfirm': DeleteconfirmVue,
-      'vue-rename': RenameVue
+      'vue-rename': RenameVue,
+      'vue-renderimgmodel': RenderimgmodelVue
     },
     data() {
       return {
@@ -44,6 +47,9 @@
           title:'修改效果图名称',
           name:'',
           flags:'renamedesign'
+        },
+        renderinfo:{
+          flags:'showimgs'
         },
         renders:[
           {
@@ -99,7 +105,10 @@
       renameRender: function(item) {
         this.renameinfo.name = item.name
         $('.renamedesign').modal('show');
-      } 
+      },
+      showImgs: function() {
+        $('.showimgs').modal('show');
+      }
     }
   }
 
