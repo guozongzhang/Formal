@@ -7,8 +7,8 @@
         label.title 我的消息
         div.message-list
           div.operate
-            a.deleteallread(href="javascript:;") 删除所有已读
-            a.readall(href="javascript:;") 全部标记已读
+            a.deleteallread(href="javascript:;" v-on:click="deleteAll()") 删除所有已读
+            a.readall(href="javascript:;" v-on:click="readAll()") 全部标记已读
           ul.list-style
             li.list-style.clear(v-for="item in messages" v-on:click="readMessage(item)" v-bind:class="item.isnew == true ? 'newmessage' : 'oldmessage'")
               div.isnew(v-show="item.isnew")
@@ -16,19 +16,27 @@
               p
                 |【{{item.type}}】{{item.text}}
                 span.time {{item.time}}
-                span.delete 删除
+                span.delete(v-on:click="deleteMessages(item.id)") 删除
+
+      <vue-deletemessage :info='deleteinfo'></vue-deletemessage>
 </template>
 
 <script>
   import LeftmenueVue from './leftmenue.vue';
+  import DeleteMessageVue from '../common/deleteconfirm.vue';
   export default {
     components: { 
-      'vue-leftmenue': LeftmenueVue
+      'vue-leftmenue': LeftmenueVue,
+      'vue-deletemessage': DeleteMessageVue,
     },
     data() {
       return {
         settings:{
           type:'mymessages'
+        },
+        deleteinfo:{
+          tips:'您确定要删除吗？',
+          flags:'deletemessage'
         },
         messages:[
           {
@@ -64,10 +72,22 @@
     },
     methods:{
       readMessage: function(obj){
-        console.log(obj.isnew)
         if(obj.isnew){
           obj.isnew = false;
         }
+      },
+      deleteMessages: function(id) {
+        this.deleteinfo.tips = '您确定要删除吗？';
+        $('.deletemessage').modal('show');
+      },
+      deleteAll: function() {
+        this.deleteinfo.tips = '您确定要删除所有已读信息吗？';
+        $('.deletemessage').modal('show');
+      },
+      readAll: function() {
+        this.messages.forEach((item)=> {
+          if(item.isnew) {item.isnew = false;}
+        })
       }
     }
   }
