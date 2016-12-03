@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    include ../layouts/header.jade
+  body
+    div#app.body-box
+      div.register-box
+        div.top-tab.clear
+          ul.clear
+            li(v-bind:class="info.type == 'single' ? 'active' : ''" v-on:click="choiceSignalUser()") 个人用户
+            li(v-bind:class=" info.type == 'company' ? 'active' : ''" v-on:click="choiceCompanyUser()") 企业用户
+        div(v-show="info.type == 'single'")
+          <vue-personaluser></vue-personaluser>
+
+
+      //- div.success-bg.hidden
+      //-   div.success-box
+      //-     i.fa.fa-check-circle 
+      //-     p.tips 信息提交成功！
+
+      //-     p.tip-text 我们会在1个工作日内审核，审核通过后，账号密码将以短信形式发送给您，请您及时查收！
+
+      //-     span.success-ok 确定
+
+    each item in development.assets.vendor.javascripts
+      script(src="/assets/javascripts/#{item}.js")
+
+    script(src="/tmp/assets/javascripts/common.js")
+    script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
+
+    script.
+      if(typeof APP.#{route.controller}.#{route.action} == 'function'){
+        new APP.#{route.controller}.#{route.action}()
+      }
