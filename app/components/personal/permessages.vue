@@ -16,19 +16,27 @@
               p
                 |【{{item.type}}】{{item.text}}
                 span.time {{item.time}}
-                span.delete 删除
+                span.delete(v-on:click="deleteMessages(item.id)") 删除
+
+      <vue-deletemessage :info='deleteinfo'></vue-deletemessage>
 </template>
 
 <script>
   import LeftmenueVue from './leftmenue.vue';
+  import DeleteMessageVue from '../common/deleteconfirm.vue';
   export default {
     components: { 
-      'vue-leftmenue': LeftmenueVue
+      'vue-leftmenue': LeftmenueVue,
+      'vue-deletemessage': DeleteMessageVue,
     },
     data() {
       return {
         settings:{
           type:'mymessages'
+        },
+        deleteinfo:{
+          tips:'您确定要删除吗？',
+          flags:'deletemessage'
         },
         messages:[
           {
@@ -64,10 +72,13 @@
     },
     methods:{
       readMessage: function(obj){
-        console.log(obj.isnew)
         if(obj.isnew){
           obj.isnew = false;
         }
+      },
+      deleteMessages: function(id) {
+        console.log(id)
+        $('.deletemessage').modal('show');
       }
     }
   }
