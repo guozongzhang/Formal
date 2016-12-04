@@ -5,7 +5,8 @@ module.exports = {
     'vue',
     'underscore-min',
     'js.cookie',
-    'bootstrap.min'
+    'bootstrap.min',
+    'jquery.form'
   ],
   stylesheets: [
     'font-awesome.min',

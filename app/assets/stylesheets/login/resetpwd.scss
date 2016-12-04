@@ -10,7 +10,7 @@ html,body{
 html{
   width: 100%;
   height: 100%;
-  background: url('/assets/images/login_bg.jpg') center center / cover no-repeat fixed;
+  background: url('/assets/images/resetpwd_bg.png') center center / cover no-repeat fixed;
   .clear:before,
   .clear:after{
     display: block;
@@ -27,7 +27,7 @@ html{
   left: 50%;
   margin-left: pxTorem(-305);
   width: pxTorem(610);
-  height: pxTorem(320);
+  // height: pxTorem(320);
   border: 1px solid #ccc;
   background-color: #fff;
   margin-bottom: pxTorem(40);
@@ -35,7 +35,7 @@ html{
     display: inline-block;
     float: left;
     width: pxTorem(370);
-    height: pxTorem(320);
+    // height: pxTorem(320);
     padding: pxTorem(40) pxTorem(30) pxTorem(30) pxTorem(60);
     .title{
       width: pxTorem(280);
@@ -84,6 +84,12 @@ html{
           margin-left: pxTorem(10);
           font-size: pxTorem(12);
           cursor: pointer;
+        }
+        img{
+          display: inline-block;
+          width: pxTorem(80);
+          height: pxTorem(36);
+          margin-left: pxTorem(10);
         }
       }
       .auto-logo{

@@ -1,16 +1,16 @@
 <template lang="jade">
-  form#confirm_per_btn
-    div.personaluser-vue.vue-component
+  form#confirm_com_btn
+    div.companyuser-vue.vue-component
       ul.tab-box.list-style.clear
         li.list-style 我是：
         li.list-style.radio-item
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')" checked)
-            | 设计师(销售员)
+            input(type="radio" name="comsubtype" v-on:click="getDesigner('dealer')" checked)
+            | 经销商
         li.list-style.radio-item
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')")
-            | 普通用户
+            input(type="radio" name="comsubtype" v-on:click="getDesigner('brander')")
+            | 品牌商
       div.info
         ul.list-style
           li.list-style
@@ -26,83 +26,165 @@
             span.must-input *
             input.input-info.getverify(type="text" name="verification" v-model="info.verification" placeholder="验证码")
             button.getverifybtn#get_verify(type="button" v-on:click="getVerification()") 免费获取
-          li.list-style(v-show="info.usersubtype == 'designer'")
+          li.list-style
+            span.fa.fa-building
+            span.must-input *
+            input.input-info(type="text" name="companyname" v-model="info.companyname" placeholder="公司名称")
+          li.list-style
             span.fa.fa-user
             span.must-input *
-            input.input-info(type="text" name="realname" v-model="info.realname" placeholder="真实姓名")
-      div.service-obj(v-show="info.usersubtype == 'designer'")
-        label 服务对象
+            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="联系人")
+          li.list-style
+            span.fa.fa-phone
+            span.must-input *
+            input.input-info(type="text" name="companytel" v-model="info.companytel" placeholder="公司固话")
+          li.list-style
+            span.fa.fa-sitemap
+            span.must-input *
+            input.input-info(type="text" name="brandname" v-model="info.brandname" v-bind:placeholder="info.comsubtype == 'dealer' ? '经销品牌' : '旗下品牌'")
+      div.service-obj.clear
+        label 公司地址
         span.tips *
         span.colon ：
-        select(name="serverobj" v-model="info.serverobj")
-          option(v-bind:value="obj.id" v-for="obj in info.serverArr") {{obj.name}}
-      div.upload-img(v-show="info.usersubtype == 'designer'")
-        label 上传名片：
-        span.upload-box#upload_per
-          span.add-btn(v-on:click="upload_per()")
+        div.area-box
+          <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="true" :showCity="true"></vue-area>
+      div.upload-img
+        label 上传营业执照：
+        span.upload-box#upload_com
+          span.add-btn(v-on:click="upload_com()")
             span.fa.fa-plus
             | 添加
           input.hidden(type="file" name="files")
-      div.tip-info(v-show="info.usersubtype == 'designer'")
+      div.tip-info
         p 1.该信息仅用于管理员审核之用，身份信息安全保密
         p 2.支持JPG、PNG、GIF格式
         p 3.文件大小需小于4M
-        p 4.上传名片可优先通过审核
+        p 4.上传营业执照可优先通过审核
       div.protocol
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
-      button.save-btn(type="submit" v-on:click="comfirmPerBtn()") 提交
+      button.save-btn(type="submit" v-on:click="comfirmComBtn()") 提交
 </template>
 
 <script>
-  var ip_host = 'http://192.168.1.120'
-  //var ip_host =' http://123.57.217.65:3010';
+  import AreaVue from '../common/area.vue'
+  var ip_host =' http://123.57.217.65:3010';
   //验证码60秒倒计时
   var start_time = 99;//开始时间
   export default {
+    components: {
+      'vue-area': AreaVue
+    },
     data() {
       return {
         info:{
-          usersubtype:'designer',
+          subtype:'dealer',
           phone:'',
           pwd:'',
           verification:'',
-          realname:'',
-          serverobj: 78,
+          companyname:'',
+          linkman:'',
+          companytel:'',
+          brandname:'',
           per_img:'',
           readprotocol: true,
-          serverArr:[]
+          province_poi_province:-1,
+          city_poi_city:-1,
+          district_poi_district:-1
         }
       }
     },
     methods:{
-      comfirmPerBtn: function() {
-        console.log('====')
-        
+      comfirmComBtn: function() {
+        $("#confirm_com_btn").validate({
+          rules: {
+            phone: {
+              required: true,
+              minlength: 11,
+            },
+            pwd: {
+              required: true,
+              minlength: 6
+            },
+            verification: {
+              required: true,
+            },
+            companyname: {
+              required: true,
+            },
+            linkman: {
+              required: true,
+            },
+            companytel: {
+              required: true,
+            },
+            brandname: {
+              required: true,
+            }
+          },
+          messages: {
+            phone: {
+              required: "请输入手机号码",
+              minlength: "手机号输入错误",
+              remote: "手机号已被注册"
+            },
+            pwd: {
+              required: "请输入密码",
+              minlength: "密码不能少于6位",
+            },
+            verification: {
+              required: "请输入验证码",
+            },
+            companyname: {
+              required: "请输入公司名称",
+            },
+            linkman: {
+              required: "请输入联系人姓名",
+            },
+            companytel: {
+              required: "请输入公司固话",
+            },
+            brandname: {
+              required: "请输入品牌名称",
+            }
+          },
+          submitHandler: function() {
+            if(!this.info.readprotocol) {
+              alert('请先阅读搭配家用户使用协议');
+              return ;
+            }
+            var senddata = {
+              designer_type: 'seller',
+              mobile: this.info.phone,
+              password: this.info.pwd,
+              code: this.info.verification,
+              com_id_poi_companys: this.info.serverobj,
+              designer_url: this.info.per_img,
+              ui_name: this.info.realname,
+            }
+            $.ajax({
+              type:'get',
+              url: ip_host + '/api/1.0/users/signUpBySmsCode',
+              data:senddata,
+              crossDomain: true,
+              headers: {
+                "X-DP-Key": "222",
+                "X-DP-ID": "111"
+              },
+              success: function(msg) {
+                $('.success-bg').removeClass('hidden');
+              },
+              error: function(msg) {
+                alert(msg.responseJSON.message);
+              }
+            })
+          }
+        });
       },
       getDesigner: function(str) {
-        if(this.info.usersubtype == str){return;}
-        this.info.usersubtype = str;
-      },
-      getServiceObj: function() {
-        var model = this;
-        $.ajax({
-          type:'get',
-          url: ip_host + '/api/1.0/functions/company/servicecompany',
-          data:{},
-          crossDomain: true,
-          headers: {
-            "X-DP-Key": "222",
-            "X-DP-ID": "111"
-          },
-          success:function(msg) {
-            model.info.serverArr = msg;
-            setTimeout(function () {
-              model.info.serverobj = 78;
-            },10);
-          }
-        })
+        if(this.info.comsubtype == str){return;}
+        this.info.comsubtype = str;
       },
       getVerification: function() {
         var model = this;
@@ -156,10 +238,10 @@
         $('#get_verify').text(start_time+'s后重发');
         $('#get_verify').attr('disabled','true');
       },
-      upload_per: function() {
+      upload_com:function() {
         var model = this;
         var url = 'http://test_open.dpjia.com/api/1.0/upload';
-        var $input = $('#upload_per').find('input');
+        var $input = $('#upload_com').find('input');
 
         $input.unbind().click();
         $input.unbind().change(function() {
@@ -167,7 +249,7 @@
           var form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
          
-          $("#upload_per").find('form').ajaxSubmit({
+          $("#upload_com").find('form').ajaxSubmit({
             type:'post',
             url:url,
             data: {
@@ -183,81 +265,12 @@
               $input.unwrap();
               model.info.per_img = data.url;
               var img = '<img src="'+ data.url + '">';
-              $('#upload_per').find('img').remove();
-              $('#upload_per').append(img);
+              $('#upload_com').find('img').remove();
+              $('#upload_com').append(img);
             }
           })
         })
       }
-    },
-    mounted(){
-      this.getServiceObj();
-      $("#confirm_per_btn").validate({
-        rules: {
-          phone: {
-            required: true,
-            minlength: 11,
-          },
-          pwd: {
-            required: true,
-            minlength: 6
-          },
-          verification: {
-            required: true,
-          },
-          realname: {
-            required: true,
-          }
-        },
-        messages: {
-          phone: {
-            required: "请输入手机号码",
-            minlength: "手机号输入错误",
-            remote: "手机号已被注册"
-          },
-          pwd: {
-            required: "请输入密码",
-            minlength: "密码不能少于6位",
-          },
-          verification: {
-            required: "请输入验证码",
-          },
-          realname: {
-            required: "请输入真实姓名",
-          }
-        },
-        submitHandler: function() {
-          if(!this.info.readprotocol) {
-            alert('请先阅读搭配家用户使用协议');
-            return ;
-          }
-          var senddata = {
-            designer_type: 'seller',
-            mobile: this.info.phone,
-            password: this.info.pwd,
-            code: this.info.verification,
-            com_id_poi_companys: this.info.serverobj,
-            designer_url: this.info.per_img,
-            ui_name: this.info.realname,
-          }
-          $.ajax({
-            type:'get',
-            url: ip_host + '/api/1.0/users/signUpBySmsCode',
-            data:senddata,
-            crossDomain: true,
-            headers: {
-              "X-DP-Key": "222",
-              "X-DP-ID": "111"
-            },
-            success: function(msg) {
-              $('.success-bg').removeClass('hidden');
-            },
-            error: function(msg) {
-              alert(msg.responseJSON.message);
-            }
-          })
-        }
-      });
     }
   }
 
@@ -265,7 +278,7 @@
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
 
-.personaluser-vue {
+.companyuser-vue {
   width: pxTorem(500);
   padding: 0 pxTorem(60);
   background-color: #fff;
@@ -283,8 +296,6 @@
     margin-top: pxTorem(10);
     ul{
       li{
-        display: block;
-        height: pxTorem(40);
         position: relative;
         margin-bottom: pxTorem(10);
         .fa{
@@ -342,18 +353,36 @@
     }
   }
   .service-obj{
-    position: relative;
     .tips{
+      position: relative;
+      top: pxTorem(5);
       color: #f00;
     }
     .colon{
       display: inline-block;
       margin-right: pxTorem(10);
+      position: relative;
+      top: pxTorem(5);
+    }
+    label{
+      position: relative;
+      top: pxTorem(5);
     }
     select{
       width: pxTorem(200);
       height: pxTorem(35);
       line-height: pxTorem(35);
+    }
+    .area-box{
+      width: pxTorem(290);
+      float: right;
+      .col-md-4{
+        margin: 0;
+        padding: 0;
+      }
+      select{
+        width: pxTorem(90);
+      }
     }
   }
   .upload-img{
@@ -403,6 +432,7 @@
   }
   .save-btn{
     margin: pxTorem(20) 0 pxTorem(40) 0;
+    display: inline-block;
     width: pxTorem(380);
     height: pxTorem(40);
     line-height: pxTorem(40);

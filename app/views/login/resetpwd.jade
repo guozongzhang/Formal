@@ -7,28 +7,27 @@ html
       div.login-box
         div.left
           div.title
-            label {{info.type == 'number' ? '账号密码登录' : '手机验证码登录'}}
-            span(v-on:click="changeLoginType()") {{info.type == 'number' ? '手机验证码登录' : '账号密码登录'}}
+            label 找回密码
           div.input-box
             div.input-item
               input(type="text" v-model="info.number" placeholder="输入手机号")
-            div.input-item(v-show="info.type == 'number'")
-              input(type="password" v-model="info.pwd" placeholder="输入密码")
-            div.input-item.getverify(v-show="info.type == 'phone'")
-              input(type="text" v-model="info.verify" placeholder="输入验证码")
+            div.input-item.getverify
+              input(type="text" v-model="info.picverify" placeholder="输入图形验证码")
+              img(src="")
+            div.input-item.getverify
+              input(type="text" v-model="info.verify" placeholder="输入短信验证码")
               span#get_verify(v-on:click="getVerify()") 获取验证码
+            div.input-item
+              input(type="text" v-model="info.newpwd" placeholder="输入新密码")
+            div.input-item
+              input(type="text" v-model="info.renewpwd" placeholder="确认新密码")
 
-            div.auto-logo
-              label.check-box
-                input(type="checkbox")
-                span 下次自动登录
-              a(href="/login/resetpwd") 忘记密码？
             div.login-btn
-              a(href="javascript:;" v-on:click="Login()") 登录
+              a(href="javascript:;" v-on:click="confirmBtn()") 提交
 
         div.right
           p 还没有搭配家账号？
-          a(href="/login/register") 立即注册
+          a(href="javascript:;") 立即注册
 
       each item in development.assets.vendor.javascripts
         script(src="/assets/javascripts/#{item}.js")

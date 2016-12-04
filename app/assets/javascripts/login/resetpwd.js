@@ -2,34 +2,30 @@ let model
 let ip_host =' http://123.57.217.65:3010';
 //验证码60秒倒计时
 let start_time = 99;//开始时间
-class Index extends Basic {
+class Resetpwd extends Basic {
   constructor(){
     super({
       vue: {
         data:{
           info:{
             number:'',
-            pwd:'',
+            picverify:'',
             verify:'',
-            type: 'phone'
+            newpwd: '',
+            renewpwd:''
           }
         },
         components: {
         }
       }
     })
-    this.register(['changeLoginType', 'getVerify', 'Login'])
+    this.register(['getVerify', 'confirmBtn'])
     model = this
     this.init();
   }
 
   //初始数据
   init () {
-  }
-
-  /*切换登录方式*/
-  changeLoginType() {
-    model.mvvm.info.type = model.mvvm.info.type == 'number' ? 'phone' : 'number';
   }
 
   /*定时器*/
@@ -44,7 +40,7 @@ class Index extends Basic {
     } else {
       start_time--;
     }
-    $('#get_verify').text('重新获取'+ start_time + 's)');
+    $('#get_verify').text(start_time+'s后重发');
     $('#get_verify').attr('disabled','true');
   }
 
@@ -84,24 +80,12 @@ class Index extends Basic {
   }
 
   /*登录*/
-  Login() {
-    let data = {};
-    if(model.mvvm.info.type == 'number') {
-      //账号登录
-      data = {
-        number: model.mvvm.info.number,
-        pwd: model.mvvm.info.pwd
-      }
-    } else{
-      //手机号登录
-      data = {
-        number: model.mvvm.info.phone,
-        pwd: model.mvvm.info.pwd
-      }
-    }
+  confirmBtn() {
+    let data = {}
+    
     console.log(data);
   }
 }
 
 
-Core.expose('login', 'index', Index)
+Core.expose('login', 'resetpwd', Resetpwd)

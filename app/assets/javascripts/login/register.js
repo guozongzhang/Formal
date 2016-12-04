@@ -1,4 +1,5 @@
 import PersonaluserVue from 'com_root/login/personaluser.vue';
+import CompanyuserVue from 'com_root/login/companyuser.vue';
 
 let model
 
@@ -14,7 +15,8 @@ class Register extends Basic {
           }
         },
         components: {
-          'vue-personaluser': PersonaluserVue
+          'vue-personaluser': PersonaluserVue,
+          'vue-companyuser': CompanyuserVue
         }
       }
     })
