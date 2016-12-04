@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    include ../layouts/header.jade
+  body
+    div#app.body-box
+      div.login-box
+        div.left
+          div.title
+            label 找回密码
+          div.input-box
+            div.input-item
+              input(type="text" v-model="info.number" placeholder="输入手机号")
+            div.input-item.getverify
+              input(type="text" v-model="info.picverify" placeholder="输入图形验证码")
+              img(src="")
+            div.input-item.getverify
+              input(type="text" v-model="info.verify" placeholder="输入短信验证码")
+              span#get_verify(v-on:click="getVerify()") 获取验证码
+            div.input-item
+              input(type="text" v-model="info.newpwd" placeholder="输入新密码")
+            div.input-item
+              input(type="text" v-model="info.renewpwd" placeholder="确认新密码")
+
+            div.login-btn
+              a(href="javascript:;" v-on:click="confirmBtn()") 提交
+
+        div.right
+          p 还没有搭配家账号？
+          a(href="javascript:;") 立即注册
+
+      each item in development.assets.vendor.javascripts
+        script(src="/assets/javascripts/#{item}.js")
+
+      script(src="/tmp/assets/javascripts/common.js")
+      script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
+
+      script.
+        if(typeof APP.#{route.controller}.#{route.action} == 'function'){
+          new APP.#{route.controller}.#{route.action}()
+        }
+

@@ -1,0 +1,163 @@
+@import "../function.scss";
+html,body{
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.hidden {
+  display: none !important;
+}
+html{
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/resetpwd_bg.png') center center / cover no-repeat fixed;
+  .clear:before,
+  .clear:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+.login-box{
+  position: absolute;
+  top: pxTorem(190);
+  left: 50%;
+  margin-left: pxTorem(-305);
+  width: pxTorem(610);
+  // height: pxTorem(320);
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-bottom: pxTorem(40);
+  .left{
+    display: inline-block;
+    float: left;
+    width: pxTorem(370);
+    // height: pxTorem(320);
+    padding: pxTorem(40) pxTorem(30) pxTorem(30) pxTorem(60);
+    .title{
+      width: pxTorem(280);
+      height: pxTorem(30);
+      position: relative;
+      label{
+        font-size: pxTorem(24);
+        color: red;
+      }
+      span{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: pxTorem(14);
+        color: #333;
+        cursor: pointer;
+      }
+      span:hover{
+        color: red;
+      }
+    }
+    .input-box{
+      margin-top: pxTorem(30);
+      .input-item{
+        margin-bottom: pxTorem(15);
+        input{
+          width: pxTorem(280);
+          height: pxTorem(36);
+          line-height: pxTorem(36);
+          border: 1px solid #d1d1d1;
+          padding: pxTorem(6) pxTorem(12);
+        }
+      }
+      .getverify{
+        input{
+          width: pxTorem(190);
+        }
+        span{
+          display: inline-block;
+          width: pxTorem(80);
+          height: pxTorem(36);
+          line-height: pxTorem(36);
+          text-align: center;
+          background-color: #f00;
+          color: #fff;
+          margin-left: pxTorem(10);
+          font-size: pxTorem(12);
+          cursor: pointer;
+        }
+        img{
+          display: inline-block;
+          width: pxTorem(80);
+          height: pxTorem(36);
+          margin-left: pxTorem(10);
+        }
+      }
+      .auto-logo{
+        position: relative;
+        width: pxTorem(280);
+        height: pxTorem(36);
+        line-height: pxTorem(36);
+        .check-box{
+          position: absolute;
+          left: 0;
+          cursor: pointer;
+          input{
+            position: relative;
+            top: pxTorem(2);
+            display: inline-block;
+            margin-right: pxTorem(5);
+          }
+        }
+        a{
+          position: absolute;
+          right: 0;
+          text-decoration: none;
+          color: #333;
+        }
+      }
+      .login-btn{
+        width: pxTorem(280);
+        height: pxTorem(36);
+        margin-top: pxTorem(10);
+        a{
+          display: inline-block;
+          text-decoration: none;
+          width: pxTorem(280);
+          height: pxTorem(36);
+          line-height: pxTorem(36);
+          text-align: center;
+          background-color: #ef0000;
+          color: #fff;
+          font-size: pxTorem(16);
+        }
+      }
+    }
+  }
+  .right{
+    display: inline-block;
+    width: pxTorem(238);
+    height: pxTorem(320);
+    float: left;
+    padding: pxTorem(120) pxTorem(40) 0 pxTorem(10);
+    text-align: center;
+    p{
+      margin-bottom: pxTorem(10);
+      padding: 0;
+      text-align: center;
+      font-size: pxTorem(16);
+      color: #797979;
+    }
+    a{
+      text-decoration: none;
+      display: inline-block;
+      width: pxTorem(140);
+      height: pxTorem(36);
+      line-height: pxTorem(36);
+      text-align: center;
+      background-color: #5076E1;
+      color: #fff;
+      font-size: pxTorem(16);
+      border-radius: pxTorem(4);
+    }
+  }
+}
