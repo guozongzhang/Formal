@@ -155,3 +155,91 @@ html{
     }
   }
 }
+
+
+@media only screen and (max-width: 800px){
+  .login-box{
+    width: pxTorem(360);
+    margin-left: pxTorem(-180);
+    height: pxTorem(210);
+    .left{
+      width: pxTorem(218);
+       padding: pxTorem(15) 0 pxTorem(15) pxTorem(20);
+      .title{
+        width: pxTorem(198);
+        height: pxTorem(24);
+        label{
+          font-size: pxTorem(14);
+        }
+        span{
+          font-size: pxTorem(12);
+        }
+      }
+      .input-box{
+        margin-top: pxTorem(15);
+        .input-item{
+          width: pxTorem(198);
+          margin-bottom: pxTorem(10);
+          input{
+            width: pxTorem(198);
+            height: pxTorem(26);
+            line-height: pxTorem(26);
+            padding: pxTorem(4) pxTorem(8);
+            font-size: pxTorem(12);
+          }
+        }
+        .getverify{
+          input{
+            width: pxTorem(110);
+          }
+          span{
+            position: relative;
+            top: pxTorem(-1);
+            display: inline-block;
+            width: pxTorem(80);
+            height: pxTorem(26);
+            line-height: pxTorem(26);
+            margin-left: pxTorem(8);
+          }
+        }
+        .auto-logo{
+          width: pxTorem(198);
+          height: pxTorem(26);
+          line-height: pxTorem(26);
+          .check-box{
+            font-size: pxTorem(12);
+          }
+          a{
+            font-size: pxTorem(12);
+          }
+        }
+        .login-btn{
+          width: pxTorem(198);
+          height: pxTorem(26);
+          margin-top: pxTorem(6);
+          a{
+            width: pxTorem(198);
+            height: pxTorem(26);
+            line-height: pxTorem(26);
+            font-size: pxTorem(12);
+          }
+        }
+      }
+    }
+    .right{
+      width: pxTorem(140);
+      padding: pxTorem(60) pxTorem(10) 0 pxTorem(10);
+      p{
+        margin-bottom: pxTorem(6);
+        font-size: pxTorem(12);
+      }
+      a{
+        width: pxTorem(100);
+        height: pxTorem(26);
+        line-height: pxTorem(26);
+        font-size: pxTorem(12);
+        border-radius: pxTorem(4);
+      }
+    }
+  }
+}
