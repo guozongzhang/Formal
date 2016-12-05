@@ -58,8 +58,19 @@ html{
 }
 
 @media only screen and (max-width: 800px){
-  /* .register-box{
-    width: pxTorem(300);
-    margin-left: pxTorem(-150);
-  } */
+  .register-box{
+    width: pxTorem(350);
+    margin-left: pxTorem(-175);
+    /* 头部导航 */
+    .top-tab {
+      padding: pxTorem(10) pxTorem(40);
+      height: pxTorem(44);
+      line-height: pxTorem(24);
+      ul{
+        li{
+          font-size: pxTorem(14);
+        }
+      }
+    }
+  }
 }
