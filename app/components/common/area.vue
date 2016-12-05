@@ -1,15 +1,15 @@
 <template lang="jade">
   div.row
     div(v-bind:class="showDistrict == true && showCity == true ? 'col-md-4' : 'col-md-6'")
-      select(class="form-control" v-model="province" @change="switchInit")
+      select(class="form-control" v-model="provinceMe" @change="switchInit")
         option(value="-1") #{"=省="}
         option(v-for="p in provinces" v-bind:value="p.id") {{p.ProvinceName}}
     div(v-bind:class="showDistrict == true ? 'col-md-4' : 'col-md-6'" v-show="showCity")
-      select(class="form-control"  v-model="city"  @change="switchInit")
+      select(class="form-control"  v-model="cityMe"  @change="switchInit")
         option(value="-1") #{"=市="}
         option(v-for="c in citys"  v-bind:value="c.id") {{c.CityName}}
     div.col-md-4(v-show="showDistrict")
-      select(class="form-control" v-model="district" @change="switchInit")
+      select(class="form-control" v-model="districtMe" @change="switchInit")
         option(value="-1") #{"=区="}
         option(v-for="d in districts" v-bind:value="d.id") {{d.DistrictName}}
 </template>
@@ -23,14 +23,24 @@ let isinit = true
 
 export default {
   props: ['province', 'city', 'district', 'allowps', 'allowcs', 'allowds','showDistrict', 'showCity'],
+  data: function () {
+    return { 
+      provinceMe: this.province,
+      cityMe: this.city,
+      districtMe: this.district,
+    }
+  },
   data () {
     return {
       provinces: [],
       citys: [],
-      districts: []
+      districts: [],
+      provinceMe: '',
+      cityMe:'',
+      districtMe:''
     }
   },
-  methods: {
+  methods: { 
     /**
      * 根据allowps,allowcs,allowds 过滤区域
      */
@@ -49,28 +59,28 @@ export default {
       })
 
       if (!isinit) {
-        this.province = -1
-        this.city = -1
+        this.provinceMe = -1
+        this.cityMe = -1
         this.citys = []
-        this.district = -1
+        this.districtMe = -1
         this.districts = []
       }
     },
 
     // 切换省份
     switchProvince: function() {
-      if (!(parseInt(this.province) + 2 > 0)) {
-        this.province = -1
+      if (!(parseInt(this.provinceMe) + 2 > 0)) {
+        this.provinceMe = -1
       }
         
       if (!isinit) {
-        this.city = -1
-        this.district = -1
+        this.cityMe = -1
+        this.districtMe = -1
         this.districts = []
       }
 
-      if(this.province == -1){return}
-      City.order('id').where({ProvinceID: this.province}).limit(2000).all((data)=> {
+      if(this.provinceMe == -1){return}
+      City.order('id').where({ProvinceID: this.provinceMe}).limit(2000).all((data)=> {
         this.citys = this.filterArea(this.allowcs, data)
       })
 
@@ -78,23 +88,22 @@ export default {
 
     // 切换城市
     switchCity: function() { 
-      console.log('city', this.city)
-      if (!(parseInt(this.city) + 2 > 0)) {
-        this.city = -1
+      if (!(parseInt(this.cityMe) + 2 > 0)) {
+        this.cityMe = -1
       } 
 
-      if (!isinit) {this.district = -1}
-      if(this.city == -1){return}
+      if (!isinit) {this.districtMe = -1}
+      if(this.cityMe == -1){return}
         
-      District.order('id').where({CityID: this.city}).limit(2000).all((data)=> {
+      District.order('id').where({CityID: this.cityMe}).limit(2000).all((data)=> {
         this.districts = this.filterArea(this.allowds, data)
       })
     },
     
     // 切换区
     switchDistrict: function(){ 
-      if (!(parseInt(this.district) + 2 > 0)) {
-        this.district = -1;
+      if (!(parseInt(this.districtMe) + 2 > 0)) {
+        this.districtMe = -1;
       }
     },
 
@@ -108,16 +117,19 @@ export default {
   mounted() {
     isinit = true;
     // 监控省市区值得变化
-    this.$watch('province', function () {
+    this.$watch('provinceMe', function () {
       this.switchProvince();
+      this.$emit('syncData', 'province_poi_province', this.provinceMe);
     })
 
-    this.$watch('city', function () {
+    this.$watch('cityMe', function () {
       this.switchCity();
+      this.$emit('syncData', 'city_poi_city', this.cityMe);
     })
 
-    this.$watch('district', function () {
+    this.$watch('districtMe', function () {
       this.switchDistrict();
+      this.$emit('syncData', 'district_poi_district', this.districtMe);
     })
 
     this.$watch('allowps', function () {
