@@ -52,11 +52,11 @@
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
-      button.save-btn(type="submit" v-on:click="comfirmPerBtn()") 提交
+      button.save-btn(type="submit") 提交
 </template>
 
 <script>
-  var ip_host = 'http://192.168.1.120'
+  var ip_host = 'http://192.168.1.120/openapi'
   //var ip_host =' http://123.57.217.65:3010';
   //验证码60秒倒计时
   var start_time = 99;//开始时间
@@ -77,10 +77,6 @@
       }
     },
     methods:{
-      comfirmPerBtn: function() {
-        console.log('====')
-        
-      },
       getDesigner: function(str) {
         if(this.info.usersubtype == str){return;}
         this.info.usersubtype = str;
@@ -108,10 +104,6 @@
         var model = this;
         var phone = this.info.phone.trim();
         if(phone) {
-          var data = {
-            mobile: phone,
-            type: 'reg',
-          };
           if($('#user_phone').hasClass('error')) {
             alert('手机号已被注册');
           } else {
@@ -191,6 +183,7 @@
       }
     },
     mounted(){
+      var model = this;
       this.getServiceObj();
       $("#confirm_per_btn").validate({
         rules: {
@@ -227,18 +220,19 @@
           }
         },
         submitHandler: function() {
-          if(!this.info.readprotocol) {
+          alert('===')
+          if(model.info.readprotocol) {
             alert('请先阅读搭配家用户使用协议');
             return ;
           }
           var senddata = {
             designer_type: 'seller',
-            mobile: this.info.phone,
-            password: this.info.pwd,
-            code: this.info.verification,
-            com_id_poi_companys: this.info.serverobj,
-            designer_url: this.info.per_img,
-            ui_name: this.info.realname,
+            mobile: model.info.phone,
+            password: model.info.pwd,
+            code: model.info.verification,
+            com_id_poi_companys: model.info.serverobj,
+            designer_url: model.info.per_img,
+            ui_name: model.info.realname,
           }
           $.ajax({
             type:'get',
@@ -250,6 +244,7 @@
               "X-DP-ID": "111"
             },
             success: function(msg) {
+              alert('==222=')
               $('.success-bg').removeClass('hidden');
             },
             error: function(msg) {
@@ -411,6 +406,12 @@
     color: #fff;
     border-radius: pxTorem(5);
     font-size: pxTorem(16);
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .personaluser-vue{
+    
   }
 }
 </style>
