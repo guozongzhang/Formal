@@ -159,12 +159,13 @@ html{
 
 @media only screen and (max-width: 800px){
   .login-box{
-    width: pxTorem(360);
-    margin-left: pxTorem(-180);
+    width: pxTorem(350);
+    margin-left: pxTorem(-175);
     height: pxTorem(210);
     .left{
       width: pxTorem(218);
-       padding: pxTorem(15) 0 pxTorem(15) pxTorem(20);
+      height: pxTorem(210);
+      padding: pxTorem(15) 0 pxTorem(15) pxTorem(20);
       .title{
         width: pxTorem(198);
         height: pxTorem(24);
@@ -227,8 +228,9 @@ html{
       }
     }
     .right{
-      width: pxTorem(140);
-      padding: pxTorem(60) pxTorem(10) 0 pxTorem(10);
+      width: pxTorem(130);
+      height: pxTorem(210);
+      padding: pxTorem(60) pxTorem(5) 0 pxTorem(5);
       p{
         margin-bottom: pxTorem(6);
         font-size: pxTorem(12);
