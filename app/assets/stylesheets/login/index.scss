@@ -23,7 +23,7 @@ html{
 
 .login-box{
   position: absolute;
-  top: pxTorem(190);
+  top: pxTorem(250);
   left: 50%;
   margin-left: pxTorem(-305);
   width: pxTorem(610);
@@ -162,6 +162,7 @@ html{
     width: pxTorem(350);
     margin-left: pxTorem(-175);
     height: pxTorem(210);
+    top: pxTorem(180);
     .left{
       width: pxTorem(218);
       height: pxTorem(210);
