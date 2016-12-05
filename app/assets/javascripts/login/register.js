@@ -26,7 +26,7 @@ class Register extends Basic {
 
   //初始数据
   init () {
-    this.register(['choiceSignalUser', 'choiceCompanyUser'])
+    this.register(['choiceSignalUser', 'choiceCompanyUser', 'submitSuccess'])
   }
 
   choiceSignalUser() {
@@ -35,6 +35,10 @@ class Register extends Basic {
 
   choiceCompanyUser() {
     model.mvvm.info.type = 'company';
+  }
+
+  submitSuccess() {
+    $('.success-bg').addClass('hidden');
   }
 }
 

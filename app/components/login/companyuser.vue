@@ -47,7 +47,7 @@
         span.tips *
         span.colon ：
         div.area-box
-          <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="true" :showCity="true"></vue-area>
+          <vue-area v-on:province.sync='info.province_poi_province' v-on:city.sync='info.city_poi_city' v-on:district.sync='info.district_poi_district' :showDistrict="true" :showCity="true"></vue-area>
       div.upload-img
         label 上传营业执照：
         span.upload-box#upload_com
@@ -64,12 +64,13 @@
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
-      button.save-btn(type="submit" v-on:click="comfirmComBtn()") 提交
+      button.save-btn(type="button" v-on:click="saveComDate()") 提交
 </template>
 
 <script>
-  import AreaVue from '../common/area.vue'
-  var ip_host =' http://123.57.217.65:3010';
+  import AreaVue from '../common/area.vue';
+  var ip_host = 'http://192.168.1.120/openapi'
+  // var ip_host =' http://123.57.217.65:3010';
   //验证码60秒倒计时
   var start_time = 99;//开始时间
   export default {
@@ -96,92 +97,6 @@
       }
     },
     methods:{
-      comfirmComBtn: function() {
-        $("#confirm_com_btn").validate({
-          rules: {
-            phone: {
-              required: true,
-              minlength: 11,
-            },
-            pwd: {
-              required: true,
-              minlength: 6
-            },
-            verification: {
-              required: true,
-            },
-            companyname: {
-              required: true,
-            },
-            linkman: {
-              required: true,
-            },
-            companytel: {
-              required: true,
-            },
-            brandname: {
-              required: true,
-            }
-          },
-          messages: {
-            phone: {
-              required: "请输入手机号码",
-              minlength: "手机号输入错误",
-              remote: "手机号已被注册"
-            },
-            pwd: {
-              required: "请输入密码",
-              minlength: "密码不能少于6位",
-            },
-            verification: {
-              required: "请输入验证码",
-            },
-            companyname: {
-              required: "请输入公司名称",
-            },
-            linkman: {
-              required: "请输入联系人姓名",
-            },
-            companytel: {
-              required: "请输入公司固话",
-            },
-            brandname: {
-              required: "请输入品牌名称",
-            }
-          },
-          submitHandler: function() {
-            if(!this.info.readprotocol) {
-              alert('请先阅读搭配家用户使用协议');
-              return ;
-            }
-            var senddata = {
-              designer_type: 'seller',
-              mobile: this.info.phone,
-              password: this.info.pwd,
-              code: this.info.verification,
-              com_id_poi_companys: this.info.serverobj,
-              designer_url: this.info.per_img,
-              ui_name: this.info.realname,
-            }
-            $.ajax({
-              type:'get',
-              url: ip_host + '/api/1.0/users/signUpBySmsCode',
-              data:senddata,
-              crossDomain: true,
-              headers: {
-                "X-DP-Key": "222",
-                "X-DP-ID": "111"
-              },
-              success: function(msg) {
-                $('.success-bg').removeClass('hidden');
-              },
-              error: function(msg) {
-                alert(msg.responseJSON.message);
-              }
-            })
-          }
-        });
-      },
       getDesigner: function(str) {
         if(this.info.comsubtype == str){return;}
         this.info.comsubtype = str;
@@ -270,7 +185,124 @@
             }
           })
         })
+      },
+      saveComDate: function() {
+        if(!$('#confirm_com_btn').valid()){return false;}
+        var model = this;
+        if(!model.info.readprotocol) {
+          alert('请先阅读搭配家用户使用协议');
+          return ;
+        }
+        var comdata = {};
+        if(model.info.comsubtype == 'dealer'){
+          // 经销商
+          comdata = {
+            deal_type: 'dealer',
+            mobile: model.info.phone,
+            password: model.info.pwd,
+            code: model.info.verification,
+            company_name: model.info.companyname,
+            link_man: model.info.linkman,
+            com_tel: model.info.companytel,
+            brand_name: model.info.brandname,
+            province: model.info.com_pro,
+            city: model.info.com_city,
+            area: model.info.com_area,
+            trade_cert_url: model.info.com_img,
+            user_type:'company_admin',
+          }
+        } else {
+          // 品牌商
+          comdata = {
+            deal_type: 'company',
+            mobile: model.info.phone,
+            password: model.info.pwd,
+            code: model.info.verification,
+            company_name: model.info.companyname,
+            link_man: model.info.linkman,
+            com_tel: model.info.companytel,
+            brand_name: model.info.brandname,
+            province: model.info.com_pro,
+            city: model.info.com_city,
+            area: model.info.com_area,
+            trade_cert_url: model.info.com_img,
+            user_type:'company_admin',
+          }
+        }
+        console.log(model.info)
+        console.log(comdata)
+        $.ajax({
+          type:'post',
+          url: ip_host + '/api/1.0/users/signUpBySmsCode',
+          data:comdata,
+          crossDomain: true,
+          headers: {
+            "X-DP-Key": "222",
+            "X-DP-ID": "111"
+          },
+          success: function(msg) {
+            $('.success-bg').removeClass('hidden');
+          },
+          error: function(msg) {
+            alert(msg.responseJSON.message);
+          }
+        })
       }
+    },
+    mounted() {
+      $("#confirm_com_btn").validate({
+        rules: {
+          phone: {
+            required: true,
+            minlength: 11,
+          },
+          pwd: {
+            required: true,
+            minlength: 6
+          },
+          verification: {
+            required: true,
+          },
+          companyname: {
+            required: true,
+          },
+          linkman: {
+            required: true,
+          },
+          companytel: {
+            required: true,
+          },
+          brandname: {
+            required: true,
+          }
+        },
+        messages: {
+          phone: {
+            required: "请输入手机号码",
+            minlength: "手机号输入错误",
+            remote: "手机号已被注册"
+          },
+          pwd: {
+            required: "请输入密码",
+            minlength: "密码不能少于6位",
+          },
+          verification: {
+            required: "请输入验证码",
+          },
+          companyname: {
+            required: "请输入公司名称",
+          },
+          linkman: {
+            required: "请输入联系人姓名",
+          },
+          companytel: {
+            required: "请输入公司固话",
+          },
+          brandname: {
+            required: "请输入品牌名称",
+          }
+        }
+      });
     }
   }
 

@@ -14,14 +14,14 @@ html
         div(v-show="info.type == 'company'")
           <vue-companyuser></vue-companyuser>
 
-      //- div.success-bg.hidden
-      //-   div.success-box
-      //-     i.fa.fa-check-circle 
-      //-     p.tips 信息提交成功！
+      div.success-bg.hidden
+        div.success-box
+          i.fa.fa-check-circle 
+          p.tips 信息提交成功！
 
-      //-     p.tip-text 我们会在1个工作日内审核，审核通过后，账号密码将以短信形式发送给您，请您及时查收！
+          p.tip-text 我们会在1个工作日内审核，审核通过后，账号密码将以短信形式发送给您，请您及时查收！
 
-      //-     span.success-ok 确定
+          span.success-ok(v-on:click="submitSuccess()") 确定
 
     each item in development.assets.vendor.javascripts
       script(src="/assets/javascripts/#{item}.js")

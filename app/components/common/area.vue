@@ -2,15 +2,15 @@
   div.row
     div(v-bind:class="showDistrict == true && showCity == true ? 'col-md-4' : 'col-md-6'")
       select(class="form-control" v-model="province" @change="switchInit")
-        option(value="-1") #{"=选择省="}
+        option(value="-1") #{"=省="}
         option(v-for="p in provinces" v-bind:value="p.id") {{p.ProvinceName}}
     div(v-bind:class="showDistrict == true ? 'col-md-4' : 'col-md-6'" v-show="showCity")
       select(class="form-control"  v-model="city"  @change="switchInit")
-        option(value="-1") #{"=选择市="}
+        option(value="-1") #{"=市="}
         option(v-for="c in citys"  v-bind:value="c.id") {{c.CityName}}
     div.col-md-4(v-show="showDistrict")
       select(class="form-control" v-model="district" @change="switchInit")
-        option(value="-1") #{"=选择区="}
+        option(value="-1") #{"=区="}
         option(v-for="d in districts" v-bind:value="d.id") {{d.DistrictName}}
 </template>
 

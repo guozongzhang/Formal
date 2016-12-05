@@ -52,7 +52,7 @@
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
-      button.save-btn(type="submit") 提交
+      button.save-btn(type="button" v-on:click="saveDate()") 提交
 </template>
 
 <script>
@@ -180,6 +180,51 @@
             }
           })
         })
+      },
+      saveDate: function() {
+        if(!$('#confirm_per_btn').valid()){return false;}
+        var model = this;
+        if(!model.info.readprotocol) {
+          alert('请先阅读搭配家用户使用协议');
+          return ;
+        }
+        var senddata = {};
+        if(model.info.usersubtype == 'designer'){
+          // 设计师
+          senddata = {
+            designer_type: 'seller',
+            mobile: model.info.phone,
+            password: model.info.pwd,
+            code: model.info.verification,
+            com_id_poi_companys: model.info.serverobj,
+            designer_url: model.info.per_img,
+            ui_name: model.info.realname,
+          }
+        } else {
+          // 普通用户
+          senddata = {
+            designer_type: 'single',
+            mobile: model.info.phone,
+            password: model.info.pwd,
+            code: model.info.verification,
+          }
+        }
+        $.ajax({
+          type:'post',
+          url: ip_host + '/api/1.0/users/signUpBySmsCode',
+          data:senddata,
+          crossDomain: true,
+          headers: {
+            "X-DP-Key": "222",
+            "X-DP-ID": "111"
+          },
+          success: function(msg) {
+            $('.success-bg').removeClass('hidden');
+          },
+          error: function(msg) {
+            alert(msg.responseJSON.message);
+          }
+        })
       }
     },
     mounted(){
@@ -218,39 +263,6 @@
           realname: {
             required: "请输入真实姓名",
           }
-        },
-        submitHandler: function() {
-          alert('===')
-          if(model.info.readprotocol) {
-            alert('请先阅读搭配家用户使用协议');
-            return ;
-          }
-          var senddata = {
-            designer_type: 'seller',
-            mobile: model.info.phone,
-            password: model.info.pwd,
-            code: model.info.verification,
-            com_id_poi_companys: model.info.serverobj,
-            designer_url: model.info.per_img,
-            ui_name: model.info.realname,
-          }
-          $.ajax({
-            type:'get',
-            url: ip_host + '/api/1.0/users/signUpBySmsCode',
-            data:senddata,
-            crossDomain: true,
-            headers: {
-              "X-DP-Key": "222",
-              "X-DP-ID": "111"
-            },
-            success: function(msg) {
-              alert('==222=')
-              $('.success-bg').removeClass('hidden');
-            },
-            error: function(msg) {
-              alert(msg.responseJSON.message);
-            }
-          })
         }
       });
     }
