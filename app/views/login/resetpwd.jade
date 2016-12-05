@@ -5,29 +5,34 @@ html
   body
     div#app.body-box
       div.login-box
-        div.left
-          div.title
-            label 找回密码
-          div.input-box
-            div.input-item
-              input(type="text" v-model="info.number" placeholder="输入手机号")
-            div.input-item.getverify
-              input(type="text" v-model="info.picverify" placeholder="输入图形验证码")
-              img(src="")
-            div.input-item.getverify
-              input(type="text" v-model="info.verify" placeholder="输入短信验证码")
-              span#get_verify(v-on:click="getVerify()") 获取验证码
-            div.input-item
-              input(type="text" v-model="info.newpwd" placeholder="输入新密码")
-            div.input-item
-              input(type="text" v-model="info.renewpwd" placeholder="确认新密码")
-
-            div.login-btn
-              a(href="javascript:;" v-on:click="confirmBtn()") 提交
-
-        div.right
-          p 还没有搭配家账号？
-          a(href="/login/register") 立即注册
+        div.title 
+          | 找回密码
+          a(href="/login/index") < 返回登录页
+        div.step-box
+          span.icon-circle.active 1
+          span.text.active 验证注册手机号
+          span.step-line >>>
+          span.icon-circle 2
+          span.text 设置新密码
+        div.input-box
+          div.input-item
+            label 账户：
+            input(type="text" v-model="info.number" placeholder="输入手机号")
+          div.input-item.getverify
+            label 验证码：
+            input(type="text" v-model="info.picverify" placeholder="输入图形验证码")
+            img(:src="info.img_code" v-on:click="changeImg()")
+          //- div.input-item.getverify
+          //-   input(type="text" v-model="info.verify" placeholder="输入短信验证码")
+          //-   span#get_verify(v-on:click="getVerify()") 获取验证码
+          //- div.input-item
+          //-   input(type="text" v-model="info.newpwd" placeholder="输入新密码")
+          //- div.input-item
+          //-   input(type="text" v-model="info.renewpwd" placeholder="确认新密码")
+          div.next-step
+            a(href="javascript:;") 下一步
+          //- div.login-btn
+          //-   a(href="javascript:;" v-on:click="confirmBtn()") 提交
 
       each item in development.assets.vendor.javascripts
         script(src="/assets/javascripts/#{item}.js")
