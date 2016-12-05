@@ -39,6 +39,7 @@ class Register extends Basic {
 
   submitSuccess() {
     $('.success-bg').addClass('hidden');
+    //window.location.href = '/'
   }
 }
 

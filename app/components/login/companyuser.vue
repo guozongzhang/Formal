@@ -72,7 +72,7 @@
   var ip_host = 'http://192.168.1.120/openapi'
   // var ip_host =' http://123.57.217.65:3010';
   //验证码60秒倒计时
-  var start_time = 99;//开始时间
+  var start_time = 60;//开始时间
   export default {
     components: {
       'vue-area': AreaVue
@@ -104,6 +104,7 @@
       getVerification: function() {
         var model = this;
         var phone = this.info.phone.trim();
+        $('#get_verify').attr('disabled','true');
         if(phone) {
           var data = {
             mobile: phone,
@@ -130,6 +131,7 @@
               },
               error:function(msg) {
                 alert(msg.responseJSON.message);
+                $('#get_verify').removeAttr('disabled');
               }
             })
             
@@ -151,7 +153,6 @@
           start_time--;
         }
         $('#get_verify').text(start_time+'s后重发');
-        $('#get_verify').attr('disabled','true');
       },
       upload_com:function() {
         var model = this;

@@ -1,7 +1,8 @@
 let model
-let ip_host =' http://123.57.217.65:3010';
+var ip_host = 'http://192.168.1.120/openapi'
+// let ip_host =' http://123.57.217.65:3010';
 //验证码60秒倒计时
-let start_time = 99;//开始时间
+let start_time = 60;//开始时间
 class Index extends Basic {
   constructor(){
     super({
@@ -11,7 +12,7 @@ class Index extends Basic {
             number:'',
             pwd:'',
             verify:'',
-            type: 'phone'
+            type: 'number'
           }
         },
         components: {
@@ -89,8 +90,8 @@ class Index extends Basic {
     if(model.mvvm.info.type == 'number') {
       //账号登录
       data = {
-        number: model.mvvm.info.number,
-        pwd: model.mvvm.info.pwd
+        username: model.mvvm.info.number,
+        password: model.mvvm.info.pwd
       }
     } else{
       //手机号登录
@@ -99,7 +100,25 @@ class Index extends Basic {
         pwd: model.mvvm.info.pwd
       }
     }
-    console.log(data);
+    $.ajax({
+      type:'get',
+      url: ip_host + '/api/1.0/users/login',
+      data:data,
+      crossDomain: true,
+      headers: {
+        "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
+        "X-DP-ID": "cfdab86f2c2ea593"
+      },
+      success: function(msg) {
+        Core.alert('success','登录成功');
+        setTimeout(()=> {
+          window.location.href = '/'
+        }, 1000)
+      },
+      error: function(msg) {
+        alert(msg.responseJSON.message);
+      }
+    })
   }
 }
 
