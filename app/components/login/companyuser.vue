@@ -47,7 +47,7 @@
         span.tips *
         span.colon ：
         div.area-box
-          <vue-area v-on:province.sync='info.province_poi_province' v-on:city.sync='info.city_poi_city' v-on:district.sync='info.district_poi_district' :showDistrict="true" :showCity="true"></vue-area>
+          <vue-area v-on:province='info.province_poi_province' v-on:city='info.city_poi_city' v-on:district='info.district_poi_district'  v-on:syncData="syncData" :showDistrict="true" :showCity="true"></vue-area>
       div.upload-img
         label 上传营业执照：
         span.upload-box#upload_com
@@ -205,10 +205,10 @@
             link_man: model.info.linkman,
             com_tel: model.info.companytel,
             brand_name: model.info.brandname,
-            province: model.info.com_pro,
-            city: model.info.com_city,
-            area: model.info.com_area,
-            trade_cert_url: model.info.com_img,
+            province: model.info.province_poi_province,
+            city: model.info.city_poi_city,
+            area: model.info.district_poi_district,
+            trade_cert_url: model.info.per_img,
             user_type:'company_admin',
           }
         } else {
@@ -222,15 +222,13 @@
             link_man: model.info.linkman,
             com_tel: model.info.companytel,
             brand_name: model.info.brandname,
-            province: model.info.com_pro,
-            city: model.info.com_city,
-            area: model.info.com_area,
-            trade_cert_url: model.info.com_img,
+            province: model.info.province_poi_province,
+            city: model.info.city_poi_city,
+            area: model.info.district_poi_district,
+            trade_cert_url: model.info.per_img,
             user_type:'company_admin',
           }
         }
-        console.log(model.info)
-        console.log(comdata)
         $.ajax({
           type:'post',
           url: ip_host + '/api/1.0/users/signUpBySmsCode',
@@ -247,6 +245,9 @@
             alert(msg.responseJSON.message);
           }
         })
+      },
+      syncData: function(key, val) {
+        this.info[key] = val;
       }
     },
     mounted() {
