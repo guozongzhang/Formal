@@ -10,7 +10,7 @@ html,body{
 html{
   width: 100%;
   height: 100%;
-  background: url('/assets/images/resetpwd_bg.png') center center / cover no-repeat fixed;
+  background: url('/assets/images/login_bg.jpg') center center / cover no-repeat fixed;
   .clear:before,
   .clear:after{
     display: block;
@@ -23,141 +23,169 @@ html{
 
 .login-box{
   position: absolute;
-  top: pxTorem(190);
+  top: pxTorem(250);
   left: 50%;
-  margin-left: pxTorem(-305);
-  width: pxTorem(610);
-  // height: pxTorem(320);
+  margin-left: pxTorem(-365);
+  width: pxTorem(730);
+  height: pxTorem(450);
   border: 1px solid #ccc;
   background-color: #fff;
-  margin-bottom: pxTorem(40);
-  .left{
-    display: inline-block;
-    float: left;
-    width: pxTorem(370);
-    // height: pxTorem(320);
-    padding: pxTorem(40) pxTorem(30) pxTorem(30) pxTorem(60);
-    .title{
-      width: pxTorem(280);
-      height: pxTorem(30);
+  border-radius: pxTorem(5);
+  .title{
+    position: relative;
+    width: pxTorem(730);
+    height: pxTorem(80);
+    line-height: pxTorem(80);
+    text-align: center;
+    border-bottom: 2px solid #e8e8e8;
+    color: red;
+    font-size: pxTorem(20);
+    margin-bottom: pxTorem(40);
+    a{
+      position: absolute;
+      left: pxTorem(30);
+      top: 0;
+      text-decoration: none;
+      color: #bcbcbc;
+      font-size: pxTorem(16);
+    }
+  }
+  .step-box{
+    width: pxTorem(500);
+    height: pxTorem(40);
+    margin: 0 auto pxTorem(60) auto;
+    text-align: center;
+    span{
+      display: inline-block;
+    }
+    .icon-circle{
+      width: pxTorem(40);
+      height: pxTorem(40);
+      line-height: pxTorem(40);
+      text-align: center;
+      border-radius: 100%;
+      background-color: #bcbcbc;
+      color: #fff;
+      font-size: pxTorem(28);
+      font-weight: bold;
+    }
+    .icon-circle.active{
+      background-color: #f14f4f;
+      color: #fff;
+    }
+    span.active{
+      color: #f14f4f;
+    }
+    .text{
       position: relative;
+      top: pxTorem(-5);
+      height: pxTorem(40);
+      line-height: pxTorem(40);
+      margin-left: pxTorem(15);
+      font-size: pxTorem(16);
+    }
+    .step-line{
+      margin: 0 pxTorem(30);
+      font-size: pxTorem(30);
+      font-weight: bold;
+      color: #bcbcbc;
+    }
+  }
+  .input-box{
+    width: pxTorem(400);
+    margin: pxTorem(20) auto;
+    .input-item{
+      margin-bottom: pxTorem(20);
       label{
-        font-size: pxTorem(24);
-        color: red;
+        display: inline-block;
+        width: pxTorem(100);
+        text-align: right;
+        font-size: pxTorem(16);
+        color: #bcbcbc;
+        margin-right: pxTorem(20);
       }
-      span{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        font-size: pxTorem(14);
-        color: #333;
-        cursor: pointer;
-      }
-      span:hover{
-        color: red;
+      input{
+        width: pxTorem(280);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        border: 1px solid #d1d1d1;
+        padding: pxTorem(6) pxTorem(12);
+        border-radius: pxTorem(5);
       }
     }
-    .input-box{
-      margin-top: pxTorem(30);
-      .input-item{
-        margin-bottom: pxTorem(15);
+    .getverify{
+      input{
+        width: pxTorem(160);
+      }
+      img{
+        display: inline-block;
+        width: pxTorem(105);
+        height: pxTorem(40);
+        margin-left: pxTorem(15);
+        cursor: pointer;
+        border-radius: pxTorem(5);
+      }
+    }
+    .next-step{
+      width: pxTorem(400);
+      height: pxTorem(40);
+      padding-left: pxTorem(120);
+      a{
+        text-decoration: none;
+        display: inline-block;
+        width: pxTorem(280);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        text-align: center;
+        background-color: #f14f4f;
+        color: #fff;
+        border-radius: pxTorem(5);
+      }
+    }
+
+
+
+
+    /* 下一步 */
+    .auto-logo{
+      position: relative;
+      width: pxTorem(280);
+      height: pxTorem(36);
+      line-height: pxTorem(36);
+      .check-box{
+        position: absolute;
+        left: 0;
+        cursor: pointer;
         input{
-          width: pxTorem(280);
-          height: pxTorem(36);
-          line-height: pxTorem(36);
-          border: 1px solid #d1d1d1;
-          padding: pxTorem(6) pxTorem(12);
+          position: relative;
+          top: pxTorem(2);
+          display: inline-block;
+          margin-right: pxTorem(5);
         }
       }
-      .getverify{
-        input{
-          width: pxTorem(190);
-        }
-        span{
-          display: inline-block;
-          width: pxTorem(80);
-          height: pxTorem(36);
-          line-height: pxTorem(36);
-          text-align: center;
-          background-color: #f00;
-          color: #fff;
-          margin-left: pxTorem(10);
-          font-size: pxTorem(12);
-          cursor: pointer;
-        }
-        img{
-          display: inline-block;
-          width: pxTorem(80);
-          height: pxTorem(36);
-          margin-left: pxTorem(10);
-        }
+      a{
+        position: absolute;
+        right: 0;
+        text-decoration: none;
+        color: #333;
       }
-      .auto-logo{
-        position: relative;
+    }
+    .login-btn{
+      width: pxTorem(280);
+      height: pxTorem(36);
+      margin-top: pxTorem(10);
+      a{
+        display: inline-block;
+        text-decoration: none;
         width: pxTorem(280);
         height: pxTorem(36);
         line-height: pxTorem(36);
-        .check-box{
-          position: absolute;
-          left: 0;
-          cursor: pointer;
-          input{
-            position: relative;
-            top: pxTorem(2);
-            display: inline-block;
-            margin-right: pxTorem(5);
-          }
-        }
-        a{
-          position: absolute;
-          right: 0;
-          text-decoration: none;
-          color: #333;
-        }
-      }
-      .login-btn{
-        width: pxTorem(280);
-        height: pxTorem(36);
-        margin-top: pxTorem(10);
-        a{
-          display: inline-block;
-          text-decoration: none;
-          width: pxTorem(280);
-          height: pxTorem(36);
-          line-height: pxTorem(36);
-          text-align: center;
-          background-color: #ef0000;
-          color: #fff;
-          font-size: pxTorem(16);
-        }
+        text-align: center;
+        background-color: #ef0000;
+        color: #fff;
+        font-size: pxTorem(16);
       }
     }
   }
-  .right{
-    display: inline-block;
-    width: pxTorem(238);
-    height: pxTorem(320);
-    float: left;
-    padding: pxTorem(120) pxTorem(40) 0 pxTorem(10);
-    text-align: center;
-    p{
-      margin-bottom: pxTorem(10);
-      padding: 0;
-      text-align: center;
-      font-size: pxTorem(16);
-      color: #797979;
-    }
-    a{
-      text-decoration: none;
-      display: inline-block;
-      width: pxTorem(140);
-      height: pxTorem(36);
-      line-height: pxTorem(36);
-      text-align: center;
-      background-color: #5076E1;
-      color: #fff;
-      font-size: pxTorem(16);
-      border-radius: pxTorem(4);
-    }
-  }
+
 }

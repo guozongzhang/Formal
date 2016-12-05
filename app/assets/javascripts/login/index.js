@@ -67,8 +67,8 @@ class Index extends Basic {
         },
         crossDomain: true,
         headers:{
-          "X-DP-Key":  "222",
-          "X-DP-ID": "111"
+          "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
+          "X-DP-ID": "cfdab86f2c2ea593"
         },
         success:function(msg) {
           alert('验证码已发送，请及时查收');
