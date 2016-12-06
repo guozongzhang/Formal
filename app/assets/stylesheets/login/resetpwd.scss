@@ -188,4 +188,55 @@ html{
     }
   }
 
+  .second-input-box{
+    width: pxTorem(317);
+    margin: 0 auto pxTorem(20) auto;
+    .input-item{
+      margin-bottom: pxTorem(20);
+      span{
+        color: #bcbcbc;
+        position: relative;
+        top: pxTorem(-10);
+        cursor: pointer;
+      }
+      input{
+        width: pxTorem(317);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        border: 1px solid #d1d1d1;
+        padding: pxTorem(6) pxTorem(12);
+        border-radius: pxTorem(5);
+      }
+      .getverify{
+        display: inline-block;
+        width: pxTorem(150);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        text-align: center;
+        background-color: #bcbcbc;
+        color: #fff;
+        border-radius: pxTorem(5);
+        position: relative;
+        top: pxTorem(-20);
+        float: right;
+      }
+    }
+    .login-btn{
+      width: pxTorem(317);
+      height: pxTorem(40);
+      a{
+        text-decoration: none;
+        display: inline-block;
+        width: pxTorem(317);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        text-align: center;
+        background-color: #f14f4f;
+        color: #fff;
+        border-radius: pxTorem(5);
+        font-size: pxTorem(16);
+      }
+    }
+  }
+
 }
