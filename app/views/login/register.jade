@@ -9,10 +9,13 @@ html
           ul.clear
             li(v-bind:class="info.type == 'single' ? 'active' : ''" v-on:click="choiceSignalUser()") 个人用户
             li(v-bind:class=" info.type == 'company' ? 'active' : ''" v-on:click="choiceCompanyUser()") 企业用户
-        div(v-show="info.type == 'single'")
+        div.vue-box(v-show="info.type == 'single'")
           <vue-personaluser></vue-personaluser>
-        div(v-show="info.type == 'company'")
+        div.vue-box(v-show="info.type == 'company'")
           <vue-companyuser></vue-companyuser>
+        div.go-login
+          p 已有搭配家账号？
+          a(href="/login/index") 登录
 
       div.success-bg.hidden
         div.success-box
