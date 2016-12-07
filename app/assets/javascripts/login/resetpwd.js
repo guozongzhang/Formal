@@ -40,7 +40,7 @@ class Resetpwd extends Basic {
       data:{
         width: 105,
         height:40,
-        font_size: 28
+        font_size: 18
       },
       crossDomain: true,
       headers:{

@@ -25,12 +25,17 @@ html{
   position: absolute;
   top: pxTorem(170);
   left: 50%;
-  width: pxTorem(500);
-  margin-left: pxTorem(-250);
+  width: pxTorem(720);
+  margin-left: pxTorem(-360);
   background-color: #fff;
-
+  .vue-box{
+    display: inline-block;
+    width: pxTorem(500);
+  }
   /* 头部导航 */
   .top-tab {
+    width: pxTorem(500);
+    display: inline-block;
     padding: pxTorem(10) pxTorem(60);
     height: pxTorem(70);
     line-height: pxTorem(40);
@@ -52,6 +57,36 @@ html{
       li.active{
         border-bottom: 2px solid #37B5F9;
       }
+    }
+  }
+
+  .go-login{
+    position: absolute;
+    top: 50%;
+    margin-top: pxTorem(-40);
+    width: pxTorem(220);
+    padding-right: pxTorem(60);
+    text-align: center;
+    display: inline-block;
+    float: right;
+    p{
+      text-align: center;
+      color: #666;
+      font-size: pxTorem(16);
+      padding: 0;
+      margin-bottom: pxTorem(20);
+    }
+    a{
+      text-decoration: none;
+      display: inline-block;
+      width: pxTorem(145);
+      height: pxTorem(40);
+      line-height: pxTorem(40);
+      text-align: center;
+      background-color: #5076e2;
+      color: #fff;
+      border-radius: pxTorem(5);
+      font-size: pxTorem(16);
     }
   }
 }
@@ -119,21 +154,21 @@ html{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 800px){
-  .register-box{
-    width: pxTorem(350);
-    margin-left: pxTorem(-175);
-    top: pxTorem(120);
-    /* 头部导航 */
-    .top-tab {
-      padding: pxTorem(10) pxTorem(40);
-      height: pxTorem(44);
-      line-height: pxTorem(24);
-      ul{
-        li{
-          font-size: pxTorem(14);
-        }
-      }
-    }
-  }
-}
+// @media only screen and (max-width: 800px){
+//   .register-box{
+//     width: pxTorem(350);
+//     margin-left: pxTorem(-175);
+//     top: pxTorem(120);
+//     /* 头部导航 */
+//     .top-tab {
+//       padding: pxTorem(10) pxTorem(40);
+//       height: pxTorem(44);
+//       line-height: pxTorem(24);
+//       ul{
+//         li{
+//           font-size: pxTorem(14);
+//         }
+//       }
+//     }
+//   }
+// }

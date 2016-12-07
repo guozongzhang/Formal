@@ -3,14 +3,15 @@
     div.personaluser-vue.vue-component
       ul.tab-box.list-style.clear
         li.list-style 我是：
-        li.list-style.radio-item
-          label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')" checked)
-            | 设计师(销售员)
         li.list-style.radio-item.subtype
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')")
+            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')" checked)
             | 普通用户
+        li.list-style.radio-item
+          label 
+            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')")
+            | 设计师(销售员)
+        
       div.info
         ul.list-style
           li.list-style
@@ -64,7 +65,7 @@
     data() {
       return {
         info:{
-          usersubtype:'designer',
+          usersubtype:'buyer',
           phone:'',
           pwd:'',
           verification:'',

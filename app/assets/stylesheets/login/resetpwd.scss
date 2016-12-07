@@ -142,50 +142,6 @@ html{
         border-radius: pxTorem(5);
       }
     }
-
-
-
-
-    /* 下一步 */
-    .auto-logo{
-      position: relative;
-      width: pxTorem(280);
-      height: pxTorem(36);
-      line-height: pxTorem(36);
-      .check-box{
-        position: absolute;
-        left: 0;
-        cursor: pointer;
-        input{
-          position: relative;
-          top: pxTorem(2);
-          display: inline-block;
-          margin-right: pxTorem(5);
-        }
-      }
-      a{
-        position: absolute;
-        right: 0;
-        text-decoration: none;
-        color: #333;
-      }
-    }
-    .login-btn{
-      width: pxTorem(280);
-      height: pxTorem(36);
-      margin-top: pxTorem(10);
-      a{
-        display: inline-block;
-        text-decoration: none;
-        width: pxTorem(280);
-        height: pxTorem(36);
-        line-height: pxTorem(36);
-        text-align: center;
-        background-color: #ef0000;
-        color: #fff;
-        font-size: pxTorem(16);
-      }
-    }
   }
 
   .second-input-box{
