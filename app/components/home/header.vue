@@ -5,8 +5,8 @@
         a.home-logo(href="/") 
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
-          li(v-for="item in menus")
-            a(:href="item.url") {{item.name}}
+          li(v-for="item in menus" v-bind:class="item.action == controller ? 'active' : ''")
+            a.title(:href="item.url") {{item.name}}
             div.sub-menu
               a(:href="sub.url" v-for="sub in item.subs" ) {{sub.name}}
     
@@ -17,6 +17,7 @@
   export default {
     data() {
       return {
+        controller: SITE.router.controller,
         logo: '',
         menus: []
       }
@@ -29,6 +30,7 @@
       },
       getTopMenus() {
         HomePage.where({name:'mainmenu'}).all((data)=> {
+          console.log(data)
           this.menus = JSON.parse(data.items[0].config)
         })
       }
@@ -78,6 +80,12 @@
         a{
           color: #333;
           text-decoration: none
+        }
+      }
+      li.active,
+      li:hover{
+        .title{
+          color: #f14f4f;
         }
       }
       li:nth-last-child(1) {
