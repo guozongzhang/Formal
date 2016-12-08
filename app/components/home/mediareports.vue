@@ -31,17 +31,17 @@
         media:[
           {
             img_url:'',
-            title:'黎明家具前总裁肖敏创立“搭配家”(图)',
-            content:'他叫肖敏，创立搭配家，他想做的不再是一家企业的运营管理，而是帮助众多家具企业进行基于互联网技术的流程再造。肖敏表示，搭配家运作一年，如今估值已达1亿元。',
-            link_more:'http://news.163.com/16/0512/00/BMQVL8V800014AED.html',
-            time:'05/12 2016'
-          },
-          {
-            img_url:'',
             title:'搭配家获创新工场合伙人天使投资',
             content:'近日，全球软装资源整合者——COLLOCATION搭配家与创新工场合伙人签署投资协议，正式获取后者提供的天使投资。本次投资将被用于搭配家的品牌建设、品质提升、产品工艺升级、业务推广等各个领域',
             link_more:'http://jiaju.sina.com.cn/news/20160829/6175943404397330738.shtml',
             time:'08/29 2016'
+          },
+          {
+            img_url:'',
+            title:'黎明家具前总裁肖敏创立“搭配家”(图)',
+            content:'他叫肖敏，创立搭配家，他想做的不再是一家企业的运营管理，而是帮助众多家具企业进行基于互联网技术的流程再造。肖敏表示，搭配家运作一年，如今估值已达1亿元。',
+            link_more:'http://news.163.com/16/0512/00/BMQVL8V800014AED.html',
+            time:'05/12 2016'
           },
           {
             img_url:'',
@@ -139,6 +139,7 @@
               position: absolute;
               bottom: pxTorem(-2);
               right: 0;
+              font-size: pxTorem(12);
             }
           }
           .media-time{
