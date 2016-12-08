@@ -22,15 +22,15 @@
           },
           {
             name:'我的搭配家',
-            url:''
+            url:'/personal/index'
           },
           {
             name:'注册',
-            url:''
+            url:'/login/register'
           },
           {
             name:'登录',
-            url:''
+            url:'/login/index'
           }
         ]
       }
