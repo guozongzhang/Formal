@@ -6,7 +6,7 @@
         div.video-content
           img(:src="items.leftcont.img")
         div.video-box
-          //- <vue-video :src="items.leftcont.url" :config="videoconf"></vue-video>
+          <vue-video :src="items.leftcont.url" :config="videoconf"></vue-video>
       div.download-box
         div.tab-box
           ul.list-style 

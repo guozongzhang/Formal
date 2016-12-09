@@ -102,8 +102,6 @@
         z-index: 100;
         padding-top: pxTorem(10);
         display: none;
-
-
         a {
           display: block;
           border-bottom: #DDD 1px solid;

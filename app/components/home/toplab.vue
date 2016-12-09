@@ -4,8 +4,22 @@
       ul.list-style 
         li.list-style.list-text(v-for="item in items" v-show="item.visible == 0") 
           a(:href="item.url") {{item.name}}
-        li.list-style.list-right(v-for="msg in configdata" v-show="msg.isshow") 
-          a(:href="msg.url") {{msg.name}}
+        li.list-style.list-right
+          a(:href="logininfo.admin.url" v-show="logininfo.admin.isshow") {{logininfo.admin.name}}
+        li.list-style.list-right
+          a(:href="logininfo.register.url" v-show="logininfo.register.isshow") {{logininfo.register.name}}
+        li.list-style.list-right
+          a(:href="logininfo.login.url" v-show="logininfo.login.isshow") {{logininfo.login.name}}
+
+        li.list-style.list-right
+          a.users-info(:href="logininfo.users.url" v-show="logininfo.users.isshow") {{logininfo.users.name}}
+            div.sub-menu
+              a(:href="sub.index.url") {{sub.index.name}}
+              a(:href="sub.mydesign.url") {{sub.mydesign.name}}
+              a(:href="sub.myrenderimg.url") {{sub.myrenderimg.name}}
+              a(:href="sub.mymessages.url") {{sub.mymessages.name}}
+              a(:href="sub.settings.url") {{sub.settings.name}}
+              a(:href="sub.exit.url" v-on:click="Exit()") {{sub.exit.name}}
 </template>
 
 <script>
@@ -15,27 +29,54 @@
       return {
         dataItem:{},
         items: [],
-        configdata:[
-          // {
-          //   name:'厂家后台',
-          //   url:''
-          // },
-          {
-            name:'我的搭配家',
-            url:'/personal/index',
-            isshow: SITE.session.login,
-          },
-          {
-            name:'注册',
+        logininfo:{
+          register:{
             url:'/login/register',
-            isshow: !SITE.session.login,
+            name:'注册',
+            isshow: !SITE.session.login
           },
-          {
-            name:'登录',
+          login:{
             url:'/login/index',
-            isshow: !SITE.session.login,
+            name:'登录',
+            isshow: !SITE.session.login
+          },
+          admin:{
+            url:'javascript:;',
+            name:'厂商后台',
+            isshow: !SITE.session.login
+          },
+          users:{
+            url:'javascript:;',
+            name:'我的搭配家',
+            isshow: SITE.session.login
           }
-        ]
+        },
+        sub:{
+          index:{
+            url:'/personal/index',
+            name:'我的收藏'
+          },
+          mydesign:{
+            url:'/personal/mydesign',
+            name:'我的设计'
+          },
+          myrenderimg:{
+            url:'/personal/myrenderimg',
+            name:'我的效果图'
+          },
+          mymessages:{
+            url:'/personal/mymessages',
+            name:'我的消息'
+          },
+          settings:{
+            url:'/personal/settings',
+            name:'账号设置'
+          },
+          exit:{
+            url:'javascript:;',
+            name:'退出登录'
+          }
+        }
       }
     },
     methods:{
@@ -45,9 +86,16 @@
           this.dataItem = data.items[0];
           this.items = JSON.parse(data.items[0].config)
         })
+      },
+      Exit: function() {
+        if(confirm('确定要退出登录吗？')) {
+          Cookies.set('dpjia', '');
+          Core.alert('success','退出登录');
+          window.location.href = '/'
+        }
       }
     },
-    created() {
+    mounted() {
       this.initData();
     }
   }
@@ -68,6 +116,9 @@
         display: inline-block;
         font-size: pxTorem(12);
         a{
+          display: inline-block;
+          width: 100%;
+          height: 100%;
           text-decoration: none;
           color:#999;
         }
@@ -79,6 +130,31 @@
       li.list-right{
         float:right;
         margin-left:pxTorem(10);
+        .users-info{
+          .sub-menu {
+            position: absolute;
+            background-color: #fff;
+            width: pxTorem(80);
+            z-index: 100;
+            display: none;
+            a {
+              text-decoration: none;
+              display: block;
+              border-bottom: #DDD 1px solid;
+              padding: pxTorem(3) pxTorem(8);
+            }
+          }
+        }
+        
+        .users-info:hover {
+          .sub-menu {
+            background-color: #fff;
+            display: block;
+            & > a{
+              font-size: pxTorem(12);
+            }
+          }
+        }
       }
     }
   }
