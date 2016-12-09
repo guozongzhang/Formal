@@ -10,13 +10,13 @@
       span.subtitle {{title.txt.desc}}
       ul.list-style.clear
         li.list-text.list-style(v-for="item in title.pics") 
-          img.goods-icon(:src="item.img")
+          img.goods-icon(:src="item[img_key || 'img']")
           span.tab-text {{item.text}}
 </template>
 
 <script>
   export default {
-    props:['title'],
+    props:['title', 'img_key'],
     data() {
       return {
       }
