@@ -73,12 +73,16 @@
         border-right: pxTorem(1) solid #ccc;
         &:hover {
           .sub-menu {
-            display: block
+            background-color: #fff;
+            display: block;
+            & > a{
+              font-size: pxTorem(14);
+            }
           }
         }
         a{
           color: #333;
-          text-decoration: none
+          text-decoration: none;
         }
       }
       li.active,
