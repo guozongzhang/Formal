@@ -33,7 +33,7 @@
             img_url:'../../assets/imgs/4.png',
             title:'搭配家与嘉利信得共建，共享，共赢新模式',
             content:'11月26日， “一路有你，感恩相伴”—嘉利信得新品发布会在隆重举行，同时揭幕新展厅。北京家具行业协会会长何法涧先生到会致辞，对嘉利信得展厅表示肯定与赞扬。该展厅由搭配家与嘉利信得共建、共享。',
-            link_more:'http://mp.weixin.qq.com/s/JtLWQ8WOQUBaVlMBlP9R9g'
+            link_more:'http://mp.weixin.qq.com/s/JtLWQ8WOQUBaVlMBlP9R9g',
             time:'11/28 2016'
           },
           {
