@@ -12,6 +12,7 @@
           a(:href="logininfo.login.url" v-show="logininfo.login.isshow") {{logininfo.login.name}}
 
         li.list-style.list-right
+          img.user-img(:src="user_logo")
           a.users-info(:href="logininfo.users.url" v-show="logininfo.users.isshow") {{logininfo.users.name}}
             div.sub-menu
               a(:href="sub.index.url") {{sub.index.name}}
@@ -29,6 +30,7 @@
       return {
         dataItem:{},
         items: [],
+        user_logo: SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/user_default.png',
         logininfo:{
           register:{
             url:'/login/register',
@@ -47,7 +49,7 @@
           },
           users:{
             url:'javascript:;',
-            name:'我的搭配家',
+            name: SITE.session.mem.info_poi_user_info.ui_name || '我的搭配家',
             isshow: SITE.session.login
           }
         },
@@ -117,8 +119,6 @@
         font-size: pxTorem(12);
         a{
           display: inline-block;
-          width: 100%;
-          height: 100%;
           text-decoration: none;
           color:#999;
         }
@@ -130,6 +130,15 @@
       li.list-right{
         float:right;
         margin-left:pxTorem(10);
+        .user-img{
+          position: relative;
+          top: pxTorem(-2);
+          display: inline-block;
+          width: pxTorem(24);
+          height: pxTorem(24);
+          margin-right: pxTorem(5);
+          border-radius: 100%;
+        }
         .users-info{
           .sub-menu {
             position: absolute;
