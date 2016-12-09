@@ -42,7 +42,6 @@
       display: inline-block;
       width: pxTorem(20);
       height: pxTorem(20);
-      border-radius: 50%;
     }
     label {
       position: absolute;
@@ -83,7 +82,6 @@
           display: inline-block;
           width: pxTorem(16);
           height: pxTorem(16);
-          border-radius: 50%;
         }
         .tab-text{
           font-size: pxTorem(12);

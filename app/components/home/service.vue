@@ -187,6 +187,7 @@
           border-radius: 0;
           opacity: 1;
           background-color: #f1f1f1;
+          overflow: hidden;
         }
         li.swiper-pagination-bullet-active{
           span {
