@@ -30,7 +30,6 @@
       },
       getTopMenus() {
         HomePage.where({name:'mainmenu'}).all((data)=> {
-          console.log(data)
           this.menus = JSON.parse(data.items[0].config)
         })
       }

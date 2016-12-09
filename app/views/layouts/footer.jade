@@ -10,6 +10,9 @@ script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.actio
 script(src="http://api.map.baidu.com/api?v=2.0&ak=n0dzf54cjjE9TfBiijtOG5z7&services=&t=20160401164342")
 
 script.
-  if(typeof APP.#{route.controller}.#{route.action} == 'function'){
-    new APP.#{route.controller}.#{route.action}()
-  }
+  SITE.Init().then(()=> {
+    if(typeof APP.#{route.controller}.#{route.action} == 'function'){
+      new APP.#{route.controller}.#{route.action}()
+    }
+  })
+  

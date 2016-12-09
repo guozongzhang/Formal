@@ -4,7 +4,7 @@
       ul.list-style 
         li.list-style.list-text(v-for="item in items" v-show="item.visible == 0") 
           a(:href="item.url") {{item.name}}
-        li.list-style.list-right(v-for="msg in configdata") 
+        li.list-style.list-right(v-for="msg in configdata" v-show="msg.isshow") 
           a(:href="msg.url") {{msg.name}}
 </template>
 
@@ -16,21 +16,24 @@
         dataItem:{},
         items: [],
         configdata:[
-          {
-            name:'厂家后台',
-            url:''
-          },
+          // {
+          //   name:'厂家后台',
+          //   url:''
+          // },
           {
             name:'我的搭配家',
-            url:'/personal/index'
+            url:'/personal/index',
+            isshow: SITE.session.login,
           },
           {
             name:'注册',
-            url:'/login/register'
+            url:'/login/register',
+            isshow: !SITE.session.login,
           },
           {
             name:'登录',
-            url:'/login/index'
+            url:'/login/index',
+            isshow: !SITE.session.login,
           }
         ]
       }

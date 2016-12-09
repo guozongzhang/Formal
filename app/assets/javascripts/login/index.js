@@ -86,6 +86,7 @@ class Index extends Basic {
 
   /*登录*/
   Login() {
+    Cookies.set('dpjia', '');
     let data = {};
     if(model.mvvm.info.type == 'number') {
       //账号登录
@@ -110,6 +111,8 @@ class Index extends Basic {
         "X-DP-ID": "cfdab86f2c2ea593"
       },
       success: function(msg) {
+        console.log(msg)
+        Cookies.set('dpjia',msg.token)
         Core.alert('success','登录成功');
         setTimeout(()=> {
           window.location.href = '/'

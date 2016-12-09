@@ -41,14 +41,14 @@
         linkdata:{
           exchange:'搭配家希望与装修家居类、媒体、行业协会、家居企业等各类优秀网站建立合作，促进双方共同发展。欢迎搜索引擎收录且快照正常的网站与我们建立友链。',
           require:[
-            '1.搭配家希望与装修家居类、媒体、行业协会',
-            '2.家居企业等各类优秀网站建立合作，促进双方共同发展',
-            '3.欢迎搜索引擎收录且快照正常的网站与我们建立友链。'
+            '1.贵网站网站已备案，且符合法律相关要求；',
+            '2.贵网站首页的百度rp不低于1，搜索引擎快照更新正常；',
+            '3.贵网站先行放置搭配家友情链接，并通过dpjia@dpjia.com通知我们；'
           ],
           ext_url:'../../assets/imgs/dpjia_ext.png',
           dpjia_text:'<a href="http://www.dpjia.com/" title="国内首家O2O在线家装平台-搭配家" target="_blank">搭配家</a>',
           ext_text:'<a href="http://www.dpjia.com/" title="国内首家o2o在线家装平台-搭配家" target="_blank"><img src="http://dpjia.com/images/test_home/friendslink/logo_1x.png" /></a>',
-          email:'seo@dpjia.com'
+          email:'dpjia@dpjia.com'
         }
       }
     },

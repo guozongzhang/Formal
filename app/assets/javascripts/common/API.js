@@ -15,7 +15,7 @@ window.API = {
       headers: {
         "X-DP-Key": xdpkey,
         "X-DP-ID": xdpid,
-        "X-DP-Token": Cookies.get('token-' + window.location.port)
+        "X-DP-Token": Cookies.get('dpjia')
       },
       success: successHandler,
       error: errorHandler
