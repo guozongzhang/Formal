@@ -13,21 +13,23 @@
           ul.list-style
             li.list-style.clear(v-for="item in designe.list")
               div.left
-                img(:src="item.img_url")
+                img(:src="item.des_cut_url")
               div.subright
-                label {{item.name}}
-                p.update-time 最后修改时间：{{item.update_time}}
-                a.go-draw(:href="item.go_draw") 进入设计
+                label {{item.des_name}}
+                p.update-time 最后修改时间：{{item.update_time | localDate}}
+                a.go-draw(href="javascript:;") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
-                span.delete(v-on:click="deleteDesign(item.id)") 删除
+                span.delete(v-on:click="deleteDesign(item)") 删除
                 span.copy 复制
 
-      <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
-      <vue-rename :info="renameinfo"></vue-rename>
+      <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
+      <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
 
 </template>
 
 <script>
+  let tmp = '';//临时变量
+  let Designs = AV.extend('designs');
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
@@ -44,7 +46,8 @@
         },
         deleteinfo:{
           tips:'您确定要删除吗？',
-          flags:'deletedesign'
+          flags:'deletedesign',
+          id:'',
         },
         renameinfo:{
           title:'修改工程名称',
@@ -53,62 +56,54 @@
         },
         designe:{
           go_new:'/personal/newdesign',
-          list:[
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            }
-          ]
+          list:[]
         }
       }
     },
     methods:{
-      deleteDesign:function(id){
-        $('.deletedesign').modal('show');
-        console.log(id)
+      init: function() {
+        Designs.keys('id,des_name,des_cut_url,update_time').all((data)=> {
+          this.designe.list = data.items;
+        })
       },
-      renameDesign: function(item) {
-        this.renameinfo.name = item.name
+      deleteDesign:function(obj){
+        tmp = obj;
+        this.deleteinfo.id = obj.id;
+        $('.deletedesign').modal('show');
+      },
+      Delete: function(id) {
+        let item = {
+          id: id
+        }
+        Designs.get(item).destroy().then((data)=> {
+          this.designe.list = _.without(this.designe.list,tmp);
+          $('.deletedesign').modal('hide');
+          Core.alert('success','删除成功');
+        })
+      },
+      renameDesign: function(obj) {
+        tmp = obj;
+        this.renameinfo.name = obj.des_name
         $('.renamedesign').modal('show');
-      } 
+      },
+      Rename: function(name) {
+        if(_.isEmpty($.trim(name))) {
+          Core.alert('danger','工程名称不能为空');
+          return;
+        }
+        let item = {
+          id: tmp.id,
+          des_name: name
+        }
+        Designs.get(item).update().then((data)=> {
+          tmp.des_name = item.des_name
+          $('.renamedesign').modal('hide');
+          Core.alert('success','修改成功');
+        })
+      }
+    },
+    mounted() {
+      this.init();
     }
   }
 

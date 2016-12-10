@@ -51,13 +51,13 @@
         },
         deleteinfo:{
           tips:'您确定要删除吗？',
-          flags:'deletedesign',
+          flags:'deleterender',
           id:'',
         },
         renameinfo:{
           title:'修改效果图名称',
           name:'',
-          flags:'renamedesign'
+          flags:'renamerender'
         },
         renderinfo:{
           flags:'showimgs'
@@ -74,7 +74,7 @@
       deleteRender:function(obj){
         tmp = obj;
         this.deleteinfo.id = obj.id;
-        $('.deletedesign').modal('show');
+        $('.deleterender').modal('show');
       },
       Delete: function(id) {
         let item = {
@@ -82,23 +82,27 @@
         }
         Render.get(item).destroy().then((data)=> {
           this.renders = _.without(this.renders,tmp);
-          $('.deletedesign').modal('hide');
+          $('.deleterender').modal('hide');
           Core.alert('success','删除成功');
         })
       },
       renameRender: function(obj) {
         tmp = obj;
         this.renameinfo.name = obj.name
-        $('.renamedesign').modal('show');
+        $('.renamerender').modal('show');
       },
       Rename: function(name) {
+        if(_.isEmpty($.trim(name))) {
+          Core.alert('danger','效果图名称不能为空');
+          return;
+        }
         let item = {
           id: tmp.id,
           name: name
         }
         Render.get(item).update().then((data)=> {
           tmp.name = item.name
-          $('.renamedesign').modal('hide');
+          $('.renamerender').modal('hide');
           Core.alert('success','修改成功');
         })
       },
