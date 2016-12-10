@@ -10,6 +10,10 @@
             a.deleteallread(href="javascript:;" v-on:click="deleteAll()") 删除所有已读
             a.readall(href="javascript:;" v-on:click="readAll()") 全部标记已读
           ul.list-style
+            p.empty(v-show="messages.length == 0")
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#empty")
+            p.empty(v-show="messages.length == 0") 还没有消息呢~
             li.list-style.clear(v-for="item in messages" v-on:click="readMessage(item)" v-bind:class="item.isnew == true ? 'newmessage' : 'oldmessage'")
               div.isnew(v-show="item.isnew")
                 span.icon
@@ -38,36 +42,7 @@
           tips:'您确定要删除吗？',
           flags:'deletemessage'
         },
-        messages:[
-          {
-            id:'1',
-            isnew: true,
-            type:'系统通知',
-            text:'您有新的用户预约您去量房，请您及时回复，及时联系客户',
-            time:'1分钟前'
-          },
-          {
-            id:'1',
-            isnew:true,
-            type:'业务通知',
-            text:'就是一些业务上的通知，具体什么的，自己去看细节吧就是一些业务上的通知，具体什么的，自己去看细节吧',
-            time:'5分钟前'
-          },
-          {
-            id:'1',
-            isnew:true,
-            type:'系统通知',
-            text:'就是一些业务上的通知，具体什么的，自己去看细节吧就就是一些业务上的通知，具体什么的，自己去看细节吧就是一些业务上的通知，具体什么的，自己去看细节吧是一些业务上的通知，具体什么的，自己去看细节吧就是一些业务上的通知，具体什么的，自己去看细节吧',
-            time:'1小时前'
-          },
-          {
-            id:'1',
-            isnew:false,
-            type:'业务通知',
-            text:'就是一些业务上的通知，具体什么的，自己去看细节吧',
-            time:'1天前'
-          }
-        ]
+        messages:[]
       }
     },
     methods:{
@@ -81,13 +56,36 @@
         $('.deletemessage').modal('show');
       },
       deleteAll: function() {
+        let len = this.calculateLen(this.messages).oldlen;
+        if(!len) {
+          Core.alert('danger','已经没有已读信息了~');
+          return;
+        }
         this.deleteinfo.tips = '您确定要删除所有已读信息吗？';
         $('.deletemessage').modal('show');
       },
       readAll: function() {
+        let len = this.calculateLen(this.messages).newlen;
+        console.log(len)
+        if(!len) {
+          Core.alert('danger','已经没有未读信息了~');
+          return;
+        }
         this.messages.forEach((item)=> {
           if(item.isnew) {item.isnew = false;}
         })
+      },
+      calculateLen: function(arr) {
+        let newlen = 0;
+        let oldlen = 0;
+        arr.forEach((item)=> {
+          if(item.isnew) {
+            newlen++;
+          } else {
+            oldlen++;
+          }
+        })
+        return {oldlen: oldlen,newlen: newlen}
       }
     }
   }
@@ -143,6 +141,7 @@
         }
       }
       ul{
+        min-height: pxTorem(120);
         margin-top: pxTorem(10);
         li{
           position: relative;
@@ -174,6 +173,15 @@
             .time{
               margin-left: pxTorem(20);
             }
+          }
+        }
+        .empty{
+          text-align: center;
+          color: #999;
+          .svg-style{
+            width: pxTorem(100);
+            height: pxTorem(100);
+            fill: #999;
           }
         }
         .newmessage{
