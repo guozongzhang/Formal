@@ -141,7 +141,6 @@
         }
       }
       ul{
-        min-height: pxTorem(120);
         margin-top: pxTorem(10);
         li{
           position: relative;

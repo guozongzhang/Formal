@@ -44,6 +44,47 @@ class Basic {
     this.mvvm = new Vue(mvvmDefault)
     
     window.MVVM = this.mvvm
+    this.initBasic();
+  }
+
+   /**
+   * 基础类里面的初始化方法 可以通过在子类中重写来覆盖，实现定制
+   * @return {void} 
+   */
+  initBasic(){
+    this.register([]) 
+    
+    /**
+     * 引用表别名显示过滤器
+     */
+    
+    Vue.filter('refcd', (value, typ)=> {
+      let ref = _.filter(SITE.Refcds, (item)=> { 
+        return item.state_types == typ && (item.old_value == value || item.name == value)
+      })[0]
+      return ref ? ref.alias : value
+    })
+
+    /**
+     JSON字符串化 
+    **/
+    Vue.filter('stringify', (value)=> {
+      return JSON.stringify(value)
+    })
+
+    // 日期格式化过滤器(格式：YYYY-MM-DD hh:mm:ss)
+    Vue.filter('localDate', (value)=> {
+      if(_.isEmpty(value)){;return '暂无';}
+      moment.locale('Chinese (Simplified)')    
+      return moment(parseInt(value)).format('YYYY-MM-DD HH:mm:ss')
+    }) 
+
+    // 日期格式化过滤器(格式：YYYY-MM-DD)
+    Vue.filter('localDateSimple', (value)=> {
+      if(_.isEmpty(value)){;return '暂无';}
+      moment.locale('Chinese (Simplified)')    
+      return moment(parseInt(value)).format('YYYY-MM-DD')
+    })
   }
   
   /**

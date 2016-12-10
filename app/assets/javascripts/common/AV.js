@@ -69,6 +69,7 @@ class Table {
     this.withRex = {}
     this.ismock = ismock
     this.searchRex = ''
+    this.keysRex = ''
   }
   
   // 初始化查询条件
@@ -80,6 +81,7 @@ class Table {
     this.relationRex = []
     this.withRex = {}
     this.searchRex = ''
+    this.keysRex = ''
     return this
   }
 
@@ -149,6 +151,12 @@ class Table {
 
   with(val){
     this.withRex = val
+    return this
+  }
+
+
+  keys(val){
+    this.keysRex = val
     return this
   }
    
@@ -227,6 +235,9 @@ class Table {
     this.query['include'] = this.includeRex.join(',')
     this.query['relation'] = JSON.stringify(this.relationRex)
     this.query['with'] = JSON.stringify(this.withRex)
+    if(this.keysRex !== '') {
+      this.query['keys'] = this.keysRex
+    }
 
 
     this.query['order'] = this.order_back || this.query['order'] || '-id'
