@@ -10,7 +10,12 @@
             span +
             | 我的设计
         div.design-list
-          ul.list-style
+          div(v-show="designe.list.length == 0")
+            p.empty
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#empty")
+            p.empty 还没有工程呢~
+          ul.list-style(v-show="designe.list.length != 0")
             li.list-style.clear(v-for="item in designe.list")
               div.left
                 img(:src="item.des_cut_url")
@@ -158,6 +163,15 @@
       }
     }
     .design-list{
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         li{
           width: pxTorem(800);

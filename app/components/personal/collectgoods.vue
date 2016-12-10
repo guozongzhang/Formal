@@ -1,18 +1,30 @@
 <template lang="jade">
   div.collectgoods-vue.vue-component
     div.goods-box.clear
-      ul.list-style.clear
+      div(v-show="goods.length == 0")
+        p.empty
+          svg.svg-style
+            use(xlink:href="/assets/svg/icon.svg#empty")
+        p.empty 还没有收藏商品呢~
+      ul.list-style.clear(v-show="goods.length != 0")
         li.list-style(v-for="item in goods")
-          a(:href="item.link_url")
-            img(:src="item.img_url")
-            p {{item.name}}
-          span.delete-icon(v-on:click="deleteGoods(item.id)")
+          a(href="javascript:;")
+            img(:src="item.fur_image")
+            div.name
+              p {{item.fur_name}}
+          span.delete-icon(v-on:click="deleteGoods(item)")
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#trash")
 
-    <vue-cancelconfirm :info='deleteinfo'></vue-cancelconfirm>
+    <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
-import CancelconfirmVue from '../common/cancelconfirm.vue';
+  let tmp = '';//临时变量
+  let favorArr = [];
+  let Favorfur = AV.extend('user_preference');
+  let Furniture = AV.extend('furnitures');
+  import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
       'vue-cancelconfirm': CancelconfirmVue,
@@ -21,52 +33,45 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
       return {
         deleteinfo:{
           tips:'确定取消该收藏商品吗？',
-          flags:'deletegoods'
+          flags:'deletegoods',
+          id:''
         },
-        goods:[
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/666.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 11-床头柜BM1304'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/861.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 11-床头柜BM1304'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/666.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'W11-2902双人床'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/861.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'W11-2902双人床'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'W12-0603餐桌'
-          }
-        ]
+        goods:[]
       }
     },
     methods:{
-      deleteGoods: function(id){
+      init: function() {
+        Favorfur.where({type:'fur',action:'favor'}).keys('id,point').all((data)=> {
+          favorArr = data.items;
+          let ids = data.items.map((item)=> {
+            return item.point;
+          })
+          Furniture.where(['id in ?', ids]).keys('id,fur_name,fur_image').all((msg)=> {
+            this.goods = msg.items;
+          })
+        })
+      },
+      deleteGoods: function(obj){
+        tmp = obj;
+        this.deleteinfo.id = obj.id;
         $('.deletegoods').modal('show');
+      },
+      Delete: function(id) {
+        let deleteid = '';
+        favorArr.forEach((item)=> {
+          if(item.point == id) {
+            deleteid = item.id;
+          }
+        })
+        Favorfur.get({id:deleteid}).destroy().then((data)=> {
+          this.goods = _.without(this.goods,tmp);
+          $('.deletegoods').modal('hide');
+          Core.alert('success','删除成功');
+        })
       }
+    },
+    mounted() {
+      this.init();
     }
   }
 
@@ -77,6 +82,15 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
 .collectgoods-vue {
   .goods-box{
     margin: pxTorem(10) 0;
+    .empty{
+      text-align: center;
+      color: #999;
+      .svg-style{
+        width: pxTorem(100);
+        height: pxTorem(100);
+        fill: #999;
+      }
+    }
     ul{
       li{
         position: relative;
@@ -95,13 +109,22 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
             width: pxTorem(180);
             height: pxTorem(180);
           }
-          p{
-            border: 1px solid #ccc;
-            margin: 0;
-            padding: pxTorem(10) pxTorem(15);
+          .name{
             height: pxTorem(60);
-            width: pxTorem(180);
+            padding: pxTorem(10) pxTorem(15);
+            border: 1px solid #ccc;
+          }
+          p{
+            margin: 0;
+            padding: 0;
+            height: pxTorem(40);
+            width: pxTorem(150);
             color: #999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;//2行截字
+            -webkit-box-orient: vertical;
           }
         }
         .delete-icon{
@@ -111,8 +134,16 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
           display: none;
           width: pxTorem(30);
           height: pxTorem(30);
-          background-color: #ccc;
+          background-color: rgba(0,0,0,0.5);
           cursor: pointer;
+          .svg-style{
+            position: relative;
+            top: pxTorem(5);
+            left: pxTorem(5);
+            width: pxTorem(20);
+            height: pxTorem(20);
+            fill: #fff;
+          }
         }
       }
       li:hover{

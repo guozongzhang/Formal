@@ -1,24 +1,35 @@
 <template lang="jade">
   div.collectexample-vue.vue-component
     div.example-box.clear
-      ul.list-style.clear
+      div(v-show="examples.length == 0")
+        p.empty
+          svg.svg-style
+            use(xlink:href="/assets/svg/icon.svg#empty")
+        p.empty 还没有收藏样板间呢~
+      ul.list-style.clear(v-show="examples.length != 0")
         li.list-style(v-for="item in examples")
-          a(:href="item.link_url")
-            img(:src="item.img_url")
+          a(href="javascript:;")
+            img(:src="item.apt_image")
             div.info-box
-              p.name {{item.name}}
+              p.name {{item.apt_name}}
               p.user 
-                span {{item.area}}
+                span {{item.apt_area}}m² / {{item.aptt_poi_apartment_types.aptt_name}}
                 a(:href="item.user_url")
                   img(:src="item.user_img")
                   span {{item.username}}
-          span.delete-icon(v-on:click="deleteExample(item.id)")
+          span.delete-icon(v-on:click="deleteExample(item)")
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#trash")
 
-    <vue-cancelconfirm :info='deleteinfo'></vue-cancelconfirm>
+    <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
-import CancelconfirmVue from '../common/cancelconfirm.vue';
+  let tmp = '';//临时变量
+  let favorArr = [];
+  let FavorExamp = AV.extend('user_preference');
+  let Example = AV.extend('apartment');
+  import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
       'vue-cancelconfirm': CancelconfirmVue,
@@ -27,77 +38,45 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
       return {
         deleteinfo:{
           tips:'确定取消该收藏样板间吗？',
-          flags:'deleteexample'
+          flags:'deleteexample',
+          id:'',
         },
-        examples:[
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'欧式田园',
-            user_img:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'设计师',
-            user_url:'',
-            area:'109mm/三室两厅'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/666.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'豪华奢侈',
-            user_img:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'习大大',
-            user_url:'',
-            area:'150/三室两厅一厨一卫'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/861.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'简约质朴',
-            user_img:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'马云',
-            user_url:'',
-            area:'68/三室两厅一厨一卫'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/666.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'样板间名称',
-            user_img:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'雷军',
-            user_url:'',
-            area:'89/三室两厅一厨一卫'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/861.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'样板间名称',
-            user_img:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'小米',
-            user_url:'',
-            area:'100/三室两厅一厨一卫'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_240',
-            name:'样板间名称',
-            user_img:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png?x-oss-process=image/resize,m_fill,h_20,w_20',
-            username:'设计师',
-            user_url:'',
-            area:'103.6/三室两厅一厨一卫'
-          }
-        ]
+        examples:[]
       }
     },
     methods:{
-      deleteExample: function(id){
-        console.log(id)
+      init: function() {
+        FavorExamp.where({type:'sampleroom',action:'favor'}).keys('id,point').all((data)=> {
+          favorArr = data.items;
+          let ids = data.items.map((item)=> {
+            return item.point;
+          })
+          Example.where(['id in ?', ids]).keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+            this.examples = msg.items;
+          })
+        })
+      },
+      deleteExample: function(obj){
+        tmp = obj;
+        this.deleteinfo.id = obj.id;
         $('.deleteexample').modal('show');
+      },
+      Delete: function(id) {
+        let deleteid = '';
+        favorArr.forEach((item)=> {
+          if(item.point == id) {
+            deleteid = item.id;
+          }
+        })
+        FavorExamp.get({id:deleteid}).destroy().then((data)=> {
+          this.examples = _.without(this.examples,tmp);
+          $('.deleteexample').modal('hide');
+          Core.alert('success','删除成功');
+        })
       }
+    },
+    mounted() {
+      this.init();
     }
   }
 
@@ -108,6 +87,15 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
 .collectexample-vue {
   .example-box{
     margin: pxTorem(10) 0;
+    .empty{
+      text-align: center;
+      color: #999;
+      .svg-style{
+        width: pxTorem(100);
+        height: pxTorem(100);
+        fill: #999;
+      }
+    }
     ul{
       li{
         position: relative;
@@ -178,8 +166,16 @@ import CancelconfirmVue from '../common/cancelconfirm.vue';
           display: none;
           width: pxTorem(30);
           height: pxTorem(30);
-          background-color: #ccc;
+          background-color: rgba(0,0,0,0.5);
           cursor: pointer;
+          .svg-style{
+            position: relative;
+            top: pxTorem(5);
+            left: pxTorem(5);
+            width: pxTorem(20);
+            height: pxTorem(20);
+            fill: #fff;
+          }
         }
       }
       li:hover{

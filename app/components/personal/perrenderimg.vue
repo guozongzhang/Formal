@@ -6,11 +6,12 @@
       div.right
         label.title 我的效果图
         div.imgs-list
-          ul.list-style.clear
-            p.empty(v-show="renders.length == 0")
+          div(v-show="renders.length == 0")
+            p.empty
               svg.svg-style
                 use(xlink:href="/assets/svg/icon.svg#empty")
-            p.empty(v-show="renders.length == 0") 还没有效果图呢~
+            p.empty 还没有效果图呢~
+          ul.list-style.clear(v-show="renders.length != 0")
             li.list-style(v-for="item in renders")
               a.link-box(href="javascript:;")
                 img(:src="item.rd_image" v-on:click="showImgs()")
@@ -149,6 +150,15 @@
     }
     .imgs-list{
       margin-top: pxTorem(20);
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         li{
           display: inline-block;
@@ -205,15 +215,6 @@
                 color: #fff;
               }
             }
-          }
-        }
-        .empty{
-          text-align: center;
-          color: #999;
-          .svg-style{
-            width: pxTorem(100);
-            height: pxTorem(100);
-            fill: #999;
           }
         }
         li:hover{

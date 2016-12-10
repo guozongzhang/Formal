@@ -9,11 +9,12 @@
           div.operate
             a.deleteallread(href="javascript:;" v-on:click="deleteAll()") 删除所有已读
             a.readall(href="javascript:;" v-on:click="readAll()") 全部标记已读
-          ul.list-style
-            p.empty(v-show="messages.length == 0")
+          div(v-show="messages.length == 0")
+            p.empty
               svg.svg-style
                 use(xlink:href="/assets/svg/icon.svg#empty")
-            p.empty(v-show="messages.length == 0") 还没有消息呢~
+            p.empty 还没有消息呢~
+          ul.list-style(v-show="messages.length != 0")
             li.list-style.clear(v-for="item in messages" v-on:click="readMessage(item)" v-bind:class="item.isnew == true ? 'newmessage' : 'oldmessage'")
               div.isnew(v-show="item.isnew")
                 span.icon
@@ -140,6 +141,15 @@
           color: #666;
         }
       }
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         margin-top: pxTorem(10);
         li{
@@ -172,15 +182,6 @@
             .time{
               margin-left: pxTorem(20);
             }
-          }
-        }
-        .empty{
-          text-align: center;
-          color: #999;
-          .svg-style{
-            width: pxTorem(100);
-            height: pxTorem(100);
-            fill: #999;
           }
         }
         .newmessage{
