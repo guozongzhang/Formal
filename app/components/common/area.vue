@@ -23,22 +23,18 @@ let isinit = true
 
 export default {
   props: ['province', 'city', 'district', 'allowps', 'allowcs', 'allowds','showDistrict', 'showCity'],
-  data: function () {
-    return { 
-      provinceMe: this.province,
-      cityMe: this.city,
-      districtMe: this.district,
-    }
-  },
   data () {
     return {
       provinces: [],
       citys: [],
       districts: [],
-      provinceMe: '',
-      cityMe:'',
-      districtMe:''
+      provinceMe: this.province,
+      cityMe: this.city,
+      districtMe: this.district
     }
+  },
+  computed: {
+
   },
   methods: { 
     /**
@@ -82,6 +78,7 @@ export default {
       if(this.provinceMe == -1){return}
       City.order('id').where({ProvinceID: this.provinceMe}).limit(2000).all((data)=> {
         this.citys = this.filterArea(this.allowcs, data)
+        
       })
 
     },

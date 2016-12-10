@@ -64,9 +64,6 @@
   .swiper-slide {
     background-position: center;
     background-size: cover;
-    img{
-      width: 100%;
-    }
   }
 }
 </style>

@@ -19,7 +19,7 @@
       div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
       | Copyright©2014-2016 
       a(href="http://www.dpjia.com" target="_blank" style="color:#fff") 搭配家（dpjia.com） 
-      | 版权所有v1.5.0 
+      | 版权所有
 
 </template>
 
