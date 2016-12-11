@@ -7,11 +7,11 @@
 //   {
 //     "port":"5000",
 //     "Ips":{
-//         "home":"test.dpjia.com",
-//         "mall":"test_mall.dpjia.com",
-//         "design":"test_design.dpjia.com",
-//         "tools":"test_tools.dpjia.com",
-//         "services":"test_services.dpjia.com"
+//         "home":"http://test.dpjia.com",
+//         "mall":"http://test_mall.dpjia.com",
+//         "design":"http://test_design.dpjia.com",
+//         "tools":"http://test_tools.dpjia.com",
+//         "services":"http://test_services.dpjia.com"
 //       },
 //       "app_key":"0c31e550cfdab86f2c2ea59327907798",
 //       "app_id":"cfdab86f2c2ea593",
