@@ -126,14 +126,14 @@ import AreaVue from '../common/area.vue';
       padding: pxTorem(30) pxTorem(280);
       .search-input{
         width: pxTorem(440);
-        height: pxTorem(38);
+        height: pxTorem(37);
         margin: 0 auto;
         border: 2px solid #ffae00;
         border-radius: pxTorem(2);
         .area{
           display: inline-block;
           width: pxTorem(90);
-          height: pxTorem(35);
+          height: pxTorem(34);
           float: left;
           border-right: 1px solid #ccc;
           .row{
