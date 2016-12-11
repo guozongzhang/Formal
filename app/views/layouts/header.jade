@@ -29,6 +29,7 @@ script.
       tools: "#{(localEnv.Ips || {}).tools || 'http://192.168.1.120:5004'}",
       services: "#{(localEnv.Ips || {}).services || 'http://192.168.1.120:5006'}"
     },
+    domain: window.location.hostname.indexOf('dpjia.com') < 0 ? window.location.hostname : '.dpjia.com',
     app_key: '0c31e550cfdab86f2c2ea59327907798',
     app_id: 'cfdab86f2c2ea593',
     API: {

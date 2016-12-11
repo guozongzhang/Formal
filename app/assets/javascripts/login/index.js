@@ -94,7 +94,7 @@ class Index extends Basic {
 
   /*登录*/
   Login() {
-    Cookies.set('dpjia', '');
+    Cookies.set('dpjia', '', { domain: SITE.domain});
     let data = {};
     if(model.mvvm.info.type == 'number') {
       //账号登录
@@ -110,7 +110,7 @@ class Index extends Basic {
       }
     }
     API.get('users/login',data, (data)=> {
-      Cookies.set('dpjia', data.token, { domain:'dpjia.com'});
+      Cookies.set('dpjia', data.token, { domain: SITE.domain});
       Core.alert('success','登录成功');
       setTimeout(()=> {
         window.location.href = '/'
@@ -118,27 +118,6 @@ class Index extends Basic {
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message)
     })
-    
-    // $.ajax({
-    //   type:'get',
-    //   url: ip_host + 'users/login',
-    //   data:data,
-    //   crossDomain: true,
-    //   headers: {
-    //     "X-DP-Key": SITE.app_key,
-    //     "X-DP-ID": SITE.app_id
-    //   },
-    //   success: function(msg) {
-    //     Cookies.set('dpjia',msg.token)
-    //     Core.alert('success','登录成功');
-    //     setTimeout(()=> {
-    //       window.location.href = '/'
-    //     }, 1000)
-    //   },
-    //   error: function(msg) {
-    //     alert(msg.responseJSON.message);
-    //   }
-    // })
   }
 }
 
