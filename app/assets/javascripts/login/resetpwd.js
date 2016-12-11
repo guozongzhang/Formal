@@ -38,7 +38,7 @@ class Resetpwd extends Basic {
         height:40,
         font_size: 18
       }, (data)=> {
-      model.mvvm.info.img_code = msg.image;
+      model.mvvm.info.img_code = data.image;
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message)
     })
@@ -65,11 +65,11 @@ class Resetpwd extends Basic {
         height:40,
         font_size: 18
       }, (data)=> {
-      if(msg.status == 1) {
+      if(data.status == 1) {
         alert('该手机号还没有注册过，请输入正确的账号');
         return ;
       }
-      if(msg.status == 2) {
+      if(data.status == 2) {
         model.mvvm.step = 'second';
       }
     },(msg)=> {

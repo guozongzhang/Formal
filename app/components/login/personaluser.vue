@@ -84,7 +84,7 @@
       getServiceObj: function() {
         var model = this;
         API.get('functions/company/servicecompany',{}, (data)=> {
-          model.info.serverArr = msg;
+          model.info.serverArr = data;
           setTimeout(function () {
             model.info.serverobj = 78;
           },10);

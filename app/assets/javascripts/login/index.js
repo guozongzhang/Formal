@@ -110,7 +110,7 @@ class Index extends Basic {
       }
     }
     API.get('users/login',data, (data)=> {
-      Cookies.set('dpjia',msg.token)
+      Cookies.set('dpjia',data.token)
       Core.alert('success','登录成功');
       setTimeout(()=> {
         window.location.href = '/'
