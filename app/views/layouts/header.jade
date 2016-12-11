@@ -22,9 +22,16 @@ script.
         }
       }
     },
+    Ips:{
+      home: "#{(localEnv.Ips || {}).home || 'http://192.168.1.120:5000'}",
+      mall: "#{(localEnv.Ips || {}).mall || 'http://192.168.1.120:5001'}",
+      design: "#{(localEnv.Ips || {}).design || 'http://192.168.1.120:5002'}",
+      tools: "#{(localEnv.Ips || {}).tools || 'http://192.168.1.120:5004'}",
+      services: "#{(localEnv.Ips || {}).services || 'http://192.168.1.120:5006'}"
+    },
     app_key: '0c31e550cfdab86f2c2ea59327907798',
     app_id: 'cfdab86f2c2ea593',
     API: {
-      url: 'http://192.168.1.120/openapi/api/1.0/'
+      url: "#{localEnv.url || 'http://192.168.1.120/openapi/api/1.0/'}"
     }
   }

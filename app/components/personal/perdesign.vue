@@ -25,7 +25,7 @@
                 a.go-draw(href="javascript:;") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
                 span.delete(v-on:click="deleteDesign(item)") 删除
-                span.copy 复制
+                //- span.copy 复制
 
       <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
       <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>

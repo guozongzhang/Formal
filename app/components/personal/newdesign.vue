@@ -7,11 +7,13 @@
       div.search-box
         div.search-input
           div.area
-            <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="false" :showCity="false"></vue-area>
+            <vue-area :province='info.province_poi_province' :city='info.city_poi_city' :district='info.district_poi_district' :showDistrict="false" :showCity="false" v-on:syncData="getarea"></vue-area>
           input(type="text")
           span.search-btn 
             span.text 搜索
             span.icon
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#search")
       div.house-list
         ul.list-style.clear
           li.list-style(v-for="item in houses")
@@ -74,6 +76,11 @@ import AreaVue from '../common/area.vue';
             address:'北京市海淀区'
           }
         ]
+      }
+    },
+    methods: {
+      getarea: function(key, val) {
+        console.log(key,val)
       }
     }
   }
@@ -177,7 +184,11 @@ import AreaVue from '../common/area.vue';
             display: inline-block;
             width: pxTorem(20);
             height: pxTorem(20);
-            background-color: #ccc;
+            .svg-style{
+              width: pxTorem(20);
+              height: pxTorem(20);
+              fill: #fff;
+            }
           }
         }
       }

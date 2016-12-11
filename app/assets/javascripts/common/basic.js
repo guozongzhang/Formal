@@ -40,6 +40,25 @@ class Basic {
      * 子类通过 this.register([]) 注册 vue methods
      */
     
+    Vue.use({
+      install: function (Vue, options) {
+        
+        // 图片缩放
+        Vue.prototype.resizeIMG = function (src, width, height) {
+          if(!height) {
+            height = width;
+          }  
+          return src + '?x-oss-process=image/resize,m_fill,h_'+ height +',w_' + width;
+        }
+
+        //跳转路由修改
+        //a(:href="siteUrl('design', item.url)")
+        Vue.prototype.siteUrl = function (typ, url) {
+          return /^http/.test(url) ? url : `${SITE.Ips[typ]}${url}`
+        }
+      }
+    })
+
     //console.log('==', JSON.stringify(initData))
     this.mvvm = new Vue(mvvmDefault)
     

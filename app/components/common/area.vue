@@ -1,6 +1,6 @@
 <template lang="jade">
   div.row
-    div(v-bind:class="showDistrict == true && showCity == true ? 'col-md-4' : 'col-md-6'")
+    div(v-bind:class="showDistrict == true && showCity == true ? 'col-md-4' : showCity == true ? 'col-md-6' : 'col-md-12'")
       select(class="form-control" v-model="provinceMe" @change="switchInit")
         option(value="-1") #{"=省="}
         option(v-for="p in provinces" v-bind:value="p.id") {{p.ProvinceName}}
