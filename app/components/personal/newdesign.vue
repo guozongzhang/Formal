@@ -133,7 +133,7 @@ import AreaVue from '../common/area.vue';
         .area{
           display: inline-block;
           width: pxTorem(90);
-          height: pxTorem(34);
+          height: pxTorem(35);
           float: left;
           border-right: 1px solid #ccc;
           .row{
