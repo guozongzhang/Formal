@@ -1,6 +1,5 @@
 let model
-var ip_host = 'http://192.168.1.120/openapi'
-// let ip_host =' http://123.57.217.65:3010';
+var ip_host =  SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/';
 //验证码60秒倒计时
 let start_time = 60;//开始时间
 class Index extends Basic {
@@ -57,27 +56,36 @@ class Index extends Basic {
         mobile: phone,
         type: 'reg',
       };
-
-      $.ajax({
-        type:'get',
-        url: ip_host + '/api/1.0/requestSmsCode/sms',
-        data:{
+      API.get('requestSmsCode/sms',{
           type:'web',
           mobile:phone,
-        },
-        crossDomain: true,
-        headers:{
-          "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-          "X-DP-ID": "cfdab86f2c2ea593"
-        },
-        success:function(msg) {
-          alert('验证码已发送，请及时查收');
-          model.countdowntime();
-        },
-        error:function(msg) {
-          alert(msg.responseJSON.message);
-        }
+        }, (data)=> {
+        alert('验证码已发送，请及时查收');
+        model.countdowntime();
+      },(msg)=> {
+        Core.alert('danger', msg.responseJSON.message);
+        $('#get_verify').removeAttr('disabled');
       })
+      // $.ajax({
+      //   type:'get',
+      //   url: ip_host + 'requestSmsCode/sms',
+      //   data:{
+      //     type:'web',
+      //     mobile:phone,
+      //   },
+      //   crossDomain: true,
+      //   headers:{
+      //     "X-DP-Key": SITE.app_key,
+      //     "X-DP-ID": SITE.app_id
+      //   },
+      //   success:function(msg) {
+      //     alert('验证码已发送，请及时查收');
+      //     model.countdowntime();
+      //   },
+      //   error:function(msg) {
+      //     alert(msg.responseJSON.message);
+      //   }
+      // })
     } else {
       alert('请正确填写手机号码');
       return ;
@@ -101,27 +109,36 @@ class Index extends Basic {
         pwd: model.mvvm.info.pwd
       }
     }
-    $.ajax({
-      type:'get',
-      url: ip_host + '/api/1.0/users/login',
-      data:data,
-      crossDomain: true,
-      headers: {
-        "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-        "X-DP-ID": "cfdab86f2c2ea593"
-      },
-      success: function(msg) {
-        console.log(msg)
-        Cookies.set('dpjia',msg.token)
-        Core.alert('success','登录成功');
-        setTimeout(()=> {
-          window.location.href = '/'
-        }, 1000)
-      },
-      error: function(msg) {
-        alert(msg.responseJSON.message);
-      }
+    API.get('users/login',data, (data)=> {
+      Cookies.set('dpjia',msg.token)
+      Core.alert('success','登录成功');
+      setTimeout(()=> {
+        window.location.href = '/'
+      }, 1000)
+    },(msg)=> {
+      Core.alert('danger', msg.responseJSON.message)
     })
+    
+    // $.ajax({
+    //   type:'get',
+    //   url: ip_host + 'users/login',
+    //   data:data,
+    //   crossDomain: true,
+    //   headers: {
+    //     "X-DP-Key": SITE.app_key,
+    //     "X-DP-ID": SITE.app_id
+    //   },
+    //   success: function(msg) {
+    //     Cookies.set('dpjia',msg.token)
+    //     Core.alert('success','登录成功');
+    //     setTimeout(()=> {
+    //       window.location.href = '/'
+    //     }, 1000)
+    //   },
+    //   error: function(msg) {
+    //     alert(msg.responseJSON.message);
+    //   }
+    // })
   }
 }
 
