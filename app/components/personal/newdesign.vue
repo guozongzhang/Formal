@@ -126,9 +126,9 @@ import AreaVue from '../common/area.vue';
       padding: pxTorem(30) pxTorem(280);
       .search-input{
         width: pxTorem(440);
-        height: pxTorem(37);
+        height: pxTorem(38);
         margin: 0 auto;
-        border: 2px solid #ffae00;
+        border: pxTorem(2) solid #ffae00;
         border-radius: pxTorem(2);
         .area{
           display: inline-block;
