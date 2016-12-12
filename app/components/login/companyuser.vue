@@ -122,28 +122,6 @@
               Core.alert('danger', msg.responseJSON.message);
               $('#get_verify').removeAttr('disabled');
             })
-
-            // $.ajax({
-            //   type:'get',
-            //   url: ip_host + 'requestSmsCode/sms',
-            //   data:{
-            //     type:'web',
-            //     mobile:phone,
-            //   },
-            //   crossDomain: true,
-            //   headers:{
-            //     "X-DP-Key":  "222",
-            //     "X-DP-ID": "111"
-            //   },
-            //   success:function(msg) {
-            //     alert('验证码已发送，请及时查收');
-            //     model.countdowntime();
-            //   },
-            //   error:function(msg) {
-            //     alert(msg.responseJSON.message);
-            //     $('#get_verify').removeAttr('disabled');
-            //   }
-            // })
           }
         } else {
           alert('请正确填写手机号码');
@@ -183,8 +161,8 @@
             },
             crossDomain: true,
             headers: {
-              "X-DP-Key": SITE.app_key,
-              "X-DP-ID": SITE.app_id,
+              "X-DP-Key": SITE.app_key || '',
+              "X-DP-ID": SITE.app_id || '',
               "X-DP-Token": Cookies.get('dpjia') || ''
             },
             success: function(data){
@@ -241,28 +219,11 @@
           }
         }
 
-        API.post('users/signUpBySmsCode',comdata, (data)=> {
+        API.post('admin/signUpBySmsCode',comdata, (data)=> {
           $('.success-bg').removeClass('hidden');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
         })
-
-        // $.ajax({
-        //   type:'post',
-        //   url: ip_host + 'users/signUpBySmsCode',
-        //   data:comdata,
-        //   crossDomain: true,
-        //   headers: {
-        //     "X-DP-Key": SITE.app_key,
-        //     "X-DP-ID": SITE.app_id
-        //   },
-        //   success: function(msg) {
-        //     $('.success-bg').removeClass('hidden');
-        //   },
-        //   error: function(msg) {
-        //     alert(msg.responseJSON.message);
-        //   }
-        // })
       },
       syncData: function(key, val) {
         this.info[key] = val;
