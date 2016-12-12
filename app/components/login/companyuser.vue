@@ -219,7 +219,7 @@
           }
         }
 
-        API.post('admin/signUpBySmsCode',comdata, (data)=> {
+        API.get('admin/signUpBySmsCode',comdata, (data)=> {
           $('.success-bg').removeClass('hidden');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
