@@ -48,7 +48,7 @@
             isshow: !SITE.session.login
           },
           users:{
-            url:'javascript:;',
+            url: SITE.Ips.b_admin,
             name: SITE.session.mem.info_poi_user_info.ui_name || '我的搭配家',
             isshow: SITE.session.login
           }
