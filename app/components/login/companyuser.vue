@@ -113,7 +113,7 @@
             alert('手机号已被注册');
           } else {
             API.get('requestSmsCode/sms',{
-                type:'web',
+                type:'admin',
                 mobile:phone,
               }, (data)=> {
               alert('验证码已发送，请及时查收');
