@@ -210,7 +210,8 @@
           },
           pwd: {
             required: true,
-            minlength: 6
+            minlength: 6,
+            maxlength: 20
           },
           verification: {
             required: true,
@@ -228,6 +229,7 @@
           pwd: {
             required: "请输入密码",
             minlength: "密码不能少于6位",
+            maxlength: "密码不能大于20位"
           },
           verification: {
             required: "请输入验证码",

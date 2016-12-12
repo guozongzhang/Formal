@@ -66,26 +66,6 @@ class Index extends Basic {
         Core.alert('danger', msg.responseJSON.message);
         $('#get_verify').removeAttr('disabled');
       })
-      // $.ajax({
-      //   type:'get',
-      //   url: ip_host + 'requestSmsCode/sms',
-      //   data:{
-      //     type:'web',
-      //     mobile:phone,
-      //   },
-      //   crossDomain: true,
-      //   headers:{
-      //     "X-DP-Key": SITE.app_key,
-      //     "X-DP-ID": SITE.app_id
-      //   },
-      //   success:function(msg) {
-      //     alert('验证码已发送，请及时查收');
-      //     model.countdowntime();
-      //   },
-      //   error:function(msg) {
-      //     alert(msg.responseJSON.message);
-      //   }
-      // })
     } else {
       alert('请正确填写手机号码');
       return ;

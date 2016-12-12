@@ -218,6 +218,10 @@
             user_type:'company_admin',
           }
         }
+        if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+          Core.alert('danger','公司地址不能为空');
+          return ;
+        }
 
         API.get('admin/signUpBySmsCode',comdata, (data)=> {
           $('.success-bg').removeClass('hidden');

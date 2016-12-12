@@ -61,9 +61,8 @@ class Resetpwd extends Basic {
       return false; 
     } 
     API.post('functions/captcha/captcha',{
-        width: 105,
-        height:40,
-        font_size: 18
+        mobile: model.mvvm.info.number,
+        code: model.mvvm.info.picverify
       }, (data)=> {
       if(data.status == 1) {
         alert('该手机号还没有注册过，请输入正确的账号');
@@ -75,33 +74,6 @@ class Resetpwd extends Basic {
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message)
     })
-
-    // $.ajax({
-    //   type:'post',
-    //   url: ip_host + 'functions/captcha/captcha',
-    //   data:{
-    //     mobile: model.mvvm.info.number,
-    //     code: model.mvvm.info.picverify,
-    //   },
-    //   crossDomain: true,
-    //   headers:{
-    //     "X-DP-Key": SITE.app_key,
-    //     "X-DP-ID": SITE.app_id
-    //   },
-    //   success:function(msg) {
-    //     if(msg.status == 1) {
-    //       alert('该手机号还没有注册过，请输入正确的账号');
-    //       return ;
-    //     }
-    //     if(msg.status == 2) {
-    //       model.mvvm.step = 'second';
-    //     }
-        
-    //   },
-    //   error:function(msg) {
-    //     alert(msg.responseJSON.message);
-    //   }
-    // })
   }
 
   /*定时器*/
@@ -129,7 +101,7 @@ class Resetpwd extends Basic {
       };
       $('#get_verify').attr('disabled','true');
 
-      API.get('functions/captcha/captcha',{
+      API.get('requestSmsCode/sms',{
           type:'reset',
           mobile:phone,
         }, (data)=> {
@@ -139,28 +111,6 @@ class Resetpwd extends Basic {
         Core.alert('danger', msg.responseJSON.message)
         $('#get_verify').removeAttr('disabled');
       })
-
-      // $.ajax({
-      //   type:'get',
-      //   url: ip_host + 'requestSmsCode/sms',
-      //   data:{
-      //     type:'reset',
-      //     mobile:phone,
-      //   },
-      //   crossDomain: true,
-      //   headers:{
-      //     "X-DP-Key": SITE.app_key,
-      //     "X-DP-ID": SITE.app_id
-      //   },
-      //   success:function(msg) {
-      //     alert('验证码已发送，请及时查收');
-      //     model.countdowntime();
-      //   },
-      //   error:function(msg) {
-      //     alert(msg.responseJSON.message);
-      //     $('#get_verify').removeAttr('disabled');
-      //   }
-      // })
     } else {
       alert('请正确填写手机号码');
       return ;
@@ -194,23 +144,6 @@ class Resetpwd extends Basic {
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message);
     })
-
-    // $.ajax({
-    //   type:'put',
-    //   url: ip_host + 'users/reset_pasd',
-    //   data:setpwd,
-    //   crossDomain: true,
-    //   headers:{
-    //     "X-DP-Key": SITE.app_key,
-    //     "X-DP-ID": SITE.app_id
-    //   },
-    //   success:function(msg) {
-    //     window.location.href = '/login/index'
-    //   },
-    //   error:function(msg) {
-    //     alert(msg.responseJSON.message);
-    //   }
-    // })
   }
 }
 
