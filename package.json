@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js |  webpack --watch| browser-sync start -c ./config/bs-config.js",
     "migrate": "knex migrate:latest",
-    "build": "webpack",
+    "build": "cnpm install && webpack",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build && pm2 restart app.js",
     "push": "pbranch=`git branch | grep \\* | cut -c3-` && git branch -D develop && git fetch origin develop:develop && git merge develop && git checkout develop && git merge $pbranch && git push origin develop && git checkout $pbranch"
   },
