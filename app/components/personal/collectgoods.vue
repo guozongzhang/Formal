@@ -36,7 +36,7 @@
     },
     data() {
       return {
-        pagesize: 20,
+        pagesize: 8,
         totalcount: 0,
         deleteinfo:{
           tips:'确定取消该收藏商品吗？',

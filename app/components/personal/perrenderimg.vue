@@ -52,7 +52,7 @@
     },
     data() {
       return {
-        pagesize: 20,
+        pagesize: 12,
         totalcount: 0,
         settings:{
           type:'myrenderimg'

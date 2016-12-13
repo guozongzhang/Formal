@@ -22,7 +22,7 @@
               div.subright
                 label {{item.des_name}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
-                a.go-draw(href="javascript:;") 进入设计
+                a.go-draw(:href="design_url + item.id") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
                 span.delete(v-on:click="deleteDesign(item)") 删除
                 //- span.copy 复制
@@ -51,7 +51,8 @@
     },
     data() {
       return {
-        pagesize: 20,
+        design_url: SITE.Ips.design + '/example/design?id=',
+        pagesize: 4,
         totalcount: 0,
         settings:{
           type:'mydesign'

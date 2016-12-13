@@ -39,7 +39,7 @@
     },
     data() {
       return {
-        pagesize: 20,
+        pagesize: 6,
         totalcount: 0,
         deleteinfo:{
           tips:'确定取消该收藏样板间吗？',
