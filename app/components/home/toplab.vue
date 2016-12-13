@@ -140,17 +140,21 @@
           border-radius: 100%;
         }
         .users-info{
+          position: relative;
           .sub-menu {
             position: absolute;
+            right: pxTorem(-1);
             background-color: #fff;
-            width: pxTorem(80);
+            width: pxTorem(100);
             z-index: 100;
             display: none;
+            border: 1px solid #ddd;
+            border-top: none;
             a {
               text-decoration: none;
               display: block;
               border-bottom: #DDD 1px solid;
-              padding: pxTorem(3) pxTorem(8);
+              padding: pxTorem(4) pxTorem(15);
             }
           }
         }
