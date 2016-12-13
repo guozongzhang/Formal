@@ -59,10 +59,11 @@
           email: SITE.session.mem.u_email || '暂无',
           sex: SITE.session.mem.info_poi_user_info.ui_sex || 0,
           province_poi_province: '',
-          city_poi_city:''
+          city_poi_city:'',
+          district_poi_district: ''
         },
         success:{
-          tips:'收藏商品',
+          tips:'保存信息',
           flags:'infosave'
         },
         info:{

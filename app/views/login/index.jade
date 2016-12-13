@@ -11,7 +11,7 @@ html
             //- span(v-on:click="changeLoginType()") {{info.type == 'number' ? '手机验证码登录' : '账号密码登录'}}
           div.input-box
             div.input-item
-              input(type="text" v-model="info.number" v-bind:placeholder="info.type == 'number' ? '输入账号' : '输入手机号'")
+              input(type="text" v-model="info.number" v-bind:placeholder="info.type == 'number' ? '输入手机号' : '输入手机号'")
             div.input-item(v-show="info.type == 'number'")
               input(type="password" v-model="info.pwd" placeholder="输入密码")
             div.input-item.getverify(v-show="info.type == 'phone'")
