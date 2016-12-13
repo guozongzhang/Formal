@@ -11,8 +11,8 @@
           div.modal-body 
             div.container-fluid
               div.info-box
-                input(type="text" v-bind:value="info.name")
-                a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
+                input(type="text" v-model="info.name")
+                a.config(href="javascript:;" v-on:click="Rename()") 确定
                 a.cancle(href="javascript:;" data-dismiss="modal" aria-label="Close") 取消
 
 </template>
@@ -21,7 +21,11 @@
   export default {
     props:['info'],
     data() {
-      return {
+      return {}
+    },
+    methods:{
+      Rename: function() {
+        this.$emit('sendname', this.info.name);
       }
     }
   }

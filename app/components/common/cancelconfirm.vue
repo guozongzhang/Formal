@@ -11,9 +11,10 @@
             div.container-fluid
               div.info-box
                 div.pic-text
-                  img(src="")
+                  svg.svg-style
+                    use(xlink:href="/assets/svg/icon.svg#exclamate")
                   span {{info.tips}}
-                a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
+                a.config(href="javascript:;" v-on:click="Unfavor()") 确定
                 a.cancle(href="javascript:;" data-dismiss="modal" aria-label="Close") 取消
 
 </template>
@@ -23,6 +24,11 @@
     props:['info'],
     data() {
       return {
+      }
+    },
+    methods:{
+      Unfavor: function() {
+        this.$emit('sendId', this.info.id);
       }
     }
   }
@@ -50,23 +56,22 @@
       .info-box{
         position: relative;
         .pic-text{
-          position: absolute;
           height: pxTorem(30);
           line-height: pxTorem(30);
-        }
-        img{
-          position: absolute;
-          left: pxTorem(60);
-          top: pxTorem(0);
-          width: pxTorem(30);
-          height: pxTorem(30);
-        }
-        span{
-          position: absolute;
-          top: pxTorem(5);
-          left: pxTorem(100);
-          font-size: pxTorem(14);
-          color: #999;
+          text-align: center;
+          .svg-style{
+            width: pxTorem(27);
+            height: pxTorem(27);
+            fill: #f14f4f;
+          }
+          span{
+            display: inline-block;
+            margin-left: pxTorem(5);
+            position: relative;
+            top: pxTorem(-8);
+            font-size: pxTorem(14);
+            color: #999;
+          }
         }
         a{
           position: absolute;

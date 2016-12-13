@@ -14,8 +14,8 @@
       return {
         perinfo:{
           bg_url:'',
-          user_url:'http://cimg.dpjia.com/files/users/149/heads/1448272058.png@120w_120h.png',
-          name:'陆卧王'
+          user_url: SITE.session.mem.info_poi_user_info.ui_head || 'http://cimg.dpjia.com/files/users/149/heads/1448272058.png@120w_120h.png',
+          name: SITE.session.mem.info_poi_user_info.ui_name || '暂无'
         }
       }
     }

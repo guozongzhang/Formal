@@ -5,15 +5,15 @@
         div.form-group
           label 原密码：
           span.tips 必须输入原密码才能修改
-          input.form-control(type="text")
+          input.form-control(type="password" v-model="info.oldpwd")
         div.form-group
           label 新密码：
           span.tips 密码长度6-16个字符
-          input.form-control(type="text")
+          input.form-control(type="password" v-model="info.newpwd")
         div.form-group
           label 确认新密码：
           span.tips 必须输入新密码才能修改
-          input.form-control(type="text")
+          input.form-control(type="password" v-model="info.repwd")
     a.submit-btn(href="javascript:;" v-on:click="submitBtn()") 提交
     //- 成功信息提示
     <vue-successtips :info='success'></vue-successtips>
@@ -27,6 +27,11 @@
     },
     data() {
       return {
+        info:{
+          oldpwd:'',
+          newpwd:'',
+          repwd:''
+        },
         success:{
           tips:'密码修改',
           flags:'pwdsave'
@@ -35,8 +40,36 @@
     },
     methods:{
       submitBtn: function() {
-        $('.pwdsave').modal('show');
-        console.log('===')
+        if(_.isEmpty($.trim(this.info.oldpwd))) {
+          Core.alert('danger','原始密码不能为空');
+          return ;
+        }
+        if(_.isEmpty($.trim(this.info.newpwd))) {
+          Core.alert('danger','新密码不能为空');
+          return ;
+        }
+        if($.trim(this.info.newpwd).length > 16 || $.trim(this.info.newpwd).length < 6) {
+          Core.alert('danger','新密码长度6~16个字符');
+          return ;
+        }
+        if($.trim(this.info.newpwd) != $.trim(this.info.repwd)) {
+          Core.alert('danger','两次密码输入不同，请重新输入');
+          return ;
+        }
+
+        let datas = {
+          old_password: this.info.oldpwd,
+          new_password: this.info.newpwd
+        }
+
+        API.put('users/resetPassword',datas, (data)=> {
+          $('.pwdsave').modal('show');
+          this.info.oldpwd = '';
+          this.info.newpwd = '';
+          this.info.repwd = '';
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
+        })
       }
     }
   }

@@ -43,12 +43,12 @@
             isshow: !SITE.session.login
           },
           admin:{
-            url:'javascript:;',
+            url:SITE.Ips.b_admin,
             name:'厂商后台',
             isshow: !SITE.session.login
           },
           users:{
-            url:'javascript:;',
+            url: '/personal/index',
             name: SITE.session.mem.info_poi_user_info.ui_name || '我的搭配家',
             isshow: SITE.session.login
           }
@@ -91,7 +91,7 @@
       },
       Exit: function() {
         if(confirm('确定要退出登录吗？')) {
-          Cookies.set('dpjia', '');
+          Cookies.set('dpjia', '', { domain: SITE.domain});
           Core.alert('success','退出登录');
           window.location.href = '/'
         }

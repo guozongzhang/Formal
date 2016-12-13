@@ -6,23 +6,38 @@
       div.right
         label.title 我的效果图
         div.imgs-list
-          ul.list-style.clear
+          div(v-show="renders.length == 0")
+            p.empty
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#empty")
+            p.empty 还没有效果图呢~
+          ul.list-style.clear(v-show="renders.length != 0")
             li.list-style(v-for="item in renders")
               a.link-box(href="javascript:;")
-                img(:src="item.img_url" v-on:click="showImgs()")
+                img(:src="item.rd_image" v-on:click="showImgs()")
                 span.edit(v-on:click="renameRender(item)")
-                span.delete(v-on:click="deleteRender(item.id)")
+                  svg.svg-style
+                    use(xlink:href="/assets/svg/icon.svg#edit")
+                span.delete(v-on:click="deleteRender(item)")
+                  svg.svg-style
+                    use(xlink:href="/assets/svg/icon.svg#trash")
                 div.info-box
                   p {{item.name}}
-                  p {{item.time}}
+                  p {{item.create_time | localDate}}
 
-      <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
-      <vue-rename :info="renameinfo"></vue-rename>
+        <vue-pagination :flag="'renderimgnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+
+      <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
+      <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
       <vue-renderimgmodel :info="renderinfo"></vue-renderimgmodel>
 
 </template>
 
 <script>
+  let tmp = '';//临时变量
+  let model;
+  let Render = AV.extend('render_tasks');
+  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
@@ -32,83 +47,84 @@
       'vue-leftmenue': LeftmenueVue,
       'vue-deleteconfirm': DeleteconfirmVue,
       'vue-rename': RenameVue,
-      'vue-renderimgmodel': RenderimgmodelVue
+      'vue-renderimgmodel': RenderimgmodelVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 12,
+        totalcount: 0,
         settings:{
           type:'myrenderimg'
         },
         deleteinfo:{
           tips:'您确定要删除吗？',
-          flags:'deletedesign'
+          flags:'deleterender',
+          id:'',
         },
         renameinfo:{
           title:'修改效果图名称',
           name:'',
-          flags:'renamedesign'
+          flags:'renamerender'
         },
         renderinfo:{
           flags:'showimgs'
         },
-        renders:[
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          },
-          {
-            id:'1',
-            link_url:'',
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_180,w_180',
-            name:'亚美特 47-餐桌BM3101',
-            time:'2016-10-20 19:00:00'
-          }
-        ]
+        renders:[]
       }
     },
     methods:{
-      deleteRender:function(id){
-        $('.deletedesign').modal('show');
-        console.log(id)
+      getRender: function() {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Render.reset().where(['rd_status in ?', ["3","uploaded"]]).keys('id,rd_image,create_time,name').limit(model.pagesize).skip(skip).all((data)=> {
+          model.totalcount = data.count;
+          this.renders = data.items;
+        })
       },
-      renameRender: function(item) {
-        this.renameinfo.name = item.name
-        $('.renamedesign').modal('show');
+      deleteRender:function(obj){
+        tmp = obj;
+        this.deleteinfo.id = obj.id;
+        $('.deleterender').modal('show');
       },
-      showImgs: function() {
-        $('.showimgs').modal('show');
-      }
+      Delete: function(id) {
+        let item = {
+          id: id
+        }
+        Render.reset().get(item).destroy().then((data)=> {
+          this.renders = _.without(this.renders,tmp);
+          $('.deleterender').modal('hide');
+          Core.alert('success','删除成功');
+        })
+      },
+      renameRender: function(obj) {
+        tmp = obj;
+        this.renameinfo.name = obj.name
+        $('.renamerender').modal('show');
+      },
+      Rename: function(name) {
+        if(_.isEmpty($.trim(name))) {
+          Core.alert('danger','效果图名称不能为空');
+          return;
+        }
+        let item = {
+          id: tmp.id,
+          name: name
+        }
+        Render.reset().get(item).update().then((data)=> {
+          tmp.name = item.name
+          $('.renamerender').modal('hide');
+          Core.alert('success','修改成功');
+        })
+      },
+      // showImgs: function() {
+      //   $('.showimgs').modal('show');
+      // }
+    },
+    mounted() {
+      this.getRender();
+    },
+    created() {
+      model = this
     }
   }
 
@@ -146,6 +162,15 @@
     }
     .imgs-list{
       margin-top: pxTorem(20);
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         li{
           display: inline-block;
@@ -172,6 +197,14 @@
               height: pxTorem(30);
               background-color: rgba(0,0,0,0.5);
               cursor: pointer;
+              .svg-style{
+                position: relative;
+                top: pxTorem(5);
+                left: pxTorem(5);
+                width: pxTorem(20);
+                height: pxTorem(20);
+                fill: #fff;
+              }
             }
             .edit{
               top: 0;

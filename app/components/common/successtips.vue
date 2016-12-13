@@ -11,7 +11,8 @@
           div.modal-body 
             div.container-fluid
               div.info-box
-                img(src="")
+                svg.svg-style
+                  use(xlink:href="/assets/svg/icon.svg#check")
                 span {{info.tips}}成功
                 a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
 
@@ -41,12 +42,13 @@
     }
     .info-box{
       position: relative;
-      img{
+      .svg-style{
         position: absolute;
         top: pxTorem(15);
         left: pxTorem(90);
         width: pxTorem(90);
         height: pxTorem(90);
+        fill: #f14f4f;
       }
       span{
         position: absolute;

@@ -6,7 +6,8 @@ module.exports = {
     'underscore-min',
     'js.cookie',
     'bootstrap.min',
-    'jquery.form'
+    'jquery.form',
+    'moment.min'
   ],
   stylesheets: [
     'font-awesome.min',

@@ -3,39 +3,39 @@
     div.info-wrap
       div.line-box.clear
         label.title 账号：
-        span 13820080808
+        span {{userinfo.username}}
 
       div.line-box.clear
         label.title 手机号：
-        span 13820080808
+        span {{userinfo.mobile}}
 
       div.line-box.input-warp.clear
         label.title 昵称：
         div.input-box
-          input.form-control(type="text")
+          input.form-control(type="text" v-bind:value="userinfo.name" v-model="userinfo.name")
 
       div.line-box.input-warp.clear
         label.title 邮箱：
         div.input-box
-          input.form-control(type="text")
+          input.form-control(type="text" v-bind:value="userinfo.email")
 
       div.line-box.input-warp.clear
         label.title 性别：
         div.input-box
           label.radio-inline
-            input(type="radio" name="inlineRadioOptions") 
+            input(type="radio" value="1" name="inlineRadioOptions" v-model="userinfo.sex") 
             span 男士
           label.radio-inline
-            input(type="radio" name="inlineRadioOptions") 
+            input(type="radio" value="2" name="inlineRadioOptions" v-model="userinfo.sex") 
             span 女式
           label.radio-inline
-            input(type="radio" name="inlineRadioOptions") 
+            input(type="radio" value="0" name="inlineRadioOptions" v-model="userinfo.sex") 
             span 保密
 
       div.line-box.input-warp.clear
-        label.title 所在地：
+        label.title 所在地： 
         div.input-box
-          <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="false" :showCity="true"></vue-area>
+          <vue-area :province='info.province_poi_province' :city='info.city_poi_city' :district='info.district_poi_district' :showDistrict="false" :showCity="true" v-on:syncData="getarea"></vue-area>
         
     a.submit-btn(href="javascript:;" v-on:click="submitBtn()") 提交
   
@@ -52,21 +52,44 @@
     },
     data() {
       return {
+        userinfo:{
+          username: SITE.session.mem.username || '暂无',
+          mobile: SITE.session.mem.u_mobile || '暂无',
+          name: SITE.session.mem.info_poi_user_info.ui_name || '暂无',
+          email: SITE.session.mem.u_email || '暂无',
+          sex: SITE.session.mem.info_poi_user_info.ui_sex || 0,
+          province_poi_province: '',
+          city_poi_city:'',
+          district_poi_district: ''
+        },
         success:{
-          tips:'收藏商品',
+          tips:'保存信息',
           flags:'infosave'
         },
         info:{
-          province_poi_province:-1,
-          city_poi_city:-1,
+          province_poi_province: SITE.session.mem.info_poi_user_info.ProvinceID || -1,
+          city_poi_city: SITE.session.mem.info_poi_user_info.CityID || -1,
           district_poi_district:-1
         }
       }
     },
     methods:{
       submitBtn: function() {
-        $('.infosave').modal('show');
-        console.log('===')
+        let datas = {
+          id: SITE.session.mem.info_poi_user_info.id,
+          ui_name: this.userinfo.name,
+          ui_sex: this.userinfo.sex,
+          ProvinceID: this.userinfo.province_poi_province,
+          CityID: this.userinfo.city_poi_city,
+        }
+        API.put('users/info',datas, (data)=> {
+          $('.infosave').modal('show');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
+        })
+      },
+      getarea: function(str,val) {
+        this.userinfo[str] = val
       }
     }
   }

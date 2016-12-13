@@ -57,8 +57,7 @@
 </template>
 
 <script>
-  var ip_host = 'http://192.168.1.120/openapi'
-  //var ip_host =' http://123.57.217.65:3010';
+  var ip_host = SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/';
   //验证码60秒倒计时
   var start_time = 60;//开始时间
   export default {
@@ -84,21 +83,13 @@
       },
       getServiceObj: function() {
         var model = this;
-        $.ajax({
-          type:'get',
-          url: ip_host + '/api/1.0/functions/company/servicecompany',
-          data:{},
-          crossDomain: true,
-          headers: {
-            "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-            "X-DP-ID": "cfdab86f2c2ea593"
-          },
-          success:function(msg) {
-            model.info.serverArr = msg;
-            setTimeout(function () {
-              model.info.serverobj = 78;
-            },10);
-          }
+        API.get('functions/company/servicecompany',{}, (data)=> {
+          model.info.serverArr = data;
+          setTimeout(function () {
+            model.info.serverobj = 78;
+          },10);
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message);
         })
       },
       getVerification: function() {
@@ -109,28 +100,16 @@
           if($('#user_phone').hasClass('error')) {
             alert('手机号已被注册');
           } else {
-            $.ajax({
-              type:'get',
-              url: ip_host + '/api/1.0/requestSmsCode/sms',
-              data:{
+            API.get('requestSmsCode/sms',{
                 type:'web',
                 mobile:phone,
-              },
-              crossDomain: true,
-              headers:{
-                "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-                "X-DP-ID": "cfdab86f2c2ea593"
-              },
-              success:function(msg) {
-                alert('验证码已发送，请及时查收');
-                model.countdowntime();
-              },
-              error:function(msg) {
-                alert(msg.responseJSON.message);
-                $('#get_verify').removeAttr('disabled');
-              }
+              }, (data)=> {
+              alert('验证码已发送，请及时查收');
+              model.countdowntime();
+            },(msg)=> {
+              Core.alert('danger', msg.responseJSON.message);
+              $('#get_verify').removeAttr('disabled');
             })
-            
           }
         } else {
           alert('请正确填写手机号码');
@@ -152,7 +131,7 @@
       },
       upload_per: function() {
         var model = this;
-        var url = 'http://test_open.dpjia.com/api/1.0/upload';
+        var url =  SITE.API.url + 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
         var $input = $('#upload_per').find('input');
 
         $input.unbind().click();
@@ -170,8 +149,9 @@
             },
             crossDomain: true,
             headers: {
-              "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-              "X-DP-ID": "cfdab86f2c2ea593"
+              "X-DP-Key": SITE.app_key || '',
+              "X-DP-ID": SITE.app_id || '',
+              "X-DP-Token": Cookies.get('dpjia') || ''
             },
             success: function(data){
               $input.unwrap();
@@ -211,21 +191,19 @@
             code: model.info.verification,
           }
         }
-        $.ajax({
-          type:'post',
-          url: ip_host + '/api/1.0/users/signUpBySmsCode',
-          data:senddata,
-          crossDomain: true,
-          headers: {
-            "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-            "X-DP-ID": "cfdab86f2c2ea593"
-          },
-          success: function(msg) {
+
+        API.post('users/signUpBySmsCode',senddata, (data)=> {
+          if(senddata.designer_type == 'single') {
+            Core.alert('success','注册成功');
+            Cookies.set('dpjia', data.token, { domain: SITE.domain});
+            setTimeout(()=> {
+              window.location.href = '/';
+            }, 1000)
+          } else {
             $('.success-bg').removeClass('hidden');
-          },
-          error: function(msg) {
-            alert(msg.responseJSON.message);
           }
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message);
         })
       }
     },
@@ -240,7 +218,8 @@
           },
           pwd: {
             required: true,
-            minlength: 6
+            minlength: 6,
+            maxlength: 20
           },
           verification: {
             required: true,
@@ -258,6 +237,7 @@
           pwd: {
             required: "请输入密码",
             minlength: "密码不能少于6位",
+            maxlength: "密码不能大于20位"
           },
           verification: {
             required: "请输入验证码",
