@@ -193,15 +193,20 @@
         }
 
         API.post('users/signUpBySmsCode',senddata, (data)=> {
-          if(senddata.designer_type == 'single') {
-            Core.alert('success','注册成功');
-            Cookies.set('dpjia', data.token, { domain: SITE.domain});
-            setTimeout(()=> {
-              window.location.href = '/';
-            }, 1000)
-          } else {
-            $('.success-bg').removeClass('hidden');
-          }
+          // if(senddata.designer_type == 'single') {
+          //   Core.alert('success','注册成功');
+          //   Cookies.set('dpjia', data.token, { domain: SITE.domain});
+          //   setTimeout(()=> {
+          //     window.location.href = '/';
+          //   }, 1000)
+          // } else {
+          //   $('.success-bg').removeClass('hidden');
+          // }
+          Core.alert('success','注册成功');
+          Cookies.set('dpjia', data.token, { domain: SITE.domain});
+          setTimeout(()=> {
+            window.location.href = '/';
+          }, 1000)
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
         })
