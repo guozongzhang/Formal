@@ -59,9 +59,7 @@
             return item.point;
           })
           Example.reset().where(['id in ?', ids]).where(['user_poi_users > ?','-2']).keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
-            console.log(msg.items)
             this.examples = msg.items;
-            console.log(this.examples.length)
           })
         })
       },
