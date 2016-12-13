@@ -23,19 +23,25 @@
                 span.time {{item.time}}
                 span.delete(v-on:click="deleteMessages(item.id)") 删除
 
+        <vue-pagination :flag="'messagenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
       <vue-deletemessage :info='deleteinfo'></vue-deletemessage>
 </template>
 
 <script>
+  let model;
+  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteMessageVue from '../common/deleteconfirm.vue';
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-deletemessage': DeleteMessageVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 20,
+        totalcount: 0,
         settings:{
           type:'mymessages'
         },
@@ -47,6 +53,11 @@
       }
     },
     methods:{
+      init: function() {
+        // model.totalcount = data.count;
+        // let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        // .limit(model.pagesize).skip(skip)
+      },
       readMessage: function(obj){
         if(obj.isnew){
           obj.isnew = false;
@@ -88,6 +99,12 @@
         })
         return {oldlen: oldlen,newlen: newlen}
       }
+    },
+    counted() {
+      this.init();
+    },
+    created() {
+      model = this;
     }
   }
 

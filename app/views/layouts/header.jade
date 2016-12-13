@@ -22,6 +22,7 @@ script.
         }
       }
     },
+    query: JSON.parse(escape2Html('#{JSON.stringify(query)}')),
     Ips:{
       home: "#{(localEnv.Ips || {}).home || 'http://192.168.1.120:5000'}",
       mall: "#{(localEnv.Ips || {}).mall || 'http://192.168.1.120:5001'}",
@@ -36,4 +37,11 @@ script.
     API: {
       url: "#{localEnv.url || 'http://192.168.1.120/openapi/api/1.0/'}"
     }
+  }
+
+  function escape2Html (str) {
+    var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' } 
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+      return arrEntities[t]
+    })
   }

@@ -6,26 +6,29 @@
           svg.svg-style
             use(xlink:href="/assets/svg/icon.svg#empty")
         p.empty 还没有收藏样板间呢~
-      ul.list-style.clear(v-show="examples.length != 0")
+      ul.list-style.clear(v-show="examples.length > 0")
         li.list-style(v-for="item in examples")
           a(href="javascript:;")
             img(:src="item.apt_image")
             div.info-box
               p.name {{item.apt_name}}
               p.user 
-                span {{item.apt_area}}m² / {{item.aptt_poi_apartment_types.aptt_name}}
-                a(:href="item.user_url")
-                  img(:src="item.user_img")
-                  span {{item.username}}
+                span {{item.apt_area}}m² / {{(item.aptt_poi_apartment_types || {}).aptt_name}}
+                //- a(:href="item.user_url")
+                //-   img(:src="item.user_img")
+                //-   span {{item.username}}
           span.delete-icon(v-on:click="deleteExample(item)")
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#trash")
+
+    <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
   let tmp = '';//临时变量
+  let model;
   let favorArr = [];
   let FavorExamp = AV.extend('user_preference');
   let Example = AV.extend('apartment');
@@ -36,6 +39,8 @@
     },
     data() {
       return {
+        pagesize: 20,
+        totalcount: 0,
         deleteinfo:{
           tips:'确定取消该收藏样板间吗？',
           flags:'deleteexample',
@@ -46,13 +51,17 @@
     },
     methods:{
       init: function() {
-        FavorExamp.where({type:'sampleroom',action:'favor'}).keys('id,point').all((data)=> {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        FavorExamp.reset().where({type:'sampleroom',action:'favor'}).keys('id,point').limit(model.pagesize).skip(skip).all((data)=> {
           favorArr = data.items;
+          model.totalcount = data.count;
           let ids = data.items.map((item)=> {
             return item.point;
           })
-          Example.where(['id in ?', ids]).keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+          Example.reset().where(['id in ?', ids]).where(['user_poi_users > ?','-2']).keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+            console.log(msg.items)
             this.examples = msg.items;
+            console.log(this.examples.length)
           })
         })
       },
@@ -68,7 +77,7 @@
             deleteid = item.id;
           }
         })
-        FavorExamp.get({id:deleteid}).destroy().then((data)=> {
+        FavorExamp.reset().get({id:deleteid}).destroy().then((data)=> {
           this.examples = _.without(this.examples,tmp);
           $('.deleteexample').modal('hide');
           Core.alert('success','删除成功');
@@ -77,6 +86,9 @@
     },
     mounted() {
       this.init();
+    },
+    created() {
+      model = this
     }
   }
 

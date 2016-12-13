@@ -15,22 +15,29 @@
           span.delete-icon(v-on:click="deleteGoods(item)")
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#trash")
+    <vue-pagination :flag="'goodsnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
   let tmp = '';//临时变量
+  let model;
   let favorArr = [];
   let Favorfur = AV.extend('user_preference');
   let Furniture = AV.extend('furnitures');
+  let FurSku = AV.extend('furniture_sku');
   import CancelconfirmVue from '../common/cancelconfirm.vue';
+  import Pagination from '../common/pagination.vue'
   export default {
     components: { 
       'vue-cancelconfirm': CancelconfirmVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 20,
+        totalcount: 0,
         deleteinfo:{
           tips:'确定取消该收藏商品吗？',
           flags:'deletegoods',
@@ -41,19 +48,36 @@
     },
     methods:{
       init: function() {
-        Favorfur.where({type:'fur',action:'favor'}).keys('id,point').all((data)=> {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Favorfur.reset().where(['type in ?',['fur','sku']]).where({action:'favor'}).keys('id,point,type').limit(model.pagesize).skip(skip).all((data)=> {
           favorArr = data.items;
-          let ids = data.items.map((item)=> {
-            return item.point;
+          model.totalcount = data.count;
+          let furids = [];
+          let skuids = [];
+          favorArr.forEach((item)=> {
+            if(item.type == 'fur') {
+              furids.push(item.point);
+            } else {
+              skuids.push(item.point);
+            }
           })
-          Furniture.where(['id in ?', ids]).keys('id,fur_name,fur_image').all((msg)=> {
-            this.goods = msg.items;
-          })
+          Furniture.reset().where(['id in ?', furids]).keys('id,fur_name,fur_image').all((msg)=> {
+            msg.items.forEach((item)=> {
+              let subitem = _.extend(item,{favortype:'goods',favor_id:item.id})
+              this.goods.push(subitem);
+            })
+          });
+          FurSku.reset().where(['id in ?', skuids]).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((tmp)=> {
+            tmp.items.forEach((item)=> {
+              let sub = _.extend(item.fur_id_poi_furnitures,{favortype:'sku',favor_id:item.id})
+              this.goods.push(sub);
+            })
+          });
         })
       },
       deleteGoods: function(obj){
         tmp = obj;
-        this.deleteinfo.id = obj.id;
+        this.deleteinfo.id = obj.favor_id;
         $('.deletegoods').modal('show');
       },
       Delete: function(id) {
@@ -63,7 +87,7 @@
             deleteid = item.id;
           }
         })
-        Favorfur.get({id:deleteid}).destroy().then((data)=> {
+        Favorfur.reset().get({id:deleteid}).destroy().then((data)=> {
           this.goods = _.without(this.goods,tmp);
           $('.deletegoods').modal('hide');
           Core.alert('success','删除成功');
@@ -72,6 +96,9 @@
     },
     mounted() {
       this.init();
+    },
+    created() {
+      model = this
     }
   }
 

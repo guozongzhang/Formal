@@ -27,6 +27,8 @@
                 span.delete(v-on:click="deleteDesign(item)") 删除
                 //- span.copy 复制
 
+          <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+
       <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
       <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
 
@@ -34,7 +36,9 @@
 
 <script>
   let tmp = '';//临时变量
+  let model;
   let Designs = AV.extend('designs');
+  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
@@ -42,10 +46,13 @@
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-deleteconfirm': DeleteconfirmVue,
-      'vue-rename': RenameVue
+      'vue-rename': RenameVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 20,
+        totalcount: 0,
         settings:{
           type:'mydesign'
         },
@@ -67,7 +74,9 @@
     },
     methods:{
       init: function() {
-        Designs.keys('id,des_name,des_cut_url,update_time').all((data)=> {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Designs.reset().keys('id,des_name,des_cut_url,update_time').limit(model.pagesize).skip(skip).all((data)=> {
+          model.totalcount = data.count;
           this.designe.list = data.items;
         })
       },
@@ -109,6 +118,9 @@
     },
     mounted() {
       this.init();
+    },
+    created() {
+      model = this
     }
   }
 

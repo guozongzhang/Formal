@@ -25,6 +25,8 @@
                   p {{item.name}}
                   p {{item.create_time | localDate}}
 
+        <vue-pagination :flag="'renderimgnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+
       <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
       <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
       <vue-renderimgmodel :info="renderinfo"></vue-renderimgmodel>
@@ -33,7 +35,9 @@
 
 <script>
   let tmp = '';//临时变量
+  let model;
   let Render = AV.extend('render_tasks');
+  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
@@ -43,10 +47,13 @@
       'vue-leftmenue': LeftmenueVue,
       'vue-deleteconfirm': DeleteconfirmVue,
       'vue-rename': RenameVue,
-      'vue-renderimgmodel': RenderimgmodelVue
+      'vue-renderimgmodel': RenderimgmodelVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 20,
+        totalcount: 0,
         settings:{
           type:'myrenderimg'
         },
@@ -68,7 +75,9 @@
     },
     methods:{
       getRender: function() {
-        Render.where(['rd_status in ?', ["3","uploaded"]]).keys('id,rd_image,create_time,name').all((data)=> {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Render.reset().where(['rd_status in ?', ["3","uploaded"]]).keys('id,rd_image,create_time,name').limit(model.pagesize).skip(skip).all((data)=> {
+          model.totalcount = data.count;
           this.renders = data.items;
         })
       },
@@ -81,7 +90,7 @@
         let item = {
           id: id
         }
-        Render.get(item).destroy().then((data)=> {
+        Render.reset().get(item).destroy().then((data)=> {
           this.renders = _.without(this.renders,tmp);
           $('.deleterender').modal('hide');
           Core.alert('success','删除成功');
@@ -101,7 +110,7 @@
           id: tmp.id,
           name: name
         }
-        Render.get(item).update().then((data)=> {
+        Render.reset().get(item).update().then((data)=> {
           tmp.name = item.name
           $('.renamerender').modal('hide');
           Core.alert('success','修改成功');
@@ -113,6 +122,9 @@
     },
     mounted() {
       this.getRender();
+    },
+    created() {
+      model = this
     }
   }
 
