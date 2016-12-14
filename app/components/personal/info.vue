@@ -14,10 +14,10 @@
         div.input-box
           input.form-control(type="text" v-bind:value="userinfo.name" v-model="userinfo.name")
 
-      div.line-box.input-warp.clear
-        label.title 邮箱：
-        div.input-box
-          input.form-control(type="text" v-bind:value="userinfo.email")
+      //- div.line-box.input-warp.clear
+      //-   label.title 邮箱：
+      //-   div.input-box
+      //-     input.form-control(type="text" v-bind:value="userinfo.email")
 
       div.line-box.input-warp.clear
         label.title 性别：
