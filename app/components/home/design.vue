@@ -227,7 +227,7 @@
               margin: pxTorem(20) 0 pxTorem(10) pxTorem(30);
             }
             p{
-              width: pxTorem(220);
+              width: pxTorem(200);
               margin: 0 auto;
               padding: 0;
               overflow: hidden;

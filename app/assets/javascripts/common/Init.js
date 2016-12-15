@@ -26,10 +26,11 @@ function getLoginState(){
       };
       resolve()
     },()=> {
-      if (SITE.router.controller != 'login') {
+      if (SITE.router.controller === 'login') {
         window.location.href = "/login/index"  
       }else{
-        resolve()
+        Cookies.set('dpjia', '', { domain: SITE.domain});
+        resolve();
       }                                         
     })
   })
