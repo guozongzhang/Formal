@@ -5,6 +5,7 @@ module.exports = {
     'vue',
     'underscore-min',
     'js.cookie',
+    'tether.min',
     'bootstrap.min',
     'jquery.form',
     'moment.min'
