@@ -1,4 +1,6 @@
 let model;
+
+import 'babel-polyfill'
 import vuefooter from '../../../components/footer/footer.vue';
 import vuetoplab from '../../../components/home/toplab.vue';
 import vueheader from '../../../components/home/header.vue';
