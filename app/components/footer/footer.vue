@@ -17,9 +17,9 @@
           | 友情链接：
           a(:href="link.url" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
       div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
-      | Copyright©2014-2016 
-      a(href="http://www.dpjia.com" target="_blank" style="color:#fff") 搭配家（dpjia.com） 
-      | 版权所有
+      | 搭配家 版权所有 2014-2016 
+      a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
+      | All right reserved 京ICP备15029423号
 
 </template>
 
