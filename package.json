@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js |  webpack --watch| browser-sync start -c ./config/bs-config.js",
     "migrate": "knex migrate:latest",
-    "build": "cnpm install && webpack",
+    "build": "cnpm install && webpack && node tool/build",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build && pm2 restart app.js",
     "push": "pbranch=`git branch | grep \\* | cut -c3-` && git branch -D develop && git fetch origin develop:develop && git merge develop && git checkout develop && git merge $pbranch && git push origin develop && git checkout $pbranch"
   },
@@ -54,9 +54,11 @@
   },
   "devDependencies": {
     "chokidar": "^1.5.2",
+    "colors": "^1.1.2",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "uglifyjs": "^2.4.10"
   }
 }
