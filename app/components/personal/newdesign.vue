@@ -68,7 +68,7 @@
         }
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
-          model.totalcount = 20;
+          model.totalcount = data.count;
           model.houses = data.items;
         })
       }
