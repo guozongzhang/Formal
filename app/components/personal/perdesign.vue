@@ -6,9 +6,9 @@
       div.right
         div.label-title
           label 我的设计
-          a(:href="designe.go_new")
-            span +
-            | 我的设计
+          a.search-house(:href="designe.go_new") 搜索户型搭
+          a.zore-draw(href="javascript:;") 从零开始搭
+          
         div.design-list
           div(v-show="designe.list.length == 0")
             p.empty
@@ -158,21 +158,26 @@
       }
       a{
         position: absolute;
-        right: pxTorem(10);
         top: pxTorem(12.5);
         text-decoration: none;
         display: inline-block;
-        width: pxTorem(120);
+        width: pxTorem(100);
         height: pxTorem(35);
         line-height: pxTorem(35);
         text-align: center;
         border: 1px solid #f14f4f;
         color: #f14f4f;
         border-radius: pxTorem(2);
-        span{
-          display: inline-block;
-          margin-right: pxTorem(5);
-        }
+      }
+      a:hover{
+        background-color: #f14f4f;
+        color: #fff;
+      }
+      .zore-draw{
+        right: pxTorem(130);
+      }
+      .search-house{
+        right: pxTorem(10);
       }
     }
     .design-list{
