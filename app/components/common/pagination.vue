@@ -60,8 +60,16 @@
 
 </script>
 <style lang="sass">
-.page-item a{
-  text-decoration: none
-}
-</style>
+  .page-item a{
+    text-decoration: none
+  }
+  
+  .page-link {
+    color: #a0a0a0
+  }
 
+  .page-item.active .page-link, .page-item.active .page-link:focus, .page-item.active .page-link:hover {
+    background-color: #F34C4A;
+    border-color: #F34C4A;
+  }
+</style>
