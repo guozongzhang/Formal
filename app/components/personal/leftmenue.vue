@@ -1,11 +1,49 @@
 <template lang="jade">
   div.leftmenue-vue.vue-component
     ul.list-style
-      li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
-        span.triangle
-        a(:href="item.link_url")
-          span.icon
+      //- li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
+      //-   span.triangle
+      //-   a(:href="item.link_url")
+      //-     span.icon
+      //-       svg.svg-style
+      //-         use(xlink:href="/assets/svg/icon.svg#heart")
           span {{item.text}}
+      li.list-style(v-bind:class="type == 'collection' ? 'active' : ''")
+        span.triangle
+        a(href="/personal/index")
+          span.icon
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#heart")
+          span 我的收藏
+      li.list-style(v-bind:class="type == 'mydesign' ? 'active' : ''")
+        span.triangle
+        a(href="/personal/mydesign")
+          span.icon
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#design")
+          span 我的设计
+      li.list-style(v-bind:class="type == 'myrenderimg' ? 'active' : ''")
+        span.triangle
+        a(href="/personal/myrenderimg")
+          span.icon
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#picture")
+          span 我的效果图
+      li.list-style(v-bind:class="type == 'mymessages' ? 'active' : ''")
+        span.triangle
+        a(href="/personal/mymessages")
+          span.icon
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#message")
+          span 我的消息
+      li.list-style(v-bind:class="type == 'settings' ? 'active' : ''")
+        span.triangle
+        a(href="/personal/settings")
+          span.icon
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#settings")
+          span 账号设置
+
 </template>
 
 <script>
@@ -17,27 +55,32 @@
           {
             link_url:'/personal/index',
             text:'我的收藏',
-            type:'collection'
+            type:'collection',
+            svg:'heart'
           },
           {
             link_url:'/personal/mydesign',
             text:'我的设计',
-            type:'mydesign'
+            type:'mydesign',
+            svg:'heart'
           },
           {
             link_url:'/personal/myrenderimg',
             text:'我的效果图',
-            type:'myrenderimg'
+            type:'myrenderimg',
+            svg:'heart'
           },
           {
             link_url:'/personal/mymessages',
             text:'我的消息',
-            type:'mymessages'
+            type:'mymessages',
+            svg:'heart'
           },
           {
             link_url:'/personal/settings',
             text:'账号设置',
-            type:'settings'
+            type:'settings',
+            svg:'heart'
           }
         ]
       }
@@ -81,11 +124,14 @@
           position: relative;
           top: pxTorem(4);
           display: inline-block;
-          width: pxTorem(16);
-          height: pxTorem(16);
+          width: pxTorem(18);
+          height: pxTorem(18);
           margin-right: pxTorem(10);
-          border-radius: 100%;
-          background-color: #000;
+          .svg-style{
+            width: pxTorem(18);
+            height: pxTorem(18);
+            fill: #bbb;
+          }
         }
       }
     }
@@ -98,7 +144,9 @@
       a{
         color: #f14f4f;
         .icon{
-          background-color: #f14f4f;
+          .svg-style{
+            fill: #f14f4f;
+          }
         }
       }
     }
