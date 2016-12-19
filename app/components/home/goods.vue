@@ -183,16 +183,26 @@
               height: pxTorem(280);
               background-color: #f1f1f1;
               a{
+                display: inline-block;
+                width: pxTorem(220);
+                height: pxTorem(280);
                 text-decoration: none;
                 img{
                   width: pxTorem(220);
                   height: pxTorem(220);
                 }
                 p{
-                  margin: 0;
-                  padding: pxTorem(10);
+                  width: pxTorem(220);
+                  height: pxTorem(60);
                   line-height: pxTorem(22);
+                  margin: 0;
+                  padding: pxTorem(12);
                   color: #333;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
                 }
               }
             }
@@ -218,10 +228,17 @@
                   height: pxTorem(220);
                 }
                 p{
-                  margin: 0;
-                  padding: pxTorem(10);
+                  width: pxTorem(220);
+                  height: pxTorem(60);
                   line-height: pxTorem(22);
+                  margin: 0;
+                  padding: pxTorem(12);
                   color: #333;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
                 }
               }
             }
@@ -254,10 +271,17 @@
                 height: pxTorem(220);
               }
               p{
-                margin: 0;
-                padding: pxTorem(10);
+                width: pxTorem(220);
+                height: pxTorem(60);
                 line-height: pxTorem(22);
+                margin: 0;
+                padding: pxTorem(12);
                 color: #333;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
               }
             }
           }
@@ -282,7 +306,7 @@
     /*品牌精选*/
     .brand-box{
       height: pxTorem(570);
-      border-top: 1px solid #ccc;
+      border-top: 1px solid #fff;
       margin-bottom: pxTorem(30);
       margin-top: pxTorem(10);
       .brand-list{
@@ -292,8 +316,9 @@
             float:left;
             width: pxTorem(240);
             height: pxTorem(190);
-            border-right: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
+            border: 1px solid #fff;
+            // border-right: 1px solid #fff;
+            // border-bottom: 1px solid #fff;
             a{
               text-decoration:none;
               img{
@@ -315,11 +340,14 @@
               }
             }
           }
-          li:nth-child(1),
-          li:nth-child(6),
-          li:nth-child(11){
-            border-left: 1px solid #ccc;
+          li:hover{
+            border: 1px solid #f14f4f;
           }
+          // li:nth-child(1),
+          // li:nth-child(6),
+          // li:nth-child(11){
+          //   border-left: 1px solid #fff;
+          // }
         }
       }
     }
@@ -352,7 +380,7 @@
                 margin: pxTorem(15) auto;
                 font-size: pxTorem(14);
                 padding:0;
-                color: #666;
+                color: #333;
               }
             }
           }

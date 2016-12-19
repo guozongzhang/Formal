@@ -1,0 +1,12 @@
+@import "../function.scss";
+
+.body-box{
+  background-color: #f4f4f4;
+  .header-vue{
+    background-color: #fff;
+  }
+  .wrap-box{
+    width: pxTorem(1000);
+    margin: 0 auto;
+  }
+}

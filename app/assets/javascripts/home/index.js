@@ -34,7 +34,6 @@ class Index extends Basic {
 
   //初始数据
   init () {
-     //["topmenu","firstfloor","secondfloor","thirdfloor","footer","logo","mainmenu","link","hotlable"]
     model.getConfig()
   }
 

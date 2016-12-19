@@ -69,8 +69,7 @@
 
 <script>
   import AreaVue from '../common/area.vue';
-  var ip_host = 'http://192.168.1.120/openapi'
-  // var ip_host =' http://123.57.217.65:3010';
+  var ip_host = SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/';
   //验证码60秒倒计时
   var start_time = 60;//开始时间
   export default {
@@ -113,28 +112,16 @@
           if($('#user_phone').hasClass('error')) {
             alert('手机号已被注册');
           } else {
-            $.ajax({
-              type:'get',
-              url: ip_host + '/api/1.0/requestSmsCode/sms',
-              data:{
-                type:'web',
+            API.get('requestSmsCode/sms',{
+                type:'admin',
                 mobile:phone,
-              },
-              crossDomain: true,
-              headers:{
-                "X-DP-Key":  "222",
-                "X-DP-ID": "111"
-              },
-              success:function(msg) {
-                alert('验证码已发送，请及时查收');
-                model.countdowntime();
-              },
-              error:function(msg) {
-                alert(msg.responseJSON.message);
-                $('#get_verify').removeAttr('disabled');
-              }
+              }, (data)=> {
+              alert('验证码已发送，请及时查收');
+              model.countdowntime();
+            },(msg)=> {
+              Core.alert('danger', msg.responseJSON.message);
+              $('#get_verify').removeAttr('disabled');
             })
-            
           }
         } else {
           alert('请正确填写手机号码');
@@ -156,7 +143,7 @@
       },
       upload_com:function() {
         var model = this;
-        var url = 'http://test_open.dpjia.com/api/1.0/upload';
+        var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
         var $input = $('#upload_com').find('input');
 
         $input.unbind().click();
@@ -174,8 +161,9 @@
             },
             crossDomain: true,
             headers: {
-              "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-              "X-DP-ID": "cfdab86f2c2ea593"
+              "X-DP-Key": SITE.app_key || '',
+              "X-DP-ID": SITE.app_id || '',
+              "X-DP-Token": Cookies.get('dpjia') || ''
             },
             success: function(data){
               $input.unwrap();
@@ -230,21 +218,15 @@
             user_type:'company_admin',
           }
         }
-        $.ajax({
-          type:'post',
-          url: ip_host + '/api/1.0/users/signUpBySmsCode',
-          data:comdata,
-          crossDomain: true,
-          headers: {
-            "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-            "X-DP-ID": "cfdab86f2c2ea593"
-          },
-          success: function(msg) {
-            $('.success-bg').removeClass('hidden');
-          },
-          error: function(msg) {
-            alert(msg.responseJSON.message);
-          }
+        if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+          Core.alert('danger','公司地址不能为空');
+          return ;
+        }
+
+        API.get('admin/signUpBySmsCode',comdata, (data)=> {
+          $('.success-bg').removeClass('hidden');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message);
         })
       },
       syncData: function(key, val) {

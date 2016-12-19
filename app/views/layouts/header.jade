@@ -6,8 +6,6 @@ each item in development.assets.vendor.stylesheets
   link(href="/assets/stylesheets/#{item}.css" rel="stylesheet")
 
 
-
-
 //- 存入后端的某些公共变量供JS使用  全局配置
 script.
   window.SITE = {
@@ -15,13 +13,35 @@ script.
       controller: '#{route.controller}',
       action: '#{route.action}'
     },
-    app_key: 'hahha',
-    app_id: '222',
-    API: {
-      url: 'http://192.168.1.120/openapi/api/1.0/'
+    session: {
+      login: false,
+      mem: {
+        info_poi_user_info:{
+          ui_head:'',
+          ui_name:''
+        }
+      }
     },
-
+    query: JSON.parse(escape2Html('#{JSON.stringify(query)}')),
+    Ips:{
+      home: "#{(localEnv.Ips || {}).home || 'http://192.168.1.120:5000'}",
+      mall: "#{(localEnv.Ips || {}).mall || 'http://192.168.1.120:5001'}",
+      design: "#{(localEnv.Ips || {}).design || 'http://192.168.1.120:5002'}",
+      tools: "#{(localEnv.Ips || {}).tools || 'http://192.168.1.120:5004'}",
+      services: "#{(localEnv.Ips || {}).services || 'http://192.168.1.120:5006'}",
+      b_admin: "#{(localEnv.Ips || {}).b_admin || 'http://192.168.1.120:3000'}"
+    },
+    domain: window.location.hostname.indexOf('dpjia.com') < 0 ? window.location.hostname : '.dpjia.com',
+    app_key: '0c31e550cfdab86f2c2ea59327907798',
+    app_id: 'cfdab86f2c2ea593',
+    API: {
+      url: "#{localEnv.url || 'http://192.168.1.120/openapi/api/1.0/'}"
+    }
   }
 
-
-
+  function escape2Html (str) {
+    var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' } 
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+      return arrEntities[t]
+    })
+  }

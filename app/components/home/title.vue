@@ -10,13 +10,13 @@
       span.subtitle {{title.txt.desc}}
       ul.list-style.clear
         li.list-text.list-style(v-for="item in title.pics") 
-          img.goods-icon(:src="item.img")
+          img.goods-icon(:src="item[img_key || 'img']")
           span.tab-text {{item.text}}
 </template>
 
 <script>
   export default {
-    props:['title'],
+    props:['title', 'img_key'],
     data() {
       return {
       }
@@ -42,7 +42,6 @@
       display: inline-block;
       width: pxTorem(20);
       height: pxTorem(20);
-      border-radius: 50%;
     }
     label {
       position: absolute;
@@ -83,7 +82,6 @@
           display: inline-block;
           width: pxTorem(16);
           height: pxTorem(16);
-          border-radius: 50%;
         }
         .tab-text{
           font-size: pxTorem(12);

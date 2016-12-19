@@ -6,28 +6,39 @@
       div.right
         div.label-title
           label 我的设计
-          a(:href="designe.go_new")
-            span +
-            | 我的设计
+          a.search-house(:href="designe.go_new") 搜索户型搭
+          a.zore-draw(:href="siteUrl('design', '/example/new')") 从零开始搭
+          
         div.design-list
-          ul.list-style
+          div(v-show="designe.list.length == 0")
+            p.empty
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#empty")
+            p.empty 还没有工程呢~
+          ul.list-style(v-show="designe.list.length != 0")
             li.list-style.clear(v-for="item in designe.list")
               div.left
-                img(:src="item.img_url")
+                img(:src="item.des_cut_url")
               div.subright
-                label {{item.name}}
-                p.update-time 最后修改时间：{{item.update_time}}
-                a.go-draw(:href="item.go_draw") 进入设计
+                label {{item.des_name}}
+                p.update-time 最后修改时间：{{item.update_time | localDate}}
+                a.go-draw(:href="design_url + item.id") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
-                span.delete(v-on:click="deleteDesign(item.id)") 删除
-                span.copy 复制
+                span.delete(v-on:click="deleteDesign(item)") 删除
+                //- span.copy 复制
 
-      <vue-deleteconfirm :info='deleteinfo'></vue-deleteconfirm>
-      <vue-rename :info="renameinfo"></vue-rename>
+          <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+
+      <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
+      <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
 
 </template>
 
 <script>
+  let tmp = '';//临时变量
+  let model;
+  let Designs = AV.extend('designs');
+  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteconfirmVue from '../common/deleteconfirm.vue';
   import RenameVue from './rename.vue';
@@ -35,16 +46,21 @@
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-deleteconfirm': DeleteconfirmVue,
-      'vue-rename': RenameVue
+      'vue-rename': RenameVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        design_url: SITE.Ips.design + '/example/design?id=',
+        pagesize: 4,
+        totalcount: 0,
         settings:{
           type:'mydesign'
         },
         deleteinfo:{
           tips:'您确定要删除吗？',
-          flags:'deletedesign'
+          flags:'deletedesign',
+          id:'',
         },
         renameinfo:{
           title:'修改工程名称',
@@ -53,62 +69,59 @@
         },
         designe:{
           go_new:'/personal/newdesign',
-          list:[
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'2016-10-10 10:10:10',
-              go_draw:''
-            },
-            {
-              id:'1',
-              img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-              name:'我的样板间名称',
-              update_time:'1分钟前',
-              go_draw:''
-            }
-          ]
+          list:[]
         }
       }
     },
     methods:{
-      deleteDesign:function(id){
-        $('.deletedesign').modal('show');
-        console.log(id)
+      init: function() {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Designs.reset().keys('id,des_name,des_cut_url,update_time').limit(model.pagesize).skip(skip).all((data)=> {
+          model.totalcount = data.count;
+          this.designe.list = data.items;
+        })
       },
-      renameDesign: function(item) {
-        this.renameinfo.name = item.name
+      deleteDesign:function(obj){
+        tmp = obj;
+        this.deleteinfo.id = obj.id;
+        $('.deletedesign').modal('show');
+      },
+      Delete: function(id) {
+        let item = {
+          id: id
+        }
+        Designs.get(item).destroy().then((data)=> {
+          this.designe.list = _.without(this.designe.list,tmp);
+          $('.deletedesign').modal('hide');
+          Core.alert('success','删除成功');
+        })
+      },
+      renameDesign: function(obj) {
+        tmp = obj;
+        this.renameinfo.name = obj.des_name
         $('.renamedesign').modal('show');
-      } 
+      },
+      Rename: function(name) {
+        if(_.isEmpty($.trim(name))) {
+          Core.alert('danger','工程名称不能为空');
+          return;
+        }
+        let item = {
+          id: tmp.id,
+          des_name: name
+        }
+        Designs.get(item).update().then((data)=> {
+          tmp.des_name = item.des_name
+          $('.renamedesign').modal('hide');
+          Core.alert('success','修改成功');
+        })
+      }
+    },
+    mounted() {
+      this.init();
+    },
+    created() {
+      model = this
     }
   }
 
@@ -145,24 +158,38 @@
       }
       a{
         position: absolute;
-        right: pxTorem(10);
         top: pxTorem(12.5);
         text-decoration: none;
         display: inline-block;
-        width: pxTorem(120);
+        width: pxTorem(100);
         height: pxTorem(35);
         line-height: pxTorem(35);
         text-align: center;
         border: 1px solid #f14f4f;
         color: #f14f4f;
         border-radius: pxTorem(2);
-        span{
-          display: inline-block;
-          margin-right: pxTorem(5);
-        }
+      }
+      a:hover{
+        background-color: #f14f4f;
+        color: #fff;
+      }
+      .zore-draw{
+        right: pxTorem(130);
+      }
+      .search-house{
+        right: pxTorem(10);
       }
     }
     .design-list{
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         li{
           width: pxTorem(800);

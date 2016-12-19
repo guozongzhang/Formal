@@ -1,6 +1,6 @@
 <template lang="jade">
   div.service-vue.vue-component
-    <vue-title :title='items'></vue-title>
+    <vue-title :title='items' :img_key="'bigimg'"></vue-title>
     div.service-box.clear
       div.left-box
         <vue-swiper :img_key='"bigimg"'  :flag='"homeService"' :swiperdata='items.lanmus[0].pics' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
@@ -187,6 +187,7 @@
           border-radius: 0;
           opacity: 1;
           background-color: #f1f1f1;
+          overflow: hidden;
         }
         li.swiper-pagination-bullet-active{
           span {

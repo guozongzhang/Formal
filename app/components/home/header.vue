@@ -5,8 +5,8 @@
         a.home-logo(href="/") 
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
-          li(v-for="item in menus")
-            a(:href="item.url") {{item.name}}
+          li(v-for="item in menus" v-bind:class="item.action == controller ? 'active' : ''")
+            a.title(:href="item.url") {{item.name}}
             div.sub-menu
               a(:href="sub.url" v-for="sub in item.subs" ) {{sub.name}}
     
@@ -17,6 +17,7 @@
   export default {
     data() {
       return {
+        controller: SITE.router.controller,
         logo: '',
         menus: []
       }
@@ -72,12 +73,22 @@
         border-right: pxTorem(1) solid #ccc;
         &:hover {
           .sub-menu {
-            display: block
+            background-color: #fff;
+            display: block;
+            & > a{
+              font-size: pxTorem(14);
+            }
           }
         }
         a{
           color: #333;
-          text-decoration: none
+          text-decoration: none;
+        }
+      }
+      li.active,
+      li:hover{
+        .title{
+          color: #f14f4f;
         }
       }
       li:nth-last-child(1) {
@@ -91,8 +102,6 @@
         z-index: 100;
         padding-top: pxTorem(10);
         display: none;
-
-
         a {
           display: block;
           border-bottom: #DDD 1px solid;

@@ -3,78 +3,78 @@
     div.new-box
       div.tab-list
         a(href="javascript:;" v-on:click="switchBtn('search')" v-bind:class="subtype == 'search' ? 'active' : ''") 搜索户型
-        a(href="javascript:;" v-on:click="switchBtn('draw')" v-bind:class="subtype == 'draw' ? 'active' : ''") 自己画
+        //- a(href="javascript:;" v-on:click="switchBtn('draw')" v-bind:class="subtype == 'draw' ? 'active' : ''") 自己画
       div.search-box
         div.search-input
           div.area
-            <vue-area :province.sync='info.province_poi_province' :city.sync='info.city_poi_city' :district.sync='info.district_poi_district' :showDistrict="false" :showCity="false"></vue-area>
-          input(type="text")
-          span.search-btn 
+            <vue-area :province='info.province_poi_province' :city='info.city_poi_city' :district='info.district_poi_district' :showDistrict="false" :showCity="false" v-on:syncData="getarea"></vue-area>
+          input(type="text" v-model="searchKey")
+          span.search-btn(v-on:click="SearchHouse()") 
             span.text 搜索
             span.icon
+              svg.svg-style
+                use(xlink:href="/assets/svg/icon.svg#search")
       div.house-list
+        div(v-show="houses.length == 0")
+          p.empty
+            svg.svg-style
+              use(xlink:href="/assets/svg/icon.svg#empty")
+          p.empty 还没有户型呢~
         ul.list-style.clear
           li.list-style(v-for="item in houses")
-            img(:src="item.img_url")
-            a.go-draw(:href="item.go_draw") 去搭配
+            img(:src="item.apt_image")
+            a.go-draw(:href="Design_url+ item.id") 去搭配
             div.info-box
-              p.name {{item.name}}
-              p.address {{item.address}}
+              p.name {{item.apt_name}}
+              p.address {{item.province_poi_province.ProvinceName}}{{item.city_poi_city.CityName}}{{item.district_poi_district.DistrictName}}
+
+      <vue-pagination :flag="'housenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 </template>
 
 <script>
-import AreaVue from '../common/area.vue';
+  let model;
+  let Apartment = AV.extend('apartment');
+  import AreaVue from '../common/area.vue';
+  import Pagination from '../common/pagination.vue'
   export default {
     components: { 
-      'vue-area': AreaVue
+      'vue-area': AreaVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
+        pagesize: 6,
+        totalcount: 0,
+        Design_url: SITE.Ips.design + '/example/new?id=',
         subtype: 'search',
+        search_pro: '',
+        searchKey:'',
         info:{
           province_poi_province:-1,
           city_poi_city:-1,
           district_poi_district:-1
         },
-        houses:[
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            go_draw:'',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            go_draw:'',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            go_draw:'',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            go_draw:'',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            go_draw:'',
-            name:'哪里家具  米兰系列',
-            address:'北京市海淀区'
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg?x-oss-process=image/resize,m_fill,h_280,w_280',
-            name:'哪里家具  米兰系列',
-            go_draw:'',
-            address:'北京市海淀区'
-          }
-        ]
+        houses:[]
       }
+    },
+    methods: {
+      getarea: function(key, val) {
+        this.search_pro = val;
+      },
+      SearchHouse: function() {
+        if(_.isEmpty($.trim(this.searchKey))) {
+          Core.alert('danger','搜索关键字不能为空');
+          return;
+        }
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
+          model.totalcount = data.count;
+          model.houses = data.items;
+        })
+      }
+    },
+    created() {
+      model = this
     }
   }
 
@@ -121,7 +121,7 @@ import AreaVue from '../common/area.vue';
         width: pxTorem(440);
         height: pxTorem(38);
         margin: 0 auto;
-        border: 2px solid #ffae00;
+        border: pxTorem(2) solid #ffae00;
         border-radius: pxTorem(2);
         .area{
           display: inline-block;
@@ -142,7 +142,7 @@ import AreaVue from '../common/area.vue';
                 background-color: #f4f4f4;
                 padding: pxTorem(3) pxTorem(5);
                 border: 0;
-                font-size: pxTorem(12);
+                font-size: pxTorem(14);
               }
             }
           }
@@ -177,13 +177,26 @@ import AreaVue from '../common/area.vue';
             display: inline-block;
             width: pxTorem(20);
             height: pxTorem(20);
-            background-color: #ccc;
+            .svg-style{
+              width: pxTorem(20);
+              height: pxTorem(20);
+              fill: #fff;
+            }
           }
         }
       }
     }
     .house-list{
       padding: 0 pxTorem(25);
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
+      }
       ul{
         li{
           position: relative;

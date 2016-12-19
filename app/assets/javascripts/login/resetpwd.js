@@ -1,6 +1,5 @@
 let model
-var ip_host = 'http://192.168.1.120/openapi'
-// let ip_host =' http://123.57.217.65:3010';
+var ip_host = SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/'
 //验证码60秒倒计时
 let start_time = 60;//开始时间
 class Resetpwd extends Basic {
@@ -34,25 +33,14 @@ class Resetpwd extends Basic {
 
   // 请求验证码
   getImgCode() {
-    $.ajax({
-      type:'get',
-      url: ip_host + '/api/1.0/functions/captcha/captcha',
-      data:{
+    API.get('functions/captcha/captcha',{
         width: 105,
         height:40,
         font_size: 18
-      },
-      crossDomain: true,
-      headers:{
-        "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-        "X-DP-ID": "cfdab86f2c2ea593"
-      },
-      success:function(msg) {
-        model.mvvm.info.img_code = msg.image;
-      },
-      error:function(msg) {
-        alert(msg.responseJSON.message);
-      }
+      }, (data)=> {
+      model.mvvm.info.img_code = data.image;
+    },(msg)=> {
+      Core.alert('danger', msg.responseJSON.message)
     })
   }
 
@@ -72,31 +60,19 @@ class Resetpwd extends Basic {
       alert("验证码不能为空");  
       return false; 
     } 
-    $.ajax({
-      type:'post',
-      url: ip_host + '/api/1.0/functions/captcha/captcha',
-      data:{
+    API.post('functions/captcha/captcha',{
         mobile: model.mvvm.info.number,
-        code: model.mvvm.info.picverify,
-      },
-      crossDomain: true,
-      headers:{
-        "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-        "X-DP-ID": "cfdab86f2c2ea593"
-      },
-      success:function(msg) {
-        if(msg.status == 1) {
-          alert('该手机号还没有注册过，请输入正确的账号');
-          return ;
-        }
-        if(msg.status == 2) {
-          model.mvvm.step = 'second';
-        }
-        
-      },
-      error:function(msg) {
-        alert(msg.responseJSON.message);
+        code: model.mvvm.info.picverify
+      }, (data)=> {
+      if(data.status == 1) {
+        alert('该手机号还没有注册过，请输入正确的账号');
+        return ;
       }
+      if(data.status == 2) {
+        model.mvvm.step = 'second';
+      }
+    },(msg)=> {
+      Core.alert('danger', msg.responseJSON.message)
     })
   }
 
@@ -124,26 +100,16 @@ class Resetpwd extends Basic {
         type: 'reg',
       };
       $('#get_verify').attr('disabled','true');
-      $.ajax({
-        type:'get',
-        url: ip_host + '/api/1.0/requestSmsCode/sms',
-        data:{
+
+      API.get('requestSmsCode/sms',{
           type:'reset',
           mobile:phone,
-        },
-        crossDomain: true,
-        headers:{
-          "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-          "X-DP-ID": "cfdab86f2c2ea593"
-        },
-        success:function(msg) {
-          alert('验证码已发送，请及时查收');
-          model.countdowntime();
-        },
-        error:function(msg) {
-          alert(msg.responseJSON.message);
-          $('#get_verify').removeAttr('disabled');
-        }
+        }, (data)=> {
+        alert('验证码已发送，请及时查收');
+        model.countdowntime();
+      },(msg)=> {
+        Core.alert('danger', msg.responseJSON.message)
+        $('#get_verify').removeAttr('disabled');
       })
     } else {
       alert('请正确填写手机号码');
@@ -172,21 +138,11 @@ class Resetpwd extends Basic {
       code: model.mvvm.info.verify,
       password: model.mvvm.info.newpwd
     }
-    $.ajax({
-      type:'put',
-      url: ip_host + '/api/1.0/users/reset_pasd',
-      data:setpwd,
-      crossDomain: true,
-      headers:{
-        "X-DP-Key": "0c31e550cfdab86f2c2ea59327907798",
-        "X-DP-ID": "cfdab86f2c2ea593"
-      },
-      success:function(msg) {
-        window.location.href = '/login/index'
-      },
-      error:function(msg) {
-        alert(msg.responseJSON.message);
-      }
+
+    API.put('users/reset_pasd',setpwd, (data)=> {
+      window.location.href = '/login/index'
+    },(msg)=> {
+      Core.alert('danger', msg.responseJSON.message);
     })
   }
 }

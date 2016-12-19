@@ -1,8 +1,8 @@
 <template lang="jade">
-  div.slick-vue.vue-component
-    section.center.slider
-      div(v-for="item in imgs")
-        img(:src="item.img_url")
+  div.slick-vue.vue-component(:class="mode || 'horizontal'")
+    section.slider(:id="'slick-' + flag")
+      div(v-for="item in imgs" v-bind:data-active="item == checkeditem")
+        img(:src="item[img_key || 'img']" @click="clickimg(item)")
 </template>
 
 <script>
@@ -10,43 +10,45 @@
   require('slick-carousel');
   require("slick-carousel/slick/slick.css");
   require("slick-carousel/slick/slick-theme.css");
+
+  let default_config = {
+    dots: false,
+    infinite: false,
+    accessibility:false,
+    variableWidth: true,
+    prevArrow: '<div class="slick-to-prev"><svg class="nav-icon prev"><use xlink:href="/assets/svg/icon.svg#arrow-down" ></use></svg></div>',
+    nextArrow: '<div class="slick-to-next"><svg class="nav-icon next"><use xlink:href="/assets/svg/icon.svg#arrow-down" ></use></svg></div>'
+    // arrows: false
+  }
+
   export default {
+    props: ['mode', 'config', 'flag', 'imgs', 'img_key', 'checkeditem'],
     data() {
       return {
-        imgs:[
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg',
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg',
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg',
-          },
-          {
-            img_url:'http://dpjia.com/images/new_index/679.jpg',
-          }
-        ]
       }
     },
     methods:{
       init: function() {
-        $(".center").slick({
-          dots: true,
-          infinite: true,
-          centerMode: true,
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          accessibility:false,
-          vertical: true,
-          verticalSwiping: true,
-          dots:false,
-          // arrows: false
-        });
+        default_config = _.extend(this.config || {}, default_config);
+        let model = this
+        setTimeout(function () {
+          $(`#slick-${model.flag}`).slick(default_config)
+        }, 500)
+      },
+
+      // 点击单个图片触发的事件
+      clickimg: function (item) {
+        //this.checkedid = item.id
+        this.$emit('clickimg', item)
+      }
+    },
+    watch: {
+      imgs: function (val) {
+        this.init()
       }
     },
     mounted() {
-      this.init();
+      this.init()
     }
   }
 
@@ -56,14 +58,33 @@
 
 .slick-vue{
   .slider {
-    width: 50%;
+    width: 100%;
     margin: 10px auto;
+    padding: 0 60px;
     .slick-slide{
-      img{
-        width: pxTorem(100);
-        height: pxTorem(100);
-      }
     }
+  }
+  .slick-to-prev, .slick-to-next {
+    background: #e4e4e4;
+    position: absolute;
+    z-index: 1000;
+    cursor: pointer
+  }
+
+  .nav-icon {
+    width: 30px;
+    height: 30px;
+    fill: #cac3c3;
+    margin-top: 30px;
+    margin-left: 10px;
+
+    &.prev {
+      transform: rotate(90deg);
+    } 
+
+    &.next {
+      transform: rotate(-90deg);
+    } 
   }
 
   .slick-slide {
@@ -77,6 +98,43 @@
   .slick-prev:before,
   .slick-next:before {
     color: black;
+  }
+
+  &.horizontal{
+    .slick-to-prev {
+      width: 50px;
+      height: 100px;
+      left: 0;
+      top: 0
+    }
+
+    .slick-to-next {
+      width: 50px;
+      height: 100px;
+      right: 0;
+      top: 0
+    }
+  }
+
+  &.vertical {
+    .slick-to-prev {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 50px;
+    }
+
+    .slider {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .slick-to-next {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+    }
   }
 }
 </style>

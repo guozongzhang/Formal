@@ -5,8 +5,10 @@ module.exports = {
     'vue',
     'underscore-min',
     'js.cookie',
+    'tether.min',
     'bootstrap.min',
-    'jquery.form'
+    'jquery.form',
+    'moment.min'
   ],
   stylesheets: [
     'font-awesome.min',

@@ -8,9 +8,9 @@
         div.tab-list
           a(href="javascript:;" v-on:click="switchBtn('goods')" v-bind:class="settings.subtype == 'goods' ? 'active' : ''") 商品
           a(href="javascript:;" v-on:click="switchBtn('example')" v-bind:class="settings.subtype == 'example' ? 'active' : ''") 样板间
-        div.info-box(v-show="settings.subtype == 'goods'")
+        div(v-show="settings.subtype == 'goods'")
           <vue-collectgoods></vue-collectgoods>
-        div.pwd-box(v-show="settings.subtype == 'example'")
+        div(v-show="settings.subtype == 'example'")
           <vue-collectexample></vue-collectexample>
 </template>
 
@@ -60,7 +60,6 @@
     float: left;
     margin-left: pxTorem(20);
     background-color: #fff;
-    min-height: pxTorem(400);
     padding: pxTorem(20);
     .title{
       font-size: pxTorem(18);

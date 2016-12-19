@@ -11,7 +11,7 @@
             div.container-fluid
               div.info-box
                 p {{info.tips}}
-                a.config(href="javascript:;" data-dismiss="modal" aria-label="Close") 确定
+                a.config(href="javascript:;" v-on:click="DeleteInfo()") 确定
                 a.cancle(href="javascript:;" data-dismiss="modal" aria-label="Close") 取消
 
 </template>
@@ -21,6 +21,12 @@
     props:['info'],
     data() {
       return {
+        deleteid: this.info.id,
+      }
+    },
+    methods: {
+      DeleteInfo: function() {
+        this.$emit('sendId', this.info.id);
       }
     }
   }
