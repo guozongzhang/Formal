@@ -36,13 +36,13 @@
             link_more:'http://mp.weixin.qq.com/s/JtLWQ8WOQUBaVlMBlP9R9g',
             time:'11/28 2016'
           },
-          {
-            img_url:'../../assets/imgs/3.png',
-            title:'搭配家获创新工场合伙人天使投资',
-            content:'近日，全球软装资源整合者——COLLOCATION搭配家与创新工场合伙人签署投资协议，正式获取后者提供的天使投资。本次投资将被用于搭配家的品牌建设、品质提升、产品工艺升级、业务推广等各个领域',
-            link_more:'http://jiaju.sina.com.cn/news/20160829/6175943404397330738.shtml',
-            time:'08/29 2016'
-          },
+          // {
+          //   img_url:'../../assets/imgs/3.png',
+          //   title:'搭配家获创新工场合伙人天使投资',
+          //   content:'近日，全球软装资源整合者——COLLOCATION搭配家与创新工场合伙人签署投资协议，正式获取后者提供的天使投资。本次投资将被用于搭配家的品牌建设、品质提升、产品工艺升级、业务推广等各个领域',
+          //   link_more:'http://jiaju.sina.com.cn/news/20160829/6175943404397330738.shtml',
+          //   time:'08/29 2016'
+          // },
           {
             img_url:'../../assets/imgs/1.png',
             title:'黎明家具前总裁肖敏创立“搭配家”(图)',
