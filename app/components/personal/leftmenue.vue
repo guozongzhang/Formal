@@ -1,48 +1,13 @@
 <template lang="jade">
   div.leftmenue-vue.vue-component
     ul.list-style
-      //- li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
-      //-   span.triangle
-      //-   a(:href="item.link_url")
-      //-     span.icon
-      //-       svg.svg-style
-      //-         use(xlink:href="/assets/svg/icon.svg#heart")
+      li.list-style(v-for="item in menues" v-bind:class="type == item.type ? 'active' : ''")
+        span.triangle
+        a(:href="item.link_url")
+          span.icon
+            svg.svg-style
+              use(:xlink:href="'/assets/svg/icon.svg#' + item.svg ")
           span {{item.text}}
-      li.list-style(v-bind:class="type == 'collection' ? 'active' : ''")
-        span.triangle
-        a(href="/personal/index")
-          span.icon
-            svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#heart")
-          span 我的收藏
-      li.list-style(v-bind:class="type == 'mydesign' ? 'active' : ''")
-        span.triangle
-        a(href="/personal/mydesign")
-          span.icon
-            svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#design")
-          span 我的设计
-      li.list-style(v-bind:class="type == 'myrenderimg' ? 'active' : ''")
-        span.triangle
-        a(href="/personal/myrenderimg")
-          span.icon
-            svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#picture")
-          span 我的效果图
-      li.list-style(v-bind:class="type == 'mymessages' ? 'active' : ''")
-        span.triangle
-        a(href="/personal/mymessages")
-          span.icon
-            svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#message")
-          span 我的消息
-      li.list-style(v-bind:class="type == 'settings' ? 'active' : ''")
-        span.triangle
-        a(href="/personal/settings")
-          span.icon
-            svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#settings")
-          span 账号设置
 
 </template>
 
@@ -62,25 +27,25 @@
             link_url:'/personal/mydesign',
             text:'我的设计',
             type:'mydesign',
-            svg:'heart'
+            svg:'design'
           },
           {
             link_url:'/personal/myrenderimg',
             text:'我的效果图',
             type:'myrenderimg',
-            svg:'heart'
+            svg:'picture'
           },
           {
             link_url:'/personal/mymessages',
             text:'我的消息',
             type:'mymessages',
-            svg:'heart'
+            svg:'message'
           },
           {
             link_url:'/personal/settings',
             text:'账号设置',
             type:'settings',
-            svg:'heart'
+            svg:'settings'
           }
         ]
       }
