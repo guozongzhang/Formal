@@ -3,13 +3,18 @@
     div.header-box
       img.bg-imgs(:src="perinfo.bg_url ? perinfo.bg_url : '/assets/images/personal_bg.png'")
       div.user-box
-        img.user-imgs(:src="perinfo.user_url")
+        img.user-imgs(:src="perinfo.user_url" v-on:click="editImgs()")
         span.user-name {{perinfo.name}}
-    
+
+    <vue-uploadportrait></vue-uploadportrait>
 </template>
 
 <script>
+  import UploadportraitVue from './uploadportrait.vue';
   export default {
+    components: { 
+      'vue-uploadportrait': UploadportraitVue
+    },
     data() {
       return {
         perinfo:{
@@ -17,6 +22,11 @@
           user_url: SITE.session.mem.info_poi_user_info.ui_head || 'http://cimg.dpjia.com/files/users/149/heads/1448272058.png@120w_120h.png',
           name: SITE.session.mem.info_poi_user_info.ui_name || '暂无'
         }
+      }
+    },
+    methods:{
+      editImgs: function() {
+        $('#uploadportrait').modal('show');
       }
     }
   }
@@ -43,6 +53,7 @@
         width: pxTorem(120);
         height: pxTorem(120);
         border-radius: 100%;
+        cursor: pointer;
       }
       .user-name{
         display: inline-block;

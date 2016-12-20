@@ -8,10 +8,12 @@ module.exports = {
     'tether.min',
     'bootstrap.min',
     'jquery.form',
-    'moment.min'
+    'moment.min',
+    'cropper.min'
   ],
   stylesheets: [
     'font-awesome.min',
-    'bootstrap.min'
+    'bootstrap.min',
+    'cropper.min'
   ]
 }
