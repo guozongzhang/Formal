@@ -6,7 +6,7 @@
         li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
     <!--办公家具-->
     div.office-imgs-box.clear(v-show="view == 0")
-      div.left-box
+      div.left-box.clear
         div.left-top
           a(:href="item.url" v-for="item in itempart(0, 0 , 0)")
             img(:src="item.img")
@@ -245,7 +245,7 @@
           }
           .right-bottom{
             li{
-              margin-top: pxTorem(20);
+              margin-top: pxTorem(15);
             }
           }
         }
