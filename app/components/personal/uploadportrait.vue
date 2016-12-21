@@ -39,8 +39,7 @@
   export default {
     data() {
       return {
-        //user_url: SITE.session.mem.info_poi_user_info.ui_head || 'http://cimg.dpjia.com/files/users/149/heads/1448272058.png',
-        user_url: '../../assets/imgs/upload.jpg',
+        user_url: '',
         option:{
           aspectRatio: 1 / 1,
           preview:'.img-preview',
@@ -88,8 +87,17 @@
         });
       },
       saveData: function() {
-        var data = $('#image').cropper('getData');
-        console.log(this.user_url,data)
+        var model = this;
+        var info = $('#image').cropper('getData');
+        info = _.extend(info,{path:model.user_url})
+        API.post('functions/profile/Profile',info, (data)=> {
+          Core.alert('success',data.message);
+          model.user_url = data.path;
+          $('#uploadportrait').modal('hide');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message);
+          $('#uploadportrait').modal('hide');
+        })
       },
       uploadPortrait: function(){
         let $input = $('#inputImage');
@@ -123,6 +131,9 @@
     mounted() {
       this.initCropper();
       this.changInput();
+    },
+    created: function() {
+      this.user_url = SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/upload.jpg';
     }
   }
 

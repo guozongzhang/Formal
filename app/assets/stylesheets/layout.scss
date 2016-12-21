@@ -31,6 +31,9 @@ body{
 }
 
 @media (max-width: 1200px) {
+  .body-box{
+    width: pxTorem(1200);
+  }
   .banner-box{
     width: pxTorem(1200);
   }
