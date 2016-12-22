@@ -88,12 +88,14 @@
         });
       },
       saveData: function() {
-        var model = this;
-        var info = $('#image').cropper('getData');
-        info = _.extend(info,{path:model.user_url})
+        let _self = this;
+        let info = $('#image').cropper('getData');
+        info = _.extend(info,{path:_self.user_url})
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
-          model.user_url = data.path;
+          console.log(data)
+          _self.user_url = data.path;
+          console.log(_self.user_url)
           $('#uploadportrait').modal('hide');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
@@ -107,7 +109,7 @@
       changInput: function(){
         let model = this;
         let url =  SITE.API.url + 'upload';
-        var $image = $('#image');
+        let $image = $('#image');
         let $input = $('#inputImage');
         $input.change(function () {
           let form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
