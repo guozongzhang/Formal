@@ -74,14 +74,14 @@ class Index extends Basic {
 
   /*登录*/
   Login() {
-    if(_.isEmpty($.trim(model.mvvm.info.number))){ 
-      alert("账号不能为空");  
-      return false; 
-    }
-    if(_.isEmpty($.trim(model.mvvm.info.pwd))){ 
-      alert("密码不能为空");  
-      return false; 
-    }
+    // if(_.isEmpty($.trim(model.mvvm.info.number))){ 
+    //   alert("账号不能为空");  
+    //   return false; 
+    // }
+    // if(_.isEmpty($.trim(model.mvvm.info.pwd))){ 
+    //   alert("密码不能为空");  
+    //   return false; 
+    // }
     Cookies.set('dpjia', '', { domain: SITE.domain});
     let data = {};
     if(model.mvvm.info.type == 'number') {
