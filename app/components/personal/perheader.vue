@@ -6,7 +6,7 @@
         img.user-imgs(:src="perinfo.user_url" v-on:click="editImgs()")
         span.user-name {{perinfo.name}}
 
-    <vue-uploadportrait></vue-uploadportrait>
+    <vue-uploadportrait :userinfo="perinfo" :syncUser="GetUserinfo"></vue-uploadportrait>
 </template>
 
 <script>
@@ -27,6 +27,9 @@
     methods:{
       editImgs: function() {
         $('#uploadportrait').modal('show');
+      },
+      GetUserinfo: function(str,val) {
+        this.perinfo[str] = val
       }
     }
   }
