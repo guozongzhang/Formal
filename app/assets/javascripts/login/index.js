@@ -74,6 +74,14 @@ class Index extends Basic {
 
   /*登录*/
   Login() {
+    if(_.isEmpty($.trim(model.mvvm.info.number))){ 
+      alert("账号不能为空");  
+      return false; 
+    }
+    if(_.isEmpty($.trim(model.mvvm.info.pwd))){ 
+      alert("密码不能为空");  
+      return false; 
+    }
     Cookies.set('dpjia', '', { domain: SITE.domain});
     let data = {};
     if(model.mvvm.info.type == 'number') {
@@ -85,7 +93,7 @@ class Index extends Basic {
     } else{
       //手机号登录
       data = {
-        number: model.mvvm.info.phone,
+        number: model.mvvm.info.number,
         pwd: model.mvvm.info.pwd
       }
     }

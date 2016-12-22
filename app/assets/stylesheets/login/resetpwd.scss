@@ -194,5 +194,123 @@ html{
       }
     }
   }
+}
 
+@media only screen and (max-width: 800px){
+  .login-box{
+    top: pxTorem(200);
+    margin-left: pxTorem(-175);
+    width: pxTorem(350);
+    height: pxTorem(450);
+    .title{
+      width: pxTorem(350);
+      height: pxTorem(60);
+      line-height: pxTorem(60);
+      font-size: pxTorem(16);
+      margin-bottom: pxTorem(20);
+      a{
+        left: pxTorem(14);
+        font-size: pxTorem(14);
+      }
+    }
+    .step-box{
+      width: pxTorem(300);
+      height: pxTorem(30);
+      margin: 0 auto pxTorem(20) auto;
+      .icon-circle{
+        position: relative;
+        top: pxTorem(-5);
+        width: pxTorem(20);
+        height: pxTorem(20);
+        line-height: pxTorem(20);
+        font-size: pxTorem(14);
+      }
+      .text{
+        top: pxTorem(-5);
+        height: pxTorem(20);
+        line-height: pxTorem(20);
+        margin-left: pxTorem(8);
+        font-size: pxTorem(12);
+      }
+      .step-line{
+        position: relative;
+        top: pxTorem(-5);
+        margin: 0 pxTorem(10);
+        font-size: pxTorem(18);
+      }
+    }
+    .input-box{
+      width: pxTorem(300);
+      margin: pxTorem(10) auto;
+      .input-item{
+        margin-bottom: pxTorem(10);
+        label{
+          width: pxTorem(80);
+          font-size: pxTorem(14);
+          margin-right: pxTorem(8);
+        }
+        input{
+          width: pxTorem(210);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          padding: pxTorem(3) pxTorem(10);
+        }
+      }
+      .getverify{
+        input{
+          width: pxTorem(120);
+        }
+        img{
+          width: pxTorem(80);
+          height: pxTorem(32);
+          margin-left: pxTorem(10);
+          border-radius: pxTorem(5);
+        }
+      }
+      .next-step{
+        width: pxTorem(210);
+        height: pxTorem(32);
+        padding-left: pxTorem(88);
+        a{
+          width: pxTorem(210);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+        }
+      }
+    }
+
+    .second-input-box{
+      width: pxTorem(220);
+      margin: 0 auto pxTorem(10) auto;
+      .input-item{
+        margin-bottom: pxTorem(10);
+        span{
+          top: pxTorem(-10);
+        }
+        input{
+          width: pxTorem(220);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          padding: pxTorem(3) pxTorem(10);
+        }
+        .getverify{
+          width: pxTorem(76);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          top: pxTorem(-10);
+          font-size: pxTorem(10);
+        }
+      }
+      .login-btn{
+        width: pxTorem(220);
+        height: pxTorem(32);
+        a{
+          width: pxTorem(220);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          font-size: pxTorem(14);
+        }
+      }
+    }
+  }
 }
