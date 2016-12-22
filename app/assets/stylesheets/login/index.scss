@@ -19,18 +19,17 @@ html{
     visibility: hidden;
     height: 0;
   }
+  body{
+    background-color: rgba(0,0,0,0) !important;
+  }
 }
 
 .login-box{
-  position: absolute;
-  top: pxTorem(250);
-  left: 50%;
-  margin-left: pxTorem(-305);
   width: pxTorem(610);
   height: pxTorem(320);
   border: 1px solid #ccc;
   background-color: #fff;
-  margin-bottom: pxTorem(40);
+  margin: pxTorem(250) auto 0 auto;
   .left{
     display: inline-block;
     float: left;
@@ -163,9 +162,8 @@ html{
 @media only screen and (max-width: 800px){
   .login-box{
     width: pxTorem(350);
-    margin-left: pxTorem(-175);
     height: pxTorem(280);
-    top: pxTorem(180);
+    margin: pxTorem(180) auto 0 auto;
     .left{
       width: pxTorem(350);
       height: pxTorem(240);

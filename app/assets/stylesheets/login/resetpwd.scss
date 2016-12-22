@@ -19,18 +19,18 @@ html{
     visibility: hidden;
     height: 0;
   }
+   body{
+    background-color: rgba(0,0,0,0) !important;
+  }
 }
 
 .login-box{
-  position: absolute;
-  top: pxTorem(250);
-  left: 50%;
-  margin-left: pxTorem(-365);
   width: pxTorem(730);
   height: pxTorem(450);
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: pxTorem(5);
+  margin: pxTorem(250) auto 0 auto;
   .title{
     position: relative;
     width: pxTorem(730);
@@ -195,17 +195,22 @@ html{
     }
   }
 }
+.frends-link{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background:rgba(0,0,0,0.5);
+}
 
 @media only screen and (max-width: 800px){
   .login-box{
-    top: pxTorem(200);
-    margin-left: pxTorem(-175);
     width: pxTorem(350);
-    height: pxTorem(450);
+    height: pxTorem(280);
+    margin: pxTorem(200) auto 0 auto;
     .title{
       width: pxTorem(350);
-      height: pxTorem(60);
-      line-height: pxTorem(60);
+      height: pxTorem(50);
+      line-height: pxTorem(50);
       font-size: pxTorem(16);
       margin-bottom: pxTorem(20);
       a{
@@ -262,7 +267,8 @@ html{
         }
         img{
           width: pxTorem(80);
-          height: pxTorem(32);
+          height: pxTorem(28);
+          line-height: pxTorem(28);
           margin-left: pxTorem(10);
           border-radius: pxTorem(5);
         }
@@ -312,5 +318,8 @@ html{
         }
       }
     }
+  }
+  .frends-link{
+    padding: pxTorem(3) pxTorem(30);
   }
 }

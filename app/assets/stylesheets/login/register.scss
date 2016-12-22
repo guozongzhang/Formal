@@ -31,13 +31,11 @@ html{
 }
 
 .register-box{
-  position: absolute;
-  top: pxTorem(170);
-  left: 50%;
+  position: relative;
   width: pxTorem(720);
-  margin-left: pxTorem(-360);
   margin-bottom: pxTorem(80);
   background-color: #fff;
+  margin: pxTorem(170) auto pxTorem(80) auto;
   .vue-box{
     display: inline-block;
     width: pxTorem(500);
@@ -172,10 +170,9 @@ html{
 
 @media only screen and (max-width: 800px){
   .register-box{
-    top: pxTorem(120);
     width: pxTorem(350);
-    margin-left: pxTorem(-175);
     margin-bottom: pxTorem(100);
+    margin: pxTorem(120) auto pxTorem(100) auto;
     .vue-box{
       width: 100%;
     }
