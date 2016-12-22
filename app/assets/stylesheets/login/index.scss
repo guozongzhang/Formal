@@ -157,6 +157,12 @@ html{
     }
   }
 }
+.frends-link{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background:rgba(0,0,0,0.5);
+}
 
 
 @media only screen and (max-width: 800px){
@@ -251,5 +257,9 @@ html{
     .right{
       display: none;
     }
+  }
+  .frends-link{
+    font-size: pxTorem(10);
+    padding: pxTorem(5) pxTorem(30);
   }
 }
