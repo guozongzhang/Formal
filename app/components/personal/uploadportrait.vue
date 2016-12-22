@@ -116,7 +116,7 @@
             mutiple: '0'
           }, function(data){
             $input.unwrap();
-            model.user_url = SITE.Ips.home + '/proxy/image?src=' + data.url;
+            model.user_url = data.url;
             Core.alert('success', '文件上传成功');
             $image.cropper('destroy').attr('src', data.url).cropper(model.option);
             $input.val('');
