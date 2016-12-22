@@ -39,7 +39,7 @@
   export default {
     data() {
       return {
-        user_url: '',
+        user_url: SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/upload.jpg',
         option:{
           aspectRatio: 1 / 1,
           preview:'.img-preview',
@@ -116,7 +116,7 @@
             mutiple: '0'
           }, function(data){
             $input.unwrap();
-            model.user_url = data.url;
+            model.user_url = SITE.Ips.home + '/proxy/image?src=' + data.url;
             Core.alert('success', '文件上传成功');
             $image.cropper('destroy').attr('src', data.url).cropper(model.option);
             $input.val('');
@@ -131,9 +131,6 @@
     mounted() {
       this.initCropper();
       this.changInput();
-    },
-    created: function() {
-      this.user_url = SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/upload.jpg';
     }
   }
 
