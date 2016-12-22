@@ -42,6 +42,7 @@
     "koa-views": "^5.0.1",
     "mysql": "^2.11.1",
     "node-sass": "^3.7.0",
+    "request": "^2.79.0",
     "slick-carousel": "^1.6.0",
     "twbs-pagination": "https://github.com/esimakin/twbs-pagination/tarball/v1.4.1",
     "underscore": "^1.8.3",
