@@ -16,7 +16,7 @@
                       use(xlink:href="/assets/svg/icon.svg#picture")
                   span.text 选择您要上传的头像
                   input(type="file"  id="inputImage" name="files" accept="image/*" style="display:none;")
-              p.tips 仅支持JPG、GIF、PNG、JPGE、BMP格式，文件小于5M
+              p.tips 仅支持JPG、PNG、JPGE、BMP格式，文件小于5M
               div.imgs-show
                 img.img-responsive#image(:src="user_url" alt="Picture")
             div.preview-box
@@ -50,6 +50,7 @@
       initCropper: function() {
         var $previews = $('.img-preview');
         $('#image').cropper({
+          aspectRatio: 1 / 1,
           build: function (e) {
             var $clone = $(this).clone();
             $clone.css({
@@ -111,6 +112,12 @@
         $input.change(function () {
           let form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
+          if(this.files[0].name.indexOf('gif') > -1) {
+            Core.alert('danger','暂时不支持GIG格式图片，请重新上传');
+            $input.unwrap();
+            $input.val('');
+            return ;
+          }
           $input.closest('form').ajaxSubmit(API.body(url, 'post', {
             mode: $(event.target).attr('data-mode') || 'image',
             mutiple: '0'
