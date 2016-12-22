@@ -37,9 +37,10 @@
 
 <script>
   export default {
+    props: ['userinfo'],
     data() {
       return {
-        user_url: SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/upload.jpg',
+        user_url:this.userinfo.user_url,
         option:{
           aspectRatio: 1 / 1,
           preview:'.img-preview',
@@ -93,9 +94,7 @@
         info = _.extend(info,{path:_self.user_url})
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
-          console.log(data)
-          _self.user_url = data.path;
-          console.log(_self.user_url)
+          this.$emit('syncUser', 'user_url', data.path);
           $('#uploadportrait').modal('hide');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
