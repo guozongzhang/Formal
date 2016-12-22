@@ -27,7 +27,7 @@ html
 
         div.second-input-box(v-show="step == 'second'")
           div.input-item
-            span 通过手机{{info.number}}
+            span 通过手机{{info.number}}18702760110
             button.getverify#get_verify(type="button" v-on:click="getVerify()") 获取验证码
           div.input-item
             input(type="text" v-model="info.verify" placeholder="验证码")
@@ -36,6 +36,11 @@ html
           div.login-btn
             a(href="javascript:;" v-on:click="confirmBtn()") 下一步
 
+      div.frends-link(style="position: fixed;bottom: 0px;width: 100%;background:rgba(0,0,0,0.5)")
+        div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
+          | 搭配家 版权所有 2014-2016 
+          a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
+          | All right reserved 京ICP备15029423号
       each item in development.assets.vendor.javascripts
         script(src="/assets/javascripts/#{item}.js")
 
@@ -46,10 +51,3 @@ html
         if(typeof APP.#{route.controller}.#{route.action} == 'function'){
           new APP.#{route.controller}.#{route.action}()
         }
-
-    footer
-      div.frends-link(style="position: fixed;bottom: 0px;width: 100%;background:rgba(0,0,0,0.5)")
-        div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
-        | 搭配家 版权所有 2014-2016 
-        a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
-        | All right reserved 京ICP备15029423号
