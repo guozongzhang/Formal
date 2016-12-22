@@ -29,6 +29,7 @@
         $('#uploadportrait').modal('show');
       },
       GetUserinfo: function(str,val) {
+        console.log('==',str,val)
         this.perinfo[str] = val
       }
     }
