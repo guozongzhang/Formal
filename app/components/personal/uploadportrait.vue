@@ -94,6 +94,7 @@
         info = _.extend(info,{path:_self.user_url})
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
+          console.log(data.path)
           this.$emit('syncUser', 'user_url', data.path);
           $('#uploadportrait').modal('hide');
         },(msg)=> {

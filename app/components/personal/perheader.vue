@@ -6,7 +6,7 @@
         img.user-imgs(:src="perinfo.user_url" v-on:click="editImgs()")
         span.user-name {{perinfo.name}}
 
-    <vue-uploadportrait :userinfo="perinfo" :syncUser="GetUserinfo"></vue-uploadportrait>
+    <vue-uploadportrait :userinfo="perinfo" v-on:syncUser="GetUserinfo"></vue-uploadportrait>
 </template>
 
 <script>
