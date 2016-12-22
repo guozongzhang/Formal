@@ -51,7 +51,6 @@ class Resetpwd extends Basic {
 
   /*验证图形验证码、手机号是否注册*/
   getNext(){
-    model.mvvm.step = 'second';
     if(!(/^1(3|4|5|7|8)\d{9}$/.test($.trim(model.mvvm.info.number)))){ 
       alert("手机号格式不正确"); 
 

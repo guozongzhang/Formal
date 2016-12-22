@@ -26,7 +26,6 @@ html{
 
 .login-box{
   width: pxTorem(730);
-  height: pxTorem(450);
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: pxTorem(5);
@@ -93,7 +92,7 @@ html{
   }
   .input-box{
     width: pxTorem(400);
-    margin: pxTorem(20) auto;
+    margin: pxTorem(20) auto pxTorem(40) auto;
     .input-item{
       margin-bottom: pxTorem(20);
       label{
@@ -129,7 +128,7 @@ html{
     .next-step{
       width: pxTorem(400);
       height: pxTorem(40);
-      padding-left: pxTorem(120);
+      margin-left: pxTorem(120);
       a{
         text-decoration: none;
         display: inline-block;
@@ -146,7 +145,7 @@ html{
 
   .second-input-box{
     width: pxTorem(317);
-    margin: 0 auto pxTorem(20) auto;
+    margin: 0 auto pxTorem(30) auto;
     .input-item{
       margin-bottom: pxTorem(20);
       span{
@@ -205,7 +204,6 @@ html{
 @media only screen and (max-width: 800px){
   .login-box{
     width: pxTorem(350);
-    height: pxTorem(280);
     margin: pxTorem(200) auto 0 auto;
     .title{
       width: pxTorem(350);
@@ -246,7 +244,7 @@ html{
     }
     .input-box{
       width: pxTorem(300);
-      margin: pxTorem(10) auto;
+      margin: pxTorem(10) auto pxTorem(20) auto;
       .input-item{
         margin-bottom: pxTorem(10);
         label{
@@ -276,7 +274,7 @@ html{
       .next-step{
         width: pxTorem(210);
         height: pxTorem(32);
-        padding-left: pxTorem(88);
+        margin-left: pxTorem(88);
         a{
           width: pxTorem(210);
           height: pxTorem(32);
@@ -287,7 +285,7 @@ html{
 
     .second-input-box{
       width: pxTorem(220);
-      margin: 0 auto pxTorem(10) auto;
+      margin: 0 auto pxTorem(20) auto;
       .input-item{
         margin-bottom: pxTorem(10);
         span{
