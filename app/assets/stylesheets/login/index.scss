@@ -19,18 +19,17 @@ html{
     visibility: hidden;
     height: 0;
   }
+  body{
+    background-color: rgba(0,0,0,0) !important;
+  }
 }
 
 .login-box{
-  position: absolute;
-  top: pxTorem(250);
-  left: 50%;
-  margin-left: pxTorem(-305);
   width: pxTorem(610);
   height: pxTorem(320);
   border: 1px solid #ccc;
   background-color: #fff;
-  margin-bottom: pxTorem(40);
+  margin: pxTorem(250) auto 0 auto;
   .left{
     display: inline-block;
     float: left;
@@ -113,7 +112,7 @@ html{
         width: pxTorem(280);
         height: pxTorem(36);
         margin-top: pxTorem(10);
-        a{
+        & > a{
           display: inline-block;
           text-decoration: none;
           width: pxTorem(280);
@@ -123,6 +122,9 @@ html{
           background-color: #ef0000;
           color: #fff;
           font-size: pxTorem(16);
+        }
+        .sub-login{
+          display: none;
         }
       }
     }
@@ -155,94 +157,109 @@ html{
     }
   }
 }
+.frends-link{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background:rgba(0,0,0,0.5);
+}
 
 
-// @media only screen and (max-width: 800px){
-//   .login-box{
-//     width: pxTorem(350);
-//     margin-left: pxTorem(-175);
-//     height: pxTorem(210);
-//     top: pxTorem(180);
-//     .left{
-//       width: pxTorem(218);
-//       height: pxTorem(210);
-//       padding: pxTorem(15) 0 pxTorem(15) pxTorem(20);
-//       .title{
-//         width: pxTorem(198);
-//         height: pxTorem(24);
-//         label{
-//           font-size: pxTorem(14);
-//         }
-//         span{
-//           font-size: pxTorem(12);
-//         }
-//       }
-//       .input-box{
-//         margin-top: pxTorem(15);
-//         .input-item{
-//           width: pxTorem(198);
-//           margin-bottom: pxTorem(10);
-//           input{
-//             width: pxTorem(198);
-//             height: pxTorem(26);
-//             line-height: pxTorem(26);
-//             padding: pxTorem(4) pxTorem(8);
-//             font-size: pxTorem(12);
-//           }
-//         }
-//         .getverify{
-//           input{
-//             width: pxTorem(110);
-//           }
-//           span{
-//             position: relative;
-//             top: pxTorem(-1);
-//             display: inline-block;
-//             width: pxTorem(80);
-//             height: pxTorem(26);
-//             line-height: pxTorem(26);
-//             margin-left: pxTorem(8);
-//           }
-//         }
-//         .auto-logo{
-//           width: pxTorem(198);
-//           height: pxTorem(26);
-//           line-height: pxTorem(26);
-//           .check-box{
-//             font-size: pxTorem(12);
-//           }
-//           a{
-//             font-size: pxTorem(12);
-//           }
-//         }
-//         .login-btn{
-//           width: pxTorem(198);
-//           height: pxTorem(26);
-//           margin-top: pxTorem(6);
-//           a{
-//             width: pxTorem(198);
-//             height: pxTorem(26);
-//             line-height: pxTorem(26);
-//             font-size: pxTorem(12);
-//           }
-//         }
-//       }
-//     }
-//     .right{
-//       width: pxTorem(130);
-//       height: pxTorem(210);
-//       padding: pxTorem(60) pxTorem(5) 0 pxTorem(5);
-//       p{
-//         margin-bottom: pxTorem(6);
-//         font-size: pxTorem(12);
-//       }
-//       a{
-//         width: pxTorem(100);
-//         height: pxTorem(26);
-//         line-height: pxTorem(26);
-//         font-size: pxTorem(12);
-//         border-radius: pxTorem(4);
-//       }
-//     }
-//   }
-// }
+@media only screen and (max-width: 800px){
+  .login-box{
+    width: pxTorem(350);
+    height: pxTorem(280);
+    margin: pxTorem(180) auto 0 auto;
+    .left{
+      width: pxTorem(350);
+      height: pxTorem(240);
+      padding: pxTorem(20);
+      .title{
+        width: 100%;
+        height: pxTorem(24);
+        text-align: center;
+        label{
+          font-size: pxTorem(16);
+        }
+        span{
+          font-size: pxTorem(14);
+        }
+      }
+      .input-box{
+        width: pxTorem(280);
+        margin: 0 auto;
+        margin-top: pxTorem(20);
+        .input-item{
+          width: 80%;
+          margin: 0 auto;
+          margin-bottom: pxTorem(10);
+          input{
+            width: 100%;
+            height: pxTorem(32);
+            line-height: pxTorem(32);
+            padding: pxTorem(4) pxTorem(8);
+            font-size: pxTorem(14);
+          }
+        }
+        .getverify{
+          input{
+            width: pxTorem(110);
+          }
+          span{
+            position: relative;
+            top: pxTorem(-1);
+            display: inline-block;
+            width: pxTorem(80);
+            height: pxTorem(26);
+            line-height: pxTorem(26);
+            margin-left: pxTorem(8);
+          }
+        }
+        .auto-logo{
+          width: 80%;
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          margin: 0 auto;
+          .check-box{
+            font-size: pxTorem(12);
+          }
+          a{
+            font-size: pxTorem(12);
+          }
+        }
+        .login-btn{
+          width: 80%;
+          height: pxTorem(32);
+          margin: 0 auto;
+          & > a{
+            width: 100%;
+            height: pxTorem(32);
+            line-height: pxTorem(32);
+            font-size: pxTorem(14);
+          }
+          .sub-login{
+            width: 100%;
+            display: inline-block;
+            margin-top: pxTorem(10);
+            span{
+              font-size: pxTorem(12);
+            }
+            .must-register{
+              display: inline-block;
+              float: right;
+              text-decoration: none;
+              font-size: pxTorem(12);
+            }
+          }
+        }
+      }
+    }
+    .right{
+      display: none;
+    }
+  }
+  .frends-link{
+    font-size: pxTorem(10);
+    padding: pxTorem(5) pxTorem(30);
+  }
+}

@@ -19,18 +19,17 @@ html{
     visibility: hidden;
     height: 0;
   }
+   body{
+    background-color: rgba(0,0,0,0) !important;
+  }
 }
 
 .login-box{
-  position: absolute;
-  top: pxTorem(250);
-  left: 50%;
-  margin-left: pxTorem(-365);
   width: pxTorem(730);
-  height: pxTorem(450);
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: pxTorem(5);
+  margin: pxTorem(250) auto 0 auto;
   .title{
     position: relative;
     width: pxTorem(730);
@@ -93,7 +92,7 @@ html{
   }
   .input-box{
     width: pxTorem(400);
-    margin: pxTorem(20) auto;
+    margin: pxTorem(20) auto pxTorem(40) auto;
     .input-item{
       margin-bottom: pxTorem(20);
       label{
@@ -129,7 +128,7 @@ html{
     .next-step{
       width: pxTorem(400);
       height: pxTorem(40);
-      padding-left: pxTorem(120);
+      margin-left: pxTorem(120);
       a{
         text-decoration: none;
         display: inline-block;
@@ -146,7 +145,7 @@ html{
 
   .second-input-box{
     width: pxTorem(317);
-    margin: 0 auto pxTorem(20) auto;
+    margin: 0 auto pxTorem(30) auto;
     .input-item{
       margin-bottom: pxTorem(20);
       span{
@@ -194,5 +193,132 @@ html{
       }
     }
   }
+}
+.frends-link{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background:rgba(0,0,0,0.5);
+}
 
+@media only screen and (max-width: 800px){
+  .login-box{
+    width: pxTorem(350);
+    margin: pxTorem(200) auto 0 auto;
+    .title{
+      width: pxTorem(350);
+      height: pxTorem(50);
+      line-height: pxTorem(50);
+      font-size: pxTorem(16);
+      margin-bottom: pxTorem(20);
+      a{
+        left: pxTorem(14);
+        font-size: pxTorem(14);
+      }
+    }
+    .step-box{
+      width: pxTorem(300);
+      height: pxTorem(30);
+      margin: 0 auto pxTorem(20) auto;
+      .icon-circle{
+        position: relative;
+        top: pxTorem(-5);
+        width: pxTorem(20);
+        height: pxTorem(20);
+        line-height: pxTorem(20);
+        font-size: pxTorem(14);
+      }
+      .text{
+        top: pxTorem(-5);
+        height: pxTorem(20);
+        line-height: pxTorem(20);
+        margin-left: pxTorem(8);
+        font-size: pxTorem(12);
+      }
+      .step-line{
+        position: relative;
+        top: pxTorem(-5);
+        margin: 0 pxTorem(10);
+        font-size: pxTorem(18);
+      }
+    }
+    .input-box{
+      width: pxTorem(300);
+      margin: pxTorem(10) auto pxTorem(20) auto;
+      .input-item{
+        margin-bottom: pxTorem(10);
+        label{
+          width: pxTorem(80);
+          font-size: pxTorem(14);
+          margin-right: pxTorem(8);
+        }
+        input{
+          width: pxTorem(210);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          padding: pxTorem(3) pxTorem(10);
+        }
+      }
+      .getverify{
+        input{
+          width: pxTorem(120);
+        }
+        img{
+          width: pxTorem(80);
+          height: pxTorem(28);
+          line-height: pxTorem(28);
+          margin-left: pxTorem(10);
+          border-radius: pxTorem(5);
+        }
+      }
+      .next-step{
+        width: pxTorem(210);
+        height: pxTorem(32);
+        margin-left: pxTorem(88);
+        a{
+          width: pxTorem(210);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+        }
+      }
+    }
+
+    .second-input-box{
+      width: pxTorem(220);
+      margin: 0 auto pxTorem(20) auto;
+      .input-item{
+        margin-bottom: pxTorem(10);
+        span{
+          top: pxTorem(-10);
+        }
+        input{
+          width: pxTorem(220);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          padding: pxTorem(3) pxTorem(10);
+        }
+        .getverify{
+          width: pxTorem(76);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          top: pxTorem(-10);
+          font-size: pxTorem(10);
+        }
+      }
+      .login-btn{
+        width: pxTorem(220);
+        height: pxTorem(32);
+        a{
+          width: pxTorem(220);
+          height: pxTorem(32);
+          line-height: pxTorem(32);
+          font-size: pxTorem(14);
+        }
+      }
+    }
+  }
+  .frends-link{
+    font-size: pxTorem(10);
+    padding: pxTorem(5) pxTorem(30);
+  }
 }

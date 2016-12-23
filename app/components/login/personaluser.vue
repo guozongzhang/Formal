@@ -54,6 +54,9 @@
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
       button.save-btn(type="button" v-on:click="saveDate()") 提交
+      p.sub-login
+        span 已有搭配家账号？
+        a.must-register(href="/login/index") 立即登录
 </template>
 
 <script>
@@ -406,6 +409,9 @@
     border-radius: pxTorem(5);
     font-size: pxTorem(16);
   }
+  .sub-login{
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 800px){
@@ -513,11 +519,17 @@
       }
     }
     .save-btn{
-      margin: pxTorem(10) 0 pxTorem(20) 0;
+      margin: pxTorem(10) 0;
       width: pxTorem(270);
       height: pxTorem(32);
       line-height: pxTorem(32);
       font-size: pxTorem(14);
+    }
+    .sub-login{
+      display: block;
+      & > a{
+        float: right;
+      }
     }
   }
 }

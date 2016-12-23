@@ -11,7 +11,7 @@ html
             //- span(v-on:click="changeLoginType()") {{info.type == 'number' ? '手机验证码登录' : '账号密码登录'}}
           div.input-box
             div.input-item
-              input(type="text" v-model="info.number" v-bind:placeholder="info.type == 'number' ? '输入手机号' : '输入手机号'")
+              input(type="text" v-model="info.number" v-bind:placeholder="info.type == 'number' ? '输入手机号/账号' : '输入手机号'")
             div.input-item(v-show="info.type == 'number'")
               input(type="password" v-model="info.pwd" placeholder="输入密码")
             div.input-item.getverify(v-show="info.type == 'phone'")
@@ -25,6 +25,9 @@ html
               a(href="/login/resetpwd") 忘记密码？
             div.login-btn
               a(href="javascript:;" v-on:click="Login()") 登录
+              p.sub-login
+                span 还没有搭配家账号？
+                a.must-register(href="/login/register") 立即注册
 
         div.right
           p 还没有搭配家账号？
@@ -41,8 +44,8 @@ html
           new APP.#{route.controller}.#{route.action}()
         }
     footer
-      div.frends-link(style="position: fixed;bottom: 0px;width: 100%;background:rgba(0,0,0,0.5)")
-        div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
+      div.frends-link
+        div(style="display:block;width:100%;text-align:center;color:#fff;")
         | 搭配家 版权所有 2014-2016 
         a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
         | All right reserved 京ICP备15029423号

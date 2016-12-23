@@ -5,7 +5,10 @@
         span.triangle
         a(:href="item.link_url")
           span.icon
+            svg.svg-style
+              use(:xlink:href="'/assets/svg/icon.svg#' + item.svg ")
           span {{item.text}}
+
 </template>
 
 <script>
@@ -17,27 +20,32 @@
           {
             link_url:'/personal/index',
             text:'我的收藏',
-            type:'collection'
+            type:'collection',
+            svg:'heart'
           },
           {
             link_url:'/personal/mydesign',
             text:'我的设计',
-            type:'mydesign'
+            type:'mydesign',
+            svg:'design'
           },
           {
             link_url:'/personal/myrenderimg',
             text:'我的效果图',
-            type:'myrenderimg'
+            type:'myrenderimg',
+            svg:'picture'
           },
           {
             link_url:'/personal/mymessages',
             text:'我的消息',
-            type:'mymessages'
+            type:'mymessages',
+            svg:'message'
           },
           {
             link_url:'/personal/settings',
             text:'账号设置',
-            type:'settings'
+            type:'settings',
+            svg:'settings'
           }
         ]
       }
@@ -81,11 +89,14 @@
           position: relative;
           top: pxTorem(4);
           display: inline-block;
-          width: pxTorem(16);
-          height: pxTorem(16);
+          width: pxTorem(18);
+          height: pxTorem(18);
           margin-right: pxTorem(10);
-          border-radius: 100%;
-          background-color: #000;
+          .svg-style{
+            width: pxTorem(18);
+            height: pxTorem(18);
+            fill: #bbb;
+          }
         }
       }
     }
@@ -98,7 +109,9 @@
       a{
         color: #f14f4f;
         .icon{
-          background-color: #f14f4f;
+          .svg-style{
+            fill: #f14f4f;
+          }
         }
       }
     }
