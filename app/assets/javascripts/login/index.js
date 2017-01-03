@@ -34,7 +34,7 @@ class Index extends Basic {
 
   /*定时器*/
   countdowntime() {
-    var time = setTimeout(model.countdowntime,1000); 
+    var time = setTimeout(model.countdowntime,1000);
     if (start_time == 0) {
       clearTimeout(time);
       $('#get_verify').text('获取验证码');
@@ -74,13 +74,13 @@ class Index extends Basic {
 
   /*登录*/
   Login() {
-    if(_.isEmpty($.trim(model.mvvm.info.number))){ 
-      alert("账号不能为空");  
-      return false; 
+    if(_.isEmpty($.trim(model.mvvm.info.number))){
+      Core.alert("danger","账号不能为空");
+      return false;
     }
-    if(_.isEmpty($.trim(model.mvvm.info.pwd))){ 
-      alert("密码不能为空");  
-      return false; 
+    if(_.isEmpty($.trim(model.mvvm.info.pwd))){
+      Core.alert("danger","密码不能为空");
+      return false;
     }
     Cookies.set('dpjia', '', { domain: SITE.domain});
     let data = {};
