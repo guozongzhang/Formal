@@ -44,7 +44,7 @@
     "node-sass": "^3.7.0",
     "request": "^2.79.0",
     "slick-carousel": "^1.6.0",
-    "twbs-pagination": "https://github.com/esimakin/twbs-pagination/tarball/v1.4.1",
+    "twbs-pagination": "https://coding.net/u/gyang/p/twbs-pagination/git/archive/v1.4.1.tar.gz",
     "underscore": "^1.8.3",
     "video.js": "^5.12.6",
     "vue-hot-reload-api": "^1.3.2",

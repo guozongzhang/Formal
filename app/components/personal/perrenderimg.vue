@@ -13,8 +13,8 @@
             p.empty 还没有效果图呢~
           ul.list-style.clear(v-show="renders.length != 0")
             li.list-style(v-for="item in renders")
-              a.link-box(href="javascript:;")
-                img(:src="item.rd_image" v-on:click="showImgs()")
+              a.link-box.fancybox(:href="item.rd_image" rel="group")
+                img(:src="item.rd_image")
                 span.edit(v-on:click="renameRender(item)")
                   svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#edit")
@@ -70,7 +70,11 @@
         renderinfo:{
           flags:'showimgs'
         },
-        renders:[]
+        renders:[
+          {
+            rd_image: 'http://192.168.1.120/openapi/files/uploads/images/f7066a5152dbd8756a93cee9d0cec433.jpeg'
+          }
+        ]
       }
     },
     methods:{
@@ -78,7 +82,7 @@
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         Render.reset().where(['rd_status in ?', ["3","uploaded"]]).keys('id,rd_image,create_time,name').limit(model.pagesize).skip(skip).all((data)=> {
           model.totalcount = data.count;
-          this.renders = data.items;
+          //this.renders = data.items;
         })
       },
       deleteRender:function(obj){
@@ -116,15 +120,19 @@
           Core.alert('success','修改成功');
         })
       },
-      // showImgs: function() {
-      //   $('.showimgs').modal('show');
-      // }
+      Init: function() {
+        $(".fancybox").fancybox({
+          closeBtn: true,
+          arrows: false,
+        });
+      }
     },
     mounted() {
+      this.Init();
       this.getRender();
     },
     created() {
-      model = this
+      model = this;
     }
   }
 
