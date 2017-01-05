@@ -1,5 +1,6 @@
 module.exports = {
   javascripts: [
+    'web-detector',
     'jquery.min',
     'jquery.validate.min',
     'vue',

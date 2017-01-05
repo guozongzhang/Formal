@@ -60,7 +60,7 @@
 
               p.signature {{item.text}}
 
-              a.appointment(:href="item.url") 预约
+              a.appointment(href="#" @click="huh") 预约
 
 
 </template>
@@ -105,7 +105,11 @@
           result.push(model.items.lanmus[lanmu].pics[i])
         } 
         return result
+      },
+      huh: function() {
+        alert(hxh)
       }
+      
     },
     created() {
       this.getList()
