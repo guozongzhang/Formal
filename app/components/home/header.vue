@@ -6,9 +6,9 @@
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
           li(v-for="item in menus" v-bind:class="item.action == controller ? 'active' : ''")
-            a.title(:href="item.url") {{item.name}}
+            a.title(:href="item.url" target="_blank") {{item.name}}
             div.sub-menu
-              a(:href="sub.url" v-for="sub in item.subs" ) {{sub.name}}
+              a(:href="sub.url" v-for="sub in item.subs" target="_blank") {{sub.name}}
     
 </template>
 
