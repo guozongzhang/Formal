@@ -5,12 +5,13 @@
         li.list-style 我是：
         li.list-style.radio-item.subtype
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')" checked)
-            | 普通用户
+            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')" checked)
+            | 设计师(销售员)
+            
         li.list-style.radio-item
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')")
-            | 设计师(销售员)
+            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')")
+            | 普通用户
         
       div.info
         ul.list-style
@@ -67,7 +68,7 @@
     data() {
       return {
         info:{
-          usersubtype:'buyer',
+          usersubtype:'designer',
           phone:'',
           pwd:'',
           verification:'',
