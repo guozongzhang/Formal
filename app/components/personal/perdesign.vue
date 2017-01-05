@@ -25,7 +25,7 @@
                 a.go-draw(:href="design_url + item.id") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
                 span.delete(v-on:click="deleteDesign(item)") 删除
-                //- span.copy 复制
+                span.copy(v-on:click="copyDesign(item)") 复制
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
@@ -114,6 +114,14 @@
           tmp.des_name = item.des_name
           $('.renamedesign').modal('hide');
           Core.alert('success','修改成功');
+        })
+      },
+      copyDesign: function(item) {
+        API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
+          this.designe.list.push(data);
+         Core.alert('success', '复制成功');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
         })
       }
     },
