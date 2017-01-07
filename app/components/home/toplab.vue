@@ -5,7 +5,7 @@
         li.list-style.list-text(v-for="item in items" v-show="item.visible == 0") 
           a(:href="item.url") {{item.name}}
         li.list-style.list-right
-          a(:href="logininfo.admin.url" v-show="logininfo.admin.isshow") {{logininfo.admin.name}}
+          a(:href="logininfo.admin.url" target="_blank" v-show="logininfo.admin.isshow") {{logininfo.admin.name}}
         li.list-style.list-right
           a(:href="logininfo.register.url" v-show="logininfo.register.isshow") {{logininfo.register.name}}
         li.list-style.list-right

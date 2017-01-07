@@ -13,8 +13,8 @@
             p.empty 还没有效果图呢~
           ul.list-style.clear(v-show="renders.length != 0")
             li.list-style(v-for="item in renders")
-              a.link-box(href="javascript:;")
-                img(:src="item.rd_image" v-on:click="showImgs()")
+              a.link-box.fancybox(:href="item.rd_image" rel="group" v-bind:title="item.name")
+                img(:src="item.rd_image")
                 span.edit(v-on:click="renameRender(item)")
                   svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#edit")
@@ -116,15 +116,19 @@
           Core.alert('success','修改成功');
         })
       },
-      // showImgs: function() {
-      //   $('.showimgs').modal('show');
-      // }
+      Init: function() {
+        $(".fancybox").fancybox({
+          closeBtn: true,
+          arrows: true,
+        });
+      }
     },
     mounted() {
+      this.Init();
       this.getRender();
     },
     created() {
-      model = this
+      model = this;
     }
   }
 

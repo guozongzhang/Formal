@@ -27,7 +27,7 @@
             span 男士
           label.radio-inline
             input(type="radio" value="2" name="inlineRadioOptions" v-model="userinfo.sex") 
-            span 女式
+            span 女士
           label.radio-inline
             input(type="radio" value="0" name="inlineRadioOptions" v-model="userinfo.sex") 
             span 保密

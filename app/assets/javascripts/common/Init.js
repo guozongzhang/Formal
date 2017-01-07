@@ -1,4 +1,4 @@
-window.SITE.Init = ()=> {
+window.SITE.Init = () => {
   return getLoginState()
 }
 
