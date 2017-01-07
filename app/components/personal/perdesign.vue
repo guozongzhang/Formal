@@ -25,7 +25,8 @@
                 a.go-draw(:href="design_url + item.id") 进入设计
                 span.rename(v-on:click="renameDesign(item)") 重命名
                 span.delete(v-on:click="deleteDesign(item)") 删除
-                span.copy(v-on:click="copyDesign(item)") 复制
+                span.copy(v-on:click="copyDesign(item)" v-show="!item.isCopy") 复制
+                span.copying(v-show="item.isCopy") 复制中...
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
@@ -78,6 +79,9 @@
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         Designs.reset().keys('id,des_name,des_cut_url,update_time').limit(model.pagesize).skip(skip).all((data)=> {
           model.totalcount = data.count;
+          data.items.forEach((item)=> {
+            item.isCopy = false;
+          })
           this.designe.list = data.items;
         })
       },
@@ -117,7 +121,9 @@
         })
       },
       copyDesign: function(item) {
+        item.isCopy = true;
         API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
+          item.isCopy = false;
           this.designe.list.splice(0,0,data);
          Core.alert('success', '复制成功');
         },(msg)=> {
@@ -253,12 +259,15 @@
               cursor: pointer;
             }
             .rename{
-              right: pxTorem(106);
+              right: pxTorem(110);
             }
             .delete{
-              right: pxTorem(60);
+              right: pxTorem(75);
             }
             .copy{
+              right: pxTorem(35);
+            }
+            .copying{
               right: pxTorem(10);
             }
             span:hover{

@@ -8,7 +8,7 @@
         p.empty 还没有收藏商品呢~
       ul.list-style.clear(v-show="goods.length != 0")
         li.list-style(v-for="item in goods")
-          a(href="javascript:;")
+          a(:href="mall_url + item.id")
             img(:src="item.fur_image")
             div.name
               p {{item.fur_name}}
@@ -36,6 +36,7 @@
     },
     data() {
       return {
+        mall_url: SITE.Ips.mall + '/home/goodsdetail?id=',
         pagesize: 8,
         totalcount: 0,
         deleteinfo:{
