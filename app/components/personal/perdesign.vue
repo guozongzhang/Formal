@@ -118,7 +118,7 @@
       },
       copyDesign: function(item) {
         API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
-          this.designe.list.push(data);
+          this.designe.list.splice(0,0,data);
          Core.alert('success', '复制成功');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message)
