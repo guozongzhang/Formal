@@ -124,6 +124,7 @@
         item.isCopy = true;
         API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
           item.isCopy = false;
+          data = _.extend(data,{isCopy: false});
           this.designe.list.splice(0,0,data);
          Core.alert('success', '复制成功');
         },(msg)=> {
