@@ -68,7 +68,7 @@
               this.goods.push(subitem);
             })
           });
-          FurSku.reset().where(['id in ?', skuids]).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((tmp)=> {
+          FurSku.reset().where(['id in ?', skuids]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((tmp)=> {
             tmp.items.forEach((item)=> {
               let sub = _.extend(item.fur_id_poi_furnitures,{favortype:'sku',favor_id:item.id})
               this.goods.push(sub);
