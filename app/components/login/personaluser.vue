@@ -5,12 +5,12 @@
         li.list-style 我是：
         li.list-style.radio-item.subtype
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('designer')" checked)
+            input(type="radio" name="usersubtype" value="designer" v-on:click="getDesigner('designer')" v-model="info.usersubtype")
             | 设计师(销售员)
             
         li.list-style.radio-item
           label 
-            input(type="radio" name="usersubtype" v-on:click="getDesigner('buyer')")
+            input(type="radio" name="usersubtype" value="buyer" v-on:click="getDesigner('buyer')" v-model="info.usersubtype")
             | 普通用户
         
       div.info
@@ -55,6 +55,9 @@
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
       button.save-btn(type="button" v-on:click="saveDate()") 提交
+      p.pc-login
+        span 已有搭配家账号？
+        a.must-register(href="/login/index") 立即登录
       p.sub-login
         span 已有搭配家账号？
         a.must-register(href="/login/index") 立即登录
@@ -65,10 +68,11 @@
   //验证码60秒倒计时
   var start_time = 60;//开始时间
   export default {
+    props:['types'],
     data() {
       return {
         info:{
-          usersubtype:'designer',
+          usersubtype:'',
           phone:'',
           pwd:'',
           verification:'',
@@ -81,9 +85,13 @@
       }
     },
     methods:{
+      Init: function() {
+        this.info.usersubtype = this.types;
+      },
       getDesigner: function(str) {
         if(this.info.usersubtype == str){return;}
         this.info.usersubtype = str;
+        this.$emit('changeusertype', str);
       },
       getServiceObj: function() {
         var model = this;
@@ -197,15 +205,6 @@
         }
 
         API.post('users/signUpBySmsCode',senddata, (data)=> {
-          // if(senddata.designer_type == 'single') {
-          //   Core.alert('success','注册成功');
-          //   Cookies.set('dpjia', data.token, { domain: SITE.domain});
-          //   setTimeout(()=> {
-          //     window.location.href = '/';
-          //   }, 1000)
-          // } else {
-          //   $('.success-bg').removeClass('hidden');
-          // }
           Core.alert('success','注册成功');
           Cookies.set('dpjia', data.token, { domain: SITE.domain});
           setTimeout(()=> {
@@ -218,6 +217,7 @@
     },
     mounted(){
       var model = this;
+      this.Init();
       this.getServiceObj();
       $("#confirm_per_btn").validate({
         rules: {
@@ -400,7 +400,7 @@
     margin-top: pxTorem(10);
   }
   .save-btn{
-    margin: pxTorem(20) 0 pxTorem(40) 0;
+    margin: pxTorem(20) 0 pxTorem(10) 0;
     width: pxTorem(380);
     height: pxTorem(40);
     line-height: pxTorem(40);
@@ -409,6 +409,10 @@
     color: #fff;
     border-radius: pxTorem(5);
     font-size: pxTorem(16);
+  }
+  .pc-login{
+    margin-bottom: pxTorem(30);
+    padding: 0;
   }
   .sub-login{
     display: none;
@@ -525,6 +529,9 @@
       height: pxTorem(32);
       line-height: pxTorem(32);
       font-size: pxTorem(14);
+    }
+    .pc-login{
+      display: none;
     }
     .sub-login{
       display: block;
