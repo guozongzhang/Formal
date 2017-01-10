@@ -10,12 +10,21 @@ html
             li(v-bind:class="info.type == 'single' ? 'active' : ''" v-on:click="choiceSignalUser()") 个人用户
             li(v-bind:class=" info.type == 'company' ? 'active' : ''" v-on:click="choiceCompanyUser()") 企业用户
         div.vue-box(v-show="info.type == 'single'")
-          <vue-personaluser></vue-personaluser>
+          <vue-personaluser :types="usertype" v-on:changeusertype="getusertypes"></vue-personaluser>
         div.vue-box(v-show="info.type == 'company'")
-          <vue-companyuser></vue-companyuser>
+          <vue-companyuser :types="usertype" v-on:changeusertype="getusertypes"></vue-companyuser>
+
+        //- div.go-login
+        //-   p 已有搭配家账号？
+        //-   a(href="/login/index") 登录
         div.go-login
-          p 已有搭配家账号？
-          a(href="/login/index") 登录
+          div.xiaoxuan(v-for="msg in tips")
+            label {{msg.title}}
+            p.sub-title {{msg.subtitle}}
+            div.box.clear(v-for="item in msg.list") 
+              span.point ● 
+              p.list
+                span.tip-text {{item}}
 
       div.success-bg.hidden
         div.success-box

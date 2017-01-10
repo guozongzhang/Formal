@@ -65,6 +65,9 @@
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
       button.save-btn(type="button" v-on:click="saveComDate()") 提交
+      p.pc-login
+        span 已有搭配家账号？
+        a.must-register(href="/login/index") 立即登录
       p.sub-login
         span 已有搭配家账号？
         a.must-register(href="/login/index") 立即登录
@@ -76,6 +79,7 @@
   //验证码60秒倒计时
   var start_time = 60;//开始时间
   export default {
+    props:['types'],
     components: {
       'vue-area': AreaVue
     },
@@ -102,6 +106,7 @@
       getDesigner: function(str) {
         if(this.info.comsubtype == str){return;}
         this.info.comsubtype = str;
+        this.$emit('changeusertype', str);
       },
       getVerification: function() {
         var model = this;
@@ -449,7 +454,7 @@
     margin-top: pxTorem(10);
   }
   .save-btn{
-    margin: pxTorem(20) 0 pxTorem(40) 0;
+    margin: pxTorem(20) 0 pxTorem(10) 0;
     display: inline-block;
     width: pxTorem(380);
     height: pxTorem(40);
@@ -459,6 +464,10 @@
     color: #fff;
     border-radius: pxTorem(5);
     font-size: pxTorem(16);
+  }
+  .pc-login{
+    margin-bottom: pxTorem(30);
+    padding: 0;
   }
   .sub-login{
     display: none;
@@ -584,6 +593,9 @@
       height: pxTorem(32);
       line-height: pxTorem(32);
       font-size: pxTorem(14);
+    }
+    .pc-login{
+      display: none;
     }
     .sub-login{
       display: block;

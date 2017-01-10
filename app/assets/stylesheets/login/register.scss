@@ -71,31 +71,62 @@ html{
   .go-login{
     position: absolute;
     top: 50%;
-    margin-top: pxTorem(-40);
+    -webkit-transform:translate(0,-50%);
+    -moz-transform:translate(0,-50%);
+    -o-transform:translate(0,-50%);
+    transform:translate(0,-50%);
     width: pxTorem(220);
     padding-right: pxTorem(60);
     text-align: center;
     display: inline-block;
     float: right;
-    p{
-      text-align: center;
-      color: #666;
-      font-size: pxTorem(16);
-      padding: 0;
-      margin-bottom: pxTorem(20);
+    .xiaoxuan{
+      margin-top: pxTorem(10);
+      label {
+        display: block;
+        text-align: left;
+        padding-left: pxTorem(15);
+        font-size: pxTorem(14);
+        margin: 0;
+        color: #333;
+      }
+      .sub-title{
+        padding-left: pxTorem(15);
+        margin-bottom: pxTorem(5);
+        text-align: left;
+        font-size: pxTorem(14);
+        color: #666;
+      }
+      div.box{
+        text-align: left;
+        color: #666;
+        font-size: pxTorem(12);
+        padding: 0;
+        margin: 0;
+        color: #999;
+        .point{
+          display: inline-block;
+          width: pxTorem(15);
+          float: left;
+        }
+        .list{
+          padding-left: pxTorem(15);
+          margin-bottom: pxTorem(5);
+        }
+      }
     }
-    a{
-      text-decoration: none;
-      display: inline-block;
-      width: pxTorem(145);
-      height: pxTorem(40);
-      line-height: pxTorem(40);
-      text-align: center;
-      background-color: #5076e2;
-      color: #fff;
-      border-radius: pxTorem(5);
-      font-size: pxTorem(16);
-    }
+    // a{
+    //   text-decoration: none;
+    //   display: inline-block;
+    //   width: pxTorem(145);
+    //   height: pxTorem(40);
+    //   line-height: pxTorem(40);
+    //   text-align: center;
+    //   background-color: #5076e2;
+    //   color: #fff;
+    //   border-radius: pxTorem(5);
+    //   font-size: pxTorem(16);
+    // }
   }
 }
 .frends-link{
@@ -188,7 +219,6 @@ html{
         }
       }
     }
-
     .go-login{
       display: none;
     }

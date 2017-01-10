@@ -25,13 +25,18 @@ html
               a(href="/login/resetpwd") 忘记密码？
             div.login-btn
               a(href="javascript:;" v-on:click="Login()") 登录
+              p.pc-login
+                span 还没有搭配家账号？
+                a.must-register(href="/login/register") 立即注册
               p.sub-login
                 span 还没有搭配家账号？
                 a.must-register(href="/login/register") 立即注册
 
+        //- div.right
+        //-   p 还没有搭配家账号？
+        //-   a(href="/login/register") 立即注册
         div.right
-          p 还没有搭配家账号？
-          a(href="/login/register") 立即注册
+          p 普通用户登录后，在个人中心可升级为设计师，成为设计师后可以试用搭配家云设计移动端
 
       each item in development.assets.vendor.javascripts
         script(src="/assets/javascripts/#{item}.js")

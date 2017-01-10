@@ -7,22 +7,29 @@
         div.tab-list
           a(href="javascript:;" v-on:click="switchBtn('info')" v-bind:class="settings.subtype == 'info' ? 'active' : ''") 基本信息
           a(href="javascript:;" v-on:click="switchBtn('pwd')" v-bind:class="settings.subtype == 'pwd' ? 'active' : ''") 修改密码
+          a(href="javascript:;" v-on:click="switchBtn('designauth')" v-bind:class="settings.subtype == 'designauth' ? 'active' : ''") 设计师认证
         div.info-box(v-show="settings.subtype == 'info'")
           <vue-info></vue-info>
+          
         div.pwd-box(v-show="settings.subtype == 'pwd'")
           <vue-pwd></vue-pwd>
-        
+
+        div.designauth-box(v-show="settings.subtype == 'designauth'")
+          <vue-designauth></vue-designauth>
+          
 </template>
 
 <script>
   import LeftmenueVue from './leftmenue.vue';
   import PwdVue from './pwd.vue';
   import InfoVue from './info.vue';
+  import DesignauthVue from './designauth.vue';
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-pwd': PwdVue,
-      'vue-info': InfoVue
+      'vue-info': InfoVue,
+      'vue-designauth': DesignauthVue
     },
     data() {
       return {
@@ -67,7 +74,7 @@
       a{
         text-decoration: none;
         display: inline-block;
-        width: pxTorem(60);
+        width: pxTorem(70);
         height: pxTorem(30);
         line-height: pxTorem(30);
         margin-right: pxTorem(30);

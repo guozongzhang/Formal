@@ -2,6 +2,12 @@
   div.info-vue.vue-component
     div.info-wrap
       div.line-box.clear
+        label.title 用户类型：
+        span {{usertype}}
+
+        a(href='javascript:;' v-show="userinfo.user_type_poi_user_types == '2'" @click="AuthDesign()") 认证成设计师
+
+      div.line-box.clear
         label.title 账号：
         span {{userinfo.username}}
 
@@ -9,15 +15,23 @@
         label.title 手机号：
         span {{userinfo.mobile}}
 
+      div.line-box.input-warp
+        label.title 邮箱：
+        span(v-show="userinfo.email") {{userinfo.email}}
+        span(v-show="userinfo.email") (未认证)
+        span(v-show="!userinfo.email") 您还没有绑定邮箱
+
+        a.email(href='javascript:;' v-show="!userinfo.email" @click="editEmail(userinfo.email)") 立即绑定
+        a.email(href='javascript:;' v-show="userinfo.email" @click="editEmail(userinfo.email)") 修改
+        a.email(href='javascript:;' v-show="userinfo.email") 重新发送验证码
+
+
       div.line-box.input-warp.clear
         label.title 昵称：
         div.input-box
           input.form-control(type="text" v-bind:value="userinfo.name" v-model="userinfo.name")
 
-      //- div.line-box.input-warp.clear
-      //-   label.title 邮箱：
-      //-   div.input-box
-      //-     input.form-control(type="text" v-bind:value="userinfo.email")
+
 
       div.line-box.input-warp.clear
         label.title 性别：
@@ -40,15 +54,23 @@
     a.submit-btn(href="javascript:;" v-on:click="submitBtn()") 提交
   
     <vue-successtips :info='success'></vue-successtips>
+    <vue-editemail :info='editemail' v-on:updateemail="UpdateEmail"></vue-editemail>
+    <vue-authdesign :info="auth" v-on:AuthResult="GetResult"></vue-authdesign>
 </template>
 
 <script>
+  let UserType = AV.extend('user_types');
   import AreaVue from '../common/area.vue';
   import SuccesstipsVue from '../common/successtips.vue';
+  import EditemailVue from './_editemail.vue';
+  import AuthdesignVue from './_authdesign.vue';
+  
   export default {
     components: { 
       'vue-area': AreaVue,
       'vue-successtips': SuccesstipsVue,
+      'vue-editemail': EditemailVue,
+      'vue-authdesign': AuthdesignVue
     },
     data() {
       return {
@@ -56,8 +78,9 @@
           username: SITE.session.mem.username || '暂无',
           mobile: SITE.session.mem.u_mobile || '暂无',
           name: SITE.session.mem.info_poi_user_info.ui_name || '暂无',
-          email: SITE.session.mem.u_email || '暂无',
+          email: SITE.session.mem.u_email,
           sex: SITE.session.mem.info_poi_user_info.ui_sex || 0,
+          user_type_poi_user_types: SITE.session.mem.user_type_poi_user_types, 
           province_poi_province: '',
           city_poi_city:'',
           district_poi_district: ''
@@ -66,11 +89,21 @@
           tips:'保存信息',
           flags:'infosave'
         },
+        editemail:{
+          uid: SITE.session.mem.id,
+          value: SITE.session.mem.u_email,
+          flags:'editemail'
+        },
+        auth:{
+          uid: SITE.session.mem.id,
+          flags:'authdesign'
+        },
         info:{
           province_poi_province: SITE.session.mem.info_poi_user_info.ProvinceID || -1,
           city_poi_city: SITE.session.mem.info_poi_user_info.CityID || -1,
           district_poi_district:-1
-        }
+        },
+        usertype:'',
       }
     },
     methods:{
@@ -90,7 +123,28 @@
       },
       getarea: function(str,val) {
         this.userinfo[str] = val
+      },
+      userType: function () {
+        UserType.reset().where({id:SITE.session.mem.user_type_poi_user_types}).keys('ut_name').all((data)=> {
+          this.usertype = data.items[0].ut_name;
+        })
+      },
+      editEmail: function(str) {
+        $('.editemail').modal('show');
+      },
+      UpdateEmail: function(str) {
+        this.userinfo.email = str;
+      },
+      AuthDesign: function() {
+        $('.authdesign').modal('show');
+      },
+      GetResult: function(flag) {
+        Core.alert('success','认证成功');
+        $('.authdesign').modal('hide');
       }
+    },
+    mounted() {
+      this.userType();
     }
   }
 
@@ -108,10 +162,20 @@
       line-height: pxTorem(32);
       .title{
         display: inline-block;
-        width: pxTorem(60);
+        width: pxTorem(70);
         float: left;
         text-align: right;
         margin-right: pxTorem(10);
+      }
+      & > a{
+        display: inline-block;
+        text-decoration: none;
+        color: #f14f4f;
+        margin-left: pxTorem(40);
+        font-size: pxTorem(12);
+      }
+      .email{
+         margin-left: pxTorem(20);
       }
       .input-box{
         display: inline-block;
