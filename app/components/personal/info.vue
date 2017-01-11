@@ -23,7 +23,7 @@
 
         a.email(href='javascript:;' v-show="!userinfo.email" @click="editEmail(userinfo.email)") 立即绑定
         a.email(href='javascript:;' v-show="userinfo.email" @click="editEmail(userinfo.email)") 修改
-        a.email(href='javascript:;' v-show="userinfo.email") 重新发送验证码
+        a.email(href='javascript:;' v-show="userinfo.email" @click="resendEmail(userinfo.email)") 重新发送验证码
 
 
       div.line-box.input-warp.clear
@@ -141,6 +141,13 @@
       GetResult: function(flag) {
         Core.alert('success','认证成功');
         $('.authdesign').modal('hide');
+      },
+      resendEmail: function(str) {
+        API.post('users/send_email',{email: str}, (data)=> {
+          Core.alert('success','发送成功');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
+        })
       }
     },
     mounted() {

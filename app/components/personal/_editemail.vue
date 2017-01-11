@@ -45,14 +45,12 @@
     　　  alert("请输入正确的邮箱格式");
           return;
     　　}
-        let tmp = {
-          id: this.info.uid,
-          u_email: this.info.value
-        }
-        User.reset().get(tmp).update().then((data)=> {
+        API.post('users/send_email',{email: this.info.value}, (data)=> {
           $('.editemail').modal('hide');
           this.$emit('updateemail', this.info.value);
           $('.emailsuccess').modal('show');
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
         })
       }
     }
