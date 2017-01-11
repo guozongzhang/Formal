@@ -48,6 +48,7 @@ html
     script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
 
     script.
+      var urltype = "#{query.type ? query.type : 'designer'}";
       if(typeof APP.#{route.controller}.#{route.action} == 'function'){
         new APP.#{route.controller}.#{route.action}()
       }

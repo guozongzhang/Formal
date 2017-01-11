@@ -86,7 +86,7 @@
     },
     methods:{
       Init: function() {
-        this.info.usersubtype = this.types;
+        this.info.usersubtype = urltype || this.types;
       },
       getDesigner: function(str) {
         if(this.info.usersubtype == str){return;}
@@ -216,6 +216,7 @@
       }
     },
     mounted(){
+      //console.log(urltype,'===')
       var model = this;
       this.Init();
       this.getServiceObj();

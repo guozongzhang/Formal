@@ -33,7 +33,7 @@
         user_logo: SITE.session.mem.info_poi_user_info.ui_head || '../../assets/imgs/user_default.png',
         logininfo:{
           register:{
-            url:'/login/register',
+            url:'/login/register?type=' + 'buyer',
             name:'注册',
             isshow: !SITE.session.login
           },

@@ -12,7 +12,7 @@ class Register extends Basic {
             type:'single',
           },
           tips:'',
-          usertype:'designer',
+          usertype: '',
           user:[
             {
               title:'普通用户',
@@ -117,7 +117,7 @@ class Register extends Basic {
   //初始数据
   init () {
     this.register(['choiceSignalUser', 'choiceCompanyUser', 'submitSuccess']);
-    model.mvvm.usertype = 'designer';
+    model.mvvm.usertype = urltype || 'designer';
     model.mvvm.tips = model.mvvm.designer;
   }
 
