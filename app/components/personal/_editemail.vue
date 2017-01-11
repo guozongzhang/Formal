@@ -45,7 +45,7 @@
     　　  alert("请输入正确的邮箱格式");
           return;
     　　}
-        API.post('users/send_email',{email: this.info.value}, (data)=> {
+        API.post('users/verfied_email',{email: this.info.value}, (data)=> {
           $('.editemail').modal('hide');
           this.$emit('updateemail', this.info.value);
           $('.emailsuccess').modal('show');
