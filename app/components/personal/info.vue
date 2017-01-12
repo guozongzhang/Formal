@@ -143,7 +143,7 @@
         $('.authdesign').modal('hide');
       },
       resendEmail: function(str) {
-        API.post('users/verfied_email',{email: str}, (data)=> {
+        API.post('users/verfied_email',{email: str,url: SITE.Ips.home + '/personal/settings'}, (data)=> {
           Core.alert('success','发送成功');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message)

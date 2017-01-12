@@ -107,7 +107,11 @@ class Index extends Basic {
       Cookies.set('dpjia', data.token, { domain: SITE.domain});
       Core.alert('success','登录成功');
       setTimeout(()=> {
-        window.location.href = '/personal/index'
+        if(!_.isEmpty(email) && !_.isEmpty(token)) {
+          window.location.href = '/personal/index?email=' + email + '&token=' + token;
+        } else {
+          window.location.href = '/personal/index'
+        }
       }, 1000)
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message)
