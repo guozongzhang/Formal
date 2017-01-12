@@ -18,12 +18,13 @@
       div.line-box.input-warp
         label.title 邮箱：
         span(v-show="userinfo.email") {{userinfo.email}}
-        span(v-show="userinfo.email") (未认证)
+        span(v-show="userinfo.email_verify") (已认证)
+        span(v-show="!userinfo.email_verify") (未认证)
         span(v-show="!userinfo.email") 您还没有绑定邮箱
 
         a.email(href='javascript:;' v-show="!userinfo.email" @click="editEmail(userinfo.email)") 立即绑定
         a.email(href='javascript:;' v-show="userinfo.email" @click="editEmail(userinfo.email)") 修改
-        a.email(href='javascript:;' v-show="userinfo.email" @click="resendEmail(userinfo.email)") 重新发送验证码
+        a.email(href='javascript:;' v-show="!userinfo.email_verify" @click="resendEmail(userinfo.email)") 重新发送验证码
 
 
       div.line-box.input-warp.clear
@@ -79,6 +80,7 @@
           mobile: SITE.session.mem.u_mobile || '暂无',
           name: SITE.session.mem.info_poi_user_info.ui_name || '暂无',
           email: SITE.session.mem.u_email,
+          email_verify: SITE.session.mem.email_verfied == '0' ? false : true,
           sex: SITE.session.mem.info_poi_user_info.ui_sex || 0,
           user_type_poi_user_types: SITE.session.mem.user_type_poi_user_types, 
           province_poi_province: '',
