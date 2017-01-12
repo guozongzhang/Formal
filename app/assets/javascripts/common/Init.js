@@ -15,10 +15,10 @@ function getLoginState(){
     if(!Cookies.get('dpjia') && SITE.router.controller === 'personal') {
       if(!_.isEmpty(email) && !_.isEmpty(token)) {
         console.log('判断有token')
-        window.location.href = "/login/index?email=" + email + '&token=' + token;
+        //window.location.href = "/login/index?email=" + email + '&token=' + token;
       } else {
         console.log('判断没有token')
-        window.location.href = "/login/index";
+        //window.location.href = "/login/index";
       }
     }
 
