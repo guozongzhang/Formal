@@ -36,7 +36,6 @@
   import AuthemailVue from './_authemail.vue';
   var email = SITE.query.email ? SITE.query.email : '';
   var token = SITE.query.token ? SITE.query.token : '';
-  console.log('页面',email,token)
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
