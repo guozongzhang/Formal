@@ -17,14 +17,16 @@
         svg.svg-style
           use(xlink:href="/assets/svg/icon.svg#tips")
         span 抱歉，邮箱验证失败，请
-        a(href="javascript:;").resend 重新发送验证邮件
+        a.resend(href="javascript:;" @click="resendEmail()") 重新发送验证邮件
 
       
 
 </template>
 
 <script>
-  import Loading from '../common/loading.vue'
+  import Loading from '../common/loading.vue';
+  var email = SITE.query.email ? SITE.query.email : '';
+  var token = SITE.query.token ? SITE.query.token : '';
   export default {
     components: {
       'vue-loading': Loading
@@ -32,18 +34,35 @@
     data() {
       return {
         isauth: true,
-        authresult: false,
+        authresult: true,
       }
     },
     methods:{
       getAuth: function() {
-        // API.get('users/check_email', {}, (data)=> {
-        //   this.isauth = false;
-        // })
+        API.get('users/check_email', {email:email,token:token}, (data)=> {
+          this.isauth = false;
+          this.authresult = true;
+        },(msg)=> {
+          this.isauth = false;
+          this.authresult = false;
+          Core.alert('danger', msg.responseJSON.message);
+        })
+      },
+      resendEmail: function() {
+        API.post('users/verfied_email',{email: email,url: SITE.Ips.home + '/personal/settings'}, (data)=> {
+          Core.alert('success','发送成功');
+          setTimeout(()=> {
+            window.location.href = '/personal/settings'
+          }, 500)
+        },(msg)=> {
+          Core.alert('danger', msg.responseJSON.message)
+        })
       }
     },
     mounted() {
-      this.getAuth();
+      if(!_.isEmpty(email) && !_.isEmpty(token)) {
+        this.getAuth();
+      }
     }
   }
 
