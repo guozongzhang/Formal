@@ -45,8 +45,7 @@
     　　  alert("请输入正确的邮箱格式");
           return;
     　　}
-
-        console.log('====',{email: this.info.value,url: SITE.Ips.home})
+    
         API.post('users/verfied_email',{email: this.info.value,url: SITE.Ips.home + '/personal/settings'}, (data)=> {
           $('.editemail').modal('hide');
           this.$emit('updateemail', this.info.value);
