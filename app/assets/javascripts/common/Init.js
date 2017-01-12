@@ -14,7 +14,7 @@ function getLoginState(){
     // 未登录进入个人中心页面
     if(!Cookies.get('dpjia') && SITE.router.controller === 'personal') {
       console.log(_.isEmpty(email),_.isEmpty(token))
-      if(!_.isEmpty(email) && !_.isEmpty(token)) {
+      if(email && token) {
         console.log('判断有token')
         //window.location.href = "/login/index?email=" + email + '&token=' + token;
       } else {
