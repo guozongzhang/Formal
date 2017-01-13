@@ -48,6 +48,7 @@
     props:['info'],
     data() {
       return {
+        btn_flag: true,//重复点击
         userinfo:{
           serverArr: [],
           serverobj: 78,
@@ -104,6 +105,10 @@
         })
       },
       saveDate: function() {
+        if(!this.btn_flag) {
+          Core.alert('danger','信息正在提交，请稍后...');
+          return;
+        }
         if(_.isEmpty(this.userinfo.realname)) {
           alert('请输入真实姓名');
           return ;
@@ -117,6 +122,7 @@
           realname: this.userinfo.realname,
           com_id: this.userinfo.serverobj
         }
+        this.btn_flag = false;
         API.put('users/users_to_designer',tmp, (data)=> {
           this.$emit('AuthResult', true);
         },(msg)=> {
