@@ -143,6 +143,9 @@
       GetResult: function(flag) {
         Core.alert('success','认证成功');
         $('.authdesign').modal('hide');
+        setTimeout(function() {
+          window.location.href = '/personal/settings';
+        },300)
       },
       resendEmail: function(str) {
         API.post('users/verfied_email',{email: str,url: SITE.Ips.home + '/personal/settings'}, (data)=> {

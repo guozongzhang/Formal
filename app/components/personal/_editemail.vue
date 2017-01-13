@@ -29,6 +29,7 @@
     props:['info'],
     data() {
       return {
+        send_flag: true,
         success:{
           flags: 'emailsuccess'
         }
@@ -36,6 +37,11 @@
     },
     methods:{
       BindEmail: function() {
+        if(!this.send_flag) {
+          Core.alert('danger','正在发送邮件，请稍后~');
+          return;
+        }
+
         var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
         if(_.isEmpty($.trim(this.info.value))){
           alert("邮箱不能为空");
@@ -45,7 +51,8 @@
     　　  alert("请输入正确的邮箱格式");
           return;
     　　}
-    
+        
+        this.send_flag = false;
         API.post('users/verfied_email',{email: this.info.value,url: SITE.Ips.home + '/personal/settings'}, (data)=> {
           $('.editemail').modal('hide');
           this.$emit('updateemail', this.info.value);
