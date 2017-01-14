@@ -75,6 +75,7 @@
     },
     data() {
       return {
+        send_flag: true,
         userinfo:{
           username: SITE.session.mem.username || '暂无',
           mobile: SITE.session.mem.u_mobile || '暂无',
@@ -148,6 +149,20 @@
         },300)
       },
       resendEmail: function(str) {
+        if(!this.send_flag) {
+          Core.alert('danger','正在发送邮件，请稍后~');
+          return;
+        }
+        var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+        if(_.isEmpty($.trim(str))){
+          alert("邮箱不能为空");
+          return;
+        }
+    　　if (!reg.test($.trim(str))) {
+    　　  alert("请输入正确的邮箱格式");
+          return;
+    　　}
+        this.send_flag = false;
         API.post('users/verfied_email',{email: str,url: SITE.Ips.home + '/personal/settings'}, (data)=> {
           Core.alert('success','发送成功');
         },(msg)=> {
