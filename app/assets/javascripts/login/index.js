@@ -25,6 +25,12 @@ class Index extends Basic {
 
   //初始数据
   init () {
+    document.onkeydown = function(e){ 
+      var ev = document.all ? window.event : e;
+      if(ev.keyCode==13) {
+        model.Login();
+       }
+    }
   }
 
   /*切换登录方式*/
@@ -101,7 +107,11 @@ class Index extends Basic {
       Cookies.set('dpjia', data.token, { domain: SITE.domain});
       Core.alert('success','登录成功');
       setTimeout(()=> {
-        window.location.href = '/'
+        if(!_.isEmpty(email) && !_.isEmpty(token)) {
+          window.location.href = '/personal/settings?email=' + email + '&token=' + token;
+        } else {
+          window.location.href = '/personal/index'
+        }
       }, 1000)
     },(msg)=> {
       Core.alert('danger', msg.responseJSON.message)

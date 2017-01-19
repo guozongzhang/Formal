@@ -4,31 +4,52 @@
       div.left
         <vue-leftmenue :type='settings.type'></vue-leftmenue>
       div.right
-        div.tab-list
-          a(href="javascript:;" v-on:click="switchBtn('info')" v-bind:class="settings.subtype == 'info' ? 'active' : ''") 基本信息
-          a(href="javascript:;" v-on:click="switchBtn('pwd')" v-bind:class="settings.subtype == 'pwd' ? 'active' : ''") 修改密码
-        div.info-box(v-show="settings.subtype == 'info'")
-          <vue-info></vue-info>
-        div.pwd-box(v-show="settings.subtype == 'pwd'")
-          <vue-pwd></vue-pwd>
-        
+        //- 个人设置基本信息
+        div(v-show="!isauth")
+          div.tab-list
+            a(href="javascript:;" v-on:click="switchBtn('info')" v-bind:class="settings.subtype == 'info' ? 'active' : ''") 基本信息
+            a(href="javascript:;" v-on:click="switchBtn('pwd')" v-bind:class="settings.subtype == 'pwd' ? 'active' : ''") 修改密码
+            a(href="javascript:;" v-on:click="switchBtn('designauth')" v-bind:class="settings.subtype == 'designauth' ? 'active' : ''") 设计师认证
+          div.info-box(v-show="settings.subtype == 'info'")
+            <vue-info></vue-info>
+            
+          div.pwd-box(v-show="settings.subtype == 'pwd'")
+            <vue-pwd></vue-pwd>
+
+          div.designauth-box(v-show="settings.subtype == 'designauth'")
+            <vue-designauth></vue-designauth>
+
+        //- 邮箱验证
+        div(v-show="isauth")
+          div.tab-list
+            a.active(href="javascript:;" v-on:click="switchBtn('info')") 验证邮箱
+          div.info-box(v-show="settings.subtype == 'authemail'")
+            <vue-authemail></vue-authemail>
+          
 </template>
 
 <script>
   import LeftmenueVue from './leftmenue.vue';
   import PwdVue from './pwd.vue';
   import InfoVue from './info.vue';
+  import DesignauthVue from './designauth.vue';
+  import AuthemailVue from './_authemail.vue';
+  var email = SITE.query.email ? SITE.query.email : '';
+  var token = SITE.query.token ? SITE.query.token : '';
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
       'vue-pwd': PwdVue,
-      'vue-info': InfoVue
+      'vue-info': InfoVue,
+      'vue-designauth': DesignauthVue,
+      'vue-authemail': AuthemailVue
     },
     data() {
       return {
+        isauth: (_.isEmpty(email) && _.isEmpty(token)) ? false : true,
         settings:{
           type:'settings',
-          subtype:'info'
+          subtype: (_.isEmpty(email) && _.isEmpty(token)) ? 'info' : 'authemail'
         }
       }
     },
@@ -67,7 +88,7 @@
       a{
         text-decoration: none;
         display: inline-block;
-        width: pxTorem(60);
+        width: pxTorem(70);
         height: pxTorem(30);
         line-height: pxTorem(30);
         margin-right: pxTorem(30);
