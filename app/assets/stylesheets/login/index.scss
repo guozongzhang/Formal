@@ -169,9 +169,9 @@ html{
 }
 
 
-@media (max-width: 800px){
+@media only screen and (max-width: 1200px) and (min-width: 300px){
   .body-box{
-    width: 100%;
+    width: 100% !important;
   }
   .banner-box{
     width: 100%;
@@ -186,16 +186,16 @@ html{
     width: 100%;
   }
   .login-box{
-    width: pxTorem(350);
-    height: pxTorem(280);
-    margin: pxTorem(180) auto 0 auto;
+    width: 60%;
+    height: pxTorem(360);
+    margin: 50% auto 0 auto;
     .left{
-      width: pxTorem(350);
-      height: pxTorem(240);
+      width: 100%;
+      height: pxTorem(320);
       padding: pxTorem(20);
       .title{
         width: 100%;
-        height: pxTorem(24);
+        height: pxTorem(40);
         text-align: center;
         label{
           font-size: pxTorem(16);
@@ -205,7 +205,7 @@ html{
         }
       }
       .input-box{
-        width: pxTorem(280);
+        width: 80%;
         margin: 0 auto;
         margin-top: pxTorem(20);
         .input-item{
@@ -214,8 +214,8 @@ html{
           margin-bottom: pxTorem(10);
           input{
             width: 100%;
-            height: pxTorem(32);
-            line-height: pxTorem(32);
+            height: pxTorem(48);
+            line-height: pxTorem(48);
             padding: pxTorem(4) pxTorem(8);
             font-size: pxTorem(14);
           }
@@ -236,8 +236,8 @@ html{
         }
         .auto-logo{
           width: 80%;
-          height: pxTorem(32);
-          line-height: pxTorem(32);
+          height: pxTorem(48);
+          line-height: pxTorem(48);
           margin: 0 auto;
           .check-box{
             font-size: pxTorem(12);
@@ -248,12 +248,12 @@ html{
         }
         .login-btn{
           width: 80%;
-          height: pxTorem(32);
+          height: pxTorem(48);
           margin: 0 auto;
           & > a{
             width: 100%;
-            height: pxTorem(32);
-            line-height: pxTorem(32);
+            height: pxTorem(48);
+            line-height: pxTorem(48);
             font-size: pxTorem(14);
           }
           .pc-login{
