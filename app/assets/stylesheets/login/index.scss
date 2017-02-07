@@ -200,10 +200,10 @@ html{
         line-height: pxTorem(100);
         text-align: center;
         label{
-          font-size: pxTorem(32);
+          font-size: pxTorem(34);
         }
         span{
-          font-size: pxTorem(16);
+          font-size: pxTorem(22);
         }
       }
       .input-box{
@@ -219,7 +219,7 @@ html{
             height: pxTorem(80);
             line-height: pxTorem(80);
             padding: pxTorem(10) pxTorem(16);
-            font-size: pxTorem(24);
+            font-size: pxTorem(26);
           }
         }
         .getverify{
@@ -242,10 +242,10 @@ html{
           line-height: pxTorem(60);
           margin: 0 auto;
           .check-box{
-            font-size: pxTorem(18);
+            font-size: pxTorem(22);
           }
           a{
-            font-size: pxTorem(18);
+            font-size: pxTorem(22);
           }
         }
         .login-btn{
@@ -256,7 +256,7 @@ html{
             width: 100%;
             height: pxTorem(80);
             line-height: pxTorem(80);
-            font-size: pxTorem(24);
+            font-size: pxTorem(26);
           }
           .pc-login{
             display: none;
@@ -266,13 +266,13 @@ html{
             display: inline-block;
             margin-top: pxTorem(20);
             span{
-              font-size: pxTorem(20);
+              font-size: pxTorem(22);
             }
             .must-register{
               display: inline-block;
               float: right;
               text-decoration: none;
-              font-size: pxTorem(20);
+              font-size: pxTorem(22);
             }
           }
         }
@@ -283,7 +283,7 @@ html{
     }
   }
   .frends-link{
-    font-size: pxTorem(20);
-    padding: pxTorem(10) pxTorem(30);
+    font-size: pxTorem(22);
+    padding: pxTorem(20) pxTorem(50);
   }
 }
