@@ -6,6 +6,9 @@ title 搭配家
 each item in development.assets.vendor.stylesheets
   link(href="/assets/stylesheets/#{item}.css" rel="stylesheet")
 
+//- 页面级别的css文件
+link(href="/tmp/assets/stylesheets/layout.css" rel="stylesheet")
+link(href="/tmp/assets/stylesheets/#{route.controller}/#{route.action}.css" rel="stylesheet")
 
 //- 存入后端的某些公共变量供JS使用  全局配置
 script.
