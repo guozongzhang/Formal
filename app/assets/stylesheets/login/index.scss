@@ -29,7 +29,7 @@ html{
   height: pxTorem(340);
   border: 1px solid #ccc;
   background-color: #fff;
-  margin: pxTorem(250) auto pxTorem(100) auto;
+  margin: pxTorem(250) auto pxTorem(30) auto;
   border-radius: pxTorem(4);
   .left{
     display: inline-block;
@@ -188,7 +188,7 @@ html{
   .login-box{
     width: pxTorem(350);
     height: pxTorem(280);
-    margin: pxTorem(180) auto 0 auto;
+    margin: pxTorem(180) auto pxTorem(10) auto;
     .left{
       width: pxTorem(350);
       height: pxTorem(240);
