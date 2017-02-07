@@ -19,18 +19,22 @@
               img(:src="item.img")
               p {{item.text}}
 
+    <vue-line></vue-line>
+
       
 </template>
 
 <script>
   import TitleVue from './title.vue';
+  import LineVue from 'com_root/common/line.vue';
   import VideoVue from '../video/video.vue';
   let HomePage = AV.extend('homepage_modules');
   let viewtimer;
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-video': VideoVue
+      'vue-video': VideoVue,
+      'vue-line': LineVue
     },
     data() {
       return {

@@ -1,5 +1,5 @@
 <template lang="jade">
-  div
+  div(style="text-align:center;background-color:#eee;padding:20px 0 0 0;margin-top:55px;border-top: 1px solid #ccc;") 
     div.footer-vue.vue-component
       div.dpjia-content
         ul.title-ul.list-style.clear

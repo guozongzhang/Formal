@@ -64,6 +64,8 @@
               img(:src="item.img")
               p {{item.text}}
 
+    <vue-line></vue-line>
+
     
    
 
@@ -71,12 +73,14 @@
 
 <script>
   import TitleVue from './title.vue';
+  import LineVue from 'com_root/common/line.vue';
   let HomePage = AV.extend('homepage_modules');
   let viewtimer;
 
   export default {
     components: { 
       'vue-title': TitleVue,
+      'vue-line': LineVue,
       'vue-item': {
         props: ['item'],
         template: '\

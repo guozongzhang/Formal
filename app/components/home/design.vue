@@ -62,11 +62,14 @@
 
               a.appointment(href="#" @click="huh") 预约
 
+    <vue-line></vue-line>
+
 
 </template>
 
 <script>
   import TitleVue from './title.vue';
+  import LineVue from 'com_root/common/line.vue';
   import SwiperVue from '../swiper/swiper.vue';
   let HomePage = AV.extend('homepage_modules');
   let viewtimer;
@@ -74,7 +77,8 @@
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-swiper': SwiperVue 
+      'vue-swiper': SwiperVue,
+      'vue-line': LineVue
     },
     data() {
       return {
