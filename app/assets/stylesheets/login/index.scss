@@ -186,19 +186,21 @@ html{
     width: 100%;
   }
   .login-box{
-    width: 80%;
-    height: pxTorem(520);
+    width: pxTorem(880);
+    height: pxTorem(640);
     margin: 50% auto 0 auto;
+    border-radius: 5px;
     .left{
       width: 100%;
-      height: pxTorem(520);
-      padding: pxTorem(20);
+      height: pxTorem(640);
+      padding: pxTorem(40);
       .title{
         width: 100%;
-        height: pxTorem(60);
+        height: pxTorem(100);
+        line-height: pxTorem(100);
         text-align: center;
         label{
-          font-size: pxTorem(22);
+          font-size: pxTorem(32);
         }
         span{
           font-size: pxTorem(16);
@@ -214,10 +216,10 @@ html{
           margin-bottom: pxTorem(20);
           input{
             width: 100%;
-            height: pxTorem(60);
-            line-height: pxTorem(60);
-            padding: pxTorem(8) pxTorem(12);
-            font-size: pxTorem(18);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            padding: pxTorem(10) pxTorem(16);
+            font-size: pxTorem(24);
           }
         }
         .getverify{
@@ -248,13 +250,13 @@ html{
         }
         .login-btn{
           width: 80%;
-          height: pxTorem(60);
+          height: pxTorem(80);
           margin: 0 auto;
           & > a{
             width: 100%;
-            height: pxTorem(60);
-            line-height: pxTorem(60);
-            font-size: pxTorem(18);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            font-size: pxTorem(24);
           }
           .pc-login{
             display: none;
@@ -264,13 +266,13 @@ html{
             display: inline-block;
             margin-top: pxTorem(20);
             span{
-              font-size: pxTorem(16);
+              font-size: pxTorem(20);
             }
             .must-register{
               display: inline-block;
               float: right;
               text-decoration: none;
-              font-size: pxTorem(16);
+              font-size: pxTorem(20);
             }
           }
         }
