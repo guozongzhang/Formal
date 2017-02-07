@@ -186,22 +186,22 @@ html{
     width: 100%;
   }
   .login-box{
-    width: 60%;
-    height: pxTorem(360);
+    width: 80%;
+    height: pxTorem(520);
     margin: 50% auto 0 auto;
     .left{
       width: 100%;
-      height: pxTorem(320);
+      height: pxTorem(520);
       padding: pxTorem(20);
       .title{
         width: 100%;
-        height: pxTorem(40);
+        height: pxTorem(60);
         text-align: center;
         label{
-          font-size: pxTorem(16);
+          font-size: pxTorem(22);
         }
         span{
-          font-size: pxTorem(14);
+          font-size: pxTorem(16);
         }
       }
       .input-box{
@@ -211,13 +211,13 @@ html{
         .input-item{
           width: 80%;
           margin: 0 auto;
-          margin-bottom: pxTorem(10);
+          margin-bottom: pxTorem(20);
           input{
             width: 100%;
-            height: pxTorem(48);
-            line-height: pxTorem(48);
-            padding: pxTorem(4) pxTorem(8);
-            font-size: pxTorem(14);
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            padding: pxTorem(8) pxTorem(12);
+            font-size: pxTorem(18);
           }
         }
         .getverify{
@@ -236,25 +236,25 @@ html{
         }
         .auto-logo{
           width: 80%;
-          height: pxTorem(48);
-          line-height: pxTorem(48);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
           margin: 0 auto;
           .check-box{
-            font-size: pxTorem(12);
+            font-size: pxTorem(18);
           }
           a{
-            font-size: pxTorem(12);
+            font-size: pxTorem(18);
           }
         }
         .login-btn{
           width: 80%;
-          height: pxTorem(48);
+          height: pxTorem(60);
           margin: 0 auto;
           & > a{
             width: 100%;
-            height: pxTorem(48);
-            line-height: pxTorem(48);
-            font-size: pxTorem(14);
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(18);
           }
           .pc-login{
             display: none;
@@ -262,15 +262,15 @@ html{
           .sub-login{
             width: 100%;
             display: inline-block;
-            margin-top: pxTorem(10);
+            margin-top: pxTorem(20);
             span{
-              font-size: pxTorem(12);
+              font-size: pxTorem(16);
             }
             .must-register{
               display: inline-block;
               float: right;
               text-decoration: none;
-              font-size: pxTorem(12);
+              font-size: pxTorem(16);
             }
           }
         }
@@ -281,7 +281,7 @@ html{
     }
   }
   .frends-link{
-    font-size: pxTorem(10);
+    font-size: pxTorem(16);
     padding: pxTorem(5) pxTorem(30);
   }
 }
