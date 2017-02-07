@@ -170,6 +170,21 @@ html{
 
 
 @media only screen and (max-width: 800px){
+  .body-box{
+    width: 100%;
+  }
+  .banner-box{
+    width: 100%;
+  }
+  .navbar{
+    width: 100%;
+  }
+  .footer-style{
+    width: 100%;
+  }
+  .container-self{
+    width: 100%;
+  }
   .login-box{
     width: pxTorem(350);
     height: pxTorem(280);
