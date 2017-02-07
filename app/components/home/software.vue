@@ -13,7 +13,7 @@
             li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
 
         <!--云量房-->
-        div.loadurl-box(v-show="view == index" v-for="(lanmu, index) in items.lanmus")
+        div.loadurl-box(v-if="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
             li.list-style(v-for="item in lanmu.pics")
               img(:src="item.img")

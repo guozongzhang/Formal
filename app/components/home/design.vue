@@ -7,20 +7,20 @@
           li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
       
       <!--效果图-->
-      div.render-left-box(v-show="view == 0")
+      div.render-left-box(v-if="view == 0")
         div.swiper-box
           <vue-swiper :flag='"homeDesgin"' :swiperdata='swips' :autoplay='2000' :effect='"fade"'></vue-swiper>
           //- div.swiper-text
           //-   p {{datas.renderdata.loopdata.text}}
 
-      div.render-right-box(v-show="view == 0")
+      div.render-right-box(v-if="view == 0")
         ul.list-style.design-right.clear
           li.list-style(v-for="item in items.lanmus[0].piclogo")
             a.img-box(:href="item.url") 
               img(:src="item.img")
       
       <!--户型图-->
-      div.house-box.clear(v-show="view == 1")
+      div.house-box.clear(v-if="view == 1")
         ul.list-style
           li.list-style(v-for="item in items.lanmus[1].pics")
             a(:href="item.url")
@@ -30,14 +30,14 @@
 
       
       <!--模型图-->
-      div.modal-left-box(v-show="view == 2")
+      div.modal-left-box(v-if="view == 2")
         div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
           a(:href="item.url")
             div
               img(:src="item.img")
             p {{item.text}}
 
-      div.modal-right-box(v-show="view == 2")
+      div.modal-right-box(v-if="view == 2")
         ul.list-style.design-right.clear
           li.list-style(v-for="item in  itempart(2, 1, 6)")
             a(:href="item.url")
@@ -47,7 +47,7 @@
       
      
       <!--设计师-->
-      div.designer-box.clear(v-show="view == 3")
+      div.designer-box.clear(v-if="view == 3")
         ul.list-style.clear
           li.list-style(v-for="item in items.lanmus[3].pics")
             a(:href="item.url")
