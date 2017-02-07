@@ -11,9 +11,9 @@
         li.list-style.list-right
           a(:href="logininfo.login.url" v-show="logininfo.login.isshow") {{logininfo.login.name}}
 
-        li.list-style.list-right
-          img.user-img(:src="user_logo" v-if="logininfo.users.isshow")
-          a.users-info(:href="logininfo.users.url" v-show="logininfo.users.isshow") {{logininfo.users.name}}
+        li.list-style.list-right(v-if="logininfo.users.isshow")
+          img.user-img(:src="user_logo")
+          a.users-info(:href="logininfo.users.url") {{logininfo.users.name}}
             div.sub-menu
               a(:href="sub.index.url") {{sub.index.name}}
               a(:href="sub.mydesign.url") {{sub.mydesign.name}}
