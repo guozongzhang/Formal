@@ -472,10 +472,13 @@
   .sub-login{
     display: none;
   }
+  .must-register{
+    float: right;
+  }
 }
 
-@media only screen and (max-width: 800px){
-  .companyuser-vue {
+@media only screen and (max-width: 1200px) and (min-width: 300px){
+  .companyusesr-vue {
     width: pxTorem(350);
     padding: 0 pxTorem(40);
     .info{
@@ -602,6 +605,193 @@
       & > a{
         float: right;
       }
+    }
+  }
+  .companyuser-vue {
+    width: pxTorem(700);
+    padding: 0;
+    background-color: #fff;
+    margin: 0 auto;
+    .tab-box{
+      li{
+        display: inline-block;
+        width: 16%;
+        float: left;
+        font-size: pxTorem(30);
+      }
+      .radio-item{
+        width: 42%;
+      }
+    }
+    .info{
+      margin-top: pxTorem(20);
+      ul{
+        li{
+          display: block;
+          height: pxTorem(80);
+          position: relative;
+          margin-bottom: pxTorem(20);
+          .fa{
+            position: absolute;
+            left: pxTorem(26);
+            top: pxTorem(18);
+            color: #ddd;
+            font-size: pxTorem(42);
+          }
+          .fa-mobile{
+            font-size: pxTorem(50);
+          }
+          .must-input{
+            position: absolute;
+            left: pxTorem(60);
+            top: pxTorem(16);
+            display: inline-block;
+            color: #f00;
+            font-size: pxTorem(24);
+          }
+          .input-info{
+            width: pxTorem(700);
+            height: pxTorem(80);
+            padding-left: pxTorem(86);
+            border: 1px solid #ddd;
+            border-radius: pxTorem(5);
+            font-size: pxTorem(30);
+          }
+          .getverify{
+            width: pxTorem(460);
+            border-radius: pxTorem(5) 0 0 pxTorem(5);
+          }
+          .getverifybtn{
+            display: inline-block;
+            width: pxTorem(220);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            text-align: center;
+            border: 1px solid #ccc;
+            font-size: pxTorem(14);
+            margin-left: pxTorem(20);
+            cursor: pointer;
+            background-color: #ddd;
+            font-size: pxTorem(30);
+          }
+          label.error{
+            position: absolute;
+            top: pxTorem(10);
+            right: pxTorem(10);
+            color: #f00;
+          }
+        }
+        li.verify-error{
+          label.error{
+            right: pxTorem(130);
+          }
+        }
+      }
+    }
+    .service-obj{
+      position: relative;
+      label{
+        font-size: pxTorem(30);
+      }
+      .tips{
+        color: #f00;
+        font-size: pxTorem(24);
+      }
+      .colon{
+        display: inline-block;
+        margin-right: pxTorem(20);
+        font-size: pxTorem(30);
+      }
+      .area-box{
+        width: pxTorem(520);
+        .row{
+          margin: 0;
+          .col-md-4{
+            display: inline-block;
+            width: pxTorem(160);
+            float: left;
+            margin-left: pxTorem(10);
+            select{
+              width: pxTorem(150);
+              height: pxTorem(80);
+              line-height: pxTorem(80);
+              font-size: pxTorem(30);
+              padding: 0 pxTorem(20);
+              option{
+                font-size: pxTorem(14);
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
+    .upload-img{
+      margin-top: pxTorem(20);
+      label{
+        display: inline-block;
+        margin-right: pxTorem(20);
+        font-size: pxTorem(30);
+      }
+      .upload-box{
+        display: inline-block;
+        width: pxTorem(300);
+        height: pxTorem(80);
+        .add-btn{
+          display: inline-block;
+          width: pxTorem(160);
+          height: pxTorem(80);
+          line-height: pxTorem(80);
+          text-align: center;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          font-size: pxTorem(24);
+          .fa{
+            display: inline-block;
+            margin-right: pxTorem(20);
+          }
+        }
+        img{
+          display: inline-block;
+          width: pxTorem(120);
+          height: pxTorem(80);
+          margin-left: pxTorem(20);
+        }
+      }
+    }
+    .tip-info{
+      margin-top: pxTorem(20);
+      p {
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        margin: 0;
+        padding-left: pxTorem(20);
+        font-size: pxTorem(24);
+        color: #f00;
+      }
+    }
+    .protocol{
+      margin-top: pxTorem(20);
+      font-size: pxTorem(24);
+    }
+    .save-btn{
+      margin: pxTorem(20) 0 pxTorem(20) 0;
+      width: pxTorem(700);
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      text-align: center;
+      background-color: #37B5F9;
+      color: #fff;
+      border-radius: pxTorem(5);
+      font-size: pxTorem(30);
+    }
+    .pc-login{
+      margin-bottom: pxTorem(40);
+      padding: 0;
+      font-size: pxTorem(24);
+    }
+    .sub-login{
+      display: none;
     }
   }
 }
