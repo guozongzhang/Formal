@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js |  webpack --watch| browser-sync start -c ./config/bs-config.js",
+    "start": "node app.js |  webpack --watch |  node tool/watch.js | browser-sync start -c ./config/bs-config.js",
     "migrate": "knex migrate:latest",
     "build": "cnpm install && webpack && node tool/build",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build && pm2 restart app.js",
