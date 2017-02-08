@@ -418,127 +418,184 @@
   .sub-login{
     display: none;
   }
+  .must-register{
+    float: right;
+  }
 }
 
-@media only screen and (max-width: 800px){
+@media (max-width: 1200px) and (min-width: 300px){
   .personaluser-vue {
-    width: pxTorem(350);
-    padding: 0 pxTorem(40);
+    width: pxTorem(700);
+    padding: 0;
+    background-color: #fff;
+    margin: 0 auto;
     .tab-box{
-      .subtype{
-        padding-left: pxTorem(10);
+      li{
+        display: inline-block;
+        width: 16%;
+        float: left;
+        font-size: pxTorem(30);
+      }
+      .radio-item{
+        width: 42%;
       }
     }
     .info{
-      margin-top: pxTorem(10);
+      margin-top: pxTorem(20);
       ul{
         li{
-          height: pxTorem(32);
-          margin-bottom: pxTorem(10);
+          display: block;
+          height: pxTorem(80);
+          position: relative;
+          margin-bottom: pxTorem(20);
           .fa{
-            left: pxTorem(12);
-            top: pxTorem(11);
-            font-size: pxTorem(14);
+            position: absolute;
+            left: pxTorem(26);
+            top: pxTorem(18);
+            color: #ddd;
+            font-size: pxTorem(42);
           }
           .fa-mobile{
-            font-size: pxTorem(20);
+            font-size: pxTorem(50);
           }
           .must-input{
             position: absolute;
-            left: pxTorem(28);
-            top: pxTorem(10);
+            left: pxTorem(60);
+            top: pxTorem(16);
             display: inline-block;
             color: #f00;
+            font-size: pxTorem(24);
           }
           .input-info{
-            width: pxTorem(270);
-            height: pxTorem(32);
-            padding-left: pxTorem(40);
-            font-size: pxTorem(12);
+            width: pxTorem(700);
+            height: pxTorem(80);
+            padding-left: pxTorem(86);
+            border: 1px solid #ddd;
+            border-radius: pxTorem(5);
+            font-size: pxTorem(30);
           }
           .getverify{
-            width: pxTorem(180);
+            width: pxTorem(460);
+            border-radius: pxTorem(5) 0 0 pxTorem(5);
           }
           .getverifybtn{
-            width: pxTorem(80);
-            height: pxTorem(32);
-            line-height: pxTorem(32);
-            font-size: pxTorem(12);
-            margin-left: pxTorem(10);
+            display: inline-block;
+            width: pxTorem(220);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            text-align: center;
+            border: 1px solid #ccc;
+            font-size: pxTorem(14);
+            margin-left: pxTorem(20);
+            cursor: pointer;
+            background-color: #ddd;
+            font-size: pxTorem(30);
           }
           label.error{
-            top: pxTorem(7);
-            right: pxTorem(8);
-            font-size: pxTorem(12);
+            position: absolute;
+            top: pxTorem(10);
+            right: pxTorem(10);
+            color: #f00;
           }
         }
         li.verify-error{
           label.error{
-            right: pxTorem(98);
+            right: pxTorem(130);
           }
         }
       }
     }
     .service-obj{
+      position: relative;
       label{
-        font-size: pxTorem(12);
+        font-size: pxTorem(30);
+      }
+      .tips{
+        color: #f00;
+        font-size: pxTorem(24);
       }
       .colon{
-        margin-right: pxTorem(6);
+        display: inline-block;
+        margin-right: pxTorem(20);
+        font-size: pxTorem(30);
       }
       select{
-        width: pxTorem(180);
-        height: pxTorem(30);
-        line-height: pxTorem(30);
+        width: pxTorem(480);
+        height: pxTorem(80);
+        line-height: pxTorem(80);
+        font-size: pxTorem(30);
+        padding: 0 pxTorem(20);
+        option{
+          font-size: pxTorem(14) !important;
+        }
       }
     }
     .upload-img{
-      margin-top: pxTorem(10);
+      margin-top: pxTorem(20);
       label{
-        font-size: pxTorem(12);
-        margin-right: pxTorem(10);
+        display: inline-block;
+        margin-right: pxTorem(20);
+        font-size: pxTorem(30);
       }
       .upload-box{
-        width: pxTorem(180);
-        height: pxTorem(32);
+        display: inline-block;
+        width: pxTorem(300);
+        height: pxTorem(80);
         .add-btn{
-          width: pxTorem(60);
-          height: pxTorem(30);
-          line-height: pxTorem(30);
-          font-size: pxTorem(12);
+          display: inline-block;
+          width: pxTorem(160);
+          height: pxTorem(80);
+          line-height: pxTorem(80);
+          text-align: center;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          font-size: pxTorem(24);
           .fa{
-            margin-right: pxTorem(6);
+            display: inline-block;
+            margin-right: pxTorem(20);
           }
         }
         img{
-          position: relative;
-          top: pxTorem(-2);
-          width: pxTorem(45);
-          height: pxTorem(30);
-          margin-left: pxTorem(10);
+          display: inline-block;
+          width: pxTorem(120);
+          height: pxTorem(80);
+          margin-left: pxTorem(20);
         }
       }
     }
     .tip-info{
+      margin-top: pxTorem(20);
       p {
-        padding-left: pxTorem(15);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        margin: 0;
+        padding-left: pxTorem(20);
+        font-size: pxTorem(24);
+        color: #f00;
       }
+    }
+    .protocol{
+      margin-top: pxTorem(20);
+      font-size: pxTorem(24);
     }
     .save-btn{
-      margin: pxTorem(10) 0;
-      width: pxTorem(270);
-      height: pxTorem(32);
-      line-height: pxTorem(32);
-      font-size: pxTorem(14);
+      margin: pxTorem(20) 0 pxTorem(20) 0;
+      width: pxTorem(700);
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      text-align: center;
+      background-color: #37B5F9;
+      color: #fff;
+      border-radius: pxTorem(5);
+      font-size: pxTorem(30);
     }
     .pc-login{
-      display: none;
+      margin-bottom: pxTorem(40);
+      padding: 0;
+      font-size: pxTorem(24);
     }
     .sub-login{
-      display: block;
-      & > a{
-        float: right;
-      }
+      display: none;
     }
   }
 }
