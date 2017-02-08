@@ -438,6 +438,10 @@
       }
       .radio-item{
         width: 42%;
+        input[type=radio]{
+          width: pxTorem(28);
+          height: pxTorem(28);
+        }
       }
     }
     .info{
@@ -577,6 +581,10 @@
     .protocol{
       margin-top: pxTorem(20);
       font-size: pxTorem(24);
+      input[type=checkbox]{
+        width: pxTorem(24);
+        height: pxTorem(24);
+      }
     }
     .save-btn{
       margin: pxTorem(20) 0 pxTorem(20) 0;

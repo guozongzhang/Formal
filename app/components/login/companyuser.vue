@@ -478,135 +478,6 @@
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 300px){
-  .companyusesr-vue {
-    width: pxTorem(350);
-    padding: 0 pxTorem(40);
-    .info{
-      margin-top: pxTorem(10);
-      ul{
-        li{
-          height: pxTorem(32);
-          margin-bottom: pxTorem(10);
-          .fa{
-            left: pxTorem(12);
-            top: pxTorem(11);
-            font-size: pxTorem(14);
-          }
-          .fa-mobile{
-            font-size: pxTorem(20);
-          }
-          .must-input{
-            position: absolute;
-            left: pxTorem(28);
-            top: pxTorem(10);
-            display: inline-block;
-            color: #f00;
-          }
-          .input-info{
-            width: pxTorem(270);
-            height: pxTorem(32);
-            padding-left: pxTorem(40);
-            font-size: pxTorem(12);
-          }
-          .getverify{
-            width: pxTorem(180);
-          }
-          .getverifybtn{
-            width: pxTorem(80);
-            height: pxTorem(32);
-            line-height: pxTorem(32);
-            font-size: pxTorem(12);
-            margin-left: pxTorem(10);
-          }
-          label.error{
-            top: pxTorem(7);
-            right: pxTorem(8);
-            font-size: pxTorem(12);
-          }
-        }
-        li.verify-error{
-          label.error{
-            right: pxTorem(98);
-          }
-        }
-      }
-    }
-    .service-obj{
-      label{
-        font-size: pxTorem(12);
-      }
-      .colon{
-        margin-right: pxTorem(6);
-      }
-      .area-box{
-        width: pxTorem(190);
-        .row{
-          margin: 0;
-          .col-md-4{
-            display: inline-block;
-            width: pxTorem(60);
-            float: left;
-            margin-left: pxTorem(3);
-            select{
-              width: pxTorem(60);
-              height: pxTorem(30);
-              line-height: pxTorem(30);
-              font-size: pxTorem(12);
-              padding: pxTorem(2);
-            }
-          }
-        }
-      }
-    }
-    .upload-img{
-      margin-top: pxTorem(10);
-      label{
-        font-size: pxTorem(12);
-        margin-right: pxTorem(10);
-      }
-      .upload-box{
-        width: pxTorem(175);
-        height: pxTorem(32);
-        .add-btn{
-          width: pxTorem(60);
-          height: pxTorem(30);
-          line-height: pxTorem(30);
-          font-size: pxTorem(12);
-          .fa{
-            margin-right: pxTorem(6);
-          }
-        }
-        img{
-          position: relative;
-          top: pxTorem(-2);
-          width: pxTorem(45);
-          height: pxTorem(30);
-          margin-left: pxTorem(10);
-        }
-      }
-    }
-    .tip-info{
-      p {
-        padding-left: pxTorem(15);
-      }
-    }
-    .save-btn{
-      margin: pxTorem(10) 0;
-      width: pxTorem(270);
-      height: pxTorem(32);
-      line-height: pxTorem(32);
-      font-size: pxTorem(14);
-    }
-    .pc-login{
-      display: none;
-    }
-    .sub-login{
-      display: block;
-      & > a{
-        float: right;
-      }
-    }
-  }
   .companyuser-vue {
     width: pxTorem(700);
     padding: 0;
@@ -621,6 +492,10 @@
       }
       .radio-item{
         width: 42%;
+        input[type=radio]{
+          width: pxTorem(28);
+          height: pxTorem(28);
+        }
       }
     }
     .info{
@@ -773,6 +648,10 @@
     .protocol{
       margin-top: pxTorem(20);
       font-size: pxTorem(24);
+      input[type=checkbox]{
+        width: pxTorem(24);
+        height: pxTorem(24);
+      }
     }
     .save-btn{
       margin: pxTorem(20) 0 pxTorem(20) 0;
