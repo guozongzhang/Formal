@@ -30,7 +30,7 @@ body{
   }
 }
 
-@media (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
   .body-box{
     width: pxTorem(1200);
   }
@@ -47,23 +47,23 @@ body{
     width: pxTorem(1200);
   }
 }
-@media (max-width: 800px) {
-  .body-box{
-    width: 100%;
-  }
-  .banner-box{
-    width: 100%;
-  }
-  .navbar{
-    width: 100%;
-  }
-  .footer-style{
-    width: 100%;
-  }
-  .container-self{
-    width: 100%;
-  }
-}
+// @media (max-width: 800px) {
+//   .body-box{
+//     width: 100%;
+//   }
+//   .banner-box{
+//     width: 100%;
+//   }
+//   .navbar{
+//     width: 100%;
+//   }
+//   .footer-style{
+//     width: 100%;
+//   }
+//   .container-self{
+//     width: 100%;
+//   }
+// }
 
 /*组件公共样式*/
 .vue-component{
@@ -108,14 +108,14 @@ body{
   }
 }
 
-nav.navbar{
-  .avatar {
-    width: 30px; 
-    height: 30px;
-    border-radius: 100%;
-    box-shadow: 1px 1px 1px #DDD;
-  }
-}
+// nav.navbar{
+//   .avatar {
+//     width: 30px; 
+//     height: 30px;
+//     border-radius: 100%;
+//     box-shadow: 1px 1px 1px #DDD;
+//   }
+// }
 
 .container{
   position: relative;

@@ -1,7 +1,7 @@
 <template lang="jade">
   div.header-vue.vue-component
     div.container-self
-      div.navbar-header.collapse.navbar-toggleable-xs 
+      div.navbar-header.navbar-toggleable-xs 
         a.home-logo(href="/") 
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
@@ -45,6 +45,7 @@
 @import "../../assets/stylesheets/function.scss";
 
 .header-vue {
+  height: pxTorem(85);
   .navbar-header{
     height: pxTorem(85);
     .home-logo{

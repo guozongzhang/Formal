@@ -13,24 +13,28 @@
             li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
 
         <!--云量房-->
-        div.loadurl-box(v-show="view == index" v-for="(lanmu, index) in items.lanmus")
+        div.loadurl-box(v-if="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
             li.list-style(v-for="item in lanmu.pics")
               img(:src="item.img")
               p {{item.text}}
+
+    <vue-line></vue-line>
 
       
 </template>
 
 <script>
   import TitleVue from './title.vue';
+  import LineVue from 'com_root/common/line.vue';
   import VideoVue from '../video/video.vue';
   let HomePage = AV.extend('homepage_modules');
   let viewtimer;
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-video': VideoVue
+      'vue-video': VideoVue,
+      'vue-line': LineVue
     },
     data() {
       return {

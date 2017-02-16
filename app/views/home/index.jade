@@ -5,4 +5,3 @@ block banner
 block con
   div(v-for="(key, index) in bodycoms")
     component(v-bind:is= '"vue-" + key')
-    <vue-line v-if="index != bodycoms.length - 1"></vue-line>

@@ -5,7 +5,7 @@
       ul.list-style 
         li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
     <!--办公家具-->
-    div.office-imgs-box.clear(v-show="view == 0")
+    div.office-imgs-box.clear(v-if="view == 0")
       div.left-box.clear
         div.left-top
           a(:href="item.url" v-for="item in itempart(0, 0 , 0)")
@@ -30,7 +30,7 @@
     
     
     <!--民用家具-->
-    div.civil-img-box.clear(v-show="view == 1")
+    div.civil-img-box.clear(v-if="view == 1")
       div.top-box
         ul.list-style 
           li.list-style(v-for="item in itempart(1, 0 , 4)")
@@ -46,7 +46,7 @@
             <vue-item :item="item"></vue-item>
    
     <!--品牌精选-->
-    div.brand-box.clear(v-show="view == 2")
+    div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
           li.list-style(v-for="item in items.lanmus[2].pics") 
@@ -56,13 +56,15 @@
     
     
     <!--线下体验店-->
-    div.store-box.clear(v-show="view == 3")
+    div.store-box.clear(v-if="view == 3")
       div.store-list.clear
         ul.list-style.clear
           li.list-style(v-for="item in items.lanmus[3].pics") 
             a(:href="item.url") 
               img(:src="item.img")
               p {{item.text}}
+
+    <vue-line></vue-line>
 
     
    
@@ -71,12 +73,14 @@
 
 <script>
   import TitleVue from './title.vue';
+  import LineVue from 'com_root/common/line.vue';
   let HomePage = AV.extend('homepage_modules');
   let viewtimer;
 
   export default {
     components: { 
       'vue-title': TitleVue,
+      'vue-line': LineVue,
       'vue-item': {
         props: ['item'],
         template: '\

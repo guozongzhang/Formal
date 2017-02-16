@@ -169,40 +169,57 @@ html{
 }
 
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1200px) and (min-width: 300px){
+  .body-box{
+    width: 100% !important;
+  }
+  .banner-box{
+    width: 100%;
+  }
+  .navbar{
+    width: 100%;
+  }
+  .footer-style{
+    width: 100%;
+  }
+  .container-self{
+    width: 100%;
+  }
   .login-box{
-    width: pxTorem(350);
-    height: pxTorem(280);
-    margin: pxTorem(180) auto 0 auto;
+    width: pxTorem(880);
+    height: pxTorem(640);
+    margin: 48% auto 0 auto;
+    border-radius: 5px;
     .left{
-      width: pxTorem(350);
-      height: pxTorem(240);
-      padding: pxTorem(20);
+      width: 100%;
+      height: pxTorem(640);
+      padding: pxTorem(40);
       .title{
         width: 100%;
-        height: pxTorem(24);
+        height: pxTorem(100);
+        line-height: pxTorem(100);
         text-align: center;
         label{
-          font-size: pxTorem(16);
+          font-size: pxTorem(34);
         }
         span{
-          font-size: pxTorem(14);
+          font-size: pxTorem(22);
         }
       }
       .input-box{
-        width: pxTorem(280);
+        width: 80%;
         margin: 0 auto;
         margin-top: pxTorem(20);
         .input-item{
           width: 80%;
           margin: 0 auto;
-          margin-bottom: pxTorem(10);
+          margin-bottom: pxTorem(20);
           input{
             width: 100%;
-            height: pxTorem(32);
-            line-height: pxTorem(32);
-            padding: pxTorem(4) pxTorem(8);
-            font-size: pxTorem(14);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            padding: pxTorem(10) pxTorem(16);
+            font-size: pxTorem(26);
           }
         }
         .getverify{
@@ -221,25 +238,25 @@ html{
         }
         .auto-logo{
           width: 80%;
-          height: pxTorem(32);
-          line-height: pxTorem(32);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
           margin: 0 auto;
           .check-box{
-            font-size: pxTorem(12);
+            font-size: pxTorem(22);
           }
           a{
-            font-size: pxTorem(12);
+            font-size: pxTorem(22);
           }
         }
         .login-btn{
           width: 80%;
-          height: pxTorem(32);
+          height: pxTorem(80);
           margin: 0 auto;
           & > a{
             width: 100%;
-            height: pxTorem(32);
-            line-height: pxTorem(32);
-            font-size: pxTorem(14);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            font-size: pxTorem(26);
           }
           .pc-login{
             display: none;
@@ -247,15 +264,15 @@ html{
           .sub-login{
             width: 100%;
             display: inline-block;
-            margin-top: pxTorem(10);
+            margin-top: pxTorem(20);
             span{
-              font-size: pxTorem(12);
+              font-size: pxTorem(22);
             }
             .must-register{
               display: inline-block;
               float: right;
               text-decoration: none;
-              font-size: pxTorem(12);
+              font-size: pxTorem(22);
             }
           }
         }
@@ -266,7 +283,7 @@ html{
     }
   }
   .frends-link{
-    font-size: pxTorem(10);
-    padding: pxTorem(5) pxTorem(30);
+    font-size: pxTorem(22);
+    padding: pxTorem(20) pxTorem(50);
   }
 }

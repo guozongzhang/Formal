@@ -1,11 +1,14 @@
 meta(charset="utf-8")
-meta(http-equiv="X-UA-Compatible" content="IE=edge")
-meta(name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=3.0, minimun-scale=1.0")
+meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+//- meta(name="viewport" content="width=device-width, target-densitydpi=high-dpi, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimun-scale=1.0")
 title 搭配家
 
 each item in development.assets.vendor.stylesheets
   link(href="/assets/stylesheets/#{item}.css" rel="stylesheet")
 
+//- 页面级别的css文件
+link(href="/tmp/assets/stylesheets/layout.css" rel="stylesheet")
+link(href="/tmp/assets/stylesheets/#{route.controller}/#{route.action}.css" rel="stylesheet")
 
 //- 存入后端的某些公共变量供JS使用  全局配置
 script.

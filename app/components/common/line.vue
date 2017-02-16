@@ -19,6 +19,8 @@
 
 .line-vue{
   p{
+    width: pxTorem(1200);
+    overflow: hidden;
     height: pxTorem(20);
     line-height: pxTorem(20);
     margin: 0;

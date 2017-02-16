@@ -201,118 +201,137 @@ html{
   background:rgba(0,0,0,0.5);
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1200px) and (min-width: 300px){
+  .body-box{
+    width: 100%;
+  }
+  .banner-box{
+    width: 100%;
+  }
+  .navbar{
+    width: 100%;
+  }
+  .footer-style{
+    width: 100%;
+  }
+  .container-self{
+    width: 100%;
+  }
   .login-box{
-    width: pxTorem(350);
-    margin: pxTorem(200) auto 0 auto;
+    width: pxTorem(800);
+    margin: 50% auto 0 auto;
     .title{
-      width: pxTorem(350);
-      height: pxTorem(50);
-      line-height: pxTorem(50);
-      font-size: pxTorem(16);
+      width: pxTorem(800);
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      font-size: pxTorem(30);
       margin-bottom: pxTorem(20);
       a{
-        left: pxTorem(14);
-        font-size: pxTorem(14);
+        left: pxTorem(30);
+        font-size: pxTorem(24);
       }
     }
     .step-box{
-      width: pxTorem(300);
-      height: pxTorem(30);
+      width: pxTorem(600);
+      height: pxTorem(60);
+      line-height: pxTorem(60);
       margin: 0 auto pxTorem(20) auto;
       .icon-circle{
         position: relative;
         top: pxTorem(-5);
-        width: pxTorem(20);
-        height: pxTorem(20);
-        line-height: pxTorem(20);
-        font-size: pxTorem(14);
+        width: pxTorem(40);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        font-size: pxTorem(24);
       }
       .text{
         top: pxTorem(-5);
-        height: pxTorem(20);
-        line-height: pxTorem(20);
-        margin-left: pxTorem(8);
-        font-size: pxTorem(12);
+        height: pxTorem(40);
+        line-height: pxTorem(40);
+        margin-left: pxTorem(10);
+        font-size: pxTorem(24);
       }
       .step-line{
         position: relative;
         top: pxTorem(-5);
-        margin: 0 pxTorem(10);
-        font-size: pxTorem(18);
+        margin: 0 pxTorem(20);
+        font-size: pxTorem(24);
       }
     }
     .input-box{
-      width: pxTorem(300);
-      margin: pxTorem(10) auto pxTorem(20) auto;
+      width: pxTorem(600);
+      margin: pxTorem(20) auto pxTorem(40) auto;
       .input-item{
-        margin-bottom: pxTorem(10);
+        margin-bottom: pxTorem(20);
         label{
-          width: pxTorem(80);
-          font-size: pxTorem(14);
-          margin-right: pxTorem(8);
+          width: pxTorem(160);
+          font-size: pxTorem(24);
+          margin-right: pxTorem(10);
         }
         input{
-          width: pxTorem(210);
-          height: pxTorem(32);
-          line-height: pxTorem(32);
-          padding: pxTorem(3) pxTorem(10);
+          width: pxTorem(340);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
+          padding: pxTorem(10) pxTorem(20);
+          font-size: pxTorem(20);
         }
       }
       .getverify{
         input{
-          width: pxTorem(120);
+          width: pxTorem(200);
         }
         img{
-          width: pxTorem(80);
-          height: pxTorem(28);
-          line-height: pxTorem(28);
-          margin-left: pxTorem(10);
+          width: pxTorem(120);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
+          margin-left: pxTorem(15);
           border-radius: pxTorem(5);
         }
       }
       .next-step{
-        width: pxTorem(210);
-        height: pxTorem(32);
+        width: pxTorem(600);
+        height: pxTorem(60);
         margin-left: pxTorem(88);
         a{
-          width: pxTorem(210);
-          height: pxTorem(32);
-          line-height: pxTorem(32);
+          width: pxTorem(420);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
         }
       }
     }
 
     .second-input-box{
-      width: pxTorem(220);
-      margin: 0 auto pxTorem(20) auto;
+      width: pxTorem(420);
+      margin: 0 auto pxTorem(40) auto;
       .input-item{
-        margin-bottom: pxTorem(10);
+        margin-bottom: pxTorem(20);
         span{
           top: pxTorem(-10);
+          font-size: pxTorem(24);
         }
         input{
-          width: pxTorem(220);
-          height: pxTorem(32);
-          line-height: pxTorem(32);
-          padding: pxTorem(3) pxTorem(10);
+          width: pxTorem(420);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
+          padding: pxTorem(10) pxTorem(20);
+          font-size: pxTorem(24);
         }
         .getverify{
-          width: pxTorem(76);
-          height: pxTorem(32);
-          line-height: pxTorem(32);
+          width: pxTorem(140);
+          height: pxTorem(40);
+          line-height: pxTorem(22);
           top: pxTorem(-10);
-          font-size: pxTorem(10);
+          font-size: pxTorem(18);
         }
       }
       .login-btn{
-        width: pxTorem(220);
-        height: pxTorem(32);
+        width: pxTorem(420);
+        height: pxTorem(60);
         a{
-          width: pxTorem(220);
-          height: pxTorem(32);
-          line-height: pxTorem(32);
-          font-size: pxTorem(14);
+          width: pxTorem(420);
+          height: pxTorem(60);
+          line-height: pxTorem(60);
+          font-size: pxTorem(24);
         }
       }
     }

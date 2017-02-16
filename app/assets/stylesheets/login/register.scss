@@ -134,6 +134,7 @@ html{
   bottom: 0px;
   width: 100%;
   background:rgba(0,0,0,0.5);
+  margin-top: pxTorem(40);
 }
 
 .success-bg {
@@ -199,23 +200,39 @@ html{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1200px) and (min-width: 300px){
+  .body-box{
+    width: 100%;
+  }
+  .banner-box{
+    width: 100%;
+  }
+  .navbar{
+    width: 100%;
+  }
+  .footer-style{
+    width: 100%;
+  }
+  .container-self{
+    width: 100%;
+  }
   .register-box{
-    width: pxTorem(350);
+    width: pxTorem(880);
     margin-bottom: pxTorem(100);
-    margin: pxTorem(120) auto pxTorem(100) auto;
+    margin: 32% auto pxTorem(100) auto;
     .vue-box{
       width: 100%;
     }
     /* 头部导航 */
     .top-tab {
       width: 100%;
-      padding: pxTorem(8) pxTorem(30);
-      height: pxTorem(40);
-      line-height: pxTorem(22);
+      padding: pxTorem(20) pxTorem(60);
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      margin-bottom: pxTorem(40);
       ul{
         li{
-          font-size: pxTorem(14);
+          font-size: pxTorem(30);
         }
       }
     }
@@ -224,7 +241,7 @@ html{
     }
   }
   .frends-link{
-    font-size: pxTorem(10);
-    padding: pxTorem(5) pxTorem(30);
+    font-size: pxTorem(22);
+    padding: pxTorem(20) pxTorem(50);
   }
 }

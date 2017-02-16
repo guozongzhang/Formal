@@ -13,8 +13,9 @@
             p.empty 还没有效果图呢~
           ul.list-style.clear(v-show="renders.length != 0")
             li.list-style(v-for="item in renders")
-              a.link-box.fancybox(:href="item.rd_image" rel="group" v-bind:title="item.name")
-                img(:src="item.rd_image")
+              a.link-box
+                a.fancybox(:href="item.rd_image" rel="group" v-bind:title="item.name")
+                  img(:src="item.rd_image")
                 span.edit(v-on:click="renameRender(item)")
                   svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#edit")
