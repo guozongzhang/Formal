@@ -17,6 +17,7 @@
             div.sub-menu
               a(:href="sub.index.url") {{sub.index.name}}
               a(:href="sub.mydesign.url") {{sub.mydesign.name}}
+              a(:href="sub.myhousetype.url") {{sub.myhousetype.name}}
               a(:href="sub.myrenderimg.url") {{sub.myrenderimg.name}}
               a(:href="sub.mymessages.url") {{sub.mymessages.name}}
               a(:href="sub.settings.url") {{sub.settings.name}}
@@ -61,6 +62,10 @@
           mydesign:{
             url:'/personal/mydesign',
             name:'我的设计'
+          },
+          myhousetype:{
+            url:'/personal/myhousetype',
+            name:'我的户型'
           },
           myrenderimg:{
             url:'/personal/myrenderimg',
