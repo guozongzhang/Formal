@@ -5,47 +5,41 @@
         <vue-leftmenue :type='settings.type'></vue-leftmenue>
       div.right
         div.label-title
-          label 我的设计
+          label 我量的户型
 
         div.design-list
-          div(v-show="designe.list.length == 0")
+          div(v-show="housetype.list.length == 0")
             p.empty
               svg.svg-style
                 use(xlink:href="/assets/svg/icon.svg#empty")
             p.empty 还没有户型图呢~
-          ul.list-style(v-show="designe.list.length != 0")
-            li.list-style.clear(v-for="item in designe.list")
+          ul.list-style(v-show="housetype.list.length != 0")
+            li.list-style.clear(v-for="item in housetype.list")
               div.left
-                img(:src="item.des_cut_url")
+                img(:src="item.apt_image")
               div.subright
-                label {{item.des_name}}
+                label {{item.apt_name}}
+                p.adderss 
+                  svg.svg-style
+                    use(xlink:href="/assets/svg/icon.svg#addr")
+                  span {{item.province_poi_province.ProvinceName}} {{item.city_poi_city.CityName}} {{item.district_poi_district.DistrictName}}-{{item.community_poi_communities.community_name}}
+                p.house-type {{item.aptt_poi_apartment_types.aptt_name}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
-                a.go-draw(:href="design_url + item.id") 进入设计
-                span.rename(v-on:click="renameDesign(item)") 重命名
-                span.delete(v-on:click="deleteDesign(item)") 删除
-                span.copy(v-on:click="copyDesign(item)" v-show="!item.isCopy") 复制
-                span.copying(v-show="item.isCopy") 复制中...
+                a.go-draw(:href="design_url + item.id") 去设计
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
-
-      <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
-      <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
 
 </template>
 
 <script>
   let tmp = '';//临时变量
   let model;
-  let Designs = AV.extend('designs');
+  let Apartment = AV.extend('apartment');
   import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
-  import DeleteconfirmVue from '../common/deleteconfirm.vue';
-  import RenameVue from './rename.vue';
   export default {
     components: { 
       'vue-leftmenue': LeftmenueVue,
-      'vue-deleteconfirm': DeleteconfirmVue,
-      'vue-rename': RenameVue,
       'vue-pagination': Pagination
     },
     data() {
@@ -56,17 +50,7 @@
         settings:{
           type:'myhousetype'
         },
-        deleteinfo:{
-          tips:'您确定要删除吗？',
-          flags:'deletedesign',
-          id:'',
-        },
-        renameinfo:{
-          title:'修改工程名称',
-          name:'',
-          flags:'renamedesign'
-        },
-        designe:{
+        housetype:{
           go_new:'/personal/newdesign',
           list:[]
         }
@@ -75,60 +59,11 @@
     methods:{
       init: function() {
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Designs.reset().keys('id,des_name,des_cut_url,update_time').limit(model.pagesize).skip(skip).all((data)=> {
+        Apartment.reset().keys('id,apt_name,apt_image,province_poi_province,city_poi_city,district_poi_district,aptt_poi_apartment_types,community_poi_communities,update_time').include('aptt_poi_apartment_types,province_poi_province,city_poi_city,district_poi_district,community_poi_communities').limit(model.pagesize).skip(skip).all((data)=> {
           model.totalcount = data.count;
-          data.items.forEach((item)=> {
-            item.isCopy = false;
-          })
-          this.designe.list = data.items;
+          this.housetype.list = data.items;
         })
       },
-      deleteDesign:function(obj){
-        tmp = obj;
-        this.deleteinfo.id = obj.id;
-        $('.deletedesign').modal('show');
-      },
-      Delete: function(id) {
-        let item = {
-          id: id
-        }
-        Designs.get(item).destroy().then((data)=> {
-          this.designe.list = _.without(this.designe.list,tmp);
-          $('.deletedesign').modal('hide');
-          Core.alert('success','删除成功');
-        })
-      },
-      renameDesign: function(obj) {
-        tmp = obj;
-        this.renameinfo.name = obj.des_name
-        $('.renamedesign').modal('show');
-      },
-      Rename: function(name) {
-        if(_.isEmpty($.trim(name))) {
-          Core.alert('danger','工程名称不能为空');
-          return;
-        }
-        let item = {
-          id: tmp.id,
-          des_name: name
-        }
-        Designs.get(item).update().then((data)=> {
-          tmp.des_name = item.des_name
-          $('.renamedesign').modal('hide');
-          Core.alert('success','修改成功');
-        })
-      },
-      copyDesign: function(item) {
-        item.isCopy = true;
-        API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
-          item.isCopy = false;
-          data = _.extend(data,{isCopy: false});
-          this.designe.list.splice(0,0,data);
-         Core.alert('success', '复制成功');
-        },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message)
-        })
-      }
     },
     mounted() {
       this.init();
@@ -229,17 +164,17 @@
             padding: pxTorem(20) pxTorem(30);
             label{
               font-size: pxTorem(18);
+              margin-bottom: pxTorem(30);
               color: #333;
             }
             .update-time{
-              margin-top: pxTorem(20);
               padding: 0;
               font-size: pxTorem(12);
               color: #999;
             }
             .go-draw{
               position: absolute;
-              left: pxTorem(30);
+              right: pxTorem(30);
               bottom: pxTorem(20);
               text-decoration: none;
               display: inline-block;
@@ -251,26 +186,20 @@
               color: #fff;
               border-radius: pxTorem(3);
             }
-            span{
-              position: absolute;
-              bottom: pxTorem(20);
-              color: #666;
-              cursor: pointer;
+            .adderss{
+              margin-bottom: pxTorem(20);
+              span {
+                position: relative;
+                top: pxTorem(-5);
+              }
+              .svg-style{
+                width: pxTorem(18);
+                height: pxTorem(18);
+                fill: #bbb;
+              }
             }
-            .rename{
-              right: pxTorem(110);
-            }
-            .delete{
-              right: pxTorem(75);
-            }
-            .copy{
-              right: pxTorem(35);
-            }
-            .copying{
-              right: pxTorem(10);
-            }
-            span:hover{
-              color: #999;
+            .house-type{
+              margin-bottom: pxTorem(20);
             }
           }
         }

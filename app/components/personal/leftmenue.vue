@@ -31,7 +31,7 @@
           },
           {
             link_url:'/personal/myhousetype',
-            text:'我的户型图',
+            text:'我的户型',
             type:'myhousetype',
             svg:'housetype'
           },
