@@ -30,6 +30,12 @@
             svg:'design'
           },
           {
+            link_url:'/personal/myhousetype',
+            text:'我的户型图',
+            type:'myhousetype',
+            svg:'housetype'
+          },
+          {
             link_url:'/personal/myrenderimg',
             text:'我的效果图',
             type:'myrenderimg',
