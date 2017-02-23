@@ -23,7 +23,7 @@
                   svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#addr")
                   span {{item.province_poi_province.ProvinceName}} {{item.city_poi_city.CityName}} {{item.district_poi_district.DistrictName}}-{{item.community_poi_communities.community_name}}
-                p.house-type {{item.aptt_poi_apartment_types.aptt_name}}
+                p.house-type {{item.aptt_poi_apartment_types ? item.aptt_poi_apartment_types.aptt_name : '暂无'}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
                 button.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled") 去设计
 
