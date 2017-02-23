@@ -25,7 +25,7 @@
                   span {{item.province_poi_province.ProvinceName}} {{item.city_poi_city.CityName}} {{item.district_poi_district.DistrictName}}-{{item.community_poi_communities.community_name}}
                 p.house-type {{item.aptt_poi_apartment_types.aptt_name}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
-                a.go-draw(:href="design_url + item.id") 去设计
+                button.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled") 去设计
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
@@ -44,7 +44,6 @@
     },
     data() {
       return {
-        design_url: SITE.Ips.design + '/example/design?id=',
         pagesize: 4,
         totalcount: 0,
         settings:{
@@ -61,9 +60,26 @@
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         Apartment.reset().keys('id,apt_name,apt_image,province_poi_province,city_poi_city,district_poi_district,aptt_poi_apartment_types,community_poi_communities,update_time').include('aptt_poi_apartment_types,province_poi_province,city_poi_city,district_poi_district,community_poi_communities').limit(model.pagesize).skip(skip).all((data)=> {
           model.totalcount = data.count;
+          data.items.forEach((item)=> {
+            item.submit_disabled = false;
+          })
           this.housetype.list = data.items;
         })
       },
+      GoDesign: function(event, obj) {
+        $(event.target).text('处理中...');
+        obj.submit_disabled = true;
+        API.post('functions/project/copy_apartment',{
+            apt_id:obj.id,
+          }, (data)=> {
+            obj.submit_disabled = false;
+            window.location.href = SITE.Ips.design + '/example/design?id=' + data.id
+        },(msg)=> {
+          obj.submit_disabled = false;
+          $(event.target).text('去设计');
+          Core.alert('danger', msg.responseJSON.message);
+        })
+      }
     },
     mounted() {
       this.init();
@@ -176,11 +192,8 @@
               position: absolute;
               right: pxTorem(30);
               bottom: pxTorem(20);
-              text-decoration: none;
-              display: inline-block;
               width: pxTorem(120);
               height: pxTorem(36);
-              line-height: pxTorem(36);
               text-align: center;
               background-color: #f14f4f;
               color: #fff;
