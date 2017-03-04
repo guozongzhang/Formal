@@ -58,7 +58,7 @@
     methods:{
       init: function() {
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Apartment.reset().where({switch_state : 'on'}).keys('id,apt_name,apt_image,paint_url,estate_name,province_poi_province,city_poi_city,district_poi_district,aptt_poi_apartment_types,community_poi_communities,update_time,switch_state').include('aptt_poi_apartment_types,province_poi_province,city_poi_city,district_poi_district,community_poi_communities').limit(model.pagesize).skip(skip).all((data)=> {
+        Apartment.reset().where({switch_state : 'on'}).order('-update_time').keys('id,apt_name,apt_image,paint_url,estate_name,province_poi_province,city_poi_city,district_poi_district,aptt_poi_apartment_types,community_poi_communities,update_time,switch_state').include('aptt_poi_apartment_types,province_poi_province,city_poi_city,district_poi_district,community_poi_communities').limit(model.pagesize).skip(skip).all((data)=> {
           model.totalcount = data.count;
           data.items.forEach((item)=> {
             item.submit_disabled = false;
