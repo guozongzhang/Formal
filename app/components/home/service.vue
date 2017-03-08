@@ -3,9 +3,11 @@
     <vue-title :title='items' :img_key="'bigimg'"></vue-title>
     div.service-box.clear
       div.left-box
-        <vue-swiper :img_key='"bigimg"'  :flag='"homeService"' :swiperdata='items.lanmus[0].pics' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf'></vue-swiper>
+        <vue-swiper :img_key='"bigimg"'  :flag='"homeService"' :swiperdata='items.lanmus[0].pics' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf' :height="420"></vue-swiper>
       div.right-box
-        ul.list-style.home-swiper-pagenation
+        div.list-style.home-swiper-pagenation
+          // li.list-style(v-for="pic in items.lanmus[0].pics")
+          //   span.bg-img(:style="'background-image:url('+ pic.smallimg + ')'")
       
 </template>
 
@@ -22,9 +24,13 @@
       let model = this;
       return {
         items: {},
-        swiperConf: { 
-          paginationBulletRender: function (swiper, index, className) {
-            return '<li class="list-style '+ className +'"><span class="bg-img" style="background-image:url('+ model.items.lanmus[0].pics[index].smallimg + ');"></span></li>';
+        swiperConf: {
+          onSwiperCreated: function () {
+            let index = 0
+            $('.home-swiper-pagenation .swiper-pagination-switch').each(function () {
+              $(this).css('background-image', 'url("' + model.items.lanmus[0].pics[index].smallimg + '")')
+              index++
+            })
           }
         }
       }
@@ -38,6 +44,10 @@
     },
     created() {
       this.getList()
+    },
+
+    mounted () {
+      
     }
   }
 
@@ -61,11 +71,6 @@
       width: pxTorem(540);
       ul{
         li{
-          float: left;
-          width: pxTorem(180);
-          height: pxTorem(140);
-          border-top: pxTorem(1) solid #ccc;
-          border-right: pxTorem(1) solid #ccc;
           .bg-img{
             display: block;
             width: 100%;
@@ -79,19 +84,19 @@
         }
       }
       .home-swiper-pagenation{
-        .swiper-pagination-bullet{
+        .swiper-pagination-switch{
           border-radius: 0;
           opacity: 1;
           background-color: #f1f1f1;
           overflow: hidden;
-        }
-        li.swiper-pagination-bullet-active{
-          span {
-            background-position: 0px -140px;
-          }
-        }
-        li.swiper-pagination-bullet:hover{
-          .bg-img{
+          float: left;
+          width: pxTorem(180);
+          height: pxTorem(140);
+          border-top: pxTorem(1) solid #ccc;
+          border-right: pxTorem(1) solid #ccc;
+          cursor: pointer;
+
+          &.swiper-active-switch {
             background-position: 0px -140px;
           }
         }

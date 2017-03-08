@@ -9,7 +9,7 @@
       <!--效果图-->
       div.render-left-box(v-if="view == 0")
         div.swiper-box
-          <vue-swiper :flag='"homeDesgin"' :swiperdata='swips' :autoplay='2000' :effect='"fade"'></vue-swiper>
+          <vue-swiper :flag='"homeDesgin"' :swiperdata='swips' :autoplay='2000' :effect='"fade"' :height="370"></vue-swiper>
           //- div.swiper-text
           //-   p {{datas.renderdata.loopdata.text}}
 
