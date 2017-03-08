@@ -22,13 +22,12 @@ const app = new Koa()
 app.use(bodyParser())
 
 
-app.use(proxy('/classes/homepage_modules', {
-  target: 'http://192.168.1.120/openapi/api/1.0',   
-  changeOrigin: true
-  // agent: new httpsProxyAgent('http://1.2.3.4:88'),
-  // rewrite: path => path.replace(/^\/octocat(\/|\/\w+)?$/, '/vagusx'),
-  // logs: true
-}))
+;['/classes', '/functions'].forEach(url => {
+  app.use(proxy(url, {
+    target: localEnv.url || 'http://192.168.1.120/openapi/api/1.0/',
+    changeOrigin: true
+  }))
+})
 
 // 本地化
 //locale(app) 
