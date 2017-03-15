@@ -14,11 +14,20 @@ const Koa = require('koa'),
   jwt = require('koa-jwt'),
   i18n = require('koa-i18n'),
   _ = require('underscore'),
-  localEnv = require('./lib/local_config')
+  localEnv = require('./lib/local_config'),
+  proxy = require('koa-proxies')
 
 const app = new Koa()
 
 app.use(bodyParser())
+
+
+;['/classes', '/functions', '/users'].forEach(url => {
+  app.use(proxy(url, {
+    target: localEnv.url || 'http://192.168.1.120/openapi/api/1.0/',
+    changeOrigin: true
+  }))
+})
 
 // 本地化
 //locale(app) 

@@ -25,7 +25,7 @@
                   span {{item.province_poi_province.ProvinceName}} {{item.city_poi_city.CityName}} {{item.district_poi_district.DistrictName}}-{{item.estate_name ? item.estate_name : '暂无'}}
                 p.house-type {{item.aptt_poi_apartment_types ? item.aptt_poi_apartment_types.aptt_name : '暂无'}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
-                button.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled") 去设计
+                a.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled" target="_blank") 去设计
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
@@ -193,7 +193,6 @@
               right: pxTorem(30);
               bottom: pxTorem(20);
               width: pxTorem(120);
-              height: pxTorem(36);
               text-align: center;
               background-color: #f14f4f;
               color: #fff;

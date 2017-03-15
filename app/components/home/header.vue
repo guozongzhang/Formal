@@ -47,24 +47,24 @@
 .header-vue {
   height: pxTorem(85);
   .navbar-header{
+    position: relative;
+    padding-left: pxTorem(100);
     height: pxTorem(85);
     .home-logo{
-      position: relative;
-      bottom: pxTorem(-25);
-      float:left;
-      margin-right: pxTorem(20);
+      position: absolute;
+      top: pxTorem(25);
+      left:0;
       img{
         width: pxTorem(180);
         height: pxTorem(60);
       }
     }
     .nav-tab{
-      position: relative;
-      bottom: pxTorem(-50);
-      width: pxTorem(700);
+      position: absolute;
+      left: pxTorem(200);
+      top: pxTorem(50);
       height: pxTorem(25);
       line-height: pxTorem(25);
-      float: left;
       li{
         display: inline-block;
         width: pxTorem(140);

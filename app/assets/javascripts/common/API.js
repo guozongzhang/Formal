@@ -11,7 +11,6 @@ window.API = {
       type: method,
       url: url,
       data: data,
-      crossDomain: true,
       headers: {
         "X-DP-Key": xdpkey,
         "X-DP-ID": xdpid,
@@ -34,14 +33,10 @@ window.API = {
    * @return {void}                
    */
   get: (apiName, params, successHandler, errorHandler, ismock)=> {
-    if (ismock) {
-      setTimeout(()=> {
-        successHandler(window.MOCK[apiName])
-      }, 1500)
-    }else{
-      let url = baseurl + apiName
-      API.ajax(url, 'get', params, successHandler, errorHandler)
-    }
+    let url = baseurl + apiName
+    console.log('===', url)
+    //$.get(url, params, successHandler, errorHandler)
+    API.ajax(url, 'get', params, successHandler, errorHandler)
   },
 
   post: (apiName, data, successHandler, errorHandler, extraparam)=> {
@@ -50,14 +45,8 @@ window.API = {
   },
 
   put: (apiName, data, successHandler, errorHandler, ismock)=> {
-    if (ismock) {
-      setTimeout(()=> {
-        successHandler(window.MOCK[apiName])
-      }, 1500)
-    }else{
-      let url = baseurl + apiName
-      API.ajax(url, 'put', data, successHandler, errorHandler)
-    }
+    let url = baseurl + apiName
+    API.ajax(url, 'put', data, successHandler, errorHandler)
   },
 
   /**

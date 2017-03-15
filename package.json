@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js |  webpack --watch |  node tool/watch.js | browser-sync start -c ./config/bs-config.js",
+    "start": "node app.js |  webpack --watch |  node tool/watch.js",
     "migrate": "knex migrate:latest",
     "build": "cnpm install && webpack && node tool/build",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build && pm2 restart app.js",
@@ -36,6 +36,7 @@
     "koa-jwt": "^1.2.0",
     "koa-locale": "^1.1.0",
     "koa-mount": "^1.3.0",
+    "koa-proxies": "^0.3.0",
     "koa-router": "^7.0.1",
     "koa-session": "^3.3.1",
     "koa-static": "^2.0.0",
