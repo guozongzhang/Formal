@@ -2,10 +2,10 @@
 
 const path = require('path')
 const Helper = require('../lib/helper')
-const DistFolder = path.dirname(__dirname) + '/app/assets/javascripts'
+const DistFolder = path.dirname(__dirname) + '/app/assets/javascripts/controller'
 
 let makeEntry = () => {
-  let entrys = Helper.walk(DistFolder, 2).reduce((last, item) => {
+  let entrys = Helper.walk(DistFolder).reduce((last, item) => {
     let _controller = path.basename(path.dirname(item))
     let _action = path.basename(item)
     let nm = 'controller/' + _controller + '/' + _action

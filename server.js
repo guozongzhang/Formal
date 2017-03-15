@@ -22,7 +22,7 @@ const app = new Koa()
 app.use(bodyParser())
 
 
-;['/classes', '/functions', '/users'].forEach(url => {
+;['/classes', '/functions'].forEach(url => {
   app.use(proxy(url, {
     target: localEnv.url || 'http://192.168.1.120/openapi/api/1.0/',
     changeOrigin: true
