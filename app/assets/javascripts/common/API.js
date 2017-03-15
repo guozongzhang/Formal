@@ -35,8 +35,8 @@ window.API = {
   get: (apiName, params, successHandler, errorHandler, ismock)=> {
     let url = baseurl + apiName
     console.log('===', url)
-    $.get(url, params, successHandler, errorHandler)
-    // API.ajax(url, 'get', params, successHandler, errorHandler)
+    //$.get(url, params, successHandler, errorHandler)
+    API.ajax(url, 'get', params, successHandler, errorHandler)
   },
 
   post: (apiName, data, successHandler, errorHandler, extraparam)=> {
