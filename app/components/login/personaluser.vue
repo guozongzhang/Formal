@@ -111,6 +111,7 @@
         if(phone) {
           if($('#user_phone').hasClass('error')) {
             alert('手机号已被注册');
+            $('#get_verify').removeAttr('disabled');
           } else {
             API.get('requestSmsCode/sms',{
                 type:'web',
@@ -125,6 +126,7 @@
           }
         } else {
           alert('请正确填写手机号码');
+          $('#get_verify').removeAttr('disabled');
           return ;
         }
       },
