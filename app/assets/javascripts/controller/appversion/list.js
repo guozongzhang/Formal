@@ -16,7 +16,7 @@ class List extends Basic {
 
   //初始数据
   init () {
-    appVersion.reset().where({app_poi_apps:4}).include('app_poi_apps').all((data)=> {
+    appVersion.reset().where({app_poi_apps:4, show:'1'}).include('app_poi_apps').all((data)=> {
       model.mvvm.historylist = data.items;
     })
   }

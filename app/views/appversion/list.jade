@@ -8,11 +8,11 @@ html
         ul
           li(v-for="item in historylist" v-cloak)
             a(v-bind:href="'/appversion/detail?id=' + item.id")
-              p.name {{item.app_poi_apps.name}} {{item.version}} 介绍
-              p.time {{item.update_time | localDateSimple}}
-              span.svg-style
+              p
+                span.name {{item.app_poi_apps.name}} {{item.version}} 介绍 
                 svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#right") 
+                span.time {{item.update_time | localDateMonDay}}
 
     each item in development.assets.vendor.javascripts
       script(src="/assets/javascripts/#{item}.js")   
