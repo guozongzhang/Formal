@@ -1,0 +1,41 @@
+@import "../function.scss";
+
+.list-box{
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: pxTorem(42);
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      a{
+        display: block;
+        padding: 0 pxTorem(8);
+        height: pxTorem(42);
+        text-decoration: none;
+        p{
+          margin: 0;
+          padding: 0;
+        }
+        .name{
+          color: #333;
+        }
+        .time{
+          color: #666
+        }
+        .svg-style{
+          float: right;
+          position: relative;
+          top: pxTorem(-15);
+          width: pxTorem(18);
+          height: pxTorem(18);
+          fill: #ddd;
+        }
+      }
+    }
+  }
+}

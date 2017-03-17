@@ -2,7 +2,7 @@
   div.header-vue.vue-component
     div.container-self
       div.navbar-header.navbar-toggleable-xs 
-        a.home-logo(href="/") 
+        a.home-logo(href="/" v-show="logo != ''") 
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
           li(v-for="item in menus" v-bind:class="item.action == controller ? 'active' : ''")

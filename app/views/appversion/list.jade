@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    include ../layouts/header.jade
+  body
+    div#app.body-box
+      div.list-box
+        ul
+          li(v-for="item in historylist" v-cloak)
+            a(v-bind:href="'/appversion/detail?id=' + item.id")
+              p.name {{item.app_poi_apps.name}} {{item.version}} 介绍
+              p.time {{item.update_time | localDateSimple}}
+              span.svg-style
+                svg.svg-style
+                    use(xlink:href="/assets/svg/icon.svg#right") 
+
+    each item in development.assets.vendor.javascripts
+      script(src="/assets/javascripts/#{item}.js")   
+    script(src="/assets/javascripts/jquery.min.js")
+    script(src="/tmp/assets/javascripts/common.js")
+    script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
+   
+    script.
+      if(typeof APP.#{route.controller}.#{route.action} == 'function'){
+        new APP.#{route.controller}.#{route.action}()
+      }
