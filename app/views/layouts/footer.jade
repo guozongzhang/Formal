@@ -2,7 +2,7 @@ div.footer-style
   <vue-footer></vue-footer>
 
 if localEnv.environment == 'production'
-  script(src="#{localEnv.cdn || '/tmp/assets/javascripts'}/production.js")
+  script(src="#{localEnv.cdn || '/tmp/assets/javascripts'}/production.js?version=#{assestsVersion}")
 
 else 
   each item in development.assets.vendor.javascripts
@@ -61,7 +61,7 @@ script.
   }
 
 
-script(src="#{localEnv.cdn || '/tmp/assets/javascripts/controller'}/#{route.controller}/#{route.action}.js")
+script(src="#{localEnv.cdn || '/tmp/assets/javascripts/controller'}/#{route.controller}/#{route.action}.js?version=#{assestsVersion}")
 script.
   SITE.Init().then(function() {
     if(typeof APP.#{route.controller}.#{route.action} == 'function'){
