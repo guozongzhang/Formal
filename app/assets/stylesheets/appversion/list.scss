@@ -13,21 +13,21 @@ body{
         list-style: none;
         margin: 0;
         padding: 0;
-        height: pxTorem(98);
+        height: pxTorem(120);
         border-bottom: 1px solid #ccc;
         cursor: pointer;
         background-color: #fff;
         a{
           display: block;
           padding: 0 pxTorem(24);
-          height: pxTorem(98);
-          line-height: pxTorem(98);
+          height: pxTorem(120);
+          line-height: pxTorem(120);
           text-decoration: none;
-          font-size: pxTorem(30);
+          font-size: pxTorem(40);
           p{
             margin: 0;
             padding: 0;
-            height: pxTorem(98);
+            height: pxTorem(120);
             .name{
               color: #666;
             }
@@ -37,10 +37,10 @@ body{
             }
             .svg-style{
               position: relative;
-              top: pxTorem(32);
+              top: pxTorem(40);
               float: right;
-              width: pxTorem(32);
-              height: pxTorem(32);
+              width: pxTorem(40);
+              height: pxTorem(40);
               fill: #999;
               margin-left: pxTorem(24);
             }
