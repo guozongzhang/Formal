@@ -65,5 +65,9 @@ script.
   SITE.Init().then(function() {
     if(typeof APP.#{route.controller}.#{route.action} == 'function'){
       new APP.#{route.controller}.#{route.action}()
+
+      setTimeout(function () {
+        $('footer').show()
+      }, 1500)
     }
   })
