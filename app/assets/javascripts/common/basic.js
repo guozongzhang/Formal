@@ -103,6 +103,13 @@ class Basic {
       moment.locale('Chinese (Simplified)')    
       return moment(parseInt(value)).format('YYYY-MM-DD')
     })
+
+    // 日期格式化过滤器(格式：MM-DD)
+    Vue.filter('localDateMonDay', (value)=> {
+      if(_.isEmpty(value)){;return '暂无';}
+      moment.locale('Chinese (Simplified)')    
+      return moment(parseInt(value)).format('MM-DD')
+    })
   }
   
   /**
