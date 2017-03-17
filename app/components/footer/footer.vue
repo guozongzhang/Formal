@@ -1,25 +1,26 @@
 <template lang="jade">
-  div(style="text-align:center;background-color:#eee;padding:20px 0 0 0;margin-top:55px;border-top: 1px solid #ccc;") 
-    div.footer-vue.vue-component
-      div.dpjia-content
-        ul.title-ul.list-style.clear
-          li.list-style(v-for="item in items")
-            label {{item.name}}
-            ul.text-ul.list-style
-              li.list-style(v-for="sub in item.subs")
-                a(:href="sub.url")
-                  span(v-if="sub.type == 'txt'") {{sub.name}}
-                  img.pic-item(:src="sub.img" v-if="sub.type == 'pic'" )
-  
-    div.frends-link
-      div.frends-box
-        p
-          | 友情链接：
-          a(:href="link.url" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
-      div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
-      | 搭配家 版权所有 2014-2017 
-      a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
-      | All right reserved 京ICP备15029423号
+  div.footer-style
+    div(style="text-align:center;background-color:#eee;padding:20px 0 0 0;margin-top:55px;border-top: 1px solid #ccc;") 
+      div.footer-vue.vue-component
+        div.dpjia-content
+          ul.title-ul.list-style.clear
+            li.list-style(v-for="item in items")
+              label {{item.name}}
+              ul.text-ul.list-style
+                li.list-style(v-for="sub in item.subs")
+                  a(:href="sub.url")
+                    span(v-if="sub.type == 'txt'") {{sub.name}}
+                    img.pic-item(:src="sub.img" v-if="sub.type == 'pic'" )
+    
+      div.frends-link
+        div.frends-box
+          p
+            | 友情链接：
+            a(:href="link.url" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
+        div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
+        | 搭配家 版权所有 2014-2017 
+        a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
+        | All right reserved 京ICP备15029423号
 
 </template>
 
