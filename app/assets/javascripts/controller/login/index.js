@@ -114,7 +114,8 @@ class Index extends Basic {
         }
       }, 1000)
     },(msg)=> {
-      Core.alert('danger', msg.responseJSON.message)
+      Core.alert('danger', '登录失败')
+      return ;
     })
   }
 }

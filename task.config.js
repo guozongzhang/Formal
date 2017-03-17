@@ -18,7 +18,7 @@ let viewCSS = Helper.walk(path.resolve(__dirname, 'app/assets/stylesheets')).map
 
 exports.tasks = {
   'vendor:js': {
-    cmd: 'uglifyjs ' + vendorJSS + ' tmp/assets/javascripts/common.js -o tmp/assets/production.js  --compress',
+    cmd: 'uglifyjs ' + vendorJSS + ' tmp/assets/javascripts/common.js -o tmp/assets/javascripts/production.js  --compress',
     tip: '公共 JS 打包压缩'
   },
   'view:css': {
