@@ -1,46 +1,61 @@
 @import "../function.scss";
 
-.detail-box{
-  .title{
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    border-bottom: 1px solid #f00;
-  }
-  .md-style{
-    padding: pxTorem(24);
+.body-box{
+  width: 100% !important;
+  .detail-box{
+    .title{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      border-bottom: 1px solid #f00;
+    }
+    .md-style{
+      padding: pxTorem(24);
+    }
   }
 }
 
 // mobile(竖屏200px-420px)
 @media only screen and (max-device-width: 420px) and  (min-device-width: 200px){
-  .title{
-    height: pxTorem(120);
-    line-height: pxTorem(120);
-    font-size: pxTorem(40);
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(120);
+      line-height: pxTorem(120);
+      font-size: pxTorem(40);
+    }
   }
 }
 // mobile(横屏421px-736px)
 @media only screen and (orientation : landscape){
-  .title{
-    height: pxTorem(100);
-    line-height: pxTorem(100);
-    font-size: pxTorem(30);
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(100);
+      line-height: pxTorem(100);
+      font-size: pxTorem(30);
+    }
   }
 }
 // iPad竖屏(768px-1000px)
 @media only screen and (max-device-width: 1000px)  and (min-device-width: 768px){
-  .title{
-    height: pxTorem(100);
-    line-height: pxTorem(100);
-    font-size: pxTorem(30);
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(100);
+      line-height: pxTorem(100);
+      font-size: pxTorem(30);
+    }
   }
 }
 // iPad横屏(1001px-1024px)
 @media only screen and (max-device-width: 1200px)  and (min-device-width: 1001px){
-  .title{
-    height: pxTorem(90);
-    line-height: pxTorem(90);
-    font-size: pxTorem(24);
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(90);
+      line-height: pxTorem(90);
+      font-size: pxTorem(24);
+    }
   }
 }
