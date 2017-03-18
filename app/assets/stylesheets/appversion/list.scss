@@ -2,48 +2,64 @@
 body{
   background-color: #f4f4f4 !important;
 }
+.body-box{
+  width: 100% !important;
+  .list-box{
+    ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        border-bottom: 1px solid #f4f4f4;
+        background-color: #fff;
+        a{
+          display: block;
+          text-decoration: none;
+          padding: 0 pxTorem(24);
+          p{
+            margin: 0;
+            padding: 0;
+            .name{
+              color: #666;
+            }
+            .time{
+              float: right;
+              color: #999;
+            }
+            .svg-style{
+              position: relative;
+              float: right;
+              fill: #999;
+              margin-left: pxTorem(24);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// mobile(竖屏200px-500px)
 @media only screen and (max-device-width: 500px) and  (min-device-width: 200px){
   .body-box{
     width: 100% !important;
     .list-box{
       ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
         li{
-          list-style: none;
-          margin: 0;
-          padding: 0;
           height: pxTorem(120);
-          border-bottom: 1px solid #ccc;
-          cursor: pointer;
-          background-color: #fff;
           a{
-            display: block;
-            padding: 0 pxTorem(24);
             height: pxTorem(120);
             line-height: pxTorem(120);
-            text-decoration: none;
             font-size: pxTorem(40);
             p{
-              margin: 0;
-              padding: 0;
               height: pxTorem(120);
-              .name{
-                color: #666;
-              }
-              .time{
-                float: right;
-                color: #999;
-              }
               .svg-style{
-                position: relative;
                 top: pxTorem(40);
-                float: right;
                 width: pxTorem(40);
                 height: pxTorem(40);
-                fill: #999;
-                margin-left: pxTorem(24);
               }
             }
           }
@@ -52,48 +68,50 @@ body{
     }
   }
 }
-@media only screen and (max-device-width: 1920px)  and (min-device-width: 501px){
+// mobile(横屏501px-736px)
+@media only screen and (max-device-width: 767px) and  (min-device-width: 501px){
   .body-box{
     width: 100% !important;
     .list-box{
       ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
         li{
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          height: pxTorem(100);
-          border-bottom: 1px solid #ccc;
-          cursor: pointer;
-          background-color: #fff;
+          height: pxTorem(80);
           a{
-            display: block;
-            padding: 0 pxTorem(24);
-            height: pxTorem(100);
-            line-height: pxTorem(100);
-            text-decoration: none;
-            font-size: pxTorem(40);
+            height: pxTorem(80);
+            line-height: pxTorem(80);
+            font-size: pxTorem(30);
             p{
-              margin: 0;
-              padding: 0;
-              height: pxTorem(100);
-              .name{
-                color: #666;
-              }
-              .time{
-                float: right;
-                color: #999;
-              }
+              height: pxTorem(80);
               .svg-style{
-                position: relative;
-                top: pxTorem(40);
-                float: right;
-                width: pxTorem(40);
-                height: pxTorem(40);
-                fill: #999;
-                margin-left: pxTorem(24);
+                top: pxTorem(24);
+                width: pxTorem(30);
+                height: pxTorem(30);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// iPad(768px-1024px)
+@media only screen and (max-device-width: 1200px)  and (min-device-width: 768px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(90);
+          a{
+            height: pxTorem(90);
+            line-height: pxTorem(90);
+            font-size: pxTorem(32);
+            p{
+              height: pxTorem(90);
+              .svg-style{
+                top: pxTorem(25);
+                width: pxTorem(36);
+                height: pxTorem(36);
               }
             }
           }
