@@ -75,17 +75,17 @@ body{
     .list-box{
       ul{
         li{
-          height: pxTorem(80);
+          height: pxTorem(60);
           a{
-            height: pxTorem(80);
-            line-height: pxTorem(80);
-            font-size: pxTorem(30);
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(22);
             p{
-              height: pxTorem(80);
+              height: pxTorem(60);
               .svg-style{
-                top: pxTorem(24);
-                width: pxTorem(30);
-                height: pxTorem(30);
+                top: pxTorem(18);
+                width: pxTorem(22);
+                height: pxTorem(22);
               }
             }
           }
@@ -94,8 +94,8 @@ body{
     }
   }
 }
-// iPad(768px-1024px)
-@media only screen and (max-device-width: 1200px)  and (min-device-width: 768px){
+// iPad竖屏(768px-1000px)
+@media only screen and (max-device-width: 1000px)  and (min-device-width: 768px){
   .body-box{
     width: 100% !important;
     .list-box{
@@ -112,6 +112,32 @@ body{
                 top: pxTorem(25);
                 width: pxTorem(36);
                 height: pxTorem(36);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// iPad横屏(1001px-1024px)
+@media only screen and (max-device-width: 1200px)  and (min-device-width: 1001px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(60);
+          a{
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(22);
+            p{
+              height: pxTorem(60);
+              .svg-style{
+                top: pxTorem(18);
+                width: pxTorem(22);
+                height: pxTorem(22);
               }
             }
           }
