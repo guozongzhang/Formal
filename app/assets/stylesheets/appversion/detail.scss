@@ -5,9 +5,9 @@
   .detail-box{
     .title{
       margin: 0;
-      padding: 0;
-      text-align: center;
-      border-bottom: 1px solid #f00;
+      padding-left: pxTorem(24);
+      text-align: left;
+      font-weight: bold;
     }
     .md-style{
       padding: pxTorem(24);
@@ -22,7 +22,7 @@
     .title{
       height: pxTorem(120);
       line-height: pxTorem(120);
-      font-size: pxTorem(40);
+      font-size: pxTorem(50);
     }
   }
 }
