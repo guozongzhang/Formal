@@ -6,7 +6,7 @@ class Detail extends Basic {
     super({
       vue: {
         data:{
-          info:{}
+          content:{}
         }
       }
     })
@@ -16,7 +16,9 @@ class Detail extends Basic {
 
   //初始数据
   init () {
-    console.log(appId)
+    appVersion.reset().find(appId).then((msg)=> {
+      model.mvvm.content = marked(msg.desc);
+    })
   }
 }
 
