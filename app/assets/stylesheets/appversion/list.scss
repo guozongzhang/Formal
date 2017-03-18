@@ -42,8 +42,8 @@ body{
     }
   }
 }
-// mobile(竖屏200px-500px)
-@media only screen and (max-device-width: 500px) and  (min-device-width: 200px){
+// mobile(竖屏200px-420px)
+@media only screen and (max-device-width: 420px) and  (min-device-width: 200px){
   .body-box{
     width: 100% !important;
     .list-box{
@@ -69,8 +69,8 @@ body{
     }
   }
 }
-// mobile(横屏501px-736px)
-@media only screen and (max-device-width: 767px) and  (min-device-width: 501px){
+// mobile(横屏421px-736px)
+@media only screen and (max-device-width: 767px) and  (min-device-width: 421px){
   .body-box{
     width: 100% !important;
     .list-box{
