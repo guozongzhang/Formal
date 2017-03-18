@@ -70,7 +70,7 @@ body{
   }
 }
 // mobile(横屏501px-736px)
-@media only screen and (max-device-width: 736px) and  (min-device-width: 200px) and (max-device-height: 500px){
+@media only screen and (max-device-width: 767px) and  (min-device-width: 501px){
   .body-box{
     width: 100% !important;
     .list-box{
@@ -84,6 +84,7 @@ body{
             p{
               height: pxTorem(42);
               .svg-style{
+                fill: #000;
                 top: pxTorem(10);
                 width: pxTorem(18);
                 height: pxTorem(18);
