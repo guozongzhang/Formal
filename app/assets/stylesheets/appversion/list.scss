@@ -70,7 +70,7 @@ body{
   }
 }
 // mobile(横屏421px-736px)
-@media only screen and (max-device-width: 767px) and  (min-device-width: 421px){
+@media only screen and (orientation : landscape){
   .body-box{
     width: 100% !important;
     .list-box{
