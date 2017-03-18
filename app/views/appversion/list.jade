@@ -12,7 +12,7 @@ html
                 span.name {{item.app_poi_apps.name}} {{item.version}} 介绍 
                 svg.svg-style
                     use(xlink:href="/assets/svg/icon.svg#right") 
-                span.time {{item.update_time | localDateMonDay}}
+                span.time {{item.publish_time | localDateMonDay}}
 
     each item in development.assets.vendor.javascripts
       script(src="/assets/javascripts/#{item}.js")   
@@ -21,6 +21,7 @@ html
     script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
    
     script.
+      var apps = #{query.id ? query.id : '0'}
       if(typeof APP.#{route.controller}.#{route.action} == 'function'){
         new APP.#{route.controller}.#{route.action}()
       }

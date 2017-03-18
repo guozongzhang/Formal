@@ -101,7 +101,8 @@
             model.info.serverobj = 78;
           },10);
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message);
+          Core.alert('danger', '获取服务对象失败');
+          return ;
         })
       },
       getVerification: function() {
@@ -120,8 +121,9 @@
               alert('验证码已发送，请及时查收');
               model.countdowntime();
             },(msg)=> {
-              Core.alert('danger', msg.responseJSON.message);
+              Core.alert('danger', '获取验证码失败');
               $('#get_verify').removeAttr('disabled');
+              return ;
             })
           }
         } else {
@@ -213,7 +215,8 @@
             window.location.href = '/';
           }, 1000)
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message);
+          Core.alert('danger', '注册失败');
+          return ;
         })
       }
     },
