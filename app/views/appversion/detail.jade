@@ -4,8 +4,9 @@ html
     include ../layouts/header.jade
   body
     div#app.body-box
-      div.detail-box
-        div.md-style(v-html="content")
+      div.detail-box(v-cloak)
+        p.title {{content.version}}
+        div.md-style(v-html="content.desc")
     each item in development.assets.vendor.javascripts
       script(src="/assets/javascripts/#{item}.js")   
     script(src="/assets/javascripts/jquery.min.js")
