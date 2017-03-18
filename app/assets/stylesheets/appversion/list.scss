@@ -69,7 +69,7 @@ body{
   }
 }
 // mobile(横屏501px-736px)
-@media only screen and (max-device-width: 767px) and  (min-device-width: 501px) and (max-device-height: 500px){
+@media only screen and (max-device-height: 500px){
   .body-box{
     width: 100% !important;
     .list-box{
