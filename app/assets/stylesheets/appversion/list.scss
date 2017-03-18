@@ -76,18 +76,18 @@ body{
     .list-box{
       ul{
         li{
-          height: pxTorem(42);
+          height: pxTorem(60);
           a{
-            height: pxTorem(42);
-            line-height: pxTorem(42);
-            font-size: pxTorem(18);
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(22);
             p{
-              height: pxTorem(42);
+              height: pxTorem(60);
               .svg-style{
                 fill: #000;
-                top: pxTorem(10);
-                width: pxTorem(18);
-                height: pxTorem(18);
+                top: pxTorem(18);
+                width: pxTorem(22);
+                height: pxTorem(22);
               }
             }
           }
