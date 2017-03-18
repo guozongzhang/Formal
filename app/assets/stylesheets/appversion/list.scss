@@ -57,6 +57,7 @@ body{
             p{
               height: pxTorem(120);
               .svg-style{
+                fill: #f00;
                 top: pxTorem(40);
                 width: pxTorem(40);
                 height: pxTorem(40);
@@ -79,7 +80,7 @@ body{
           a{
             height: pxTorem(42);
             line-height: pxTorem(42);
-            font-size: pxTorem(50);
+            font-size: pxTorem(18);
             p{
               height: pxTorem(42);
               .svg-style{
