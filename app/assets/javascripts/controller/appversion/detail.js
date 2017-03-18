@@ -19,9 +19,9 @@ class Detail extends Basic {
 
   //初始数据
   init () {
-    appVersion.reset().find(appId).then((msg)=> {
-      model.mvvm.content.desc = marked(msg.desc);
-      model.mvvm.content.version = msg.version
+    appVersion.reset().where({app_poi_apps:appId,version:version}).all((msg)=> {
+      model.mvvm.content.desc = marked(msg.items[0].desc);
+      model.mvvm.content.version = msg.items[0].version
     })
   }
 }
