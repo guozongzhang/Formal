@@ -75,17 +75,17 @@ body{
     .list-box{
       ul{
         li{
-          height: pxTorem(60);
+          height: pxTorem(42);
           a{
-            height: pxTorem(60);
-            line-height: pxTorem(60);
-            font-size: pxTorem(22);
+            height: pxTorem(42);
+            line-height: pxTorem(42);
+            font-size: pxTorem(18);
             p{
-              height: pxTorem(60);
+              height: pxTorem(42);
               .svg-style{
-                top: pxTorem(18);
-                width: pxTorem(22);
-                height: pxTorem(22);
+                top: pxTorem(10);
+                width: pxTorem(18);
+                height: pxTorem(18);
               }
             }
           }
