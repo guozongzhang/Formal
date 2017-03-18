@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    border-bottom: 1px solid #f00;
   }
   .md-style{
     padding: pxTorem(24);
@@ -22,9 +23,9 @@
 // mobile(横屏421px-736px)
 @media only screen and (orientation : landscape){
   .title{
-    height: pxTorem(90);
-    line-height: pxTorem(90);
-    font-size: pxTorem(24);
+    height: pxTorem(100);
+    line-height: pxTorem(100);
+    font-size: pxTorem(30);
   }
 }
 // iPad竖屏(768px-1000px)
