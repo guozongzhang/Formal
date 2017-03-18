@@ -2,57 +2,7 @@
 body{
   background-color: #f4f4f4 !important;
 }
-@media only screen and (max-width: 800px) and  (min-width: 200px){
-  // .body-box{
-  //   width: 100% !important;
-  //   .list-box{
-  //     ul{
-  //       list-style: none;
-  //       margin: 0;
-  //       padding: 0;
-  //       li{
-  //         list-style: none;
-  //         margin: 0;
-  //         padding: 0;
-  //         height: pxTorem(120);
-  //         border-bottom: 1px solid #ccc;
-  //         cursor: pointer;
-  //         background-color: #fff;
-  //         a{
-  //           display: block;
-  //           padding: 0 pxTorem(24);
-  //           height: pxTorem(120);
-  //           line-height: pxTorem(120);
-  //           text-decoration: none;
-  //           font-size: pxTorem(40);
-  //           p{
-  //             margin: 0;
-  //             padding: 0;
-  //             height: pxTorem(120);
-  //             .name{
-  //               color: #666;
-  //             }
-  //             .time{
-  //               float: right;
-  //               color: #999;
-  //             }
-  //             .svg-style{
-  //               position: relative;
-  //               top: pxTorem(40);
-  //               float: right;
-  //               width: pxTorem(40);
-  //               height: pxTorem(40);
-  //               fill: #999;
-  //               margin-left: pxTorem(24);
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-}
-@media only screen and (max-width: 1200px) and (min-width: 801px){
+@media only screen and (max-device-width: 500px) and  (min-device-width: 200px){
   .body-box{
     width: 100% !important;
     .list-box{
@@ -79,6 +29,56 @@ body{
               margin: 0;
               padding: 0;
               height: pxTorem(120);
+              .name{
+                color: #666;
+              }
+              .time{
+                float: right;
+                color: #999;
+              }
+              .svg-style{
+                position: relative;
+                top: pxTorem(40);
+                float: right;
+                width: pxTorem(40);
+                height: pxTorem(40);
+                fill: #999;
+                margin-left: pxTorem(24);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-device-width: 1920px)  and (min-device-width: 501px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          height: pxTorem(100);
+          border-bottom: 1px solid #ccc;
+          cursor: pointer;
+          background-color: #fff;
+          a{
+            display: block;
+            padding: 0 pxTorem(24);
+            height: pxTorem(100);
+            line-height: pxTorem(100);
+            text-decoration: none;
+            font-size: pxTorem(40);
+            p{
+              margin: 0;
+              padding: 0;
+              height: pxTorem(100);
               .name{
                 color: #666;
               }
