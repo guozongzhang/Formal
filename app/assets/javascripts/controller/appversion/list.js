@@ -1,4 +1,5 @@
 let model
+let APPs = AV.extend('apps');
 let appVersion = AV.extend('version');
 
 class List extends Basic {
@@ -16,8 +17,10 @@ class List extends Basic {
 
   //初始数据
   init () {
-    appVersion.reset().where({app_poi_apps:apps, show:'1'}).order('-order').include('app_poi_apps').all((data)=> {
-      model.mvvm.historylist = data.items;
+    APPs.reset().where({app_id:app_id}).all((msg)=> {
+      appVersion.reset().where({app_poi_apps:msg.items[0].id, show:'1'}).order('-order').include('app_poi_apps').all((data)=> {
+        model.mvvm.historylist = data.items;
+      })
     })
   }
 }

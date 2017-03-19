@@ -15,7 +15,7 @@ html
     script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
    
     script.
-      var appId = "#{query.id ? query.id : '0'}";
+      var app_id = "#{query.id ? query.id : '0'}";
       var version = "#{query.ver ? query.ver : '0'}";
       if(typeof APP.#{route.controller}.#{route.action} == 'function'){
         new APP.#{route.controller}.#{route.action}()
