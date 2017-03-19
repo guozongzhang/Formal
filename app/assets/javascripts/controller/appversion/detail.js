@@ -1,4 +1,5 @@
 let model
+let APPs = AV.extend('apps');
 let appVersion = AV.extend('version');
 
 class Detail extends Basic {
