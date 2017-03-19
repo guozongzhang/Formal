@@ -7,7 +7,7 @@ html
       div.list-box
         ul
           li(v-for="item in historylist" v-cloak)
-            a(v-bind:href="'/appversion/detail?id=' + item.app_poi_apps.id + '&ver=' + item.version")
+            a(v-bind:href="'/appversion/detail?id=' + item.app_poi_apps.app_id + '&ver=' + item.version")
               p
                 span.name {{item.app_poi_apps.name}} {{item.version}} 介绍 
                 svg.svg-style
