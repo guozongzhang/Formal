@@ -40,7 +40,8 @@ class Resetpwd extends Basic {
       }, (data)=> {
       model.mvvm.info.img_code = data.image;
     },(msg)=> {
-      Core.alert('danger', msg.responseJSON.message)
+      Core.alert('danger', '获取验证码失败');
+      return ;
     })
   }
 
@@ -72,7 +73,8 @@ class Resetpwd extends Basic {
         model.mvvm.step = 'second';
       }
     },(msg)=> {
-      Core.alert('danger', msg.responseJSON.message)
+      Core.alert('danger', '获取验证码失败');
+      return ;
     })
   }
 
@@ -108,8 +110,9 @@ class Resetpwd extends Basic {
         alert('验证码已发送，请及时查收');
         model.countdowntime();
       },(msg)=> {
-        Core.alert('danger', msg.responseJSON.message)
+        Core.alert('danger', '获取验证码失败');
         $('#get_verify').removeAttr('disabled');
+        return ;
       })
     } else {
       alert('请正确填写手机号码');
@@ -142,7 +145,8 @@ class Resetpwd extends Basic {
     API.put('users/reset_pasd',setpwd, (data)=> {
       window.location.href = '/login/index'
     },(msg)=> {
-      Core.alert('danger', msg.responseJSON.message);
+      Core.alert('danger', '找回密码失败');
+      return ;
     })
   }
 }

@@ -1,0 +1,148 @@
+@import "../function.scss";
+body{
+  background-color: #f4f4f4 !important;
+}
+.body-box{
+  width: 100% !important;
+  .list-box{
+    ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        border-bottom: 1px solid #f4f4f4;
+        background-color: #fff;
+        a{
+          display: block;
+          text-decoration: none;
+          padding: 0 pxTorem(24);
+          p{
+            margin: 0;
+            padding: 0;
+            .name{
+              color: #666;
+            }
+            .time{
+              float: right;
+              color: #999;
+            }
+            .svg-style{
+              position: relative;
+              float: right;
+              fill: #999;
+              margin-left: pxTorem(24);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// mobile(竖屏200px-420px)
+@media only screen and (max-device-width: 420px) and  (min-device-width: 200px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(120);
+          a{
+            height: pxTorem(120);
+            line-height: pxTorem(120);
+            font-size: pxTorem(40);
+            p{
+              height: pxTorem(120);
+              .svg-style{
+                top: pxTorem(40);
+                width: pxTorem(40);
+                height: pxTorem(40);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// mobile(横屏421px-736px)
+@media only screen and (orientation : landscape){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(60);
+          a{
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(22);
+            p{
+              height: pxTorem(60);
+              .svg-style{
+                top: pxTorem(18);
+                width: pxTorem(22);
+                height: pxTorem(22);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// iPad竖屏(768px-1000px)
+@media only screen and (max-device-width: 1000px)  and (min-device-width: 768px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(90);
+          a{
+            height: pxTorem(90);
+            line-height: pxTorem(90);
+            font-size: pxTorem(32);
+            p{
+              height: pxTorem(90);
+              .svg-style{
+                top: pxTorem(25);
+                width: pxTorem(36);
+                height: pxTorem(36);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// iPad横屏(1001px-1024px)
+@media only screen and (max-device-width: 1200px)  and (min-device-width: 1001px){
+  .body-box{
+    width: 100% !important;
+    .list-box{
+      ul{
+        li{
+          height: pxTorem(60);
+          a{
+            height: pxTorem(60);
+            line-height: pxTorem(60);
+            font-size: pxTorem(22);
+            p{
+              height: pxTorem(60);
+              .svg-style{
+                top: pxTorem(18);
+                width: pxTorem(22);
+                height: pxTorem(22);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

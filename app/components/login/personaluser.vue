@@ -101,7 +101,8 @@
             model.info.serverobj = 78;
           },10);
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message);
+          Core.alert('danger', '获取服务对象失败');
+          return ;
         })
       },
       getVerification: function() {
@@ -111,6 +112,7 @@
         if(phone) {
           if($('#user_phone').hasClass('error')) {
             alert('手机号已被注册');
+            $('#get_verify').removeAttr('disabled');
           } else {
             API.get('requestSmsCode/sms',{
                 type:'web',
@@ -119,12 +121,14 @@
               alert('验证码已发送，请及时查收');
               model.countdowntime();
             },(msg)=> {
-              Core.alert('danger', msg.responseJSON.message);
+              Core.alert('danger', '获取验证码失败');
               $('#get_verify').removeAttr('disabled');
+              return ;
             })
           }
         } else {
           alert('请正确填写手机号码');
+          $('#get_verify').removeAttr('disabled');
           return ;
         }
       },
@@ -211,7 +215,8 @@
             window.location.href = '/';
           }, 1000)
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message);
+          Core.alert('danger', '注册失败');
+          return ;
         })
       }
     },

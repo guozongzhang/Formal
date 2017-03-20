@@ -69,8 +69,9 @@ class Index extends Basic {
         alert('验证码已发送，请及时查收');
         model.countdowntime();
       },(msg)=> {
-        Core.alert('danger', msg.responseJSON.message);
+        Core.alert('danger', '验证码获取失败');
         $('#get_verify').removeAttr('disabled');
+        return ;
       })
     } else {
       alert('请正确填写手机号码');
@@ -114,7 +115,8 @@ class Index extends Basic {
         }
       }, 1000)
     },(msg)=> {
-      Core.alert('danger', msg.responseJSON.message)
+      Core.alert('danger', '登录失败')
+      return ;
     })
   }
 }

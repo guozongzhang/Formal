@@ -1,0 +1,62 @@
+@import "../function.scss";
+
+.body-box{
+  width: 100% !important;
+  .detail-box{
+    .title{
+      margin: 0;
+      padding-left: pxTorem(24);
+      text-align: left;
+      font-weight: bold;
+      background-color: #f4f4f4;
+    }
+    .md-style{
+      padding: pxTorem(24);
+    }
+  }
+}
+
+// mobile(竖屏200px-420px)
+@media only screen and (max-device-width: 420px) and  (min-device-width: 200px){
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(120);
+      line-height: pxTorem(120);
+      font-size: pxTorem(50);
+    }
+  }
+}
+// mobile(横屏421px-736px)
+@media only screen and (orientation : landscape){
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      font-size: pxTorem(30);
+    }
+  }
+}
+// iPad竖屏(768px-1000px)
+@media only screen and (max-device-width: 1000px)  and (min-device-width: 768px){
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(80);
+      line-height: pxTorem(80);
+      font-size: pxTorem(30);
+    }
+  }
+}
+// iPad横屏(1001px-1024px)
+@media only screen and (max-device-width: 1200px)  and (min-device-width: 1001px){
+  .body-box{
+    width: 100% !important;
+    .title{
+      height: pxTorem(70);
+      line-height: pxTorem(70);
+      font-size: pxTorem(30);
+    }
+  }
+}

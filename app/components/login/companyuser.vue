@@ -127,8 +127,9 @@
               alert('验证码已发送，请及时查收');
               model.countdowntime();
             },(msg)=> {
-              Core.alert('danger', msg.responseJSON.message);
+              Core.alert('danger', '获取验证码失败');
               $('#get_verify').removeAttr('disabled');
+              return ;
             })
           }
         } else {
@@ -234,7 +235,8 @@
         API.get('admin/signUpBySmsCode',comdata, (data)=> {
           $('.success-bg').removeClass('hidden');
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message);
+          Core.alert('danger', '注册失败');
+          return ;
         })
       },
       syncData: function(key, val) {

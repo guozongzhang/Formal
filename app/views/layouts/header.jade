@@ -12,6 +12,13 @@ link(href="/tmp/assets/stylesheets/#{route.controller}/#{route.action}.css" rel=
 
 //- 存入后端的某些公共变量供JS使用  全局配置
 script.
+  function isIE() { //ie?  
+    if (!!window.ActiveXObject || "ActiveXObject" in window)  
+        return true;  
+    else  
+        return false;  
+  }  
+
   window.SITE = {
     router: {
       controller: '#{route.controller}',
@@ -40,7 +47,7 @@ script.
     app_id: 'cfdab86f2c2ea593',
     API: {
       //- url: "#{localEnv.url || 'http://192.168.1.120/openapi/api/1.0/'}"
-      url: '/'
+      url: isIE() ? '/' : "#{localEnv.url || 'http://192.168.1.120/openapi/api/1.0/'}"
     }
   }
 
