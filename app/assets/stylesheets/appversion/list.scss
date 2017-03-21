@@ -16,6 +16,9 @@ body{
         cursor: pointer;
         border-bottom: 1px solid #f4f4f4;
         background-color: #fff;
+        height: pxTorem(120);
+        line-height: pxTorem(120);
+        font-size: pxTorem(40);
         a{
           display: block;
           text-decoration: none;
@@ -23,6 +26,7 @@ body{
           p{
             margin: 0;
             padding: 0;
+            height: pxTorem(120);
             .name{
               color: #666;
             }
@@ -35,6 +39,9 @@ body{
               float: right;
               fill: #999;
               margin-left: pxTorem(24);
+              width: pxTorem(40);
+              height: pxTorem(40);
+              top: pxTorem(40);
             }
           }
         }
