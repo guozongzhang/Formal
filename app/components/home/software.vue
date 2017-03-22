@@ -16,8 +16,9 @@
         div.loadurl-box(v-if="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
             li.list-style(v-for="item in lanmu.pics")
-              img(:src="item.img")
-              p {{item.text}}
+              a(:href="item.url" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;")
+                img(:src="item.img")
+                p {{item.text}}
 
     <vue-line></vue-line>
 
@@ -59,6 +60,8 @@
       },
       getList: function() {
         HomePage.where({name: 'thirdfloor'}).all((data)=> {
+          console.log('==========')
+          console.log(JSON.parse(data.items[0].config))
           this.items = JSON.parse(data.items[0].config)
         })
       }
@@ -87,7 +90,7 @@
         width: pxTorem(280);
         img{
           width: pxTorem(280);
-          height: pxTorem(360)
+          height: pxTorem(360);
         }
         p{
           color: #666;
