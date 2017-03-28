@@ -1,6 +1,6 @@
 <template lang="jade">
   div.banner-vue.vue-component
-    <vue-swiper :flag='"homeBanner"' :swiperdata='items' :autoplay='5000' :height="350"></vue-swiper>
+    <vue-swiper :flag='"homeBanner"' :swiperdata='items' :autoplay='5000' :height="433"></vue-swiper>
 </template>
 
 <script>
