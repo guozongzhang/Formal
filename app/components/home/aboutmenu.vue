@@ -8,6 +8,7 @@
           li.list-style(v-for="item in menus" v-bind:class="item.action == action ? 'active' : ''")
             a(:href="item.link_url") {{item.name}}
             span.triangle
+              
 </template>
 
 <script>
