@@ -25,7 +25,7 @@
                   span {{item.province_poi_province.ProvinceName}} {{item.city_poi_city.CityName}} {{item.district_poi_district.DistrictName}}-{{item.estate_name ? item.estate_name : '暂无'}}
                 p.house-type {{item.aptt_poi_apartment_types ? item.aptt_poi_apartment_types.aptt_name : '暂无'}}
                 p.update-time 最后修改时间：{{item.update_time | localDate}}
-                a.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled" target="_blank") 去设计
+                a.btn.btn-flat.bg-olive.go-draw(v-on:click="GoDesign($event,item)" v-bind:disabled="item.submit_disabled") 去设计
 
           <vue-pagination :flag="'designnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 
@@ -73,7 +73,8 @@
             apt_id:obj.id,
           }, (data)=> {
             obj.submit_disabled = false;
-            window.location.href = SITE.Ips.design + '/example/design?id=' + data.id
+            window.open(SITE.Ips.design + '/example/design?id=' + data.id);
+            //window.location.href = SITE.Ips.design + '/example/design?id=' + data.id
         },(msg)=> {
           obj.submit_disabled = false;
           $(event.target).text('去设计');
