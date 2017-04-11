@@ -180,12 +180,14 @@
           height: pxTorem(280);
           ul {
             margin-top: pxTorem(20);
+            height: pxTorem(280);
             li{
               display: inline-block;
               margin: 0 pxTorem(9.9);
               width: pxTorem(220);
               height: pxTorem(280);
               background-color: #f1f1f1;
+              float: left;
               a{
                 display: inline-block;
                 width: pxTorem(220);
