@@ -16,7 +16,7 @@
                       use(xlink:href="/assets/svg/icon.svg#picture")
                   span.text 选择您要上传的头像
                   input(type="file"  id="inputImage" name="files" accept="image/*" style="display:none;")
-              p.tips 仅支持JPG、PNG、JPGE、BMP格式，文件小于5M
+              p.tips 仅支持JPG、PNG、JPGE格式，文件小于5M
               div.imgs-show
                 img.img-responsive#image(:src="user_url" alt="Picture")
             div.preview-box
