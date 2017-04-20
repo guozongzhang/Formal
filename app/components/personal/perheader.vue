@@ -30,7 +30,7 @@
       },
       GetUserinfo: function(str,val) {
         this.perinfo[str] = val;
-        window.reload();
+        location.reload() 
       }
     }
   }
