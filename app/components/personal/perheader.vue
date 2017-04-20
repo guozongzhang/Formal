@@ -29,7 +29,8 @@
         $('#uploadportrait').modal('show');
       },
       GetUserinfo: function(str,val) {
-        this.perinfo[str] = val
+        this.perinfo[str] = val;
+        location.reload() 
       }
     }
   }
