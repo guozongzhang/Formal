@@ -68,7 +68,7 @@
           this.info.newpwd = '';
           this.info.repwd = '';
         },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message)
+          Core.alert('danger', JSON.parse(msg.responseText).message)
         })
       }
     }
