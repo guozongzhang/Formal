@@ -28,17 +28,25 @@
         let model = this;
         let default_config = {
           pagination: (model.pagenation || '.swiper-pagination'),
-          loop: true,
+          loop : true,
+          freeMode : false,
           paginationClickable: true,
+          initialSlide: 0,
+          speed: 500,
           nextButton: '.swiper-button-next',
           prevButton: '.swiper-button-prev',
-          spaceBetween: 30,
-          autoplay: model.autoplay || 1000,
+          autoplay: 3000,
           effect: model.effect || 'overflow',
-          grabCursor: true,
+          autoplayDisableOnInteraction : false
         }
         default_config = _.extend(model.config || {}, default_config);
         this.mySwiper = new Swiper('.'+ model.flag, default_config);
+        // 鼠标悬停停止播放
+        $('.'+ model.flag).mouseenter(function() {
+          model.mySwiper.stopAutoplay()
+        }).mouseleave(function() {
+          model.mySwiper.startAutoplay()
+        })
       },
 
       gotoNext: function (){
