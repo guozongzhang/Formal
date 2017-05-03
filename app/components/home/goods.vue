@@ -4,7 +4,6 @@
     div.tab-group
       ul.list-style 
         li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
-    <!--办公家具-->
     div.office-imgs-box.clear(v-if="view == 0")
       div.left-box.clear
         div.left-top
@@ -150,6 +149,7 @@
           text-align: center;
           border-right: 1px solid #ccc;
           color: #666;
+          cursor: pointer;
         }
         li.active{
           background-color: #f14f4f;

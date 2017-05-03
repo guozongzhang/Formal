@@ -129,6 +129,7 @@
             text-align: center;
             border-right: 1px solid #ccc;
             color: #666;
+            cursor: pointer;
           }
           li.active{
             background-color: #558fee;
