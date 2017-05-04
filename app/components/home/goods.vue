@@ -49,7 +49,11 @@
       div.brand-list
         ul.list-style
           li.list-style(v-for="item in brands") 
-            a(:href="item.url" target="_blank") 
+            a(:href="item.url" target="_blank" v-show="item.checked") 
+              //- span gc
+              img(:src="item.img")
+              p {{item.text}}
+            a(href="javascript:;" v-show="!item.checked")
               img(:src="item.img")
               p {{item.text}}
     
