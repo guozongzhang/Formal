@@ -48,7 +48,7 @@
     div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="item in brand") 
+          li.list-style(v-for="item in brands") 
             a(:href="item.url" target="_blank") 
               img(:src="item.img")
               p {{item.text}}
@@ -58,7 +58,7 @@
     div.store-box.clear(v-if="view == 3")
       div.store-list.clear
         ul.list-style.clear
-          li.list-style(v-for="item in items.lanmus[3].pics") 
+          li.list-style(v-for="item in stores") 
             a(:href="item.url") 
               img(:src="item.img")
               p {{item.text}}
@@ -96,7 +96,8 @@
       return {
         view: 0,
         items: {},
-        brand:[]
+        brands:[],
+        stores:[]
       }
     },
     
@@ -112,7 +113,10 @@
 
       getList: function() {
         HomePage.where({name: 'firstfloor'}).all((data)=> {
-          this.brand = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
+          this.brands = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
+            return item.order*-1
+          })
+          this.stores = _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
             return item.order*-1
           })
           this.items = JSON.parse(data.items[0].config)
