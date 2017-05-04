@@ -48,9 +48,8 @@
     div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="item in brands") 
-            a(:href="item.url" target="_blank" v-show="item.checked") 
-              //- span gc
+          li.list-style(v-for="item in brands" v-bind:class="item.checked ? 'hover' : ''") 
+            a(:href="item.url" target="_blank" v-show="item.checked")
               img(:src="item.img")
               p {{item.text}}
             a(href="javascript:;" v-show="!item.checked")
@@ -358,14 +357,9 @@
               }
             }
           }
-          li:hover{
+          li.hover:hover{
             border: 1px solid #f14f4f;
           }
-          // li:nth-child(1),
-          // li:nth-child(6),
-          // li:nth-child(11){
-          //   border-left: 1px solid #fff;
-          // }
         }
       }
     }
