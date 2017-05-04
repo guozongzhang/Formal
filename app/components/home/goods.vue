@@ -48,7 +48,7 @@
     div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="item in items.lanmus[2].pics") 
+          li.list-style(v-for="item in brand") 
             a(:href="item.url") 
               img(:src="item.img")
               p {{item.text}}
@@ -95,7 +95,8 @@
     data() {
       return {
         view: 0,
-        items: {}
+        items: {},
+        brand:[]
       }
     },
     
@@ -111,6 +112,9 @@
 
       getList: function() {
         HomePage.where({name: 'firstfloor'}).all((data)=> {
+          this.brand = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
+            return item.order*-1
+          })
           this.items = JSON.parse(data.items[0].config)
         })
       },

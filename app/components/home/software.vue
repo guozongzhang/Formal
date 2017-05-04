@@ -60,8 +60,6 @@
       },
       getList: function() {
         HomePage.where({name: 'thirdfloor'}).all((data)=> {
-          console.log('==========')
-          console.log(JSON.parse(data.items[0].config))
           this.items = JSON.parse(data.items[0].config)
         })
       }
