@@ -49,7 +49,7 @@
       div.brand-list
         ul.list-style
           li.list-style(v-for="item in brand") 
-            a(:href="item.url") 
+            a(:href="item.url" target="_blank") 
               img(:src="item.img")
               p {{item.text}}
     
