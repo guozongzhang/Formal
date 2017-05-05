@@ -152,6 +152,7 @@
           text-align: center;
           border-right: pxTorem(1) solid #ccc;
           color: #666;
+          cursor: pointer;
         }
         li:nth-child(4){
           border-right: none;

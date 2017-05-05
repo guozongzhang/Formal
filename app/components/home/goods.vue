@@ -4,7 +4,6 @@
     div.tab-group
       ul.list-style 
         li.list-style(v-for="(tmp, index) in items.lanmus"  v-on:mouseover="changeTab(index)" v-bind:class="view == index ? 'active' : ''") {{tmp.title}}
-    <!--办公家具-->
     div.office-imgs-box.clear(v-if="view == 0")
       div.left-box.clear
         div.left-top
@@ -49,8 +48,11 @@
     div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="item in items.lanmus[2].pics") 
-            a(:href="item.url") 
+          li.list-style(v-for="item in brands" v-bind:class="item.checked ? 'hover' : ''") 
+            a(:href="item.url" target="_blank" v-show="item.checked")
+              img(:src="item.img")
+              p {{item.text}}
+            a(href="javascript:;" v-show="!item.checked")
               img(:src="item.img")
               p {{item.text}}
     
@@ -59,7 +61,7 @@
     div.store-box.clear(v-if="view == 3")
       div.store-list.clear
         ul.list-style.clear
-          li.list-style(v-for="item in items.lanmus[3].pics") 
+          li.list-style(v-for="item in stores") 
             a(:href="item.url") 
               img(:src="item.img")
               p {{item.text}}
@@ -96,7 +98,9 @@
     data() {
       return {
         view: 0,
-        items: {}
+        items: {},
+        brands:[],
+        stores:[]
       }
     },
     
@@ -112,6 +116,12 @@
 
       getList: function() {
         HomePage.where({name: 'firstfloor'}).all((data)=> {
+          this.brands = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
+            return item.order*-1
+          })
+          this.stores = _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
+            return item.order*-1
+          })
           this.items = JSON.parse(data.items[0].config)
         })
       },
@@ -150,6 +160,7 @@
           text-align: center;
           border-right: 1px solid #ccc;
           color: #666;
+          cursor: pointer;
         }
         li.active{
           background-color: #f14f4f;
@@ -327,6 +338,7 @@
             // border-bottom: 1px solid #fff;
             a{
               text-decoration:none;
+              cursor: default;
               img{
                 width: pxTorem(160);
                 height: pxTorem(120);
@@ -346,14 +358,12 @@
               }
             }
           }
-          li:hover{
+          li.hover:hover{
             border: 1px solid #f14f4f;
+            a{
+              cursor: pointer;
+            }
           }
-          // li:nth-child(1),
-          // li:nth-child(6),
-          // li:nth-child(11){
-          //   border-left: 1px solid #fff;
-          // }
         }
       }
     }

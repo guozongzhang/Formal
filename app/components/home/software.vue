@@ -60,8 +60,6 @@
       },
       getList: function() {
         HomePage.where({name: 'thirdfloor'}).all((data)=> {
-          console.log('==========')
-          console.log(JSON.parse(data.items[0].config))
           this.items = JSON.parse(data.items[0].config)
         })
       }
@@ -129,6 +127,7 @@
             text-align: center;
             border-right: 1px solid #ccc;
             color: #666;
+            cursor: pointer;
           }
           li.active{
             background-color: #558fee;

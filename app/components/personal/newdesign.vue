@@ -22,7 +22,7 @@
           p.empty 还没有户型呢~
         ul.list-style.clear
           li.list-style(v-for="item in houses")
-            img(:src="item.apt_image")
+            img(:src="item.paint_url")
             a.go-draw(:href="Design_url+ item.id") 去搭配
             div.info-box
               p.name {{item.apt_name}}
@@ -67,10 +67,22 @@
           return;
         }
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
-          model.totalcount = data.count;
-          model.houses = data.items;
+        let whereobj = JSON.stringify({province_poi_province:this.search_pro})
+        let obj = {
+          limit: model.pagesize,
+          skip: skip,
+          search: this.searchKey,
+          where: whereobj,
+          owner:'public'
+        }
+        API.get('functions/search/apartment_search', obj ,data => {
+          model.houses = data.items
+          model.totalcount = data.count
         })
+        // Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
+        //   model.totalcount = data.count;
+        //   model.houses = data.items;
+        // })
       }
     },
     created() {
