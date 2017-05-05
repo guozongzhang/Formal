@@ -67,10 +67,12 @@
           return;
         }
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        let whereobj = JSON.stringify({province_poi_province:this.search_pro})
         let obj = {
           limit: model.pagesize,
           skip: skip,
           search: this.searchKey,
+          where: whereobj,
           owner:'public'
         }
         API.get('functions/search/apartment_search', obj ,data => {
