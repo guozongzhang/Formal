@@ -338,6 +338,7 @@
             // border-bottom: 1px solid #fff;
             a{
               text-decoration:none;
+              cursor: default;
               img{
                 width: pxTorem(160);
                 height: pxTorem(120);
@@ -359,6 +360,9 @@
           }
           li.hover:hover{
             border: 1px solid #f14f4f;
+            a{
+              cursor: pointer;
+            }
           }
         }
       }
