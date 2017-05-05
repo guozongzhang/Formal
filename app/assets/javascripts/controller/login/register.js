@@ -118,7 +118,7 @@ class Register extends Basic {
   init () {
     this.register(['choiceSignalUser', 'choiceCompanyUser', 'submitSuccess']);
     model.mvvm.usertype = urltype || 'designer';
-    model.mvvm.tips = model.mvvm.designer;
+    model.mvvm.tips = model.mvvm.usertype == 'buyer' ? model.mvvm.user : model.mvvm.designer;
   }
 
   choiceSignalUser() {

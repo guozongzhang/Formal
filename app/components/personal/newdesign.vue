@@ -67,10 +67,20 @@
           return;
         }
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
-          model.totalcount = data.count;
-          model.houses = data.items;
+        let obj = {
+          limit: model.pagesize,
+          skip: skip,
+          search: this.searchKey,
+          owner:'public'
+        }
+        API.get('functions/search/apartment_search', obj ,data => {
+          model.houses = data.items
+          model.totalcount = data.count
         })
+        // Apartment.reset().where({province_poi_province:this.search_pro}).where(['user_poi_users > ?', '-2']).search(this.searchKey).limit(model.pagesize).skip(skip).include('province_poi_province,city_poi_city,district_poi_district').all((data)=> {
+        //   model.totalcount = data.count;
+        //   model.houses = data.items;
+        // })
       }
     },
     created() {
