@@ -22,7 +22,7 @@
           p.empty 还没有户型呢~
         ul.list-style.clear
           li.list-style(v-for="item in houses")
-            img(:src="item.apt_image")
+            img(:src="item.paint_url")
             a.go-draw(:href="Design_url+ item.id") 去搭配
             div.info-box
               p.name {{item.apt_name}}
