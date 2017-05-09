@@ -31,6 +31,13 @@
         media:[
           {
             img_url:'../../assets/imgs/4.png',
+            title:'从家具跨行互联网 看肖敏如何助企业实现转型升级',
+            content:'“一个具有适应能力的公司能够满足顾客千变万化的需求。你的顾客不会停滞不前；同样，你的公司也不可能一成不变。在动态的环境中，你无法指望可以止步不前，也不可能固守公司最初的产品和所提供的服务。”这是《互联网新思维--未来十年的企业变形计》中一句颇有深意的话，用在今天这家产业互联网公司再合适不过。',
+            link_more:'http://www.caigou2003.com/e/wap/show.php?classid=181&id=2901143&style=0&bclassid=37&cid=181&cpage=0&from=timeline',
+            time:'05/04 2017'
+          },
+          {
+            img_url:'../../assets/imgs/4.png',
             title:'搭配家与嘉利信得共建，共享，共赢新模式',
             content:'11月26日， “一路有你，感恩相伴”—嘉利信得新品发布会在隆重举行，同时揭幕新展厅。北京家具行业协会会长何法涧先生到会致辞，对嘉利信得展厅表示肯定与赞扬。该展厅由搭配家与嘉利信得共建、共享。',
             link_more:'http://mp.weixin.qq.com/s/JtLWQ8WOQUBaVlMBlP9R9g',
