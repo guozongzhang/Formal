@@ -58,7 +58,9 @@
           let ids = data.items.map((item)=> {
             return item.point;
           })
-          Example.reset().keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+          Example.reset().where(['id in ?', ids]).where(['user_poi_users > ?','-2']).where(['com_id_poi_companys > ?','-1'])
+          .where(['dealer_id_poi_company_dealer > ?','-1']).where(['st_id_poi_company_stores > ?','-1'])
+          .keys('id,apt_name,apt_image,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
             this.examples = msg.items;
           })
         })
