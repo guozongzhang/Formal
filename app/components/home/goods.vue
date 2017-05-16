@@ -49,13 +49,9 @@
       div.brand-list
         ul.list-style
           li.list-style(v-for="item in brands" v-bind:class="item.checked ? 'hover' : ''") 
-            a(:href="item.url" target="_blank" v-show="item.checked")
+            a(:href="item.checked ? item.url : 'javascript:void(0)'" target="_blank" )
               img(:src="item.img")
               p {{item.text}}
-            a(href="javascript:;" v-show="!item.checked")
-              img(:src="item.img")
-              p {{item.text}}
-    
     
     <!--线下体验店-->
     div.store-box.clear(v-if="view == 3")
