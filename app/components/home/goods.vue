@@ -49,13 +49,9 @@
       div.brand-list
         ul.list-style
           li.list-style(v-for="item in brands" v-bind:class="item.checked ? 'hover' : ''") 
-            a(:href="item.url" target="_blank" v-show="item.checked")
+            a(:href="item.checked ? item.url : 'javascript:void(0)'" target="_blank" )
               img(:src="item.img")
               p {{item.text}}
-            a(href="javascript:;" v-show="!item.checked")
-              img(:src="item.img")
-              p {{item.text}}
-    
     
     <!--线下体验店-->
     div.store-box.clear(v-if="view == 3")
@@ -119,7 +115,8 @@
           this.brands = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
             return item.order*-1
           })
-          this.stores = _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
+          this.stores = JSON.parse(data.items[0].config).lanmus[3].pics
+           _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
             return item.order*-1
           })
           this.items = JSON.parse(data.items[0].config)
