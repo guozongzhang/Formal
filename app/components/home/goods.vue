@@ -119,7 +119,8 @@
           this.brands = _.sortBy(JSON.parse(data.items[0].config).lanmus[2].pics, function(item) {
             return item.order*-1
           })
-          this.stores = _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
+          this.stores = JSON.parse(data.items[0].config).lanmus[3].pics
+           _.sortBy(JSON.parse(data.items[0].config).lanmus[3].pics, function(item) {
             return item.order*-1
           })
           this.items = JSON.parse(data.items[0].config)
