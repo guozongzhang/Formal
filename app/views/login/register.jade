@@ -17,7 +17,7 @@ html
         //- div.go-login
         //-   p 已有搭配家账号？
         //-   a(href="/login/index") 登录
-        div.go-login
+        div.go-login(v-cloak)
           div.xiaoxuan(v-for="msg in tips")
             label {{msg.title}}
             p.sub-title {{msg.subtitle}}

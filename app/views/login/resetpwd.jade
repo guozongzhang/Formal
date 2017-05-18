@@ -8,7 +8,7 @@ html
         div.title 
           | 找回密码
           a(href="/login/index") < 返回登录页
-        div.step-box
+        div.step-box(v-cloak)
           span.icon-circle.active 1
           span.text.active 验证注册手机号
           span.step-line(v-bind:class="step == 'second' ? 'active' : ''") >>>

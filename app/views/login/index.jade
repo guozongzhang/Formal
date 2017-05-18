@@ -9,7 +9,7 @@ html
           div.title(v-cloak)
             label {{info.type == 'number' ? '账号密码登录' : '手机验证码登录'}}
             //- span(v-on:click="changeLoginType()") {{info.type == 'number' ? '手机验证码登录' : '账号密码登录'}}
-          div.input-box
+          div.input-box(v-cloak)
             div.input-item
               input(type="text" v-model="info.number" v-bind:placeholder="info.type == 'number' ? '输入手机号/账号' : '输入手机号'")
             div.input-item(v-show="info.type == 'number'")
