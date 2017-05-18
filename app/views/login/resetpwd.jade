@@ -14,7 +14,7 @@ html
           span.step-line(v-bind:class="step == 'second' ? 'active' : ''") >>>
           span.icon-circle(v-bind:class="step == 'second' ? 'active' : ''") 2
           span.text(v-bind:class="step == 'second' ? 'active' : ''") 设置新密码
-        div.input-box(v-show="step == 'first'")
+        div.input-box(v-show="step == 'first'" v-cloak)
           div.input-item
             label 账户：
             input(type="text" v-model="info.number" placeholder="请输入手机号")
@@ -25,7 +25,7 @@ html
           div.next-step
             a(href="javascript:;" v-on:click="getNext()") 下一步
 
-        div.second-input-box(v-show="step == 'second'")
+        div.second-input-box(v-show="step == 'second'" v-cloak)
           div.input-item
             span 通过手机{{info.number}}
             button.getverify#get_verify(type="button" v-on:click="getVerify()") 获取验证码

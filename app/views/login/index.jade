@@ -18,7 +18,7 @@ html
               input(type="text" v-model="info.verify" placeholder="输入验证码")
               span#get_verify(v-on:click="getVerify()") 获取验证码
 
-            div.auto-logo
+            div.auto-logo(v-cloak)
               label.check-box
                 input(type="checkbox")
                 span 下次自动登录
