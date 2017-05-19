@@ -8,7 +8,7 @@
               label {{item.name}}
               ul.text-ul.list-style
                 li.list-style(v-for="sub in item.subs")
-                  a(:href="sub.url")
+                  a(:href="sub.url" target="_blank")
                     span(v-if="sub.type == 'txt'") {{sub.name}}
                     img.pic-item(:src="sub.img" v-if="sub.type == 'pic'" )
     

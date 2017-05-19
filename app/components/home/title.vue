@@ -3,7 +3,7 @@
     p 
       img.goods-icon(:src="title.txt.img")
       label {{title.txt.title}}
-      a(:href="title.txt.url") 
+      a(:href="title.txt.url" target="_blank") 
         span.link-text 查看更多
         span > 
     div.sub-box
