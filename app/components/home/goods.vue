@@ -7,7 +7,7 @@
     div.office-imgs-box.clear(v-if="view == 0")
       div.left-box.clear
         div.left-top
-          a(:href="item.url" v-for="item in itempart(0, 0 , 0)")
+          a(:href="item.url ? item.url : 'javascript:void(0)'" v-for="item in itempart(0, 0 , 0)" target="_blank")
             img(:src="item.img")
         
         div.left-bottom
@@ -37,7 +37,7 @@
 
       div.bottom-box
         div.bottom-left
-          a(:href="item.url" v-for="item in itempart(1, 5 , 5)")
+          a(:href="item.url" v-for="item in itempart(1, 5 , 5)" target="_blank")
             img(:src="item.img")
 
         ul.list-style 
@@ -58,7 +58,7 @@
       div.store-list.clear
         ul.list-style.clear
           li.list-style(v-for="item in stores") 
-            a(:href="item.url") 
+            a(:href="item.url" target="_blank") 
               img(:src="item.img")
               p {{item.text}}
 
@@ -81,14 +81,14 @@
       'vue-line': LineVue,
       'vue-item': {
         props: ['item'],
-        template: '\
-          <a :href="item.url">\
+        template: `\
+          <a :href="item.url ? item.url : 'javascript:void(0)'" target="_blank">\
               <div class="img-box">\
                 <img :src="item.img" />\
               </div>\
               <p> {{item.text}} </p>\
           </a>\
-        ',
+        `,
       }
     },
     data() {
