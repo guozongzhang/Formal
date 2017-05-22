@@ -8,7 +8,7 @@
         p.empty 还没有收藏样板间呢~
       ul.list-style.clear(v-show="examples.length > 0")
         li.list-style(v-for="item in examples")
-          a(href="javascript:;")
+          a(:href="item.link_url" target="_blank")
             img(:src="item.paint_url")
             div.info-box
               p.name {{item.apt_name}}
@@ -61,6 +61,9 @@
           Example.reset().where(['id in ?', ids]).where(['user_poi_users > ?','-2']).where(['com_id_poi_companys > ?','-1'])
           .where(['dealer_id_poi_company_dealer > ?','-1']).where(['st_id_poi_company_stores > ?','-1'])
           .keys('id,apt_name,paint_url,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+            msg.items.forEach((item)=> {
+              item.link_url = SITE.Ips.design + 'example/exampledetail?id=' + item.id;
+            })
             this.examples = msg.items;
           })
         })
@@ -122,6 +125,7 @@
           display: inline-block;
           width: pxTorem(240);
           height: pxTorem(254);
+          cursor: pointer;
           img{
             width: pxTorem(240);
             height: pxTorem(180);
