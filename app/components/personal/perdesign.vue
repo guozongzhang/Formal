@@ -6,7 +6,7 @@
       div.right
         div.label-title
           label 我的设计
-          a.search-house(:href="designe.go_new") 搜索户型搭
+          a.search-house(:href="designe.go_new" target="_blank") 搜索户型搭
           a.zore-draw(:href="siteUrl('design', '/example/new')" target="_blank") 从零开始搭
           
         div.design-list

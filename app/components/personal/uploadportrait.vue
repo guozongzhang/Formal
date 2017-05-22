@@ -52,6 +52,7 @@
         var $previews = $('.img-preview');
         $('#image').cropper({
           aspectRatio: 1 / 1,
+          viewMode:1,
           build: function (e) {
             var $clone = $(this).clone();
             $clone.css({
@@ -114,7 +115,7 @@
           let form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
           if(this.files[0].name.indexOf('gif') > -1) {
-            Core.alert('danger','暂时不支持GIG格式图片，请重新上传');
+            Core.alert('danger','暂时不支持GIF格式图片，请重新上传');
             $input.unwrap();
             $input.val('');
             return ;
