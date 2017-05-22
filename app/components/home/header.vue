@@ -5,8 +5,8 @@
         a.home-logo(href="/" v-show="logo != ''") 
           img(:src="logo")
         ul.nav.navbar-nav.nav-tab
-          li(v-for="item in menus" v-bind:class="item.action == controller ? 'active' : ''")
-            a.title(:href="item.url" target="_blank") {{item.name}}
+          li(v-for="(item, index) in menus")
+            a.title(:href="item.url" v-bind:target="index == 0 ? '_self' : '_blank'") {{item.name}}
             div.sub-menu
               a(:href="sub.url" v-for="sub in item.subs" target="_blank") {{sub.name}}
     

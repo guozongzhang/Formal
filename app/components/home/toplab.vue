@@ -12,7 +12,7 @@
           a(:href="logininfo.login.url" v-show="logininfo.login.isshow") {{logininfo.login.name}}
 
         li.list-style.list-right(v-if="logininfo.users.isshow")
-          img.user-img(:src="user_logo")
+          img.user-img#user-imgs(:src="user_logo")
           a.users-info(:href="logininfo.users.url") {{logininfo.users.name}}
             div.sub-menu
               a(:href="sub.index.url") {{sub.index.name}}
