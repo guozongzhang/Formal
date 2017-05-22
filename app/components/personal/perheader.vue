@@ -18,7 +18,7 @@
     data() {
       return {
         perinfo:{
-          bg_url:'',
+          bg_url:'', 
           user_url: SITE.session.mem.info_poi_user_info.ui_head || 'http://cimg.dpjia.com/files/users/149/heads/1448272058.png@120w_120h.png',
           name: SITE.session.mem.info_poi_user_info.ui_name || '暂无'
         }
