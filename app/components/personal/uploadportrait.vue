@@ -42,6 +42,7 @@
       return {
         user_url:this.userinfo.user_url,
         option:{
+          viewMode:1,
           aspectRatio: 1 / 1,
           preview:'.img-preview',
         },
