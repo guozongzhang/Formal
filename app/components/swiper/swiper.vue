@@ -26,9 +26,10 @@
     methods: {
       init: function () {
         let model = this;
+        let loop_flag =  this.swiperdata.length > 1 ? true : false;
         let default_config = {
           pagination: (model.pagenation || '.swiper-pagination'),
-          loop : true,
+          loop : loop_flag,
           freeMode : false,
           paginationClickable: true,
           initialSlide: 0,

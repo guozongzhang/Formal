@@ -42,8 +42,10 @@
       return {
         user_url:this.userinfo.user_url,
         option:{
+          viewMode:1,
           aspectRatio: 1 / 1,
           preview:'.img-preview',
+          checkImageOrigin: true,
         },
       }
     },
@@ -52,6 +54,8 @@
         var $previews = $('.img-preview');
         $('#image').cropper({
           aspectRatio: 1 / 1,
+          viewMode:1,
+          checkImageOrigin: true,
           build: function (e) {
             var $clone = $(this).clone();
             $clone.css({
@@ -95,6 +99,7 @@
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
           this.$emit('syncUser', 'user_url', data.path);
+          $('#image').cropper('destroy').attr('src', data.path).cropper(_self.option)
           $('#uploadportrait').modal('hide');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
@@ -114,7 +119,7 @@
           let form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
           if(this.files[0].name.indexOf('gif') > -1) {
-            Core.alert('danger','暂时不支持GIG格式图片，请重新上传');
+            Core.alert('danger','暂时不支持GIF格式图片，请重新上传');
             $input.unwrap();
             $input.val('');
             return ;
