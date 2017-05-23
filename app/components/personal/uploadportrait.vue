@@ -97,6 +97,8 @@
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
           this.$emit('syncUser', 'user_url', data.path);
+          $('.cropper-container').find('img').attr('src', data.path);
+          _self.initCropper();
           $('#uploadportrait').modal('hide');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);

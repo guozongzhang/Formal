@@ -31,7 +31,6 @@
       GetUserinfo: function(str,val) {
         this.perinfo[str] = val;
         $('#user-imgs').attr('src', val);
-        $('.cropper-container').find('img').attr('src', val);
       }
     }
   }
