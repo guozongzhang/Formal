@@ -62,7 +62,7 @@
           .where(['dealer_id_poi_company_dealer > ?','-1']).where(['st_id_poi_company_stores > ?','-1'])
           .keys('id,apt_name,paint_url,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
             msg.items.forEach((item)=> {
-              item.link_url = SITE.Ips.design + 'example/exampledetail?id=' + item.id;
+              item.link_url = SITE.Ips.design + '/example/exampledetail?id=' + item.id;
             })
             this.examples = msg.items;
           })
