@@ -45,6 +45,7 @@
           viewMode:1,
           aspectRatio: 1 / 1,
           preview:'.img-preview',
+          checkImageOrigin: true,
         },
       }
     },
@@ -54,6 +55,7 @@
         $('#image').cropper({
           aspectRatio: 1 / 1,
           viewMode:1,
+          checkImageOrigin: true,
           build: function (e) {
             var $clone = $(this).clone();
             $clone.css({
@@ -97,8 +99,7 @@
         API.post('functions/profile/Profile',info, (data)=> {
           Core.alert('success',data.message);
           this.$emit('syncUser', 'user_url', data.path);
-          $('.cropper-container').find('img').attr('src', data.path);
-          _self.initCropper();
+          $('#image').cropper('destroy').attr('src', data.path).cropper(_self.option)
           $('#uploadportrait').modal('hide');
         },(msg)=> {
           Core.alert('danger', msg.responseJSON.message);
