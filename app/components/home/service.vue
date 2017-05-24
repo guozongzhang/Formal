@@ -2,12 +2,10 @@
   div.service-vue.vue-component
     <vue-title :title='items' :img_key="'bigimg'"></vue-title>
     div.service-box.clear
-      div.left-box
+      div.left-box(v-if="items.lanmus")
         <vue-swiper :img_key='"bigimg"'  :flag='"homeService"' :swiperdata='items.lanmus[0].pics' :autoplay='3000' :effect='"fade"' :pagenation='".home-swiper-pagenation"' :config='swiperConf' :height="420"></vue-swiper>
       div.right-box
         div.list-style.home-swiper-pagenation
-          // li.list-style(v-for="pic in items.lanmus[0].pics")
-          //   span.bg-img(:style="'background-image:url('+ pic.smallimg + ')'")
       
 </template>
 
@@ -42,12 +40,8 @@
         })
       }
     },
-    created() {
+    created () {
       this.getList()
-    },
-
-    mounted () {
-      
     }
   }
 

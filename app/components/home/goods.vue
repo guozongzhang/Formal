@@ -7,7 +7,7 @@
     div.office-imgs-box.clear(v-if="view == 0")
       div.left-box.clear
         div.left-top
-          a(:href="item.url" v-for="item in itempart(0, 0 , 0)")
+          a.yuguo(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" v-for="item in itempart(0, 0 , 0)" target="_blank")
             img(:src="item.img")
         
         div.left-bottom
@@ -37,7 +37,7 @@
 
       div.bottom-box
         div.bottom-left
-          a(:href="item.url" v-for="item in itempart(1, 5 , 5)")
+          a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" v-for="item in itempart(1, 5 , 5)" target="_blank")
             img(:src="item.img")
 
         ul.list-style 
@@ -48,8 +48,8 @@
     div.brand-box.clear(v-if="view == 2")
       div.brand-list
         ul.list-style
-          li.list-style(v-for="item in brands" v-bind:class="item.checked ? 'hover' : ''") 
-            a(:href="item.checked ? item.url : 'javascript:void(0)'" target="_blank" )
+          li.list-style(v-for="item in brands" v-bind:class="item.checked && (item || {}).islink == 'on' ? 'hover' : ''") 
+            a(:href="item.checked && (item || {}).islink == 'on' ? item.url : 'javascript:;'" target="_blank" )
               img(:src="item.img")
               p {{item.text}}
     
@@ -58,7 +58,7 @@
       div.store-list.clear
         ul.list-style.clear
           li.list-style(v-for="item in stores") 
-            a(:href="item.url") 
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank") 
               img(:src="item.img")
               p {{item.text}}
 
@@ -81,14 +81,14 @@
       'vue-line': LineVue,
       'vue-item': {
         props: ['item'],
-        template: '\
-          <a :href="item.url">\
+        template: `\
+          <a :href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank">\
               <div class="img-box">\
                 <img :src="item.img" />\
               </div>\
               <p> {{item.text}} </p>\
           </a>\
-        ',
+        `,
       }
     },
     data() {
@@ -126,7 +126,10 @@
         let result = []
         let model = this
         for(let i = start; i <= end; i++) {
-          result.push(model.items.lanmus[lanmu].pics[i])
+          let tmp = (model.items.lanmus || [])[lanmu];
+          if(tmp) {
+            result.push(tmp.pics[i])
+          }
         } 
         return result
       }

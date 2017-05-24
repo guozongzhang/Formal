@@ -14,16 +14,16 @@
           //-   p {{datas.renderdata.loopdata.text}}
 
       div.render-right-box(v-if="view == 0")
-        ul.list-style.design-right.clear
+        ul.list-style.design-right.clear(v-if="items.lanmus")
           li.list-style(v-for="item in items.lanmus[0].piclogo")
-            a.img-box(:href="item.url") 
+            a.img-box(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank") 
               img(:src="item.img")
       
       <!--户型图-->
       div.house-box.clear(v-if="view == 1")
-        ul.list-style
+        ul.list-style(v-if="items.lanmus")
           li.list-style(v-for="item in items.lanmus[1].pics")
-            a(:href="item.url")
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
               img(:src="item.img")
               p.name {{item.text}} 
               p.address 地址：{{item.addr}}  
@@ -31,16 +31,17 @@
       
       <!--模型图-->
       div.modal-left-box(v-if="view == 2")
-        div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
-          a(:href="item.url")
-            div
-              img(:src="item.img")
-            p {{item.text}}
+        div(v-if="items.lanmus")
+          div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
+              div
+                img(:src="item.img")
+              p {{item.text}}
 
       div.modal-right-box(v-if="view == 2")
-        ul.list-style.design-right.clear
+        ul.list-style.design-right.clear(v-if="items.lanmus")
           li.list-style(v-for="item in  itempart(2, 1, 6)")
-            a(:href="item.url")
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
               div
                 img(:src="item.img") 
               p {{item.text}}
@@ -48,9 +49,9 @@
      
       <!--设计师-->
       div.designer-box.clear(v-if="view == 3")
-        ul.list-style.clear
+        ul.list-style.clear(v-if="items.lanmus")
           li.list-style(v-for="item in items.lanmus[3].pics")
-            a(:href="item.url")
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
               div.work-box
                 img(:src="item.img")
               div.user-info
@@ -105,8 +106,11 @@
       itempart: function(lanmu, start, end){
         let result = []
         let model = this
-        for(let i = start; i <= end; i++) {
-          result.push(model.items.lanmus[lanmu].pics[i])
+        for(let i = parseInt(start); i <= parseInt(end); i++) {
+          let tmp = (model.items.lanmus || []);
+          if(tmp) {
+            result.push(tmp[parseInt(lanmu)].pics[i])
+          }
         } 
         return result
       },

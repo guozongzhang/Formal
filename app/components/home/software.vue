@@ -2,11 +2,11 @@
   div.software-vue.vue-component
     <vue-title :title='items'></vue-title>
     div.software-box.clear
-      div.video
+      div.video(v-if="items.leftcont")
         div.video-content
           img(:src="items.leftcont.img")
         div.video-box
-          <vue-video :src="items.leftcont.url" :config="videoconf"></vue-video>
+          <vue-videos :src="items.leftcont.url" :config="videoconf"></vue-videos>
       div.download-box
         div.tab-box
           ul.list-style 
@@ -16,7 +16,7 @@
         div.loadurl-box(v-if="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
             li.list-style(v-for="item in lanmu.pics")
-              a(:href="item.url" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;")
+              a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;")
                 img(:src="item.img")
                 p {{item.text}}
 
@@ -24,7 +24,6 @@
 
       
 </template>
-
 <script>
   import TitleVue from './title.vue';
   import LineVue from 'com_root/common/line.vue';
@@ -34,7 +33,7 @@
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-video': VideoVue,
+      'vue-videos': VideoVue,
       'vue-line': LineVue
     },
     data() {
