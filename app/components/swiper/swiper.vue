@@ -3,9 +3,8 @@
     div.swiper-container(:class="flag" v-bind:style="'height: ' + (height || 300) + 'px'")
       div.swiper-wrapper
         template(v-for="item in swiperdata")
-          a.swiper-slide(:href="item[url_key || 'url']" target="_blank"  v-bind:style="'background-image: url('+item[img_key || 'img']  +')'")
+          a.swiper-slide(:href="(item || {}).islink == 'off' ? 'javascript:;' : (item || {}).url" target="_blank" v-bind:class="(item || {}).islink == 'off' ? 'noPointer' : ''" v-bind:style="'background-image: url('+item[img_key || 'img']  +')'")
 
-            //- img(:src="item[img_key || 'img']")
       div.swiper-pagination.swiper-pagination-white
       div.swiper-button-next.swiper-button-white(@click="gotoNext()")
       div.swiper-button-prev.swiper-button-white(@click="gotoPrev()")
@@ -87,6 +86,9 @@
     img{
       width: 100%;
     }
+  }
+  .noPointer{
+    cursor: default !important;
   }
 
   .swiper-pagination {

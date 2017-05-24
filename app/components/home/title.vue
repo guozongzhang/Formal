@@ -3,15 +3,16 @@
     p 
       img.goods-icon(:src="title.txt.img")
       label {{title.txt.title}}
-      a(:href="title.txt.url" target="_blank") 
+      a(:href="(title.txt || {}).islink == 'off' ? 'javascript:;' : title.txt.url" v-bind:style="{cursor: (title.txt || {}).islink == 'off' ? 'default' : 'pointer'}" v-bind:target="(title.txt || {}).target") 
         span.link-text 查看更多
         span > 
     div.sub-box
       span.subtitle {{title.txt.desc}}
       ul.list-style.clear
-        li.list-text.list-style(v-for="item in title.pics") 
-          img.goods-icon(:src="item[img_key || 'img']")
-          span.tab-text {{item.text}}
+        li.list-text.list-style(v-for="item in title.pics")
+          a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;" v-bind:style="{cursor: (item|| {}).islink == 'off' ? 'default' : 'pointer'}")
+            img.goods-icon(:src="item[img_key || 'img']")
+            span.tab-text {{item.text}}
 </template>
 
 <script>
