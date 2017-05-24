@@ -126,7 +126,10 @@
         let result = []
         let model = this
         for(let i = start; i <= end; i++) {
-          result.push(model.items.lanmus[lanmu].pics[i])
+          let tmp = (model.items.lanmus || [])[lanmu];
+          if(tmp) {
+            result.push(tmp.pics[i])
+          }
         } 
         return result
       }

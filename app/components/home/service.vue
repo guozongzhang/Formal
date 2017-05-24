@@ -42,12 +42,8 @@
         })
       }
     },
-    created() {
-      this.getList()
-    },
-
     mounted () {
-      
+      this.getList()
     }
   }
 
