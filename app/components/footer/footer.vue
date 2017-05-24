@@ -8,7 +8,7 @@
               label {{item.name}}
               ul.text-ul.list-style
                 li.list-style(v-for="sub in item.subs")
-                  a(:href="sub.url" target="_blank")
+                  a(:href="(sub || {}).islink == 'off' ? 'javascript:;' : sub.url" v-bind:style="{cursor: (sub || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
                     span(v-if="sub.type == 'txt'") {{sub.name}}
                     img.pic-item(:src="sub.img" v-if="sub.type == 'pic'" )
     
@@ -16,7 +16,7 @@
         div.frends-box
           p
             | 友情链接：
-            a(:href="link.url" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
+            a(:href="(link || {}).islink == 'off' ? 'javascript:;' : link.url" v-bind:style="{cursor: (link || {}).islink == 'off' ? 'default' : 'pointer'}" v-for="link in links"  target="_blank" v-if="link.visible == '0'")  {{link.name}}
         div(style="display:block;width:100%;text-align:center;padding: 0;color:#fff;")
         | 搭配家 版权所有 2014-2017 
         a(href="http://www.dpjia.com" target="_blank" style="color:#fff") www.dpjia.com  
