@@ -2,11 +2,11 @@
   div.software-vue.vue-component
     <vue-title :title='items'></vue-title>
     div.software-box.clear
-      div.video
+      div.video(v-if="items.leftcont")
         div.video-content
           img(:src="items.leftcont.img")
         div.video-box
-          <vue-video :src="items.leftcont.url" :config="videoconf"></vue-video>
+          <vue-videos :src="items.leftcont.url" :config="videoconf"></vue-videos>
       div.download-box
         div.tab-box
           ul.list-style 
@@ -33,7 +33,7 @@
   export default {
     components: { 
       'vue-title': TitleVue, 
-      'vue-video': VideoVue,
+      'vue-videos': VideoVue,
       'vue-line': LineVue
     },
     data() {
