@@ -16,7 +16,7 @@
         div.loadurl-box(v-if="view == index" v-for="(lanmu, index) in items.lanmus")
           ul.list-style 
             li.list-style(v-for="item in lanmu.pics")
-              a(:href="item.url" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;")
+              a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url" v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank" style="display:inline-block;width:100%;height:100%;text-decoration: none;")
                 img(:src="item.img")
                 p {{item.text}}
 
