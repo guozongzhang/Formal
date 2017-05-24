@@ -24,7 +24,6 @@
 
       
 </template>
-
 <script>
   import TitleVue from './title.vue';
   import LineVue from 'com_root/common/line.vue';
