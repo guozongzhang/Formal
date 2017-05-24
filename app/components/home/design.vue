@@ -30,15 +30,16 @@
 
       
       <!--模型图-->
-      div.modal-left-box(v-if="view == 2 && items.lanmus")
-        div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
-          a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
-            div
-              img(:src="item.img")
-            p {{item.text}}
+      div.modal-left-box(v-if="view == 2")
+        div(v-if="items.lanmus")
+          div.img-boxs(v-for="item in  [items.lanmus[2].pics[0]]")
+            a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
+              div
+                img(:src="item.img")
+              p {{item.text}}
 
-      div.modal-right-box(v-if="view == 2" && "items.lanmus")
-        ul.list-style.design-right.clear
+      div.modal-right-box(v-if="view == 2")
+        ul.list-style.design-right.clear(v-if="items.lanmus")
           li.list-style(v-for="item in  itempart(2, 1, 6)")
             a(:href="(item || {}).islink == 'off' ? 'javascript:;' : item.url"  v-bind:style="{cursor: (item || {}).islink == 'off' ? 'default' : 'pointer'}" target="_blank")
               div
