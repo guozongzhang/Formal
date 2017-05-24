@@ -1,5 +1,5 @@
 <template lang="jade">
-  div.title-vue.vue-component
+  div.title-vue.vue-component(v-if="title && title.txt")
     p 
       img.goods-icon(:src="title.txt.img")
       label {{title.txt.title}}
