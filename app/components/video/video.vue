@@ -6,7 +6,7 @@
         p.vjs-no-js
           span To view this video please enable JavaScript, and consider upgrading to a web browser that 
           a(href="http://videojs.com/html5-video-support/" target="_blank")
-            supports HTML5 video  
+            | supports HTML5 video  
 </template>
 
 <script>
