@@ -9,18 +9,26 @@
             span.title-icon
             label {{linces.title}}
           div.info
-            img(:src="linces.imgs[0].url")
+            img(:src="linces.imgs[0].url" @click="showBig(linces.imgs[0])")
             p {{linces.imgs[0].name}}
+    div
+      <vue-bigimage :id="'license'" :info="info"></vue-bigimage>
 </template>
 
 <script>
   import AboutmenuVue from './aboutmenu.vue';
+  import BigImageVue from '../common/bigimage.vue';
   export default {
     components: {
       'vue-aboutmenu': AboutmenuVue,
+      'vue-bigimage': BigImageVue
     },
     data() {
       return {
+        info:{
+          url: '',
+          text: ''
+        },
         linces:{
           title:'营业执照',
           imgs:[
@@ -30,6 +38,14 @@
             }
           ]
         }
+      }
+    },
+    methods: {
+      // 查看大图
+      showBig: function (obj) {
+        this.info.url = obj.url
+        this.info.text = obj.name
+        $('.license').modal('show')
       }
     }
   }
@@ -77,6 +93,7 @@
         text-align: center;
         img{
           width: 360px;
+          cursor: pointer;
         }
       }
     }
