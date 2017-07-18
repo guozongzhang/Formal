@@ -11,19 +11,34 @@
           div.sub(v-for="sub in copyright.items")
             label {{sub.title}}
             div.item(v-for="(item, index) in sub.list" v-show="index < 5 || sub.show")
-              img(:src="item.url")
+              img(:src="item.url" @click="showBig(item)")
               p {{item.name}}
-            a.getmore(@click="getMore(sub)") {{sub.show ? '收起' : '展开'}}更多
+            a.getmore(@click="getMore(sub)" v-if="sub.list.length > 5") 
+              | {{sub.show ? '收起' : '展开'}}更多
+              span.icon(v-if="!sub.show")
+                span.triangle-out-down
+                span.triangle-in-down
+              span.icon(v-if="sub.show")
+                span.triangle-out-up
+                span.triangle-in-up
+    div
+      <vue-bigimage :id="'copyright'" :info="info"></vue-bigimage>
 </template>
 
 <script>
   import AboutmenuVue from './aboutmenu.vue';
+  import BigImageVue from '../common/bigimage.vue';
   export default {
     components: {
       'vue-aboutmenu': AboutmenuVue,
+      'vue-bigimage': BigImageVue
     },
     data() {
       return {
+        info:{
+          url: '',
+          text: ''
+        },
         copyright:{
           title:'软件著作权',
           items:[
@@ -440,8 +455,16 @@
       }
     },
     methods: {
+      // 查看更多
       getMore: function(obj) {
         obj.show = !obj.show
+      },
+
+      // 查看大图
+      showBig: function (obj) {
+        this.info.url = obj.url
+        this.info.text = obj.name
+        $('.copyright').modal('show')
       }
     }
   }
@@ -496,6 +519,7 @@
           display: block;
           color: #000;
           font-size: 14px;
+          font-weight: bold;
         }
         .item{
           display: inline-block;
@@ -503,6 +527,7 @@
           margin-right: 10px;
           img{
             width: 154px;
+            cursor: pointer;
           }
           p{
             font-size: 12px;
@@ -512,11 +537,56 @@
         }
         .getmore{
           position: absolute;
-          right: 10px;
+          right: 40px;
           bottom: 10px;
-          color: #666;
+          color: #bcbcbc;
           text-decoration: none;
           cursor: pointer;
+          .icon{
+            position: absolute;
+            right: -2px;
+            top: 4px;
+            .triangle-out-down{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-top: 10px solid #bcbcbc;
+            }
+            .triangle-in-down{
+              position: absolute;
+              top: -3px;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-top: 10px solid #fff;
+            }
+            .triangle-out-up{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid #bcbcbc;
+            }
+            .triangle-in-up{
+              position: absolute;
+              top: 3px;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid #fff;
+            }
+          }
         }
       }
       .sub:last-child{

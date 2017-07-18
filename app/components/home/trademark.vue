@@ -10,19 +10,28 @@
             label {{trademark.title}}
           div.info
             div.item(v-for="item in trademark.imgs")
-              img(:src="item.url")
+              img(:src="item.url" @click="showBig(item)")
               p {{item.name}}
           a(v-show="trademark.imgs.length > 5") 展开
+    div
+      <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
+
 </template>
 
 <script>
   import AboutmenuVue from './aboutmenu.vue';
+  import BigImageVue from '../common/bigimage.vue';
   export default {
     components: {
       'vue-aboutmenu': AboutmenuVue,
+      'vue-bigimage': BigImageVue
     },
     data() {
       return {
+        info:{
+          url: '',
+          text: ''
+        },
         trademark:{
           title:'注册商标',
           imgs:[
@@ -40,6 +49,14 @@
             }
           ]
         }
+      }
+    },
+    methods: {
+      // 查看大图
+      showBig: function (obj) {
+        this.info.url = obj.url
+        this.info.text = obj.name
+        $('.trademark').modal('show')
       }
     }
   }
@@ -91,6 +108,7 @@
           float: left;
           img{
             width: 200px;
+            cursor: pointer;
           }
         }
         
