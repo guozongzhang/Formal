@@ -4,72 +4,467 @@
       div.left-menu
         <vue-aboutmenu></vue-aboutmenu>
       div.right-story
-        div.story-img
-          img(:src="story.img")
         div.info-box.storys
           p.title
             span.title-icon
-            label {{story.story.title}}
-          p.content {{story.story.lineone}}
-          p.content {{story.story.linetwo}}
-
-        div.info-box.advantage
-          p.title
-            span.title-icon
-            label {{story.advantage.title}}
-          p.content(v-for="item in story.advantage.list") {{item}}
-
-        div.info-box.mission
-          p.title
-            span.title-icon
-            label {{story.mission.title}}
-          div.content.mission-sub(v-for="msg in story.mission.list")
-            label {{msg.subtitle}}
-            p {{msg.content}}
+            label {{copyright.title}}
+          div.sub(v-for="sub in copyright.items")
+            label {{sub.title}}
+            div.item(v-for="(item, index) in sub.list" v-show="index < 5 || sub.show")
+              img(:src="item.url" @click="showBig(item)")
+              p {{item.name}}
+            a.getmore(@click="getMore(sub)" v-if="sub.list.length > 5") 
+              | {{sub.show ? '收起' : '展开'}}更多
+              span.icon(v-if="!sub.show")
+                span.triangle-out-down
+                span.triangle-in-down
+              span.icon(v-if="sub.show")
+                span.triangle-out-up
+                span.triangle-in-up
+    div
+      <vue-bigimage :id="'copyright'" :info="info"></vue-bigimage>
 </template>
 
 <script>
   import AboutmenuVue from './aboutmenu.vue';
+  import BigImageVue from '../common/bigimage.vue';
   export default {
     components: {
       'vue-aboutmenu': AboutmenuVue,
+      'vue-bigimage': BigImageVue
     },
     data() {
       return {
-        story:{
-          img:'../../assets/imgs/story.png',
-          story:{
-            title:'品牌故事',
-            lineone:'搭配家隶属于北京京乐网络技术有限公司，以3D虚拟现实技术和云计算为技术核心，推动整个家居行业互联网化业务的高新技术企业。搭配家首创云设计、云量房、云展示、云制造，于2015年年初逐步上线迭代，并应用到家居行业，帮助家具企业在营销，管理，服务上全面互联网化。',
-            linetwo:'搭配家帮助家居企业利用现有的产品、体验店、品牌价值以及研发能力的资源，结合搭配家提供的管理工具、评价体系、订单系统、3D设计、网络平台等进行有机融合，加速产业互联网推动。'
-          },
-          advantage:{
-            title:'搭配家的优势是什么',
-            list:[
-              '1.洞悉家居行业发展的规律和特点',
-              '2.洞悉用户的消费心理及行为',
-              '3.洞悉家具厂商的业务流程',
-              '4.洞悉家居行业相关方的工作要点',
-              '5.搭配家60后核心力量20余年的家居行业从业经验',
-              '6.搭配家70后骨干人员对用户行为、行业痛点的清晰认知',
-              '7.搭配家80后青年杰俊对厂商流程和互联网技术的精准掌握',
-              '8.搭配家90后阳光少年对未来世界的洞察和后浪推前浪的青春力量'
-            ]
-          },  
-          mission:{
-            title:'搭配家的使命',
-            list:[
-              {
-                subtitle:'帮助用户：',
-                content:'提供海量真实的户型图作为家居设计和家具搭配的入口、提供专业设计师、品牌厂商、邻里分享集中不同形式的设计方案，并直接就近寻找线下店购买，彻底解决家具采购消费过程的烦恼和辛劳，带来全新的购物体验'
-              },
-              {
-                subtitle:'帮助厂家：',
-                content:'帮助家具厂商实现互联网+时代的升级发展，把厂商形象化合理化的推荐给用户，帮助厂家提升整体服务水平和经营效果'
-              }
-            ]
-          }
+        info:{
+          url: '',
+          text: ''
+        },
+        copyright:{
+          title:'软件著作权',
+          items:[
+            {
+              title: 'DPJIA.COM',
+              show: false,
+              list:[
+                {
+                  name:'商标注册第2类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/2_1.jpg'
+                },
+                {
+                  name:'商标注册第2类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/2_0.jpg'
+                },
+                {
+                  name:'商标注册第6类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/6_1.jpg'
+                },
+                {
+                  name:'商标注册第6类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/6_0.jpg'
+                },
+                {
+                  name:'商标注册第18类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/18_1.jpg'
+                },
+                {
+                  name:'商标注册第18类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/18_0.jpg'
+                },
+                {
+                  name:'商标注册第19类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/19_1.jpg'
+                },
+                {
+                  name:'商标注册第19类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/19_0.jpg'
+                },
+                {
+                  name:'商标注册第20类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/20_1.jpg'
+                },
+                {
+                  name:'商标注册第20类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/20_0.jpg'
+                },
+                {
+                  name:'商标注册第21类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/21_1.jpg'
+                },
+                {
+                  name:'商标注册第21类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/21_0.jpg'
+                },
+                {
+                  name:'商标注册第24类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/24_1.jpg'
+                },
+                {
+                  name:'商标注册第24类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/24_0.jpg'
+                },
+                {
+                  name:'商标注册第25类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/25_1.jpg'
+                },
+                {
+                  name:'商标注册第25类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/25_0.jpg'
+                },
+                {
+                  name:'商标注册第27类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/27_1.jpg'
+                },
+                {
+                  name:'商标注册第27类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/27_0.jpg'
+                },
+                {
+                  name:'商标注册第35类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/35_1.jpg'
+                },
+                {
+                  name:'商标注册第35类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/35_0.jpg'
+                },
+                {
+                  name:'商标注册第37类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/37_1.jpg'
+                },
+                {
+                  name:'商标注册第37类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/37_0.jpg'
+                },
+                {
+                  name:'商标注册第39类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/39_1.jpg'
+                },
+                {
+                  name:'商标注册第39类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/39_0.jpg'
+                },
+                {
+                  name:'商标注册第42类正面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/42_1.jpg'
+                },
+                {
+                  name:'商标注册第42类反面',
+                  url:'../../assets/imgs/dpjia_copyright/DPJIA_COM/42_0.jpg'
+                }
+              ]
+            },
+            {
+              title: '搭配家',
+              show: false,
+              list:[
+                {
+                  name:'商标注册第2类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/2_1.jpg'
+                },
+                {
+                  name:'商标注册第2类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/2_0.jpg'
+                },
+                {
+                  name:'商标注册第6类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/6_1.jpg'
+                },
+                {
+                  name:'商标注册第6类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/6_0.jpg'
+                },
+                {
+                  name:'商标注册第18类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/18_1.jpg'
+                },
+                {
+                  name:'商标注册第18类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/18_0.jpg'
+                },
+                {
+                  name:'商标注册第19类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/19_1.jpg'
+                },
+                {
+                  name:'商标注册第19类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/19_0.jpg'
+                },
+                {
+                  name:'商标注册第20类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/20_1.jpg'
+                },
+                {
+                  name:'商标注册第20类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/20_0.jpg'
+                },
+                {
+                  name:'商标注册第21类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/21_1.jpg'
+                },
+                {
+                  name:'商标注册第21类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/21_0.jpg'
+                },
+                {
+                  name:'商标注册第24类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/24_1.jpg'
+                },
+                {
+                  name:'商标注册第24类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/24_0.jpg'
+                },
+                {
+                  name:'商标注册第25类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/25_1.jpg'
+                },
+                {
+                  name:'商标注册第25类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/25_0.jpg'
+                },
+                {
+                  name:'商标注册第35类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/35_1.jpg'
+                },
+                {
+                  name:'商标注册第35类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/35_0.jpg'
+                },
+                {
+                  name:'商标注册第37类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/37_1.jpg'
+                },
+                {
+                  name:'商标注册第37类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/37_0.jpg'
+                },
+                {
+                  name:'商标注册第39类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/39_1.jpg'
+                },
+                {
+                  name:'商标注册第39类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/39_0.jpg'
+                },
+                {
+                  name:'商标注册第42类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/42_1.jpg'
+                },
+                {
+                  name:'商标注册第42类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia/42_0.jpg'
+                }
+              ]
+            },
+            {
+              title: '搭配家(dpjia)',
+              show: false,
+              list:[
+                {
+                  name:'商标注册第35类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia_dpjia/35_1.jpg'
+                },
+                {
+                  name:'商标注册第35类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia_dpjia/35_0.jpg'
+                },
+                {
+                  name:'商标注册第42类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia_dpjia/42_1.jpg'
+                },
+                {
+                  name:'商标注册第42类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dapeijia_dpjia/42_0.jpg'
+                }
+              ]
+            },
+            {
+              title: '搭配家LOGO图形标识',
+              show: false,
+              list:[
+                {
+                  name:'商标注册第2类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/2_1.jpg'
+                },
+                {
+                  name:'商标注册第2类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/2_0.jpg'
+                },
+                {
+                  name:'商标注册第6类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/6_1.jpg'
+                },
+                {
+                  name:'商标注册第6类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/6_0.jpg'
+                },
+                {
+                  name:'商标注册第8类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/8_1.jpg'
+                },
+                {
+                  name:'商标注册第8类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/8_0.jpg'
+                },
+                {
+                  name:'商标注册第9类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/9_1.jpg'
+                },
+                {
+                  name:'商标注册第9类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/9_0.jpg'
+                },
+                {
+                  name:'商标注册第11类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/11_1.jpg'
+                },
+                {
+                  name:'商标注册第11类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/11_0.jpg'
+                },
+                {
+                  name:'商标注册第16类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/16_1.jpg'
+                },
+                {
+                  name:'商标注册第16类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/16_0.jpg'
+                },
+                {
+                  name:'商标注册第17类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/17_1.jpg'
+                },
+                {
+                  name:'商标注册第17类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/17_0.jpg'
+                },
+                {
+                  name:'商标注册第18类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/18_1.jpg'
+                },
+                {
+                  name:'商标注册第18类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/18_0.jpg'
+                },
+                {
+                  name:'商标注册第19类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/19_1.jpg'
+                },
+                {
+                  name:'商标注册第19类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/19_0.jpg'
+                },
+                {
+                  name:'商标注册第20类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/20_1.jpg'
+                },
+                {
+                  name:'商标注册第20类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/20_0.jpg'
+                },
+                {
+                  name:'商标注册第21类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/21_1.jpg'
+                },
+                {
+                  name:'商标注册第21类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/21_0.jpg'
+                },
+                {
+                  name:'商标注册第24类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/24_1.jpg'
+                },
+                {
+                  name:'商标注册第24类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/24_0.jpg'
+                },
+                {
+                  name:'商标注册第25类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/25_1.jpg'
+                },
+                {
+                  name:'商标注册第25类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/25_0.jpg'
+                },
+                {
+                  name:'商标注册第27类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/27_1.jpg'
+                },
+                {
+                  name:'商标注册第27类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/27_0.jpg'
+                },
+                {
+                  name:'商标注册第28类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/28_1.jpg'
+                },
+                {
+                  name:'商标注册第28类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/28_0.jpg'
+                },
+                {
+                  name:'商标注册第35类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/35_1.jpg'
+                },
+                {
+                  name:'商标注册第35类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/35_0.jpg'
+                },
+                {
+                  name:'商标注册第42类正面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/42_1.jpg'
+                },
+                {
+                  name:'商标注册第42类反面',
+                  url:'../../assets/imgs/dpjia_copyright/dpjia_logo/42_0.jpg'
+                }
+              ]
+            },
+            {
+              title: '京乐汉字拼音组合',
+              show: false,
+              list:[
+                {
+                  name:'商标注册第38类正面',
+                  url:'../../assets/imgs/dpjia_copyright/jingle/38_1.jpg'
+                },
+                {
+                  name:'商标注册第38类反面',
+                  url:'../../assets/imgs/dpjia_copyright/jingle/38_0.jpg'
+                }
+              ]
+            },
+            {
+              title: '猫头鹰',
+              show: false,
+              list:[
+                 {
+                  name:'商标注册第35类正面',
+                  url:'../../assets/imgs/dpjia_copyright/owl/35_1.jpg'
+                },
+                {
+                  name:'商标注册第41类正面',
+                  url:'../../assets/imgs/dpjia_copyright/owl/41_1.jpg'
+                },
+                {
+                  name:'商标注册第42类正面',
+                  url:'../../assets/imgs/dpjia_copyright/owl/42_1.jpg'
+                }
+              ]
+            }
+          ]
         }
+      }
+    },
+    methods: {
+      // 查看更多
+      getMore: function(obj) {
+        obj.show = !obj.show
+      },
+
+      // 查看大图
+      showBig: function (obj) {
+        this.info.url = obj.url
+        this.info.text = obj.name
+        $('.copyright').modal('show')
       }
     }
   }
@@ -91,12 +486,6 @@
     background-color: #fff;
     padding: pxTorem(20);
     float: left;
-    .story-img{
-      width: pxTorem(820);
-      img{
-        width: pxTorem(820);
-      }
-    }
     .info-box{
       margin-top: pxTorem(20);
       .title{
@@ -119,10 +508,89 @@
           font-weight: bold;
         }
       }
-      .content{
-        margin: 0;
-        padding-left: pxTorem(15);
-        color: #666;
+      .sub{
+        position: relative;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        margin-top: 20px;
+        padding-bottom: 40px;
+        float: left;
+        label{
+          display: block;
+          color: #000;
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .item{
+          display: inline-block;
+          width: 154px;
+          margin-right: 10px;
+          img{
+            width: 154px;
+            cursor: pointer;
+          }
+          p{
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+          }
+        }
+        .getmore{
+          position: absolute;
+          right: 40px;
+          bottom: 10px;
+          color: #bcbcbc;
+          text-decoration: none;
+          cursor: pointer;
+          .icon{
+            position: absolute;
+            right: -2px;
+            top: 4px;
+            .triangle-out-down{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-top: 10px solid #bcbcbc;
+            }
+            .triangle-in-down{
+              position: absolute;
+              top: -3px;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-top: 10px solid #fff;
+            }
+            .triangle-out-up{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid #bcbcbc;
+            }
+            .triangle-in-up{
+              position: absolute;
+              top: 3px;
+              left: 0;
+              width: 0;
+              height: 0;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              border-bottom: 10px solid #fff;
+            }
+          }
+        }
+      }
+      .sub:last-child{
+        border-bottom: none;
       }
     }
     .storys{
