@@ -417,7 +417,7 @@
                 //   url:'../../assets/imgs/dpjia_copyright/dpjia_logo/42_0.jpg'
                 // }
               ]
-            },
+            }
             // {
             //   title: '京乐汉字拼音组合',
             //   show: false,
@@ -432,24 +432,24 @@
             //     }
             //   ]
             // },
-            {
-              title: '猫头鹰',
-              show: false,
-              list:[
-                 {
-                  name:'商标注册第35类正面',
-                  url:'../../assets/imgs/dpjia_copyright/owl/35_1.jpg'
-                },
-                {
-                  name:'商标注册第41类正面',
-                  url:'../../assets/imgs/dpjia_copyright/owl/41_1.jpg'
-                },
-                {
-                  name:'商标注册第42类正面',
-                  url:'../../assets/imgs/dpjia_copyright/owl/42_1.jpg'
-                }
-              ]
-            }
+            // {
+            //   title: '猫头鹰',
+            //   show: false,
+            //   list:[
+            //      {
+            //       name:'商标注册第35类正面',
+            //       url:'../../assets/imgs/dpjia_copyright/owl/35_1.jpg'
+            //     },
+            //     {
+            //       name:'商标注册第41类正面',
+            //       url:'../../assets/imgs/dpjia_copyright/owl/41_1.jpg'
+            //     },
+            //     {
+            //       name:'商标注册第42类正面',
+            //       url:'../../assets/imgs/dpjia_copyright/owl/42_1.jpg'
+            //     }
+            //   ]
+            // }
           ]
         }
       }
