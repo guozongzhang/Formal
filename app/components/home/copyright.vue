@@ -1,5 +1,9 @@
 <template lang="jade">
+<<<<<<< HEAD
   div.copyright-vue.vue-component
+=======
+  div.trademark-vue.vue-component
+>>>>>>> hotfix/2.3.6
     div.clear
       div.left-menu
         <vue-aboutmenu></vue-aboutmenu>
@@ -7,6 +11,7 @@
         div.info-box.storys
           p.title
             span.title-icon
+<<<<<<< HEAD
             label {{copyright.title}}
           div.sub(v-for="sub in copyright.items")
             label {{sub.title}}
@@ -23,6 +28,17 @@
                 span.triangle-in-up
     div
       <vue-bigimage :id="'copyright'" :info="info"></vue-bigimage>
+=======
+            label {{trademark.title}}
+          div.info
+            div.item(v-for="item in trademark.imgs")
+              img(:src="item.url" @click="showBig(item)")
+              p {{item.name}}
+          a(v-show="trademark.imgs.length > 5") 展开
+    div
+      <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
+
+>>>>>>> hotfix/2.3.6
 </template>
 
 <script>
@@ -39,6 +55,7 @@
           url: '',
           text: ''
         },
+<<<<<<< HEAD
         copyright:{
           title:'软件著作权',
           items:[
@@ -449,22 +466,45 @@
                   url:'../../assets/imgs/dpjia_copyright/owl/42_1.jpg'
                 }
               ]
+=======
+        trademark:{
+          title:'软件著作权',
+          imgs:[
+            {
+              name:'搭配家云后台家居厂商管理系统【简称：搭配家云后台】V2.0',
+              url:'../../assets/imgs/dpjia_trademark/1.jpg'
+            },
+            {
+              name:'搭配家云量房智能量房套件【简称：搭配家云量房】V1.0',
+              url:'../../assets/imgs/dpjia_trademark/2.jpg'
+            },
+            {
+              name:'搭配家云设计销售设计移动终端【简称：搭配家云设计】V3.0',
+              url:'../../assets/imgs/dpjia_trademark/3.jpg'
+>>>>>>> hotfix/2.3.6
             }
           ]
         }
       }
     },
     methods: {
+<<<<<<< HEAD
       // 查看更多
       getMore: function(obj) {
         obj.show = !obj.show
       },
 
+=======
+>>>>>>> hotfix/2.3.6
       // 查看大图
       showBig: function (obj) {
         this.info.url = obj.url
         this.info.text = obj.name
+<<<<<<< HEAD
         $('.copyright').modal('show')
+=======
+        $('.trademark').modal('show')
+>>>>>>> hotfix/2.3.6
       }
     }
   }
@@ -473,7 +513,11 @@
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
 
+<<<<<<< HEAD
 .copyright-vue{
+=======
+.trademark-vue{
+>>>>>>> hotfix/2.3.6
   margin-top: pxTorem(40);
   .left-menu{
     display: inline-block;
@@ -508,6 +552,7 @@
           font-weight: bold;
         }
       }
+<<<<<<< HEAD
       .sub{
         position: relative;
         width: 100%;
@@ -591,6 +636,20 @@
       }
       .sub:last-child{
         border-bottom: none;
+=======
+      .info{
+        .item{
+          display: inline-block;
+          width: 200px;
+          margin-right: 10px;
+          float: left;
+          img{
+            width: 200px;
+            cursor: pointer;
+          }
+        }
+        
+>>>>>>> hotfix/2.3.6
       }
     }
     .storys{
@@ -599,6 +658,7 @@
         text-indent: 2em;
       }
     }
+<<<<<<< HEAD
     .mission{
       margin-bottom: pxTorem(100);
       .mission-sub{
@@ -614,6 +674,8 @@
         }
       }
     }
+=======
+>>>>>>> hotfix/2.3.6
   }
 }
 </style>
