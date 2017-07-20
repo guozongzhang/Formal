@@ -28,11 +28,6 @@
             name:'发展历程',
             action:'development'
           },
-          // {
-          //   link_url:'/home/lawprivacy',
-          //   name:'法律隐私',
-          //   action:'lawprivacy'
-          // },
           {
             link_url:'/home/mediareports',
             name:'媒体报道',
@@ -48,6 +43,21 @@
             name:'友情链接',
             action:'frendslink'
           },
+          {
+            link_url:'/home/license',
+            name:'营业执照',
+            action:'license'
+          },
+          {
+            link_url:'/home/trademark',
+            name:'注册商标',
+            action:'trademark'
+          },
+          {
+            link_url:'/home/copyright',
+            name:'软件著作权',
+            action:'copyright'
+          }
           // {
           //   link_url:'/home/joinus',
           //   name:'加入我们',
@@ -72,7 +82,7 @@
       top: 0;
       left: 0;
       width: pxTorem(120);
-      height: pxTorem(280);
+      height: pxTorem(380);
     }
     .title{
       position: absolute;
