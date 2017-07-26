@@ -1,9 +1,5 @@
 <template lang="jade">
-<<<<<<< HEAD
-  div.trademark-vue.vue-component
-=======
   div.copyright-vue.vue-component
->>>>>>> hotfix/2.3.6
     div.clear
       div.left-menu
         <vue-aboutmenu></vue-aboutmenu>
@@ -11,17 +7,6 @@
         div.info-box.storys
           p.title
             span.title-icon
-<<<<<<< HEAD
-            label {{trademark.title}}
-          div.info
-            div.item(v-for="item in trademark.imgs")
-              img(:src="item.url" @click="showBig(item)")
-              p {{item.name}}
-          a(v-show="trademark.imgs.length > 5") 展开
-    div
-      <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
-
-=======
             label {{copyright.title}}
           div.sub(v-for="sub in copyright.items")
             label {{sub.title}}
@@ -38,9 +23,7 @@
                 span.triangle-in-up
     div
       <vue-bigimage :id="'copyright'" :info="info"></vue-bigimage>
->>>>>>> hotfix/2.3.6
 </template>
-
 <script>
   import AboutmenuVue from './aboutmenu.vue';
   import BigImageVue from '../common/bigimage.vue';
@@ -55,23 +38,6 @@
           url: '',
           text: ''
         },
-<<<<<<< HEAD
-        trademark:{
-          title:'注册商标',
-          imgs:[
-            {
-              name:'搭配家云后台家居厂商管理系统【简称：搭配家云后台】V2.0',
-              url:'../../assets/imgs/dpjia_trademark/1.jpg'
-            },
-            {
-              name:'搭配家云量房智能量房套件【简称：搭配家云量房】V1.0',
-              url:'../../assets/imgs/dpjia_trademark/2.jpg'
-            },
-            {
-              name:'搭配家云设计销售设计移动终端【简称：搭配家云设计】V3.0',
-              url:'../../assets/imgs/dpjia_trademark/3.jpg'
-            }
-=======
         copyright:{
           title:'注册商标',
           items:[
@@ -483,42 +449,27 @@
             //     }
             //   ]
             // }
->>>>>>> hotfix/2.3.6
           ]
         }
       }
     },
     methods: {
-<<<<<<< HEAD
-=======
       // 查看更多
       getMore: function(obj) {
         obj.show = !obj.show
       },
-
->>>>>>> hotfix/2.3.6
       // 查看大图
       showBig: function (obj) {
         this.info.url = obj.url
         this.info.text = obj.name
-<<<<<<< HEAD
-        $('.trademark').modal('show')
-=======
         $('.copyright').modal('show')
->>>>>>> hotfix/2.3.6
       }
     }
   }
-
 </script>
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
-
-<<<<<<< HEAD
-.trademark-vue{
-=======
 .copyright-vue{
->>>>>>> hotfix/2.3.6
   margin-top: pxTorem(40);
   .left-menu{
     display: inline-block;
@@ -553,20 +504,6 @@
           font-weight: bold;
         }
       }
-<<<<<<< HEAD
-      .info{
-        .item{
-          display: inline-block;
-          width: 200px;
-          margin-right: 10px;
-          float: left;
-          img{
-            width: 200px;
-            cursor: pointer;
-          }
-        }
-        
-=======
       .sub{
         position: relative;
         width: 100%;
@@ -650,7 +587,6 @@
       }
       .sub:last-child{
         border-bottom: none;
->>>>>>> hotfix/2.3.6
       }
     }
     .storys{
@@ -659,12 +595,6 @@
         text-indent: 2em;
       }
     }
-<<<<<<< HEAD
-  }
-}
-</style>
-
-=======
     .mission{
       margin-bottom: pxTorem(100);
       .mission-sub{
@@ -683,4 +613,3 @@
   }
 }
 </style>
->>>>>>> hotfix/2.3.6
