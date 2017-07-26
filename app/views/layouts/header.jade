@@ -9,7 +9,14 @@ each item in development.assets.vendor.stylesheets
 //- 页面级别的css文件
 link(href="/tmp/assets/stylesheets/layout.css" rel="stylesheet")
 link(href="/tmp/assets/stylesheets/#{route.controller}/#{route.action}.css" rel="stylesheet")
-
+script.
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2de572cfc2991cd0a890b273f1c3b104";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
 //- 存入后端的某些公共变量供JS使用  全局配置
 script.
   function isIE() { //ie?  
