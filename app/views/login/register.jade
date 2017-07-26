@@ -47,7 +47,7 @@ html
 
     script(src="/tmp/assets/javascripts/common.js")
     script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
-    include ../layouts/datastatistics.jade
+    //- include ../layouts/datastatistics.jade
     script.
       var urltype = SITE.query.type ? SITE.query.type : 'designer';
       if(typeof APP.#{route.controller}.#{route.action} == 'function'){
