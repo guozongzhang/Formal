@@ -75,7 +75,7 @@
           where: whereobj,
           owner:'public'
         }
-        API.get('functions/search/apartment_search', obj ,data => {
+        API.get('functions/es/site_es_apartment', obj ,data => {
           model.houses = data.items
           model.totalcount = data.count
         })

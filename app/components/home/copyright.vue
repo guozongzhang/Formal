@@ -15,9 +15,7 @@
           a(v-show="trademark.imgs.length > 5") 展开
     div
       <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
-
 </template>
-
 <script>
   import AboutmenuVue from './aboutmenu.vue';
   import BigImageVue from '../common/bigimage.vue';
@@ -60,11 +58,9 @@
       }
     }
   }
-
 </script>
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
-
 .trademark-vue{
   margin-top: pxTorem(40);
   .left-menu{
@@ -123,4 +119,3 @@
   }
 }
 </style>
-

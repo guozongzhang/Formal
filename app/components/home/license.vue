@@ -14,7 +14,6 @@
     div
       <vue-bigimage :id="'license'" :info="info"></vue-bigimage>
 </template>
-
 <script>
   import AboutmenuVue from './aboutmenu.vue';
   import BigImageVue from '../common/bigimage.vue';
@@ -49,11 +48,9 @@
       }
     }
   }
-
 </script>
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
-
 .license-vue{
   margin-top: pxTorem(40);
   .left-menu{
@@ -106,4 +103,3 @@
   }
 }
 </style>
-

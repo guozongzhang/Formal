@@ -24,7 +24,6 @@
     div
       <vue-bigimage :id="'copyright'" :info="info"></vue-bigimage>
 </template>
-
 <script>
   import AboutmenuVue from './aboutmenu.vue';
   import BigImageVue from '../common/bigimage.vue';
@@ -459,7 +458,6 @@
       getMore: function(obj) {
         obj.show = !obj.show
       },
-
       // 查看大图
       showBig: function (obj) {
         this.info.url = obj.url
@@ -468,11 +466,9 @@
       }
     }
   }
-
 </script>
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
-
 .copyright-vue{
   margin-top: pxTorem(40);
   .left-menu{
