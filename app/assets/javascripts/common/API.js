@@ -34,12 +34,15 @@ window.API = {
    */
   get: (apiName, params, successHandler, errorHandler, ismock)=> {
     let url = baseurl + apiName
-    console.log('===', url)
-    //$.get(url, params, successHandler, errorHandler)
     API.ajax(url, 'get', params, successHandler, errorHandler)
   },
 
-  post: (apiName, data, successHandler, errorHandler, extraparam)=> {
+  delete: (apiName, data, successHandler, errorHandler, extraparam) => {
+    let url = baseurl + apiName
+    API.ajax(url, 'delete', data, successHandler, errorHandler, extraparam)
+  },
+
+  post: (apiName, data, successHandler, errorHandler, extraparam) => {
     let url = baseurl + apiName
     API.ajax(url, 'post', data, successHandler, errorHandler, extraparam)
   },
