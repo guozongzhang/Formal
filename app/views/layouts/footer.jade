@@ -54,6 +54,7 @@ script.
 
 script(src="#{localEnv.cdn || ''}/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js?version=#{assestsVersion}")
 script.
+  API.showNotification('test')
   SITE.Init().then(function() {
     if(typeof APP.#{route.controller}.#{route.action} == 'function'){
       new APP.#{route.controller}.#{route.action}()
@@ -61,6 +62,12 @@ script.
       socket.on('unread', function (obj) {
         MVVM.UnreadMessage = obj.unread || 0
         if(MVVM.UnreadMessage > 0) {
+          if(obj.id) {
+            API.showNotification('msg', {title: obj.title, content: obj.content})
+          } else {
+            //- 初始化，有未读消息时
+            //- API.showNotification('msg', {title: '搭配家温馨提示', content: '您有' + MVVM.UnreadMessage + '条未读消息,请及时查阅~'})
+          }
           document.title = '(' + MVVM.UnreadMessage + ')' + '搭配家'
           $('#msgalert').addClass('animated wobble')
           setTimeout(function () {
