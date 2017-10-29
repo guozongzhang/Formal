@@ -1,5 +1,3 @@
-
-
 if localEnv.environment == 'production'
   script(src="#{localEnv.cdn || ''}/tmp/assets/javascripts/production.js?version=#{assestsVersion}")
 
@@ -11,8 +9,7 @@ else
 
 //- 百度地图API
 script(src="http://api.map.baidu.com/api?v=2.0&ak=n0dzf54cjjE9TfBiijtOG5z7&services=&t=20160401164342")
-
-
+script(src="https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js")
 //- 错误日志记录
 script.
   window.onerror = function (msg,url,line,col,error) {
@@ -50,22 +47,36 @@ script.
         }
 
         //把data上报到后台！
-        console.log(errorData)
         API.post('functions/leancloudlog/send_log', errorData, function () {
-          console.log('错误日志上报成功')
         })
     }, 0);
-
-    
   }
-
 
 script(src="#{localEnv.cdn || ''}/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js?version=#{assestsVersion}")
 script.
+  API.showNotification('test')
   SITE.Init().then(function() {
     if(typeof APP.#{route.controller}.#{route.action} == 'function'){
       new APP.#{route.controller}.#{route.action}()
-
+      var socket = io(SITE.Ips.msg_url + '?token=' + Cookies.get('dpjia'))
+      socket.on('unread', function (obj) {
+        MVVM.UnreadMessage = obj.unread || 0
+        if(MVVM.UnreadMessage > 0) {
+          if(obj.id) {
+            API.showNotification('msg', {title: obj.title, content: obj.content})
+          } else {
+            //- 初始化，有未读消息时
+            //- API.showNotification('msg', {title: '搭配家温馨提示', content: '您有' + MVVM.UnreadMessage + '条未读消息,请及时查阅~'})
+          }
+          document.title = '(' + MVVM.UnreadMessage + ')' + '搭配家'
+          $('#msgalert').addClass('animated wobble')
+          setTimeout(function () {
+            $('#msgalert').removeClass('animated wobble')
+          }, 1000)
+        } else {
+          document.title = '搭配家'
+        }
+      })
       setTimeout(function () {
         $('footer').show()
       }, 1500)

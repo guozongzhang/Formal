@@ -11,9 +11,11 @@ import vueheader from '../../../components/home/header.vue';
 class Basic {
   constructor(initData = {}){
     model = this
-    
     let mvvmDefault = {
       el: '#app',
+      data: {
+        UnreadMessage: 0 // 消息数量
+      },
       components: {
         'vue-footer': vuefooter,
         'vue-toplab': vuetoplab,
@@ -124,6 +126,5 @@ class Basic {
   }
 
 }
-
 
 window.Basic = Basic

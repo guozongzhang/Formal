@@ -4,7 +4,7 @@
       div.left
         <vue-leftmenue :type='settings.type'></vue-leftmenue>
       div.right
-        label.title 我的消息
+        label.title 系统通知
         div.message-list
           div.operate
             a.deleteallread(href="javascript:;" v-on:click="deleteAll()") 删除所有已读
@@ -15,20 +15,27 @@
                 use(xlink:href="/assets/svg/icon.svg#empty")
             p.empty 还没有消息呢~
           ul.list-style(v-show="messages.length != 0")
-            li.list-style.clear(v-for="item in messages" v-on:click="readMessage(item)" v-bind:class="item.isnew == true ? 'newmessage' : 'oldmessage'")
-              div.isnew(v-show="item.isnew")
-                span.icon
-              p
-                |【{{item.type}}】{{item.text}}
-                span.time {{item.time}}
-                span.delete(v-on:click="deleteMessages(item.id)") 删除
-
+            li.list-style.clear(v-for="item in messages")
+              p(v-on:click="readMessage(item)")
+                span.icon(v-show="item.message_status == '0'")
+                span.title-text {{item.message_poi_messages.title}}
+                span.time {{item.create_time | localDateSimple}}
+                span.delete(v-on:click="deleteMessages(item)") 删除
+              p 
+                | {{item.ismore ? (item.message_poi_messages.content).substring(0, 58) + '...' : item.message_poi_messages.content}}
+                span.get-more(v-show="(item.message_poi_messages.content).length > 58 && item.ismore" @click="getMore(item)") 
+                  | 展开
+                  span.fa.fa-angle-down 
+                span.get-more(v-show="(item.message_poi_messages.content).length > 58 && !item.ismore" @click="getMore(item)") 
+                  | 收起
+                  span.fa.fa-angle-up 
         <vue-pagination :flag="'messagenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
-      <vue-deletemessage :info='deleteinfo'></vue-deletemessage>
+      <vue-deletemessage :info='deleteinfo' v-on:sendId="Delete"></vue-deletemessage>
 </template>
 
 <script>
   let model;
+  let optInfo
   import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
   import DeleteMessageVue from '../common/deleteconfirm.vue';
@@ -40,68 +47,118 @@
     },
     data() {
       return {
-        pagesize: 20,
+        pagesize: 5,
         totalcount: 0,
+        isRead: false,
         settings:{
           type:'mymessages'
         },
         deleteinfo:{
           tips:'您确定要删除吗？',
-          flags:'deletemessage'
+          flags:'deletemessage',
+           id:''
         },
         messages:[]
       }
     },
     methods:{
       init: function() {
-        // model.totalcount = data.count;
-        // let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        // .limit(model.pagesize).skip(skip)
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        API.get('functions/messages/messages_inmail?order=-id', {limit: 5, skip: skip}, (data) => {
+          data.items.forEach((item) => {
+            item.ismore = false
+            if(item.message_poi_messages.content.length > 58) {
+              item.ismore = true
+            }
+          })
+          model.messages = data.items
+          model.totalcount = data.count
+        })
       },
       readMessage: function(obj){
-        if(obj.isnew){
-          obj.isnew = false;
+        if(obj.message_status == 0) {
+          API.put('functions/messages/messages_inmail', {ids: obj.id, message_status: 1}, (msg) => {
+            obj.message_status = 1
+          })
         }
       },
-      deleteMessages: function(id) {
-        this.deleteinfo.tips = '您确定要删除吗？';
-        $('.deletemessage').modal('show');
+      deleteMessages: function(obj) {
+        model.isRead = false
+        optInfo = obj
+        this.deleteinfo.tips = '您确定要删除吗？'
+        this.deleteinfo.id = obj.id
+        $('.deletemessage').modal('show')
+      },
+      Delete: function(id) {
+        // 删除
+        if(!model.isRead) {
+          API.delete('functions/messages/messages_inmail', {ids: id}, (data) => {
+            let arr = id.split(',')
+            model.messages.forEach((item) => {
+              if (_.indexOf(arr, item.id) > -1) {
+                model.messages = _.without(model.messages, item)
+              }
+            })
+            $('.deletemessage').modal('hide');
+            Core.alert('success', '删除成功')
+          })
+        } else{
+          // 标记已读
+          API.put('functions/messages/messages_inmail', {ids: id, message_status: 1}, (msg) => {
+            model.messages.forEach((item) => {
+              item.message_status = 1
+            })
+            $('.deletemessage').modal('hide');
+            Core.alert('success', '操作成功')
+          })
+        }
+        
       },
       deleteAll: function() {
-        let len = this.calculateLen(this.messages).oldlen;
-        if(!len) {
+        model.isRead = false
+        let oldarr = this.calculateLen(this.messages).oldlen
+        if(oldarr.length == 0) {
           Core.alert('danger','已经没有已读信息了~');
           return;
         }
         this.deleteinfo.tips = '您确定要删除所有已读信息吗？';
+        this.deleteinfo.id = oldarr.join(',')
         $('.deletemessage').modal('show');
       },
       readAll: function() {
-        let len = this.calculateLen(this.messages).newlen;
-        console.log(len)
-        if(!len) {
+        model.isRead = true
+        let newarr = this.calculateLen(this.messages).newlen
+        if(newarr.length == 0) {
           Core.alert('danger','已经没有未读信息了~');
           return;
         }
-        this.messages.forEach((item)=> {
-          if(item.isnew) {item.isnew = false;}
-        })
+        this.deleteinfo.tips = '您确定要全部标记为已读信息吗？';
+        this.deleteinfo.id = newarr.join(',')
+        $('.deletemessage').modal('show');
       },
       calculateLen: function(arr) {
-        let newlen = 0;
-        let oldlen = 0;
+        let newlen = [];
+        let oldlen = [];
         arr.forEach((item)=> {
-          if(item.isnew) {
-            newlen++;
+          if(item.message_status == 0) {
+            newlen.push(item.id)
           } else {
-            oldlen++;
+            oldlen.push(item.id)
           }
         })
         return {oldlen: oldlen,newlen: newlen}
+      },
+      getMore: function (obj) {
+        if(obj.message_status == 0) {
+          API.put('functions/messages/messages_inmail', {ids: obj.id, message_status: 1}, (msg) => {
+            obj.message_status = 1
+          })
+        }
+        obj.ismore = !obj.ismore
       }
     },
-    counted() {
-      this.init();
+    mounted() {
+      model.init()
     },
     created() {
       model = this;
@@ -155,7 +212,16 @@
           text-align: center;
           border: 1px solid #ccc;
           margin-left: pxTorem(20);
-          color: #666;
+          border-radius: pxTorem(14);
+          font-size: pxTorem(12);
+        }
+        .readall{
+          background-color: #e13f3f;
+          color: #fff;
+        }
+        .deleteallread{
+          border-color: #e13f3f;
+          color: #e13f3f;
         }
       }
       .empty{
@@ -175,45 +241,51 @@
           padding: pxTorem(20) pxTorem(10);
           border-bottom: 1px dashed #d9d9d9;
           cursor: pointer;
-          .isnew{
-            position: absolute;
-            top: 50%;
-            margin-top: pxTorem(-11);
+          p{
+            position: relative;
+            margin: 0;
+            color: #999999;
+            font-size: pxTorem(12);
+            span{
+              display: inline-block;
+              margin-left: pxTorem(10);
+            }
             .icon{
-              position: relative;
-              left: pxTorem(10);
+              position: absolute;
+              left: pxTorem(-24);
+              top: pxTorem(7);
               display: inline-block;
               width: pxTorem(8);
               height: pxTorem(8);
               background-color: #f14f4f;
               border-radius: 100%;
             }
-          }
-          p{
-            margin: 0;
-            color: #666;
-            span{
-              display: inline-block;
-              margin-left: pxTorem(10);
+            .title-text{
+              font-size: pxTorem(16);
+              color: #333 !important;
+              margin-left: 0 !important;
             }
             .time{
-              margin-left: pxTorem(20);
+              position: absolute;
+              right: pxTorem(40);
+              top: pxTorem(5);
             }
-          }
-        }
-        .newmessage{
-          p{
-            padding-left: pxTorem(28);
-            span{
-              color: #f14f4f;
+            .delete{
+              position: absolute;
+              right: pxTorem(5);
+              top: pxTorem(5);
             }
-          }
-        }
-        .oldmessage{
-          p{
-            padding: 0;
-            span{
-              color: #999;
+            .delete:hover{
+              color: #e13f3f;
+            }
+            .get-more{
+              position: absolute;
+              right: pxTorem(5);
+              bottom: pxTorem(-1);
+              color: #5278e5 !important;
+              & > span{
+                margin-left: pxTorem(2);
+              }
             }
           }
         }

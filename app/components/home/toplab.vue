@@ -1,7 +1,8 @@
 <template lang="jade">
   div.toplab-vue.vue-component
     div.top-box
-      ul.list-style 
+      ul.list-style
+        
         li.list-style.list-text(v-for="item in items" v-show="item.visible == 0") 
           a(:href="item.url") {{item.name}}
         li.list-style.list-right
@@ -10,7 +11,6 @@
           a(:href="logininfo.register.url" v-show="logininfo.register.isshow") {{logininfo.register.name}}
         li.list-style.list-right
           a(:href="logininfo.login.url" v-show="logininfo.login.isshow") {{logininfo.login.name}}
-
         li.list-style.list-right(v-if="logininfo.users.isshow")
           img.user-img#user-imgs(:src="user_logo")
           a.users-info(:href="logininfo.users.url") {{logininfo.users.name}}
@@ -22,11 +22,17 @@
               a(:href="sub.mymessages.url") {{sub.mymessages.name}}
               a(:href="sub.settings.url") {{sub.settings.name}}
               a(:href="sub.exit.url" v-on:click="Exit()") {{sub.exit.name}}
+        li.list-style.list-right#msgalert(v-if="logininfo.users.isshow" style="position: relative;cursor: pointer")
+          a(:href="sub.mymessages.url")
+            span.label.label-danger(style="position: absolute;top: 2px;left: -10px" v-show="msg > 0") {{msg > 100 ? '99+' : msg}}
+            i.fa.fa-bell-o(style="font-size: 16px;color: #f14f4f")
+          
 </template>
 
 <script>
   let HomePage = AV.extend('homepage_modules');//创建人
   export default {
+    props: ['msg'],
     data() {
       return {
         dataItem:{},

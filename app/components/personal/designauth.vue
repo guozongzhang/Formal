@@ -58,7 +58,7 @@
           return;
         }
         DesignerCards.where({designer_id_poi_designer:SITE.session.mem.designer.id}).all((data)=> {
-          this.userInfo.per_img = data.items[0].designer_url;
+          this.userInfo.per_img = (data.items[0] || {}).designer_url;
         })
       }
     },
