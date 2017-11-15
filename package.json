@@ -6,6 +6,7 @@
   "scripts": {
     "start": "pm2-docker server.js",
     "migrate": "knex migrate:latest",
+    "dockerbuild": "webpack && node tool/build",
     "build": "cnpm install && webpack && node tool/build",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build  &&  npm run cdn && pm2 restart app.js",
     "push": "pbranch=`git branch | grep \\* | cut -c3-` && git branch -D develop && git fetch origin develop:develop && git merge develop && git checkout develop && git merge $pbranch && git push origin develop && git checkout $pbranch",

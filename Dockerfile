@@ -12,8 +12,8 @@ RUN npm install pm2 -g --registry=https://registry.npm.taobao.org
 
 RUN npm install --registry=https://registry.npm.taobao.org
 
-RUN npm run build && npm run cdn
+RUN npm run dockerbuild && npm run cdn
 
-EXPOSE 3001
+EXPOSE 5000
 
 CMD ["npm", "start"] 
