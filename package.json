@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js |  webpack --watch |  node tool/watch.js",
+    "start": "pm2-docker server.js",
     "migrate": "knex migrate:latest",
     "build": "cnpm install && webpack && node tool/build",
     "deploy": "git branch -D tmp && git fetch origin develop:tmp && git merge tmp && npm run build  &&  npm run cdn && pm2 restart app.js",
@@ -59,7 +59,7 @@
     "chokidar": "^1.5.2",
     "colors": "^1.1.2",
     "css-loader": "^0.25.0",
-    "dpj_deploy": "^1.1.0",
+    "dpj_deploy": "git://git.coding.net/yuguo6211/dpjia_alisdk.git",
     "file-loader": "^0.9.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
