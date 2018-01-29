@@ -12,7 +12,6 @@
             div.item(v-for="item in trademark.imgs")
               img(:src="item.url" @click="showBig(item)")
               p {{item.name}}
-          // a(v-show="trademark.imgs.length > 5") 展开
     div
       <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
 </template>
