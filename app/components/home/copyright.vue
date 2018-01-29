@@ -12,7 +12,7 @@
             div.item(v-for="item in trademark.imgs")
               img(:src="item.url" @click="showBig(item)")
               p {{item.name}}
-          a(v-show="trademark.imgs.length > 5") 展开
+          // a(v-show="trademark.imgs.length > 5") 展开
     div
       <vue-bigimage :id="'trademark'" :info="info"></vue-bigimage>
 </template>
@@ -44,6 +44,26 @@
             {
               name:'搭配家云设计销售设计移动终端【简称：搭配家云设计】V3.0',
               url:'../../assets/imgs/dpjia_trademark/3.jpg'
+            },
+            {
+              name:'搭配家云智造家具智能制造系统【简称：搭配家云制造】V1.0',
+              url:'../../assets/imgs/dpjia_trademark/yzz.jpg'
+            },
+            {
+              name:'搭配家全屋整木智能定制系统【简称：搭配家整木定制】V1.0',
+              url:'../../assets/imgs/dpjia_trademark/zmdz.jpg'
+            },
+            {
+              name:'搭配家办公工位智能定制系统【简称：搭配家云工位】V2.0',
+              url:'../../assets/imgs/dpjia_trademark/gw.jpg'
+            },
+            {
+              name:'搭配家家居生态云平台管理系统【简称：搭配家云平台】V2.0',
+              url:'../../assets/imgs/dpjia_trademark/ypt.jpg'
+            },
+            {
+              name:'搭配家云协同移动协同办公管理APP【简称：搭配家云协同】V1.0',
+              url:'../../assets/imgs/dpjia_trademark/yxt.jpg'
             }
           ]
         }
@@ -104,10 +124,13 @@
           float: left;
           img{
             width: 200px;
+            height: 275px;
             cursor: pointer;
           }
         }
-        
+        .item:child-nth(4n){
+          margin-right: 0;
+        }
       }
     }
     .storys{
