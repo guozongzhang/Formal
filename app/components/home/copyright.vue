@@ -7,7 +7,7 @@
         div.info-box.storys
           p.title
             span.title-icon
-            label 111111{{trademark.title}}-{{trademark.imgs.length}}
+            label {{trademark.title}}
           div.info
             div.item(v-for="item in trademark.imgs")
               img(:src="item.url" @click="showBig(item)")
