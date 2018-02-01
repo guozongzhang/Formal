@@ -60,7 +60,7 @@
     "chokidar": "^1.5.2",
     "colors": "^1.1.2",
     "css-loader": "^0.25.0",
-    "dpj_deploy": "git://git.coding.net/yuguo6211/dpjia_alisdk.git",
+    "dpj_deploy": "^1.3.0",
     "file-loader": "^0.9.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
