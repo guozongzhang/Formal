@@ -59,8 +59,6 @@ class Basic {
         }
       }
     })
-
-    //console.log('==', JSON.stringify(initData))
     this.mvvm = new Vue(mvvmDefault)
     
     window.MVVM = this.mvvm

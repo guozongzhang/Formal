@@ -221,7 +221,6 @@
       }
     },
     mounted(){
-      //console.log(urltype,'===')
       var model = this;
       this.Init();
       this.getServiceObj();
