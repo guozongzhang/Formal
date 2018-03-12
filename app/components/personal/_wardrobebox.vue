@@ -1,25 +1,26 @@
 <template lang="jade">
   div.collectexample-vue.vue-component
     div.example-box.clear
-      div(v-show="examples.length == 0")
-        p.empty
-          svg.svg-style
-            use(xlink:href="/assets/svg/icon.svg#empty")
-        p.empty 还没有柜体呢~
-      ul.list-style.clear(v-show="examples.length > 0")
-        li.list-style(v-for="item in examples")
-          a(:href="item.link_url" target="_blank")
-            img(:src="item.paint_url")
-            div.info-box
-              p.name {{item.apt_name}}
-              p.user 
-                span {{item.apt_area}}m² / {{(item.aptt_poi_apartment_types || {}).aptt_name}}
-          span.delete-icon(v-on:click="deleteExample(item)")
+      div.design-list
+        div(v-show="examples.length == 0")
+          p.empty
             svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#trash")
+              use(xlink:href="/assets/svg/icon.svg#empty")
+          p.empty 还没有柜体呢~
+        ul.list-style(v-show="examples.length != 0")
+          li.list-style.clear(v-for="item in examples")
+            div.left
+              img(:src="item.des_cut_url")
+            div.subright
+              label {{item.des_name}}
+              p.update-time 最后修改时间：{{item.update_time | localDate}}
+              a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
+              span.rename(v-on:click="editwardrobe(item)") 编辑
+              span.delete(v-on:click="deletewardrobe(item)") 删除
+              span.copy(v-on:click="copywardrobe(item)" v-show="!item.isCopy") 复制
+              span.copying(v-show="item.isCopy") 复制中...
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
-
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
@@ -28,7 +29,8 @@
   let model;
   let favorArr = [];
   let FavorExamp = AV.extend('user_preference');
-  let Example = AV.extend('apartment');
+  // let Example = AV.extend('apartment');
+  let Example = AV.extend('furniture_sku')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
@@ -55,9 +57,8 @@
           let ids = data.items.map((item)=> {
             return item.point;
           })
-          Example.reset().where(['id in ?', ids]).where(['user_poi_users > ?','-2']).where(['com_id_poi_companys > ?','-1'])
-          .where(['dealer_id_poi_company_dealer > ?','-1']).where(['st_id_poi_company_stores > ?','-1'])
-          .keys('id,apt_name,paint_url,apt_area,aptt_poi_apartment_types').include('aptt_poi_apartment_types').all((msg)=> {
+          Example.reset().where(['id in ?', ["5374", "8666", "5219", "5132", "8977", "8412"]]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((msg) => {
+            console.log('data = ', msg)
             msg.items.forEach((item)=> {
               item.link_url = SITE.Ips.design + '/example/exampledetail?id=' + item.id;
             })
@@ -65,10 +66,17 @@
           })
         })
       },
-      deleteExample: function(obj){
+      deletewardrobe: function(obj){
         tmp = obj;
         this.deleteinfo.id = obj.id;
         $('.deleteexample').modal('show');
+      },
+      editwardrobe: function(obj){
+        window.location.href='/personal/editwardrobe'
+        console.log('编辑', obj)
+      },
+      copywardrobe: function (obj){
+        console.log('复制', obj)
       },
       Delete: function(id) {
         let deleteid = '';
@@ -93,114 +101,96 @@
   }
 
 </script>
+
 <style lang="sass">
 @import "../../assets/stylesheets/function.scss";
 
 .collectexample-vue {
-  .example-box{
-    margin: pxTorem(10) 0;
-    .empty{
-      text-align: center;
-      color: #999;
-      .svg-style{
-        width: pxTorem(100);
-        height: pxTorem(100);
-        fill: #999;
+  width: pxTorem(1000);
+  margin: 0 auto;
+  height: 100%;
+      .design-list{
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
+        }
       }
-    }
-    ul{
-      li{
-        position: relative;
-        display: inline-block;
-        width: pxTorem(240);
-        height: pxTorem(254);
-        float: left;
-        margin-right: pxTorem(20);
-        margin-bottom: pxTorem(20);
-        a{
-          text-decoration: none;
-          display: inline-block;
-          width: pxTorem(240);
-          height: pxTorem(254);
-          cursor: pointer;
-          img{
-            width: pxTorem(240);
-            height: pxTorem(180);
-          }
-          .info-box{
-            border: 1px solid #ccc;
-            margin: 0;
-            padding: pxTorem(10);
-            height: pxTorem(74);
-            width: pxTorem(240);
-            color: #999;
-            p{
-              margin: 0;
-              padding: 0;
-              height: pxTorem(26);
-              line-height: pxTorem(26);
+      ul{
+        li{
+          width: pxTorem(800);
+          height: pxTorem(200);
+          margin-top: pxTorem(20);
+          background-color: #fff;
+          .left{
+            display: inline-block;
+            width: pxTorem(200);
+            height: pxTorem(200);
+            float: left;
+            border-right: 1px solid #ccc;
+            img{
+              width: pxTorem(200);
+              height: pxTorem(200);
             }
-            .name{
-              font-size: pxTorem(14);
-              font-weight: 400;
+          }
+          .subright{
+            position: relative;
+            display: inline-block;
+            width: pxTorem(600);
+            height: pxTorem(200);
+            float: left;
+            padding: pxTorem(20) pxTorem(30);
+            label{
+              font-size: pxTorem(18);
               color: #333;
             }
-            .user{
-              position: relative;
-              color: #999;
+            .update-time{
+              margin-top: pxTorem(20);
+              padding: 0;
               font-size: pxTorem(12);
-              a{
-                text-decoration: none;
-                display: inline-block;
-                width: pxTorem(80);
-                height: pxTorem(26);
-                position: absolute;
-                right: 0;
-                text-align: right;
-                img{
-                  width: pxTorem(20);
-                  height: pxTorem(20);
-                  border-radius: 100%;
-                  margin-right: pxTorem(5);
-                }
-                span{
-                  position: relative;
-                  top: pxTorem(2);
-                  color: #999;
-                }
-              }
+              color: #999;
+            }
+            .go-draw{
+              position: absolute;
+              left: pxTorem(30);
+              bottom: pxTorem(20);
+              text-decoration: none;
+              display: inline-block;
+              width: pxTorem(120);
+              height: pxTorem(36);
+              line-height: pxTorem(36);
+              text-align: center;
+              background-color: #f14f4f;
+              color: #fff;
+              border-radius: pxTorem(3);
+            }
+            span{
+              position: absolute;
+              bottom: pxTorem(20);
+              color: #666;
+              cursor: pointer;
+            }
+            .rename{
+              right: pxTorem(110);
+            }
+            .delete{
+              right: pxTorem(75);
+            }
+            .copy{
+              right: pxTorem(35);
+            }
+            .copying{
+              right: pxTorem(10);
+            }
+            span:hover{
+              color: #999;
             }
           }
         }
-        .delete-icon{
-          position: absolute;
-          right: 0;
-          top: 0;
-          display: none;
-          width: pxTorem(30);
-          height: pxTorem(30);
-          background-color: rgba(0,0,0,0.5);
-          cursor: pointer;
-          .svg-style{
-            position: relative;
-            top: pxTorem(5);
-            left: pxTorem(5);
-            width: pxTorem(20);
-            height: pxTorem(20);
-            fill: #fff;
-          }
-        }
-      }
-      li:hover{
-        .delete-icon{
-          display: inline-block;
-        }
-      }
-      li:nth-child(3n){
-        margin-right: 0;
       }
     }
-  }
 }
 </style>
-

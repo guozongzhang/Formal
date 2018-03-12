@@ -48,6 +48,7 @@
     "request": "^2.79.0",
     "slick-carousel": "^1.6.0",
     "twbs-pagination": "http://cdn.dpjia.com/frontend/packages/v1.4.1-twbs-pagination-master.tar.gz",
+    "uglify-js": "^3.3.14",
     "underscore": "^1.8.3",
     "video.js": "^5.12.6",
     "vue-hot-reload-api": "^1.3.2",
