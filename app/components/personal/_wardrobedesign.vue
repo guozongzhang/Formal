@@ -8,7 +8,7 @@
           p.empty
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#empty")
-          p.empty 还没有柜体呢~
+          p.empty 当前数据为空,请您到柜体库中基于模板新增数据哦
         ul.list-style(v-show="goods.length != 0")
           li.list-style.clear(v-for="item in goods")
             div.left

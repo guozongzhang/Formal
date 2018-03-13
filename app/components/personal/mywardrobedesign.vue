@@ -24,7 +24,7 @@
 <script>
   let tmp = '';//临时变量
   let model;
-  let Designs = AV.extend('designs');
+  let Bureau = AV.extend('pre_personal_bureau');
   import LeftmenueVue from './leftmenue.vue';
   export default {
     components: { 
@@ -43,6 +43,8 @@
       init: function () {
         model.editObj.id = window.location.search
         alert(model.editObj.id);
+
+        //  需要根据id请求详情数据
       },
       submit: function(){
         console.log('editObj', this.editObj)

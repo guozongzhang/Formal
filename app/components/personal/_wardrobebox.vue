@@ -10,9 +10,9 @@
         ul.list-style(v-show="examples.length != 0")
           li.list-style.clear(v-for="item in examples")
             div.left
-              img(:src="item.des_cut_url")
+              img(:src="item.icon_url")
             div.subright
-              label {{item.des_name}}
+              label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
               a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
 
@@ -26,7 +26,7 @@
   let favorArr = [];
   let FavorExamp = AV.extend('user_preference');
   // let Example = AV.extend('apartment');
-  let Example = AV.extend('furniture_sku')
+  let Example = AV.extend('pre_personal_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
@@ -46,21 +46,24 @@
     },
     methods:{
       init: function() {
-        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        FavorExamp.reset().where({type:'sampleroom',action:'favor'}).keys('id,point').limit(model.pagesize).skip(skip).all((data)=> {
-          favorArr = data.items;
-          model.totalcount = data.count;
-          let ids = data.items.map((item)=> {
-            return item.point;
-          })
-          Example.reset().where(['id in ?', ["5374", "8666", "5219", "5132", "8977", "8412"]]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((msg) => {
-            console.log('data = ', msg)
-            msg.items.forEach((item)=> {
-              item.link_url = SITE.Ips.design + '/example/exampledetail?id=' + item.id;
-            })
-            this.examples = msg.items;
-          })
+        Example.reset().all((all) => {
+          console.log('all === ', all)
         })
+        // let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
+        // FavorExamp.reset().where({type:'sampleroom',action:'favor'}).keys('id,point').limit(model.pagesize).skip(skip).all((data)=> {
+        //   favorArr = data.items;
+        //   model.totalcount = data.count;
+        //   let ids = data.items.map((item)=> {
+        //     return item.point;
+        //   })
+        //   Example.reset().where(['id in ?', ["5374", "8666", "5219", "5132", "8977", "8412"]]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((msg) => {
+        //     console.log('data = ', msg)
+        //     msg.items.forEach((item)=> {
+        //       item.link_url = SITE.Ips.design + '/example/exampledetail?id=' + item.id;
+        //     })
+        //     this.examples = msg.items;
+        //   })
+        // })
       },
       deletewardrobe: function(obj){
         tmp = obj;
