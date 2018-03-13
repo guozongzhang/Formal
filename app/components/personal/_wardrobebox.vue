@@ -15,10 +15,6 @@
               label {{item.des_name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
               a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
-              span.rename(v-on:click="editwardrobe(item)") 编辑
-              span.delete(v-on:click="deletewardrobe(item)") 删除
-              span.copy(v-on:click="copywardrobe(item)" v-show="!item.isCopy") 复制
-              span.copying(v-show="item.isCopy") 复制中...
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
@@ -41,7 +37,7 @@
         pagesize: 6,
         totalcount: 0,
         deleteinfo:{
-          tips:'确定取消该收藏样板间吗？',
+          tips:'确定删除柜体吗？',
           flags:'deleteexample',
           id:'',
         },
@@ -72,10 +68,12 @@
         $('.deleteexample').modal('show');
       },
       editwardrobe: function(obj){
-        window.location.href='/personal/editwardrobe'
+        window.location.href='/personal/editwardrobe?'+obj.id
         console.log('编辑', obj)
       },
       copywardrobe: function (obj){
+        //  复制出来的柜体的命名规则为当前柜体的名称+01 以此累加
+        obj.fur_id_poi_furnitures.fur_name = obj.fur_id_poi_furnitures.fur_name + '01'
         console.log('复制', obj)
       },
       Delete: function(id) {

@@ -7,16 +7,17 @@
         div.label-title
           label 编辑方案
         div
-          label 名称
-          span.not-null *
-          input(type="text" class="form-control")
-
+          label 柜体名称
+          span *
+            input(type="text" class="form-control" style="width:300px" v-model="editObj.name")
         div
-            button.btn.btn-flat.bg-olive(@click="submit()"  type="button") 提交
-            button.btn.btn-flat.bg-olive(@click="submit()"  type="button") 返回
-
-      <vue-deleteconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-deleteconfirm>
-      <vue-rename :info="renameinfo" v-on:sendname="Rename"></vue-rename>
+          label 预览图：
+            span *
+          div
+            div.upload.default.auto(data-model="objendpro.image_url") +
+        div
+            button.btn.btn-flat(@click="submit()"  type="button") 提交
+            button.btn.btn-flat(@click="back()"  type="button" style="margin-left:50px") 返回
 
 </template>
 
@@ -24,104 +25,35 @@
   let tmp = '';//临时变量
   let model;
   let Designs = AV.extend('designs');
-  import Pagination from '../common/pagination.vue'
   import LeftmenueVue from './leftmenue.vue';
-  import DeleteconfirmVue from '../common/deleteconfirm.vue';
-  import RenameVue from './rename.vue';
   export default {
     components: { 
-      'vue-leftmenue': LeftmenueVue,
-      'vue-deleteconfirm': DeleteconfirmVue,
-      'vue-rename': RenameVue,
-      'vue-pagination': Pagination
+      'vue-leftmenue': LeftmenueVue
     },
     data() {
       return {
-        design_url: SITE.Ips.design + '/example/design?id=',
-        pagesize: 4,
-        totalcount: 0,
-        settings:{
-          type:'mydesign'
+        editObj: {
+          name: '',
+          id: ''
         },
-        deleteinfo:{
-          tips:'您确定要删除吗？',
-          flags:'deletedesign',
-          id:'',
-        },
-        renameinfo:{
-          title:'修改工程名称',
-          name:'',
-          flags:'renamedesign'
-        },
-        designe:{
-          go_new:'/personal/newdesign',
-          list:[]
-        }
+        settings: {}
       }
     },
     methods:{
-      init: function() {
-        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Designs.reset().keys('id,des_name,des_cut_url,update_time').limit(model.pagesize).skip(skip).all((data)=> {
-          model.totalcount = data.count;
-          data.items.forEach((item)=> {
-            item.isCopy = false;
-          })
-          this.designe.list = data.items;
-        })
+      init: function () {
+        model.editObj.id = window.location.search
+        alert(model.editObj.id);
       },
-      deleteDesign:function(obj){
-        tmp = obj;
-        this.deleteinfo.id = obj.id;
-        $('.deletedesign').modal('show');
+      submit: function(){
+        console.log('editObj', this.editObj)
       },
-      Delete: function(id) {
-        let item = {
-          id: id
-        }
-        Designs.get(item).destroy().then((data)=> {
-          this.designe.list = _.without(this.designe.list,tmp);
-          $('.deletedesign').modal('hide');
-          Core.alert('success','删除成功');
-        })
-      },
-      renameDesign: function(obj) {
-        tmp = obj;
-        this.renameinfo.name = obj.des_name
-        $('.renamedesign').modal('show');
-      },
-      Rename: function(name) {
-        if(_.isEmpty($.trim(name))) {
-          Core.alert('danger','工程名称不能为空');
-          return;
-        }
-        let item = {
-          id: tmp.id,
-          des_name: name
-        }
-        Designs.get(item).update().then((data)=> {
-          tmp.des_name = item.des_name
-          $('.renamedesign').modal('hide');
-          Core.alert('success','修改成功');
-        })
-      },
-      copyDesign: function(item) {
-        item.isCopy = true;
-        API.post('functions/project/copy_project',{des_id:item.id}, (data)=> {
-          item.isCopy = false;
-          data = _.extend(data,{isCopy: false});
-          this.designe.list.splice(0,0,data);
-         Core.alert('success', '复制成功');
-        },(msg)=> {
-          Core.alert('danger', msg.responseJSON.message)
-        })
+      back: function(){
+        window.history.back()
       }
     },
     mounted() {
-      this.init();
-    },
-    created() {
       model = this
+      model.init()
     }
   }
 
@@ -155,112 +87,6 @@
         font-size: pxTorem(18);
         font-weight: bold;
         margin-left: pxTorem(20);
-      }
-      a{
-        position: absolute;
-        top: pxTorem(12.5);
-        text-decoration: none;
-        display: inline-block;
-        width: pxTorem(100);
-        height: pxTorem(35);
-        line-height: pxTorem(35);
-        text-align: center;
-        border: 1px solid #f14f4f;
-        color: #f14f4f;
-        border-radius: pxTorem(2);
-      }
-      a:hover{
-        background-color: #f14f4f;
-        color: #fff;
-      }
-      .zore-draw{
-        right: pxTorem(130);
-      }
-      .search-house{
-        right: pxTorem(10);
-      }
-    }
-    .design-list{
-      .empty{
-        text-align: center;
-        color: #999;
-        .svg-style{
-          width: pxTorem(100);
-          height: pxTorem(100);
-          fill: #999;
-        }
-      }
-      ul{
-        li{
-          width: pxTorem(800);
-          height: pxTorem(200);
-          margin-top: pxTorem(20);
-          background-color: #fff;
-          .left{
-            display: inline-block;
-            width: pxTorem(200);
-            height: pxTorem(200);
-            float: left;
-            border-right: 1px solid #ccc;
-            img{
-              width: pxTorem(200);
-              height: pxTorem(200);
-            }
-          }
-          .subright{
-            position: relative;
-            display: inline-block;
-            width: pxTorem(600);
-            height: pxTorem(200);
-            float: left;
-            padding: pxTorem(20) pxTorem(30);
-            label{
-              font-size: pxTorem(18);
-              color: #333;
-            }
-            .update-time{
-              margin-top: pxTorem(20);
-              padding: 0;
-              font-size: pxTorem(12);
-              color: #999;
-            }
-            .go-draw{
-              position: absolute;
-              left: pxTorem(30);
-              bottom: pxTorem(20);
-              text-decoration: none;
-              display: inline-block;
-              width: pxTorem(120);
-              height: pxTorem(36);
-              line-height: pxTorem(36);
-              text-align: center;
-              background-color: #f14f4f;
-              color: #fff;
-              border-radius: pxTorem(3);
-            }
-            span{
-              position: absolute;
-              bottom: pxTorem(20);
-              color: #666;
-              cursor: pointer;
-            }
-            .rename{
-              right: pxTorem(110);
-            }
-            .delete{
-              right: pxTorem(75);
-            }
-            .copy{
-              right: pxTorem(35);
-            }
-            .copying{
-              right: pxTorem(10);
-            }
-            span:hover{
-              color: #999;
-            }
-          }
-        }
       }
     }
   }

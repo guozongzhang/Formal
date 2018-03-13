@@ -1,22 +1,28 @@
+
+
 <template lang="jade">
   div.collectgoods-vue.vue-component
-    div.goods-box.clear
-      div(v-show="goods.length == 0")
-        p.empty
-          svg.svg-style
-            use(xlink:href="/assets/svg/icon.svg#empty")
-        p.empty 还没有设计衣柜呢~
-      ul.list-style.clear(v-show="goods.length != 0")
-        li.list-style(v-for="item in goods")
-          a(:href="mall_url + item.id")
-            img(:src="item.fur_image")
-            div.name
-              p {{item.fur_name}}
-          span.delete-icon(v-on:click="deleteGoods(item)")
+    div.example-box.clear
+      div.design-list
+        div(v-show="goods.length == 0")
+          p.empty
             svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#trash")
-    <vue-pagination :flag="'goodsnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+              use(xlink:href="/assets/svg/icon.svg#empty")
+          p.empty 还没有柜体呢~
+        ul.list-style(v-show="goods.length != 0")
+          li.list-style.clear(v-for="item in goods")
+            div.left
+              img(:src="item.des_cut_url")
+            div.subright
+              label {{item.des_name}}
+              p.update-time 最后修改时间：{{item.update_time | localDate}}
+              a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
+              span.rename(v-on:click="editwardrobe(item)") 编辑
+              span.delete(v-on:click="deletewardrobe(item)") 删除
+              span.copy(v-on:click="copywardrobe(item)" v-show="!item.isCopy") 复制
+              span.copying(v-show="item.isCopy") 复制中...
 
+    <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
@@ -109,81 +115,97 @@
 @import "../../assets/stylesheets/function.scss";
 
 .collectgoods-vue {
-  .goods-box{
-    margin: pxTorem(10) 0;
-    .empty{
-      text-align: center;
-      color: #999;
-      .svg-style{
-        width: pxTorem(100);
-        height: pxTorem(100);
-        fill: #999;
-      }
-    }
-    ul{
-      li{
-        position: relative;
-        display: inline-block;
-        width: pxTorem(180);
-        height: pxTorem(240);
-        float: left;
-        margin-right: pxTorem(13.3);
-        margin-bottom: pxTorem(13.3);
-        a{
-          text-decoration: none;
-          display: inline-block;
-          width: pxTorem(180);
-          height: pxTorem(240);
-          img{
-            width: pxTorem(180);
-            height: pxTorem(180);
-          }
-          .name{
-            height: pxTorem(60);
-            padding: pxTorem(10) pxTorem(15);
-            border: 1px solid #ccc;
-          }
-          p{
-            margin: 0;
-            padding: 0;
-            height: pxTorem(40);
-            width: pxTorem(150);
-            color: #999;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;//2行截字
-            -webkit-box-orient: vertical;
-          }
+  width: pxTorem(1000);
+  margin: 0 auto;
+  height: 100%;
+      .design-list{
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
         }
-        .delete-icon{
-          position: absolute;
-          right: 0;
-          top: 0;
-          display: none;
-          width: pxTorem(30);
-          height: pxTorem(30);
-          background-color: rgba(0,0,0,0.5);
-          cursor: pointer;
-          .svg-style{
+      }
+      ul{
+        li{
+          width: pxTorem(800);
+          height: pxTorem(200);
+          margin-top: pxTorem(20);
+          background-color: #fff;
+          .left{
+            display: inline-block;
+            width: pxTorem(200);
+            height: pxTorem(200);
+            float: left;
+            border-right: 1px solid #ccc;
+            img{
+              width: pxTorem(200);
+              height: pxTorem(200);
+            }
+          }
+          .subright{
             position: relative;
-            top: pxTorem(5);
-            left: pxTorem(5);
-            width: pxTorem(20);
-            height: pxTorem(20);
-            fill: #fff;
+            display: inline-block;
+            width: pxTorem(600);
+            height: pxTorem(200);
+            float: left;
+            padding: pxTorem(20) pxTorem(30);
+            label{
+              font-size: pxTorem(18);
+              color: #333;
+            }
+            .update-time{
+              margin-top: pxTorem(20);
+              padding: 0;
+              font-size: pxTorem(12);
+              color: #999;
+            }
+            .go-draw{
+              position: absolute;
+              left: pxTorem(30);
+              bottom: pxTorem(20);
+              text-decoration: none;
+              display: inline-block;
+              width: pxTorem(120);
+              height: pxTorem(36);
+              line-height: pxTorem(36);
+              text-align: center;
+              background-color: #f14f4f;
+              color: #fff;
+              border-radius: pxTorem(3);
+            }
+            span{
+              position: absolute;
+              bottom: pxTorem(20);
+              color: #666;
+              cursor: pointer;
+            }
+            .rename{
+              right: pxTorem(110);
+            }
+            .delete{
+              right: pxTorem(75);
+            }
+            .copy{
+              right: pxTorem(35);
+            }
+            .copying{
+              right: pxTorem(10);
+            }
+            span:hover{
+              color: #999;
+            }
           }
         }
       }
-      li:hover{
-        .delete-icon{
-          display: inline-block;
-        }
-      }
-      li:nth-child(4n){
-        margin-right: 0;
-      }
     }
-  }
 }
 </style>
+
+
+
+
+
+
