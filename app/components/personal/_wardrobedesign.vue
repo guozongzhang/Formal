@@ -19,7 +19,7 @@
               a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
               span.delete(v-on:click="deletewardrobe(item)") 删除
-              span.copy(v-on:click="copywardrobe(item)" v-show="!item.isCopy") 复制
+              span.copy(v-on:click="copywardrobe(item)") 复制
               span.copying(v-show="item.isCopy") 复制中...
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
@@ -67,10 +67,14 @@
         $('.deletegoods').modal('show');
       },
       copywardrobe: function(obj){
-
+        API.post('functions/bureau/copy_personal_bureau',{id: obj.id}, (data)=> {
+          console.log('data', data)
+        },(msg)=> {
+          Core.alert('danger', JSON.parse(msg.responseText).message)
+        })
       },
       editwardrobe: function(obj){
-
+        window.location.href='/personal/editwardrobe?'+obj.id
       },
       Delete: function(id) {
         Bureau.reset().get({id: this.deleteinfo.id}).destroy().then((data) => {

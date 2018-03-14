@@ -14,7 +14,7 @@
           label 预览图：
             span *
           div
-            div.upload.default.auto(data-model="objendpro.image_url") +
+            div.upload.default.auto(data-model="editObj.icon_url") +
         div
             button.btn.btn-flat(@click="submit()"  type="button") 提交
             button.btn.btn-flat(@click="back()"  type="button" style="margin-left:50px") 返回
@@ -33,20 +33,15 @@
     data() {
       return {
         editObj: {
-          name: '',
-          id: ''
         },
         settings: {}
       }
     },
     methods:{
       init: function () {
-        model.editObj.id = window.location.search
-        alert(model.editObj.id);
-
         //  需要根据id请求详情数据
-        Bureau.reset().where({id: model.editObj.id}).all((data) => {
-          
+        Bureau.reset().where({id: window.location.search.replace('?', '')}).all((data) => {
+          model.editObj = data.items[0]
         })
       },
       submit: function(){
