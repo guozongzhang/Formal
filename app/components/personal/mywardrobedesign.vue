@@ -45,6 +45,9 @@
         alert(model.editObj.id);
 
         //  需要根据id请求详情数据
+        Bureau.reset().where({id: model.editObj.id}).all((data) => {
+          
+        })
       },
       submit: function(){
         console.log('editObj', this.editObj)

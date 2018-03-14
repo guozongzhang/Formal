@@ -12,9 +12,9 @@
         ul.list-style(v-show="goods.length != 0")
           li.list-style.clear(v-for="item in goods")
             div.left
-              img(:src="item.des_cut_url")
+              img(:src="item.icon_url")
             div.subright
-              label {{item.des_name}}
+              label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
               a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
@@ -29,10 +29,7 @@
 <script>
   let tmp = '';//临时变量
   let model;
-  let favorArr = [];
-  let Favorfur = AV.extend('user_preference');
-  let Furniture = AV.extend('furnitures');
-  let FurSku = AV.extend('furniture_sku');
+  let Bureau = AV.extend('pre_personal_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   import Pagination from '../common/pagination.vue'
   export default {
@@ -56,46 +53,27 @@
     methods:{
       init: function() {
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Favorfur.reset().where(['type in ?',['fur','sku']]).where({action:'favor'}).keys('id,point,type').limit(model.pagesize).skip(skip).all((data)=> {
-          favorArr = data.items;
-          model.totalcount = data.count;
-          let furids = [];
-          let skuids = [];
-          favorArr.forEach((item)=> {
-            if(item.type == 'fur') {
-              furids.push(item.point);
-            } else {
-              skuids.push(item.point);
-            }
-          })
-          Furniture.reset().where(['id in ?', furids]).keys('id,fur_name,fur_image').all((msg)=> {
-            msg.items.forEach((item)=> {
-              let subitem = _.extend(item,{favortype:'goods',favor_id:item.id})
-              this.goods.push(subitem);
-            })
-          });
-
-          FurSku.reset().where(['id in ?', skuids]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((tmp)=> {
-            tmp.items.forEach((item)=> {
-              let sub = _.extend(item.fur_id_poi_furnitures,{favortype:'sku',favor_id:item.id})
-              this.goods.push(sub);
-            })
-          });
+        var param = {
+          user_poi_users: SITE.session.mem.id,
+          mask_delete: 0
+        }
+        Bureau.reset().where(param).skip(skip).all((all) => {
+          model.goods = all.items
         })
       },
-      deleteGoods: function(obj){
+      deletewardrobe: function(obj){
         tmp = obj;
-        this.deleteinfo.id = obj.favor_id;
+        this.deleteinfo.id = obj.id;
         $('.deletegoods').modal('show');
       },
+      copywardrobe: function(obj){
+
+      },
+      editwardrobe: function(obj){
+
+      },
       Delete: function(id) {
-        let deleteid = '';
-        favorArr.forEach((item)=> {
-          if(item.point == id) {
-            deleteid = item.id;
-          }
-        })
-        Favorfur.reset().get({id:deleteid}).destroy().then((data)=> {
+        Bureau.reset().get({id: this.deleteinfo.id}).destroy().then((data) => {
           this.goods = _.without(this.goods,tmp);
           $('.deletegoods').modal('hide');
           Core.alert('success','删除成功');

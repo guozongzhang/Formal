@@ -17,16 +17,12 @@
               a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
-    <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
   let tmp = '';//临时变量
   let model;
-  let favorArr = [];
-  let FavorExamp = AV.extend('user_preference');
-  // let Example = AV.extend('apartment');
-  let Example = AV.extend('pre_personal_bureau')
+  let Bureau = AV.extend('pre_personal_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
@@ -36,62 +32,19 @@
       return {
         pagesize: 6,
         totalcount: 0,
-        deleteinfo:{
-          tips:'确定删除柜体吗？',
-          flags:'deleteexample',
-          id:'',
-        },
         examples:[]
       }
     },
     methods:{
       init: function() {
-        Example.reset().all((all) => {
-          console.log('all === ', all)
+        var param = {
+          user_poi_users: SITE.session.mem.id,
+          mask_delete: 0
+        }
+        Bureau.reset().where(param).all((all) => {
+          model.examples = all.items
         })
-        // let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        // FavorExamp.reset().where({type:'sampleroom',action:'favor'}).keys('id,point').limit(model.pagesize).skip(skip).all((data)=> {
-        //   favorArr = data.items;
-        //   model.totalcount = data.count;
-        //   let ids = data.items.map((item)=> {
-        //     return item.point;
-        //   })
-        //   Example.reset().where(['id in ?', ["5374", "8666", "5219", "5132", "8977", "8412"]]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((msg) => {
-        //     console.log('data = ', msg)
-        //     msg.items.forEach((item)=> {
-        //       item.link_url = SITE.Ips.design + '/example/exampledetail?id=' + item.id;
-        //     })
-        //     this.examples = msg.items;
-        //   })
-        // })
       },
-      deletewardrobe: function(obj){
-        tmp = obj;
-        this.deleteinfo.id = obj.id;
-        $('.deleteexample').modal('show');
-      },
-      editwardrobe: function(obj){
-        window.location.href='/personal/editwardrobe?'+obj.id
-        console.log('编辑', obj)
-      },
-      copywardrobe: function (obj){
-        //  复制出来的柜体的命名规则为当前柜体的名称+01 以此累加
-        obj.fur_id_poi_furnitures.fur_name = obj.fur_id_poi_furnitures.fur_name + '01'
-        console.log('复制', obj)
-      },
-      Delete: function(id) {
-        let deleteid = '';
-        favorArr.forEach((item)=> {
-          if(item.point == id) {
-            deleteid = item.id;
-          }
-        })
-        FavorExamp.reset().get({id:deleteid}).destroy().then((data)=> {
-          this.examples = _.without(this.examples,tmp);
-          $('.deleteexample').modal('hide');
-          Core.alert('success','删除成功');
-        })
-      }
     },
     mounted() {
       this.init();
@@ -173,18 +126,6 @@
               bottom: pxTorem(20);
               color: #666;
               cursor: pointer;
-            }
-            .rename{
-              right: pxTorem(110);
-            }
-            .delete{
-              right: pxTorem(75);
-            }
-            .copy{
-              right: pxTorem(35);
-            }
-            .copying{
-              right: pxTorem(10);
             }
             span:hover{
               color: #999;
