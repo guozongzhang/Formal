@@ -13,8 +13,13 @@
         div
           label 预览图：
             span *
+
           div
-            div.upload.default.auto(data-model="editObj.icon_url") +
+            div.upload.auto.default-left#uploadcontract(data-model="editObj.icon_url") +
+            div.goods-img-box.upload.default(v-show="editObj.icon_url")
+              a.fancybox(:href="editObj.icon_url" rel="group" )
+                img.preview(:src="editObj.icon_url" v-cloak  style="width:80px;height:80px;")
+            
         div
             button.btn.btn-flat(@click="submit()"  type="button") 提交
             button.btn.btn-flat(@click="back()"  type="button" style="margin-left:50px") 返回
@@ -39,14 +44,22 @@
     },
     methods:{
       init: function () {
+        Core.uploadForm($('#uploadcontract'), (data) => {
+          model.editObj.icon_url = data.url
+        })
         //  需要根据id请求详情数据
         Bureau.reset().where({id: window.location.search.replace('?', '')}).all((data) => {
           model.editObj = data.items[0]
+          console.log(model.editObj)
         })
       },
       submit: function(){
-        console.log('editObj', this.editObj)
+        console.log('model.editObj', model.editObj)
+        Bureau.reset().get(model.editObj).update().then((data) => {
+          console.log('data', data)
+        })
       },
+      
       back: function(){
         window.history.back()
       }
@@ -76,6 +89,42 @@
     width: pxTorem(800);
     float: left;
     margin-left: pxTorem(20);
+    .upload.default{
+      width: 80px;
+      height: 80px;
+      border: 1px dashed #ccc;
+      line-height: 80px;
+      color: #aaa;
+      box-shadow: 0 1px 1px rgba(12,12,12,.19);
+    }
+    .upload {
+      position: relative;
+      height: 80px;
+      width: 80px;
+      line-height: 30px;
+      border: 1px solid #a9a9a9;
+      border-radius: 4px;
+      color: #555;
+      font-size: 40px;
+      padding: 0 10px;
+    }
+    .upload input[type=file] {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      z-index: 100;
+      cursor: pointer;
+    }
+    .preview {
+      width: 80px;
+      height: 80px;
+      float: left;
+      border: #DDD 1px solid;
+      padding: 1px;
+      margin-left: -10px;
+    }
     .label-title{
       position: relative;
       width: pxTorem(800);
