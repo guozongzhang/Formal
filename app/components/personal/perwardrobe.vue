@@ -5,13 +5,15 @@
         <vue-leftmenue :type='settings.type'></vue-leftmenue>
       div.right
         label.title 我的柜体
-        div.tab-list
-          a(href="javascript:;" v-on:click="switchBtn('wardrobebox')" v-bind:class="settings.subtype == 'wardrobebox' ? 'active' : ''") 柜体库
-          a(href="javascript:;" v-on:click="switchBtn('wardrobedesign')" v-bind:class="settings.subtype == 'wardrobedesign' ? 'active' : ''") 我的设计
-        div(v-show="settings.subtype == 'wardrobebox'")
-          <vue-wardrobebox></vue-wardrobebox>
-        div(v-show="settings.subtype == 'wardrobedesign'")
-          <vue-wardrobedesign></vue-wardrobedesign>
+        div
+          a(href="http://open.dpjia.com/downloads/index/dpjia-office3.4.1.exe" target="_blank") 下载柜体编辑器
+          div.tab-list
+            a(href="javascript:;" v-on:click="switchBtn('wardrobebox')" v-bind:class="settings.subtype == 'wardrobebox' ? 'active' : ''") 柜体库
+            a(href="javascript:;" v-on:click="switchBtn('wardrobedesign')" v-bind:class="settings.subtype == 'wardrobedesign' ? 'active' : ''") 我的设计
+          div(v-show="settings.subtype == 'wardrobebox'")
+            <vue-wardrobebox></vue-wardrobebox>
+          div(v-show="settings.subtype == 'wardrobedesign'")
+            <vue-wardrobedesign></vue-wardrobedesign>
 </template>
 
 <script>

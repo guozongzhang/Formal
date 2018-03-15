@@ -1,32 +1,35 @@
+
+
 <template lang="jade">
   div.collectgoods-vue.vue-component
-    div.goods-box.clear
-      div(v-show="goods.length == 0")
-        p.empty
-          svg.svg-style
-            use(xlink:href="/assets/svg/icon.svg#empty")
-        p.empty 还没有设计衣柜呢~
-      ul.list-style.clear(v-show="goods.length != 0")
-        li.list-style(v-for="item in goods")
-          a(:href="mall_url + item.id")
-            img(:src="item.fur_image")
-            div.name
-              p {{item.fur_name}}
-          span.delete-icon(v-on:click="deleteGoods(item)")
+    div.example-box.clear
+      div.design-list
+        div(v-show="goods.length == 0")
+          p.empty
             svg.svg-style
-              use(xlink:href="/assets/svg/icon.svg#trash")
-    <vue-pagination :flag="'goodsnumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
+              use(xlink:href="/assets/svg/icon.svg#empty")
+          p.empty 当前数据为空,请您到柜体库中基于模板新增数据哦
+        ul.list-style(v-show="goods.length != 0")
+          li.list-style.clear(v-for="item in goods")
+            div.left
+              img(:src="item.icon_url")
+            div.subright
+              label {{item.name}}
+              p.update-time 最后修改时间：{{item.update_time | localDate}}
+              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
+              span.rename(v-on:click="editwardrobe(item)") 编辑
+              span.delete(v-on:click="deletewardrobe(item)") 删除
+              span.copy(v-on:click="copywardrobe(item)") 复制
+              span.copying(v-show="item.isCopy") 复制中...
 
+    <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
     <vue-cancelconfirm :info='deleteinfo' v-on:sendId="Delete"></vue-cancelconfirm>
 </template>
 
 <script>
   let tmp = '';//临时变量
   let model;
-  let favorArr = [];
-  let Favorfur = AV.extend('user_preference');
-  let Furniture = AV.extend('furnitures');
-  let FurSku = AV.extend('furniture_sku');
+  let Bureau = AV.extend('c2m_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   import Pagination from '../common/pagination.vue'
   export default {
@@ -50,45 +53,50 @@
     methods:{
       init: function() {
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
-        Favorfur.reset().where(['type in ?',['fur','sku']]).where({action:'favor'}).keys('id,point,type').limit(model.pagesize).skip(skip).all((data)=> {
-          favorArr = data.items;
-          model.totalcount = data.count;
-          let furids = [];
-          let skuids = [];
-          favorArr.forEach((item)=> {
-            if(item.type == 'fur') {
-              furids.push(item.point);
-            } else {
-              skuids.push(item.point);
+        var param = {
+          user_poi_users: SITE.session.mem.id,
+          mask_delete: 0,
+          com_id_poi_companys: 0
+        }
+        var inc = {
+          include: [
+            {
+              table: 'configuration_poi_product_configuration',
+              include: [
+                {
+                  table: 'product_poi_products'
+                }
+              ]
             }
-          })
-          Furniture.reset().where(['id in ?', furids]).keys('id,fur_name,fur_image').all((msg)=> {
-            msg.items.forEach((item)=> {
-              let subitem = _.extend(item,{favortype:'goods',favor_id:item.id})
-              this.goods.push(subitem);
-            })
-          });
-          FurSku.reset().where(['id in ?', skuids]).where({user_poi_users: 0}).keys('id,fur_id_poi_furnitures').include('fur_id_poi_furnitures').all((tmp)=> {
-            tmp.items.forEach((item)=> {
-              let sub = _.extend(item.fur_id_poi_furnitures,{favortype:'sku',favor_id:item.id})
-              this.goods.push(sub);
-            })
-          });
+          ]
+        }
+        Bureau.reset().where(param).with(inc).skip(skip).all((all) => {
+          model.goods = all.items
         })
       },
-      deleteGoods: function(obj){
+      intodesign: function(obj){
+        let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
+        let token = Cookies.get('token-' + window.location.port)
+        // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
+        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&pid=' + obj.configuration_poi_product_configuration.id + '&configurationname=' + obj.configuration_poi_product_configuration.name + '&productname=' + obj.configuration_poi_product_configuration.product_poi_products.name
+      },
+      deletewardrobe: function(obj){
         tmp = obj;
-        this.deleteinfo.id = obj.favor_id;
+        this.deleteinfo.id = obj.id;
         $('.deletegoods').modal('show');
       },
-      Delete: function(id) {
-        let deleteid = '';
-        favorArr.forEach((item)=> {
-          if(item.point == id) {
-            deleteid = item.id;
-          }
+      copywardrobe: function(obj){
+        API.post('functions/bureau/copy_personal_bureau',{id: obj.id}, (data)=> {
+          console.log('data', data)
+        },(msg)=> {
+          Core.alert('danger', JSON.parse(msg.responseText).message)
         })
-        Favorfur.reset().get({id:deleteid}).destroy().then((data)=> {
+      },
+      editwardrobe: function(obj){
+        window.location.href='/personal/editwardrobe?'+obj.id
+      },
+      Delete: function(id) {
+        Bureau.reset().get({id: this.deleteinfo.id}).destroy().then((data) => {
           this.goods = _.without(this.goods,tmp);
           $('.deletegoods').modal('hide');
           Core.alert('success','删除成功');
@@ -108,81 +116,97 @@
 @import "../../assets/stylesheets/function.scss";
 
 .collectgoods-vue {
-  .goods-box{
-    margin: pxTorem(10) 0;
-    .empty{
-      text-align: center;
-      color: #999;
-      .svg-style{
-        width: pxTorem(100);
-        height: pxTorem(100);
-        fill: #999;
-      }
-    }
-    ul{
-      li{
-        position: relative;
-        display: inline-block;
-        width: pxTorem(180);
-        height: pxTorem(240);
-        float: left;
-        margin-right: pxTorem(13.3);
-        margin-bottom: pxTorem(13.3);
-        a{
-          text-decoration: none;
-          display: inline-block;
-          width: pxTorem(180);
-          height: pxTorem(240);
-          img{
-            width: pxTorem(180);
-            height: pxTorem(180);
-          }
-          .name{
-            height: pxTorem(60);
-            padding: pxTorem(10) pxTorem(15);
-            border: 1px solid #ccc;
-          }
-          p{
-            margin: 0;
-            padding: 0;
-            height: pxTorem(40);
-            width: pxTorem(150);
-            color: #999;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;//2行截字
-            -webkit-box-orient: vertical;
-          }
+  width: pxTorem(1000);
+  margin: 0 auto;
+  height: 100%;
+      .design-list{
+      .empty{
+        text-align: center;
+        color: #999;
+        .svg-style{
+          width: pxTorem(100);
+          height: pxTorem(100);
+          fill: #999;
         }
-        .delete-icon{
-          position: absolute;
-          right: 0;
-          top: 0;
-          display: none;
-          width: pxTorem(30);
-          height: pxTorem(30);
-          background-color: rgba(0,0,0,0.5);
-          cursor: pointer;
-          .svg-style{
+      }
+      ul{
+        li{
+          width: pxTorem(800);
+          height: pxTorem(200);
+          margin-top: pxTorem(20);
+          background-color: #fff;
+          .left{
+            display: inline-block;
+            width: pxTorem(200);
+            height: pxTorem(200);
+            float: left;
+            border-right: 1px solid #ccc;
+            img{
+              width: pxTorem(200);
+              height: pxTorem(200);
+            }
+          }
+          .subright{
             position: relative;
-            top: pxTorem(5);
-            left: pxTorem(5);
-            width: pxTorem(20);
-            height: pxTorem(20);
-            fill: #fff;
+            display: inline-block;
+            width: pxTorem(600);
+            height: pxTorem(200);
+            float: left;
+            padding: pxTorem(20) pxTorem(30);
+            label{
+              font-size: pxTorem(18);
+              color: #333;
+            }
+            .update-time{
+              margin-top: pxTorem(20);
+              padding: 0;
+              font-size: pxTorem(12);
+              color: #999;
+            }
+            .go-draw{
+              position: absolute;
+              left: pxTorem(30);
+              bottom: pxTorem(20);
+              text-decoration: none;
+              display: inline-block;
+              width: pxTorem(120);
+              height: pxTorem(36);
+              line-height: pxTorem(36);
+              text-align: center;
+              background-color: #f14f4f;
+              color: #fff;
+              border-radius: pxTorem(3);
+            }
+            span{
+              position: absolute;
+              bottom: pxTorem(20);
+              color: #666;
+              cursor: pointer;
+            }
+            .rename{
+              right: pxTorem(110);
+            }
+            .delete{
+              right: pxTorem(75);
+            }
+            .copy{
+              right: pxTorem(35);
+            }
+            .copying{
+              right: pxTorem(10);
+            }
+            span:hover{
+              color: #999;
+            }
           }
         }
       }
-      li:hover{
-        .delete-icon{
-          display: inline-block;
-        }
-      }
-      li:nth-child(4n){
-        margin-right: 0;
-      }
     }
-  }
 }
 </style>
+
+
+
+
+
+
