@@ -14,7 +14,7 @@
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 </template>
@@ -47,6 +47,12 @@
         })
       },
     },
+    intodesign: function(obj){
+        let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
+        let token = Cookies.get('token-' + window.location.port)
+        // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
+        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
+      },
     mounted() {
       this.init();
     },
