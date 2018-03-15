@@ -22,7 +22,7 @@
 <script>
   let tmp = '';//临时变量
   let model;
-  let Bureau = AV.extend('pre_personal_bureau')
+  let Bureau = AV.extend('c2m_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   export default {
     components: { 
@@ -39,7 +39,8 @@
       init: function() {
         var param = {
           user_poi_users: SITE.session.mem.id,
-          mask_delete: 0
+          mask_delete: 0,
+          com_id_poi_companys: 0
         }
         Bureau.reset().where(param).all((all) => {
           model.examples = all.items

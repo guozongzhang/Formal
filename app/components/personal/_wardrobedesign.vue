@@ -16,7 +16,7 @@
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(:href="design_url + item.id" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
               span.delete(v-on:click="deletewardrobe(item)") 删除
               span.copy(v-on:click="copywardrobe(item)") 复制
@@ -29,7 +29,7 @@
 <script>
   let tmp = '';//临时变量
   let model;
-  let Bureau = AV.extend('pre_personal_bureau')
+  let Bureau = AV.extend('c2m_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
   import Pagination from '../common/pagination.vue'
   export default {
@@ -55,11 +55,30 @@
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         var param = {
           user_poi_users: SITE.session.mem.id,
-          mask_delete: 0
+          mask_delete: 0,
+          com_id_poi_companys: 0
         }
-        Bureau.reset().where(param).skip(skip).all((all) => {
+        var inc = {
+          include: [
+            {
+              table: 'configuration_poi_product_configuration',
+              include: [
+                {
+                  table: 'product_poi_products'
+                }
+              ]
+            }
+          ]
+        }
+        Bureau.reset().where(param).with(inc).skip(skip).all((all) => {
           model.goods = all.items
         })
+      },
+      intodesign: function(obj){
+        let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
+        let token = Cookies.get('token-' + window.location.port)
+        // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
+        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&pid=' + obj.configuration_poi_product_configuration.id + '&configurationname=' + obj.configuration_poi_product_configuration.name + '&productname=' + obj.configuration_poi_product_configuration.product_poi_products.name
       },
       deletewardrobe: function(obj){
         tmp = obj;

@@ -29,7 +29,7 @@
 <script>
   let tmp = '';//临时变量
   let model;
-  let Bureau = AV.extend('pre_personal_bureau');
+  let Bureau = AV.extend('c2m_bureau');
   import LeftmenueVue from './leftmenue.vue';
   export default {
     components: { 
