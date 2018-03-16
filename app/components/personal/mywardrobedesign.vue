@@ -56,7 +56,7 @@
         Bureau.reset().get(model.editObj).update().then((data) => {
           Core.alert('success', '编辑成功')
           setTimeout(()=> {
-            window.history.back()
+            window.location.href = 'personal/mywardrobe'
           }, 1000)
         }, function(data){
           Core.alert('error', '编辑失败')
@@ -64,7 +64,7 @@
       },
       
       back: function(){
-        window.history.back()
+        window.location.href = 'personal/mywardrobe'
       }
     },
     mounted() {
