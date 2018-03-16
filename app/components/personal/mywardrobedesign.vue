@@ -48,7 +48,8 @@
           model.editObj.icon_url = data.url
         })
         //  需要根据id请求详情数据
-        Bureau.reset().where({id: window.location.search.replace('?', '')}).all((data) => {
+        Bureau.reset().where({id: window.location.search.replace('?', ''), com_id_poi_companys: 0}).all((data) => {
+          console.log('data === ', data)
           model.editObj = data.items[0]
           console.log(model.editObj)
         })
@@ -89,9 +90,11 @@
     width: pxTorem(800);
     float: left;
     margin-left: pxTorem(20);
-    .upload.default{
+
+    .upload.auto.default-left{
       width: 80px;
       height: 80px;
+      text-align: center;
       border: 1px dashed #ccc;
       line-height: 80px;
       color: #aaa;
@@ -102,6 +105,7 @@
       height: 80px;
       width: 80px;
       line-height: 30px;
+      text-align: center;
       border: 1px solid #a9a9a9;
       border-radius: 4px;
       color: #555;
@@ -113,6 +117,7 @@
       width: 100%;
       height: 100%;
       position: absolute;
+      text-align: center;
       top: 0;
       z-index: 100;
       cursor: pointer;
@@ -121,17 +126,21 @@
       width: 80px;
       height: 80px;
       float: left;
+      text-align: center;
       border: #DDD 1px solid;
       padding: 1px;
       margin-left: -10px;
     }
+
     .label-title{
       position: relative;
       width: pxTorem(800);
+      text-align: center;
       height: pxTorem(60);
       line-height: pxTorem(60);
       background-color: #fff;
       label{
+        text-align: center;
         display: inline-block;
         font-size: pxTorem(18);
         font-weight: bold;
