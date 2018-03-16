@@ -38,7 +38,7 @@
     methods:{
       init: function() {
         var param = {
-          user_poi_users: SITE.session.mem.id,
+          user_poi_users: 0,
           mask_delete: 0,
           com_id_poi_companys: 0
         }
