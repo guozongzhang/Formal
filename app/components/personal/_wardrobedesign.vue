@@ -87,7 +87,7 @@
         $('.deletegoods').modal('show');
       },
       copywardrobe: function(obj){
-        API.post('functions/bureau/copy_personal_bureau',{id: obj.id}, (data)=> {
+        API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           console.log('data', data)
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)

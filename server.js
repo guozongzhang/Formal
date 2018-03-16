@@ -24,7 +24,7 @@ app.use(bodyParser())
 
 ;['/classes', '/functions', '/users', '/requestSmsCode', '/upload'].forEach(url => {
   app.use(proxy(url, {
-    target: localEnv.url || 'http://192.168.1.120/openapi/api/1.0/',
+    target: localEnv.url || 'http://192.168.1.45/openapi/api/1.0/',
     changeOrigin: true
   }))
 })

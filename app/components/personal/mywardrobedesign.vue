@@ -49,15 +49,17 @@
         })
         //  需要根据id请求详情数据
         Bureau.reset().where({id: window.location.search.replace('?', ''), com_id_poi_companys: 0}).all((data) => {
-          console.log('data === ', data)
           model.editObj = data.items[0]
-          console.log(model.editObj)
         })
       },
       submit: function(){
-        console.log('model.editObj', model.editObj)
         Bureau.reset().get(model.editObj).update().then((data) => {
-          console.log('data', data)
+          Core.alert('success', '编辑成功')
+          setTimeout(()=> {
+            window.history.back()
+          }, 1000)
+        }, function(data){
+          Core.alert('error', '编辑失败')
         })
       },
       
