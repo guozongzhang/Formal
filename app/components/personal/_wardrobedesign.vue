@@ -82,7 +82,7 @@
         let href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
         console.log('href', href)
         // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
-        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
+        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + 'firstcopy=false' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
       },
       deletewardrobe: function(obj){
         tmp = obj;
