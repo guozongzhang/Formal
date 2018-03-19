@@ -137,16 +137,14 @@
     .label-title{
       position: relative;
       width: pxTorem(800);
-      text-align: center;
       height: pxTorem(60);
       line-height: pxTorem(60);
       background-color: #fff;
       label{
-        text-align: center;
         display: inline-block;
         font-size: pxTorem(18);
+        margin-left: 0px;
         font-weight: bold;
-        margin-left: pxTorem(20);
       }
     }
   }
