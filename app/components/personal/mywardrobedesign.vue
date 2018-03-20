@@ -20,7 +20,7 @@
               a.fancybox(:href="editObj.icon_url" rel="group" )
                 img.preview(:src="editObj.icon_url" v-cloak  style="width:80px;height:80px;")
             
-        div
+        div(style="margin-top:90px;position:absolute")
             button.btn.btn-flat(@click="submit()"  type="button") 提交
             button.btn.btn-flat(@click="back()"  type="button" style="margin-left:50px") 返回
 
@@ -103,6 +103,10 @@
       line-height: 80px;
       color: #aaa;
       box-shadow: 0 1px 1px rgba(12,12,12,.19);
+      .mask{
+        top: 0px !important;
+        right: 13px !important;
+      }
     }
     .upload {
       position: relative;
@@ -122,7 +126,6 @@
       width: 100%;
       height: 100%;
       position: absolute;
-      top: 0;
       z-index: 100;
       cursor: pointer;
     }
