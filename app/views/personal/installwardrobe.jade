@@ -4,14 +4,18 @@ html
     include ../layouts/header.jade
   body
     div#app.body-box
-      div(style="width:800px; margin:0 auto")
+      div(style="width:800px; margin:20px auto")
         p 正在打开柜体编辑器，若未打开柜体编辑器，请先点击进入  
           a(href="http://open.dpjia.com/downloads/index/dpjia-office3.4.1.exe" target="_blank")  安装《柜体编辑器》！
-        p 《柜体编辑器》界面截图，3分钟做一套定制柜         3秒钟导出孔位图  ....（此窗口将在{{time}}秒钟自定关闭）
+        p 《柜体编辑器》界面截图，3分钟做一套定制柜         3秒钟导出孔位图  ....（此窗口将在111秒钟自定关闭）
         img(src="/assets/images/installwardrobe.png" style="width:800px")
 
-
-    script(src="/tmp/assets/javascripts/common.js")
-    script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
-
+      each item in development.assets.vendor.javascripts
+        script(src="/assets/javascripts/#{item}.js")
+      script(src="/tmp/assets/javascripts/common.js")
+      script(src="/tmp/assets/javascripts/controller/#{route.controller}/#{route.action}.js")
+      script.
+        if(typeof APP.#{route.controller}.#{route.action} == 'function'){
+          new APP.#{route.controller}.#{route.action}()
+        }
 

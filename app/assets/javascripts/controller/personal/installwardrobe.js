@@ -1,35 +1,26 @@
 let model
-
-class InstallWardrobe extends Basic {
+class Installwardrobe extends Basic {
   constructor () {
     super({
       vue: {
         data: {
-          time: 10  // 倒计时
+          tips: '22222'
+        },
+        methods: {
         },
         components: {
         }
       }
     })
-    this.register()
     model = this
     this.init()
-    console.log('哈哈哈哈哈哈哈')
+    console.log('yuguo00989999')
   }
 
-  // 初始数据
+  //初始数据
   init () {
-    console.log('time: 10  // 倒计时', model.mvvm.time)
-    // model.countdowntime()
+    console.log('---', model.mvvm.tips)
   }
-
-  // countdowntime () {
-  //   if (model.mvvm.time === 0) {
-  //     console.log('关闭页面')
-  //   } else {
-  //     model.mvvm.time--
-  //   }
-  // }
 }
 
-Core.expose('personal', 'installwardrobe', InstallWardrobe)
+Core.expose('personal', 'installwardrobe', Installwardrobe)
