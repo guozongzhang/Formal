@@ -4,7 +4,7 @@ class Installwardrobe extends Basic {
     super({
       vue: {
         data: {
-          tips: '22222'
+          tips: ''
         },
         methods: {
         },
@@ -14,12 +14,10 @@ class Installwardrobe extends Basic {
     })
     model = this
     this.init()
-    console.log('yuguo00989999')
   }
 
   //初始数据
   init () {
-    console.log('---', model.mvvm.tips)
   }
 }
 
