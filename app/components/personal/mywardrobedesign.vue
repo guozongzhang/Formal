@@ -14,7 +14,7 @@
           label 预览图：
             span *
 
-          div
+          div(style="margin-bottom:10px;position:relative")
             div.upload.auto.default-left#uploadcontract(data-model="editObj.icon_url") +
             div.goods-img-box.upload.default(v-show="editObj.icon_url")
               a.fancybox(:href="editObj.icon_url" rel="group" )
@@ -97,6 +97,8 @@
       width: 80px;
       height: 80px;
       text-align: center;
+      float: left;
+      display: inline-block;
       border: 1px dashed #ccc;
       line-height: 80px;
       color: #aaa;
@@ -106,8 +108,9 @@
       position: relative;
       height: 80px;
       width: 80px;
+      float: left;
       line-height: 30px;
-      text-align: center;
+      margin-left: 10px;
       border: 1px solid #a9a9a9;
       border-radius: 4px;
       color: #555;
@@ -119,7 +122,6 @@
       width: 100%;
       height: 100%;
       position: absolute;
-      text-align: center;
       top: 0;
       z-index: 100;
       cursor: pointer;
@@ -128,10 +130,9 @@
       width: 80px;
       height: 80px;
       float: left;
-      text-align: center;
+      margin-left: -10px;
       border: #DDD 1px solid;
       padding: 1px;
-      margin-left: -10px;
     }
 
     .label-title{
