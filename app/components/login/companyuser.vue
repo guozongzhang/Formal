@@ -39,6 +39,10 @@
             span.must-input *
             input.input-info(type="text" name="companytel" v-model="info.companytel" placeholder="公司固话")
           li.list-style
+            span.fa.fa-owner
+            span.must-input *
+            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="负责人姓名")
+          li.list-style
             span.fa.fa-sitemap
             span.must-input *
             input.input-info(type="text" name="brandname" v-model="info.brandname" v-bind:placeholder="info.comsubtype == 'dealer' ? '经销品牌' : '旗下品牌'")
@@ -48,22 +52,26 @@
         span.colon ：
         div.area-box
           <vue-area v-on:province='info.province_poi_province' v-on:city='info.city_poi_city' v-on:district='info.district_poi_district'  v-on:syncData="syncData" :showDistrict="true" :showCity="true"></vue-area>
+      div.info
+        ul.list-style
+          li.list-style
+            span.fa.fa-mobile
+            span.must-input *
+            input.input-info(type="text" name="phone" v-model="info.phone" placeholder="详细地址")
       div.upload-img
-        label 上传营业执照：
+        label 公司logo：
         span.upload-box#upload_com
           span.add-btn(v-on:click="upload_com()")
             span.fa.fa-plus
             | 添加
           input.hidden(type="file" name="files")
-      div.tip-info
-        p 1.该信息仅用于管理员审核之用，身份信息安全保密
-        p 2.支持JPG、PNG、GIF格式
-        p 3.文件大小需小于4M
-        p 4.上传营业执照可优先通过审核
-      div.protocol
-        input(type="checkbox" v-model="info.readprotocol")
-        span 已阅读并同意
-        a(href="javascript:;") 《搭配家用户使用协议》
+      div.upload-img
+        label 三证合一：
+        span.upload-box#upload_com
+          span.add-btn(v-on:click="upload_com()")
+            span.fa.fa-plus
+            | 添加
+          input.hidden(type="file" name="files")
       button.save-btn(type="button" v-on:click="saveComDate()") 提交
       p.pc-login
         span 已有搭配家账号？
