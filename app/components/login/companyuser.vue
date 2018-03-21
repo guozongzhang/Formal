@@ -30,7 +30,7 @@
             li.list-style
               span.fa.fa-mobile
               span.must-input *
-              input.input-info(type="text" name="phone" v-model="info.com_addr" placeholder="详细地址")
+              input.input-info(type="text" name="com_addr" v-model="info.com_addr" placeholder="详细地址")
         div.info
           ul.list-style
             li.list-style
@@ -58,7 +58,6 @@
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
         a(href="javascript:;") 《搭配家用户使用协议》
-        a(v-on:click="nextsetp()") 哈哈哈哈哈哈哈哈
       
       div.info(v-show="step=='two'")
         ul.list-style
@@ -79,8 +78,9 @@
             span.fa.fa-key
             span.must-input *
             input.input-info(type="password" name="pwd" v-model="info.pwd" placeholder="设置密码")
+          a(v-on:click="previousPage()") 上一步
           
-      button.save-btn(type="button" v-on:click="saveComDate()" v-show="step=='two'") 提交
+      button.save-btn(type="submit" v-on:click="saveComDate()" v-show="step=='two'") 提交
       p.pc-login
         span 已有搭配家账号？
         a.must-register(href="/login/index") 立即登录
@@ -112,7 +112,6 @@
           linkman:'',
           companytel:'',
           brandname:'',
-          per_img:'',
           cert_url:'',
           com_logo:'',
           com_addr:'',
@@ -172,7 +171,14 @@
         $('#get_verify').text(start_time+'s后重发');
       },
       nextsetp: function() {
-        model.step = 'two'
+        if(model.firstValidate()){ 
+          model.step = 'two'
+        } else {
+          alert('error', '信息填写有误')
+        }
+      },
+      previousPage: function() {
+        model.step = 'one'
       },
       upload_com_logo:function() {
         var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
@@ -199,7 +205,7 @@
             },
             success: function(data){
               $input.unwrap();
-              model.info.per_img = data.url;
+              model.info.com_logo = data.url;
               var img = '<img src="'+ data.url + '">';
               $('#com-img').find('img').remove();
               $('#com-img').append(img);
@@ -232,7 +238,7 @@
             },
             success: function(data){
               $input.unwrap();
-              model.info.per_img = data.url;
+              model.info.cert_url = data.url;
               var img = '<img src="'+ data.url + '">';
               $('#cerl-img').find('img').remove();
               $('#cerl-img').append(img);
@@ -240,8 +246,26 @@
           })
         })
       },
+      firstValidate: function() {
+        console.log('data', model.info)
+        if((model.info.companyname) && (model.info.province_poi_province > 0) && (model.info.district_poi_district > 0) && (model.info.city_poi_city > 0) && (model.info.com_addr) && (model.info.com_owner) && (model.info.com_logo) && (model.info.cert_url)){
+          return true;
+        } else {
+          return false;
+        }
+      },
+      secondValidata: function() {
+        if((model.info.phone) && (model.info.verification) && (model.info.linkman) && (model.info.pwd)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
       saveComDate: function() {
-        if(!$('#confirm_com_btn').valid()){return false;}
+        if(!model.firstValidate && model.secondValidata){
+          alert('error', '信息上传有误')
+          return
+        }
         console.log('完整的信息', model.info)
         return
         if(!model.info.readprotocol) {
@@ -263,7 +287,8 @@
             province: model.info.province_poi_province,
             city: model.info.city_poi_city,
             area: model.info.district_poi_district,
-            trade_cert_url: model.info.per_img,
+            com_logo: model.info.com_logo,
+            cert_url: model.info.cert_url,
             user_type:'company_admin',
           }
         } else {
@@ -280,7 +305,8 @@
             province: model.info.province_poi_province,
             city: model.info.city_poi_city,
             area: model.info.district_poi_district,
-            trade_cert_url: model.info.per_img,
+            com_logo: model.info.com_logo,
+            cert_url: model.info.cert_url,
             user_type:'company_admin',
           }
         }
@@ -307,6 +333,12 @@
           phone: {
             required: true,
             minlength: 11,
+          },
+          com_owner: {
+            required: true,
+          },
+          com_addr: {
+            required: true,
           },
           pwd: {
             required: true,
@@ -337,6 +369,12 @@
           pwd: {
             required: "请输入密码",
             minlength: "密码不能少于6位",
+          },
+          com_owner: {
+             required: "请输入负责人姓名",
+          },
+          com_addr: {
+            required: "请输入详细地址",
           },
           verification: {
             required: "请输入验证码",
@@ -469,6 +507,7 @@
     }
   }
   .com-img,.cerl-img{
+    height: 60px;
     margin-top: pxTorem(10);
     label{
       display: inline-block;
@@ -493,8 +532,8 @@
       }
       img{
         display: inline-block;
-        width: pxTorem(45);
-        height: pxTorem(30);
+        width: 50px;
+        height: 50px;
         margin-left: pxTorem(10);
       }
     }
