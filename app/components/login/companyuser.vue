@@ -6,65 +6,81 @@
         li.list-style.radio-item
           label 
             input(type="radio" name="comsubtype" v-on:click="getDesigner('dealer')" checked)
-            | 经销商
+            | 注册经销商后台体系
         li.list-style.radio-item
           label 
             input(type="radio" name="comsubtype" v-on:click="getDesigner('brander')")
-            | 品牌商
-      div.info
+            | 注册云展厅后台体系
+
+      div(v-show="step=='one'")
+        div.info
+          ul.list-style
+            li.list-style
+              span.fa.fa-building
+              span.must-input *
+              input.input-info(type="text" name="companyname" v-model="info.companyname" placeholder="公司名称")
+        div.service-obj.clear
+          label 公司地址
+          span.tips *
+          span.colon ：
+          div.area-box
+            <vue-area v-on:province='info.province_poi_province' v-on:city='info.city_poi_city' v-on:district='info.district_poi_district'  v-on:syncData="syncData" :showDistrict="true" :showCity="true"></vue-area>
+        div.info
+          ul.list-style
+            li.list-style
+              span.fa.fa-mobile
+              span.must-input *
+              input.input-info(type="text" name="com_addr" v-model="info.com_addr" placeholder="详细地址")
+        div.info
+          ul.list-style
+            li.list-style
+              span.fa.fa-owner
+              span.must-input *
+              input.input-info(type="text" name="linkman" v-model="info.com_owner" placeholder="负责人姓名")
+        div.com-img
+          label 公司logo：
+          span.upload-box#com-img
+            span.add-btn(v-on:click="upload_com_logo()")
+              span.fa.fa-plus
+              | 添加
+            input.hidden(type="file" name="files")
+        div.cerl-img
+          label 三证合一：
+          span.upload-box#cerl-img
+            span.add-btn(v-on:click="upload_cert_url()")
+              span.fa.fa-plus
+              | 添加
+            input.hidden(type="file" name="files")
+
+        button.save-btn(type="button" v-on:click="nextsetp()" v-show="step=='one'") 下一步
+
+        div.protocol
+        input(type="checkbox" v-model="info.readprotocol")
+        span 已阅读并同意
+        a(href="javascript:;") 《搭配家用户使用协议》
+      
+      div.info(v-show="step=='two'")
         ul.list-style
           li.list-style
             span.fa.fa-mobile
             span.must-input *
             input.input-info(type="text" name="phone" v-model="info.phone" placeholder="手机号")
-          li.list-style
-            span.fa.fa-key
-            span.must-input *
-            input.input-info(type="password" name="pwd" v-model="info.pwd" placeholder="密码")
           li.list-style.verify-error
             span.fa.fa-shield
             span.must-input *
             input.input-info.getverify(type="text" name="verification" v-model="info.verification" placeholder="验证码")
             button.getverifybtn#get_verify(type="button" v-on:click="getVerification()") 免费获取
           li.list-style
-            span.fa.fa-building
-            span.must-input *
-            input.input-info(type="text" name="companyname" v-model="info.companyname" placeholder="公司名称")
-          li.list-style
             span.fa.fa-user
             span.must-input *
-            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="联系人")
+            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="用户名")
           li.list-style
-            span.fa.fa-phone
+            span.fa.fa-key
             span.must-input *
-            input.input-info(type="text" name="companytel" v-model="info.companytel" placeholder="公司固话")
-          li.list-style
-            span.fa.fa-sitemap
-            span.must-input *
-            input.input-info(type="text" name="brandname" v-model="info.brandname" v-bind:placeholder="info.comsubtype == 'dealer' ? '经销品牌' : '旗下品牌'")
-      div.service-obj.clear
-        label 公司地址
-        span.tips *
-        span.colon ：
-        div.area-box
-          <vue-area v-on:province='info.province_poi_province' v-on:city='info.city_poi_city' v-on:district='info.district_poi_district'  v-on:syncData="syncData" :showDistrict="true" :showCity="true"></vue-area>
-      div.upload-img
-        label 上传营业执照：
-        span.upload-box#upload_com
-          span.add-btn(v-on:click="upload_com()")
-            span.fa.fa-plus
-            | 添加
-          input.hidden(type="file" name="files")
-      div.tip-info
-        p 1.该信息仅用于管理员审核之用，身份信息安全保密
-        p 2.支持JPG、PNG、GIF格式
-        p 3.文件大小需小于4M
-        p 4.上传营业执照可优先通过审核
-      div.protocol
-        input(type="checkbox" v-model="info.readprotocol")
-        span 已阅读并同意
-        a(href="javascript:;") 《搭配家用户使用协议》
-      button.save-btn(type="button" v-on:click="saveComDate()") 提交
+            input.input-info(type="password" name="pwd" v-model="info.pwd" placeholder="设置密码")
+          a(v-on:click="previousPage()") 上一步
+          
+      button.save-btn(type="button" v-on:click="saveComDate()" v-show="step=='two'") 提交
       p.pc-login
         span 已有搭配家账号？
         a.must-register(href="/login/index") 立即登录
@@ -78,6 +94,7 @@
   var ip_host = SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/';
   //验证码60秒倒计时
   var start_time = 60;//开始时间
+  var model;
   export default {
     props:['types'],
     components: {
@@ -85,6 +102,7 @@
     },
     data() {
       return {
+        step:'one',
         info:{
           comsubtype:'dealer',
           phone:'',
@@ -94,7 +112,10 @@
           linkman:'',
           companytel:'',
           brandname:'',
-          per_img:'',
+          cert_url:'',
+          com_logo:'',
+          com_addr:'',
+          com_owner:'',
           readprotocol: true,
           province_poi_province:-1,
           city_poi_city:-1,
@@ -109,7 +130,6 @@
         this.$emit('changeusertype', str);
       },
       getVerification: function() {
-        var model = this;
         var phone = this.info.phone.trim();
         $('#get_verify').attr('disabled','true');
         if(phone) {
@@ -150,10 +170,22 @@
         }
         $('#get_verify').text(start_time+'s后重发');
       },
-      upload_com:function() {
-        var model = this;
+      //  下一步
+      nextsetp: function() {
+        if(model.firstValidate()){ 
+          model.step = 'two'
+        } else {
+          alert('error', '信息填写有误')
+        }
+      },
+      //  上一步
+      previousPage: function() {
+        model.step = 'one'
+      },
+      //  上传公司logo
+      upload_com_logo:function() {
         var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
-        var $input = $('#upload_com').find('input');
+        var $input = $('#com-img').find('input');
 
         $input.unbind().click();
         $input.unbind().change(function() {
@@ -161,7 +193,7 @@
           var form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
          
-          $("#upload_com").find('form').ajaxSubmit({
+          $("#com-img").find('form').ajaxSubmit({
             type:'post',
             url:url,
             data: {
@@ -176,79 +208,157 @@
             },
             success: function(data){
               $input.unwrap();
-              model.info.per_img = data.url;
+              model.info.com_logo = data.url;
               var img = '<img src="'+ data.url + '">';
-              $('#upload_com').find('img').remove();
-              $('#upload_com').append(img);
+              $('#com-img').find('img').remove();
+              $('#com-img').append(img);
             }
           })
         })
       },
+      //  上传三证合一
+      upload_cert_url: function() {
+        var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
+        var $input = $('#cerl-img').find('input');
+
+        $input.unbind().click();
+        $input.unbind().change(function() {
+          if($input.val() == ''){return false;}
+          var form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
+          $input.wrap(form);
+         
+          $("#cerl-img").find('form').ajaxSubmit({
+            type:'post',
+            url:url,
+            data: {
+              mode: 'image',
+              mutiple: '0'
+            },
+            crossDomain: true,
+            headers: {
+              "X-DP-Key": SITE.app_key || '',
+              "X-DP-ID": SITE.app_id || '',
+              "X-DP-Token": Cookies.get('dpjia') || ''
+            },
+            success: function(data){
+              $input.unwrap();
+              model.info.cert_url = data.url;
+              var img = '<img src="'+ data.url + '">';
+              $('#cerl-img').find('img').remove();
+              $('#cerl-img').append(img);
+            }
+          })
+        })
+      },
+      //  验证手机号
+      isPoneAvailable: function (pone) {  
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;  
+        if (!myreg.test(pone)) {  
+          return false;  
+        } else {  
+          return true;  
+        }  
+      },
+      //  一级页面验证
+      firstValidate: function() {
+        if((model.info.companyname) && (model.info.province_poi_province > 0) && (model.info.district_poi_district > 0) && (model.info.city_poi_city > 0) && (model.info.com_addr) && (model.info.com_owner) && (model.info.com_logo) && (model.info.cert_url)){
+          return true;
+        } else {
+          return false;
+        }
+      },
+      //  二级页面验证
+      secondValidata: function() {
+        if((model.isPoneAvailable(model.info.phone)) && (model.info.verification) && (model.info.linkman) && (model.info.pwd)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      //  提交
       saveComDate: function() {
-        if(!$('#confirm_com_btn').valid()){return false;}
-        var model = this;
+        if(!(model.firstValidate() && model.secondValidata())){
+          alert('error', '信息上传有误')
+          return
+        }
         if(!model.info.readprotocol) {
           alert('请先阅读搭配家用户使用协议');
           return ;
         }
         var comdata = {};
         if(model.info.comsubtype == 'dealer'){
-          // 经销商
+          // 注册经销商后台体系
           comdata = {
             deal_type: 'dealer',
             mobile: model.info.phone,
             password: model.info.pwd,
             code: model.info.verification,
-            company_name: model.info.companyname,
-            link_man: model.info.linkman,
-            com_tel: model.info.companytel,
-            brand_name: model.info.brandname,
-            province: model.info.province_poi_province,
-            city: model.info.city_poi_city,
-            area: model.info.district_poi_district,
-            trade_cert_url: model.info.per_img,
+            com_name: model.info.companyname,
+            username: model.info.linkman,
+            province_poi_province: model.info.province_poi_province,
+            city_poi_city: model.info.city_poi_city,
+            district_poi_district: model.info.district_poi_district,
+            com_logo: model.info.com_logo,
+            cert_url: model.info.cert_url,
+            com_owner: model.info.com_owner,
             user_type:'company_admin',
           }
+          if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+            Core.alert('danger','公司地址不能为空');
+            return ;
+          }
+          API.get('admin/signUpBySmsCode',comdata, (data)=> {
+            $('.success-bg').removeClass('hidden');
+          },(msg)=> {
+            Core.alert('danger', '注册失败');
+            return ;
+          })
         } else {
-          // 品牌商
+          // 注册云展厅后台体系
           comdata = {
             deal_type: 'company',
             mobile: model.info.phone,
             password: model.info.pwd,
             code: model.info.verification,
-            company_name: model.info.companyname,
-            link_man: model.info.linkman,
-            com_tel: model.info.companytel,
-            brand_name: model.info.brandname,
-            province: model.info.province_poi_province,
-            city: model.info.city_poi_city,
-            area: model.info.district_poi_district,
-            trade_cert_url: model.info.per_img,
+            com_name: model.info.companyname,
+            username: model.info.linkman,
+            province_poi_province: model.info.province_poi_province,
+            city_poi_city: model.info.city_poi_city,
+            district_poi_district: model.info.district_poi_district,
+            com_logo: model.info.com_logo,
+            cert_url: model.info.cert_url,
+            com_owner: model.info.com_owner,
             user_type:'company_admin',
           }
+          if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+            Core.alert('danger','公司地址不能为空');
+            return ;
+          }
+          API.post('companys/companys',comdata, (data)=> {
+            $('.success-bg').removeClass('hidden');
+          },(msg)=> {
+            Core.alert('danger', '注册失败');
+            return ;
+          })
         }
-        if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
-          Core.alert('danger','公司地址不能为空');
-          return ;
-        }
-
-        API.get('admin/signUpBySmsCode',comdata, (data)=> {
-          $('.success-bg').removeClass('hidden');
-        },(msg)=> {
-          Core.alert('danger', '注册失败');
-          return ;
-        })
       },
       syncData: function(key, val) {
         this.info[key] = val;
       }
     },
     mounted() {
+      model = this;
       $("#confirm_com_btn").validate({
         rules: {
           phone: {
             required: true,
             minlength: 11,
+          },
+          com_owner: {
+            required: true,
+          },
+          com_addr: {
+            required: true,
           },
           pwd: {
             required: true,
@@ -279,6 +389,12 @@
           pwd: {
             required: "请输入密码",
             minlength: "密码不能少于6位",
+          },
+          com_owner: {
+             required: "请输入负责人姓名",
+          },
+          com_addr: {
+            required: "请输入详细地址",
           },
           verification: {
             required: "请输入验证码",
@@ -410,7 +526,8 @@
       }
     }
   }
-  .upload-img{
+  .com-img,.cerl-img{
+    height: 60px;
     margin-top: pxTorem(10);
     label{
       display: inline-block;
@@ -435,8 +552,8 @@
       }
       img{
         display: inline-block;
-        width: pxTorem(45);
-        height: pxTorem(30);
+        width: 50px;
+        height: 50px;
         margin-left: pxTorem(10);
       }
     }
