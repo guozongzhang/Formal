@@ -46,8 +46,7 @@
           model.examples = all.items
         })
       },
-    },
-    intodesign: function(obj){
+      intodesign: function(obj){
       //  调用复制请求，回调后出发Unity请求
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
@@ -57,7 +56,8 @@
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
-     },
+     }
+    },
     mounted() {
       this.init();
     },
