@@ -71,8 +71,8 @@
           ]
         }
         Bureau.reset().where(param).skip(skip).all((all) => {
-          console.log('=====', all)
           model.goods = all.items
+          model.totalcount = all.count
         })
       },
       intodesign: function(obj){
@@ -92,6 +92,7 @@
       },
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
+          Core.alert('success', '复制成功')
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })

@@ -44,6 +44,7 @@
         }
         Bureau.reset().where(param).all((all) => {
           model.examples = all.items
+          model.totalcount = all.count
         })
       },
       intodesign: function(obj){
