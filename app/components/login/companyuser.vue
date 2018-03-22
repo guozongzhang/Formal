@@ -73,14 +73,14 @@
           li.list-style
             span.fa.fa-user
             span.must-input *
-            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="用户名称")
+            input.input-info(type="text" name="linkman" v-model="info.linkman" placeholder="用户名")
           li.list-style
             span.fa.fa-key
             span.must-input *
             input.input-info(type="password" name="pwd" v-model="info.pwd" placeholder="设置密码")
           a(v-on:click="previousPage()") 上一步
           
-      button.save-btn(type="submit" v-on:click="saveComDate()" v-show="step=='two'") 提交
+      button.save-btn(type="button" v-on:click="saveComDate()" v-show="step=='two'") 提交
       p.pc-login
         span 已有搭配家账号？
         a.must-register(href="/login/index") 立即登录
@@ -170,6 +170,7 @@
         }
         $('#get_verify').text(start_time+'s后重发');
       },
+      //  下一步
       nextsetp: function() {
         if(model.firstValidate()){ 
           model.step = 'two'
@@ -177,9 +178,11 @@
           alert('error', '信息填写有误')
         }
       },
+      //  上一步
       previousPage: function() {
         model.step = 'one'
       },
+      //  上传公司logo
       upload_com_logo:function() {
         var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
         var $input = $('#com-img').find('input');
@@ -213,6 +216,7 @@
           })
         })
       },
+      //  上传三证合一
       upload_cert_url: function() {
         var url = SITE.API.url+ 'upload' || 'http://test_open.dpjia.com/api/1.0/upload';
         var $input = $('#cerl-img').find('input');
@@ -246,81 +250,97 @@
           })
         })
       },
+      //  验证手机号
+      isPoneAvailable: function (pone) {  
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;  
+        if (!myreg.test(pone)) {  
+          return false;  
+        } else {  
+          return true;  
+        }  
+      },
+      //  一级页面验证
       firstValidate: function() {
-        console.log('data', model.info)
         if((model.info.companyname) && (model.info.province_poi_province > 0) && (model.info.district_poi_district > 0) && (model.info.city_poi_city > 0) && (model.info.com_addr) && (model.info.com_owner) && (model.info.com_logo) && (model.info.cert_url)){
           return true;
         } else {
           return false;
         }
       },
+      //  二级页面验证
       secondValidata: function() {
-        if((model.info.phone) && (model.info.verification) && (model.info.linkman) && (model.info.pwd)) {
+        if((model.isPoneAvailable(model.info.phone)) && (model.info.verification) && (model.info.linkman) && (model.info.pwd)) {
           return true;
         } else {
           return false;
         }
       },
+      //  提交
       saveComDate: function() {
-        if(!model.firstValidate && model.secondValidata){
+        if(!(model.firstValidate() && model.secondValidata())){
           alert('error', '信息上传有误')
           return
         }
-        console.log('完整的信息', model.info)
-        return
         if(!model.info.readprotocol) {
           alert('请先阅读搭配家用户使用协议');
           return ;
         }
         var comdata = {};
         if(model.info.comsubtype == 'dealer'){
-          // 经销商
+          // 注册经销商后台体系
           comdata = {
             deal_type: 'dealer',
             mobile: model.info.phone,
             password: model.info.pwd,
             code: model.info.verification,
-            company_name: model.info.companyname,
-            link_man: model.info.linkman,
-            com_tel: model.info.companytel,
-            brand_name: model.info.brandname,
-            province: model.info.province_poi_province,
-            city: model.info.city_poi_city,
-            area: model.info.district_poi_district,
+            com_name: model.info.companyname,
+            username: model.info.linkman,
+            province_poi_province: model.info.province_poi_province,
+            city_poi_city: model.info.city_poi_city,
+            district_poi_district: model.info.district_poi_district,
             com_logo: model.info.com_logo,
             cert_url: model.info.cert_url,
+            com_owner: model.info.com_owner,
             user_type:'company_admin',
           }
+          if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+            Core.alert('danger','公司地址不能为空');
+            return ;
+          }
+          API.get('admin/signUpBySmsCode',comdata, (data)=> {
+            $('.success-bg').removeClass('hidden');
+          },(msg)=> {
+            Core.alert('danger', '注册失败');
+            return ;
+          })
         } else {
-          // 品牌商
+          // 注册云展厅后台体系
           comdata = {
             deal_type: 'company',
             mobile: model.info.phone,
             password: model.info.pwd,
             code: model.info.verification,
-            company_name: model.info.companyname,
-            link_man: model.info.linkman,
-            com_tel: model.info.companytel,
-            brand_name: model.info.brandname,
-            province: model.info.province_poi_province,
-            city: model.info.city_poi_city,
-            area: model.info.district_poi_district,
+            com_name: model.info.companyname,
+            username: model.info.linkman,
+            province_poi_province: model.info.province_poi_province,
+            city_poi_city: model.info.city_poi_city,
+            district_poi_district: model.info.district_poi_district,
             com_logo: model.info.com_logo,
             cert_url: model.info.cert_url,
+            com_owner: model.info.com_owner,
             user_type:'company_admin',
           }
+          if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
+            Core.alert('danger','公司地址不能为空');
+            return ;
+          }
+          API.post('companys/companys',comdata, (data)=> {
+            $('.success-bg').removeClass('hidden');
+          },(msg)=> {
+            Core.alert('danger', '注册失败');
+            return ;
+          })
         }
-        if(comdata.province == -1 || comdata.city == -1 || comdata.area == -1) {
-          Core.alert('danger','公司地址不能为空');
-          return ;
-        }
-
-        API.get('admin/signUpBySmsCode',comdata, (data)=> {
-          $('.success-bg').removeClass('hidden');
-        },(msg)=> {
-          Core.alert('danger', '注册失败');
-          return ;
-        })
       },
       syncData: function(key, val) {
         this.info[key] = val;
