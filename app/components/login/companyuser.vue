@@ -69,7 +69,7 @@
             span.fa.fa-shield
             span.must-input *
             input.input-info.getverify(type="text" name="verification" v-model="info.verification" placeholder="验证码")
-            button.getverifybtn#get_verify(type="button" v-on:click="getVerification()") 免费获取
+            button.getverifybtn#com_verify(type="button" v-on:click="getVerification()") 免费获取
           li.list-style
             span.fa.fa-user
             span.must-input *
@@ -131,7 +131,7 @@
       },
       getVerification: function() {
         var phone = this.info.phone.trim();
-        $('#get_verify').attr('disabled','true');
+        $('#com_verify').attr('disabled','true');
         if(phone) {
           var data = {
             mobile: phone,
@@ -144,11 +144,11 @@
                 type:'admin',
                 mobile:phone,
               }, (data)=> {
-              alert('验证码已发送，请及时查收');
+              Core.alert('success', '验证码已发送，请及时查收');
               model.countdowntime();
             },(msg)=> {
               Core.alert('danger', '获取验证码失败');
-              $('#get_verify').removeAttr('disabled');
+              $('#com_verify').removeAttr('disabled');
               return ;
             })
           }
@@ -161,21 +161,21 @@
         var time = setTimeout(this.countdowntime,1000); 
         if (start_time == 0) {
           clearTimeout(time);
-          $('#get_verify').text('免费获取');
-          $('#get_verify').removeAttr('disabled');
+          $('#com_verify').text('免费获取');
+          $('#com_verify').removeAttr('disabled');
           start_time = 99;
           return false;
         } else {
           start_time--;
         }
-        $('#get_verify').text(start_time+'s后重发');
+        $('#com_verify').text(start_time+'s后重发');
       },
       //  下一步
       nextsetp: function() {
-        if(model.firstValidate()){ 
+        if(!model.firstValidate()){ 
           model.step = 'two'
         } else {
-          alert('error', '信息填写有误')
+          Core.alert('danger', model.firstValidate())
         }
       },
       //  上一步
@@ -261,28 +261,62 @@
       },
       //  一级页面验证
       firstValidate: function() {
-        if((model.info.companyname) && (model.info.province_poi_province > 0) && (model.info.district_poi_district > 0) && (model.info.city_poi_city > 0) && (model.info.com_addr) && (model.info.com_owner) && (model.info.com_logo) && (model.info.cert_url)){
-          return true;
-        } else {
-          return false;
+        let validateResult = ''
+        if (!model.info.companyname) {
+          validateResult = '公司名称填写有误'
         }
+        if (model.info.province_poi_province <= 0) {
+          validateResult = '请选择省'
+        }
+        if (model.info.district_poi_district <= 0) {
+          validateResult = '请选择区'
+        }
+        if (model.info.city_poi_city <= 0) {
+          validateResult = '请选择市'
+        }
+        if (!model.info.com_addr) {
+          validateResult = '请填写详细地址'
+        }
+        if (!model.info.com_owner) {
+          validateResult = '请填写负责人姓名'
+        }
+        if (!model.info.com_logo) {
+          validateResult = '请上传公司logo'
+        }
+        if (!model.info.cert_url) {
+          validateResult = '请上传三证合一'
+        }
+        if (!model.info.readprotocol) {
+          validateResult = '请同意使用协议'
+        }
+        
+        return validateResult
       },
       //  二级页面验证
       secondValidata: function() {
-        if((model.isPoneAvailable(model.info.phone)) && (model.info.verification) && (model.info.linkman) && (model.info.pwd)) {
-          return true;
-        } else {
-          return false;
+        let validateResult = ''
+        if (!model.isPoneAvailable(model.info.phone)) {
+          validateResult = '请输入正确手机号'
         }
+        if (!model.info.verification) {
+          validateResult = '请填写验证码'
+        }
+        if (!model.info.linkman) {
+          validateResult = '请填写用户名'
+        }
+        if (!model.info.pwd) {
+          validateResult = '请填写密码'
+        }
+        return validateResult
       },
       //  提交
       saveComDate: function() {
-        if(!(model.firstValidate() && model.secondValidata())){
-          alert('error', '信息上传有误')
+        if(model.secondValidata()){
+          Core.alert('danger', model.secondValidata())
           return
         }
         if(!model.info.readprotocol) {
-          alert('请先阅读搭配家用户使用协议');
+          Core.alert('请先阅读搭配家用户使用协议');
           return ;
         }
         var comdata = {};
