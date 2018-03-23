@@ -233,7 +233,7 @@
           if($input.val() == ''){return false;}
           var form = $("<form class='uploadform' method='post' enctype='multipart/form-data' action='" + url + "'></form>");
           $input.wrap(form);
-         
+      
           $("#cerl-img").find('form').ajaxSubmit({
             type:'post',
             url:url,

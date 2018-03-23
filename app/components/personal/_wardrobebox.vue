@@ -2,7 +2,7 @@
   div.collectexample-vue.vue-component
     div.example-box.clear
       div.design-list
-        div(v-show="examples.length == 0")
+        div(v-show="!isLoading")
           p.empty
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#empty")
@@ -30,6 +30,7 @@
     },
     data() {
       return {
+        isLoading: true,
         pagesize: 6,
         totalcount: 0,
         examples:[]
@@ -43,6 +44,12 @@
           com_id_poi_companys: 0
         }
         Bureau.reset().where(param).all((all) => {
+          model.isLoading = false
+          if (all.count == 0) {
+            model.isLoading = false
+          }else{
+            model.isLoading = true
+          }
           model.examples = all.items
           model.totalcount = all.count
         })

@@ -3,7 +3,7 @@
   div.collectgoods-vue.vue-component
     div.example-box.clear
       div.design-list
-        div(v-show="goods.length == 0")
+        div(v-show="!isLoading")
           p.empty
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#empty")
@@ -41,6 +41,7 @@
       return {
         mall_url: SITE.Ips.mall + '/home/goodsdetail?id=',
         pagesize: 8,
+        isLoading: true,
         totalcount: 0,
         deleteinfo:{
           tips:'确定取消该收藏商品吗？',
@@ -71,6 +72,12 @@
           ]
         }
         Bureau.reset().where(param).skip(skip).all((all) => {
+          model.isLoading = false
+          if (all.count == 0) {
+            model.isLoading = false
+          }else{
+            model.isLoading = true
+          }
           model.goods = all.items
           model.totalcount = all.count
         })
