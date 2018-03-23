@@ -15,7 +15,7 @@
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
               span.delete(v-on:click="deletewardrobe(item)") 删除
               span.copy(v-on:click="copywardrobe(item)") 复制
@@ -44,7 +44,7 @@
         isLoading: true,
         totalcount: 0,
         deleteinfo:{
-          tips:'确定取消该收藏商品吗？',
+          tips:'确定删除该柜体？',
           flags:'deletegoods',
           id:''
         },
@@ -98,6 +98,16 @@
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           Core.alert('success', '复制成功')
+          Bureau.reset().where(param).skip(skip).all((all) => {
+            model.isLoading = false
+            if (all.count == 0) {
+              model.isLoading = false
+            }else{
+              model.isLoading = true
+            }
+            model.goods = all.items
+            model.totalcount = all.count
+          })
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
