@@ -1,5 +1,4 @@
 
-
 <template lang="jade">
   div.collectgoods-vue.vue-component
     div.example-box.clear
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+  //  我的设计
   let tmp = '';//临时变量
   let model;
   let Bureau = AV.extend('c2m_bureau')
@@ -75,21 +75,19 @@
           model.totalcount = all.count
         })
       },
+      //  进入设计
       intodesign: function(obj){
-        // window.location.href='/personal/installwardrobe'
         let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
         let token = Cookies.get('dpjia')
-        // console.log('token = ', token)
-        // let href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + '' + '&productname=' + encodeURI(obj.name)
-        // console.log('href', href)
-        // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
         window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=false' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + '' + '&productname=' + encodeURI(obj.name)
       },
+      //  点击item删除按钮
       deletewardrobe: function(obj){
         tmp = obj;
         this.deleteinfo.id = obj.id;
         $('.deletegoods').modal('show');
       },
+      //  复制
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           Core.alert('success', '复制成功')
@@ -97,9 +95,11 @@
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
       },
+      //  编辑
       editwardrobe: function(obj){
         window.location.href='/personal/editwardrobe?'+obj.id
       },
+      //  确定删除
       Delete: function(id) {
         Bureau.reset().get({id: this.deleteinfo.id}).destroy().then((data) => {
           this.goods = _.without(this.goods,tmp);

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  //  编辑柜体
   let tmp = '';//临时变量
   let model;
   let Bureau = AV.extend('c2m_bureau');
@@ -52,6 +53,7 @@
           model.editObj = data.items[0]
         })
       },
+      //  提交
       submit: function(){
         Bureau.reset().get(model.editObj).update().then((data) => {
           Core.alert('success', '编辑成功')
