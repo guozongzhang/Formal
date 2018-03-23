@@ -14,7 +14,7 @@
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 </template>
@@ -59,7 +59,7 @@
       //  调用复制请求，回调后出发Unity请求
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
-          let token = Cookies.get('token-' + window.location.port)
+          let token = Cookies.get('dpjia')
           window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=true' +'&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + '' + '&productname=' + encodeURI(obj.name)
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
