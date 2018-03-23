@@ -78,7 +78,7 @@
             span.fa.fa-key
             span.must-input *
             input.input-info(type="password" name="pwd" v-model="info.pwd" placeholder="设置密码")
-          a(v-on:click="previousPage()") 上一步
+          a(v-on:click="previousPage()" style="cursor:pointer") 上一步
           
       button.save-btn(type="button" v-on:click="saveComDate()" v-show="step=='two'") 提交
       p.pc-login
@@ -129,6 +129,7 @@
         this.info.comsubtype = str;
         this.$emit('changeusertype', str);
       },
+      //  获取验证码
       getVerification: function() {
         var phone = this.info.phone.trim();
         $('#com_verify').attr('disabled','true');
@@ -147,7 +148,12 @@
               Core.alert('success', '验证码已发送，请及时查收');
               model.countdowntime();
             },(msg)=> {
-              Core.alert('danger', '获取验证码失败');
+              if (!model.isPoneAvailable(model.info.phone)) {
+                Core.alert('danger', '手机号格式有误');
+              }else{
+                Core.alert('danger', '获取验证码失败');
+              }
+              
               $('#com_verify').removeAttr('disabled');
               return ;
             })
@@ -437,7 +443,7 @@
             required: "请输入公司名称",
           },
           linkman: {
-            required: "请输入联系人姓名",
+            required: "请输入用户名",
           },
           companytel: {
             required: "请输入公司固话",
