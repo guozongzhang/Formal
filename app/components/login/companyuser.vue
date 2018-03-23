@@ -91,6 +91,7 @@
 
 <script>
   import AreaVue from '../common/area.vue';
+  const querystring = require("querystring");
   var ip_host = SITE.API.url || 'http://192.168.1.120/openapi/api/1.0/';
   //验证码60秒倒计时
   var start_time = 60;//开始时间
@@ -350,7 +351,8 @@
           API.get('admin/signUpBySmsCode',comdata, (data)=> {
             $('.success-bg').removeClass('hidden');
           },(msg)=> {
-            Core.alert('danger', '注册失败');
+            var mes = JSON.parse(msg.responseText)
+            Core.alert('danger', mes.message);
             return ;
           })
         } else {
@@ -377,7 +379,8 @@
           API.post('companys/companys',comdata, (data)=> {
             $('.success-bg').removeClass('hidden');
           },(msg)=> {
-            Core.alert('danger', '注册失败');
+            var mes = JSON.parse(msg.responseText)
+            Core.alert('danger', mes.message);
             return ;
           })
         }
