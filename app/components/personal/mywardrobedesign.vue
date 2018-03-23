@@ -8,11 +8,11 @@
           label 编辑方案
         div
           label 柜体名称
-          span *
+          span.must-input *
             input(type="text" class="form-control" style="width:300px" v-model="editObj.name")
         div
           label 预览图：
-            span *
+            span.must-input *
 
           div(style="margin-bottom:10px;position:relative")
             div.upload.auto.default-left#uploadcontract(data-model="editObj.screen_cut_url") +
@@ -130,6 +130,7 @@
       position: absolute;
       z-index: 100;
       cursor: pointer;
+      margin-left: -50px;
     }
     .preview {
       width: 80px;
@@ -140,6 +141,10 @@
       padding: 1px;
     }
 
+    .must-input{
+      left: pxTorem(60);
+      color: #f00;
+      }
     .label-title{
       position: relative;
       width: pxTorem(800);
