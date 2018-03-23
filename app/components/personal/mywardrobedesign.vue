@@ -15,10 +15,10 @@
             span *
 
           div(style="margin-bottom:10px;position:relative")
-            div.upload.auto.default-left#uploadcontract(data-model="editObj.icon_url") +
-            div.goods-img-box.upload.default(v-show="editObj.icon_url")
-              a.fancybox(:href="editObj.icon_url" rel="group" )
-                img.preview(:src="editObj.icon_url" v-cloak  style="width:80px;height:80px;")
+            div.upload.auto.default-left#uploadcontract(data-model="editObj.screen_cut_url") +
+            div.goods-img-box.upload.default(v-show="editObj.screen_cut_url")
+              a.fancybox(:href="editObj.screen_cut_url" rel="group" )
+                img.preview(:src="editObj.screen_cut_url" v-cloak  style="width:80px;height:80px;")
             
         div(style="margin-top:90px;position:absolute")
             button.btn.btn-flat(@click="submit()"  type="button") 提交
@@ -46,7 +46,7 @@
     methods:{
       init: function () {
         Core.uploadForm($('#uploadcontract'), (data) => {
-          model.editObj.icon_url = data.url
+          model.editObj.screen_cut_url = data.url
         })
         //  需要根据id请求详情数据
         Bureau.reset().where({id: window.location.search.replace('?', ''), com_id_poi_companys: 0}).all((data) => {
