@@ -98,6 +98,11 @@
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           Core.alert('success', '复制成功')
+          var param = {
+            user_poi_users: SITE.session.mem.id,
+            mask_delete: 0,
+            com_id_poi_companys: 0
+          }
           Bureau.reset().where(param).skip(skip).all((all) => {
             model.isLoading = false
             if (all.count == 0) {
