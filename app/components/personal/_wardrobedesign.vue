@@ -11,7 +11,7 @@
         ul.list-style(v-show="goods.length != 0")
           li.list-style.clear(v-for="item in goods")
             div.left
-              img(:src="item.screen_cut_url")
+              img(:src="item.icon_url")
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
