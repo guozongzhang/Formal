@@ -2,7 +2,7 @@
   div.collectexample-vue.vue-component
     div.example-box.clear
       div.design-list
-        div(v-show="examples.length == 0")
+        div(v-show="!isLoading")
           p.empty
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#empty")
@@ -10,11 +10,11 @@
         ul.list-style(v-show="examples.length != 0")
           li.list-style.clear(v-for="item in examples")
             div.left
-              img(:src="item.icon_url")
+              img(:src="item.screen_cut_url")
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
 
     <vue-pagination :flag="'examplenumber'" :totalcount="totalcount" :pagesize="pagesize"></vue-pagination>
 </template>
@@ -30,6 +30,7 @@
     },
     data() {
       return {
+        isLoading: true,
         pagesize: 6,
         totalcount: 0,
         examples:[]
@@ -43,22 +44,28 @@
           com_id_poi_companys: 0
         }
         Bureau.reset().where(param).all((all) => {
+          model.isLoading = false
+          if (all.count == 0) {
+            model.isLoading = false
+          }else{
+            model.isLoading = true
+          }
           model.examples = all.items
+          model.totalcount = all.count
         })
       },
-    },
-    intodesign: function(obj){
+      //  进入设计
+      intodesign: function(obj){
       //  调用复制请求，回调后出发Unity请求
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
-          console.log('data', data)
           let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
-          let token = Cookies.get('token-' + window.location.port)
-        // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
-          window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=true' +'&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
+          let token = Cookies.get('dpjia')
+          window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=true' +'&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + '' + '&productname=' + encodeURI(obj.name)
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
-     },
+     }
+    },
     mounted() {
       this.init();
     },

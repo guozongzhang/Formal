@@ -53,7 +53,7 @@
       div.protocol
         input(type="checkbox" v-model="info.readprotocol")
         span 已阅读并同意
-        a(href="javascript:;") 《搭配家用户使用协议》
+        a(href="/assets/images/serverprotocol.pdf" target="_blank") 《搭配家用户使用协议》
       button.save-btn(type="button" v-on:click="saveDate()") 提交
       p.pc-login
         span 已有搭配家账号？

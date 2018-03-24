@@ -1,10 +1,9 @@
 
-
 <template lang="jade">
   div.collectgoods-vue.vue-component
     div.example-box.clear
       div.design-list
-        div(v-show="goods.length == 0")
+        div(v-show="!isLoading")
           p.empty
             svg.svg-style
               use(xlink:href="/assets/svg/icon.svg#empty")
@@ -12,11 +11,11 @@
         ul.list-style(v-show="goods.length != 0")
           li.list-style.clear(v-for="item in goods")
             div.left
-              img(:src="item.icon_url")
+              img(:src="item.screen_cut_url")
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(v-on:click="intodesign(item)" target="_blank") 进入设计
+              a.go-draw(v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
               span.delete(v-on:click="deletewardrobe(item)") 删除
               span.copy(v-on:click="copywardrobe(item)") 复制
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+  //  我的设计
   let tmp = '';//临时变量
   let model;
   let Bureau = AV.extend('c2m_bureau')
@@ -41,9 +41,10 @@
       return {
         mall_url: SITE.Ips.mall + '/home/goodsdetail?id=',
         pagesize: 8,
+        isLoading: true,
         totalcount: 0,
         deleteinfo:{
-          tips:'确定取消该收藏商品吗？',
+          tips:'确定删除该柜体？',
           flags:'deletegoods',
           id:''
         },
@@ -71,35 +72,51 @@
           ]
         }
         Bureau.reset().where(param).skip(skip).all((all) => {
-          console.log('=====', all)
+          model.isLoading = false
+          if (all.count == 0) {
+            model.isLoading = false
+          }else{
+            model.isLoading = true
+          }
           model.goods = all.items
+          model.totalcount = all.count
         })
       },
+      //  进入设计
       intodesign: function(obj){
-        window.location.href='/personal/installwardrobe'
-        // let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
-        // let token = Cookies.get('dpjia')
-        // console.log('token = ', token)
-        // let href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
-        // console.log('href', href)
-        // // hosturl=http://192.168.1.120/openapi/api&apiversion=/1.0/&appid=111&appkey=222&sessiontoken=b95ceea2b1224560134ef9218ac58bae&bureauid=543&isedit=true&pid=5310
-        // window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=false' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + obj.name + '&productname=' + obj.name
+        let urlStr = (SITE.API.url).split('/api/')[0] + '/api'
+        let token = Cookies.get('dpjia')
+        window.location.href = 'DPBureau://hosturl=' + urlStr + '&apiversion=/1.0/' + '&appid=' + SITE.app_id + '&appkey=' + SITE.app_key + '&sessiontoken=' + token + '&bureauid=' + obj.id + '&isedit=true' + '&ispersonal=true' + '&iscopy=false' + '&pid=' + obj.configuration_poi_product_configuration + '&configurationname=' + '' + '&productname=' + encodeURI(obj.name)
       },
+      //  点击item删除按钮
       deletewardrobe: function(obj){
         tmp = obj;
         this.deleteinfo.id = obj.id;
         $('.deletegoods').modal('show');
       },
+      //  复制
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
-          console.log('data', data)
+          Core.alert('success', '复制成功')
+          Bureau.reset().where(param).skip(skip).all((all) => {
+            model.isLoading = false
+            if (all.count == 0) {
+              model.isLoading = false
+            }else{
+              model.isLoading = true
+            }
+            model.goods = all.items
+            model.totalcount = all.count
+          })
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
       },
+      //  编辑
       editwardrobe: function(obj){
         window.location.href='/personal/editwardrobe?'+obj.id
       },
+      //  确定删除
       Delete: function(id) {
         Bureau.reset().get({id: this.deleteinfo.id}).destroy().then((data) => {
           this.goods = _.without(this.goods,tmp);

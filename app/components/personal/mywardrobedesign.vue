@@ -8,25 +8,26 @@
           label 编辑方案
         div
           label 柜体名称
-          span *
+          span.must-input *
             input(type="text" class="form-control" style="width:300px" v-model="editObj.name")
         div
           label 预览图：
-            span *
+            span.must-input *
 
           div(style="margin-bottom:10px;position:relative")
-            div.upload.auto.default-left#uploadcontract(data-model="editObj.icon_url") +
-            div.goods-img-box.upload.default(v-show="editObj.icon_url")
-              a.fancybox(:href="editObj.icon_url" rel="group" )
-                img.preview(:src="editObj.icon_url" v-cloak  style="width:80px;height:80px;")
+            div.upload.auto.default-left#uploadcontract(data-model="editObj.screen_cut_url") +
+            div.goods-img-box.upload.default(v-show="editObj.screen_cut_url")
+              a.fancybox(:href="editObj.screen_cut_url" rel="group" )
+                img.preview(:src="editObj.screen_cut_url" v-cloak  style="width:80px;height:80px;")
             
-        div
+        div(style="margin-top:90px;position:absolute")
             button.btn.btn-flat(@click="submit()"  type="button") 提交
             button.btn.btn-flat(@click="back()"  type="button" style="margin-left:50px") 返回
 
 </template>
 
 <script>
+  //  编辑柜体
   let tmp = '';//临时变量
   let model;
   let Bureau = AV.extend('c2m_bureau');
@@ -45,13 +46,14 @@
     methods:{
       init: function () {
         Core.uploadForm($('#uploadcontract'), (data) => {
-          model.editObj.icon_url = data.url
+          model.editObj.screen_cut_url = data.url
         })
         //  需要根据id请求详情数据
         Bureau.reset().where({id: window.location.search.replace('?', ''), com_id_poi_companys: 0}).all((data) => {
           model.editObj = data.items[0]
         })
       },
+      //  提交
       submit: function(){
         Bureau.reset().get(model.editObj).update().then((data) => {
           Core.alert('success', '编辑成功')
@@ -103,6 +105,10 @@
       line-height: 80px;
       color: #aaa;
       box-shadow: 0 1px 1px rgba(12,12,12,.19);
+      .mask{
+        top: 0px !important;
+        right: 13px !important;
+      }
     }
     .upload {
       position: relative;
@@ -122,9 +128,9 @@
       width: 100%;
       height: 100%;
       position: absolute;
-      top: 0;
       z-index: 100;
       cursor: pointer;
+      margin-left: -50px;
     }
     .preview {
       width: 80px;
@@ -135,6 +141,10 @@
       padding: 1px;
     }
 
+    .must-input{
+      left: pxTorem(60);
+      color: #f00;
+      }
     .label-title{
       position: relative;
       width: pxTorem(800);
