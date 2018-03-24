@@ -38,12 +38,13 @@
     },
     methods:{
       init: function() {
+        let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         var param = {
           user_poi_users: 0,
           mask_delete: 0,
           com_id_poi_companys: 0
         }
-        Bureau.reset().where(param).all((all) => {
+        Bureau.reset().where(param).skip(skip).limit(model.pagesize).all((all) => {
           model.isLoading = false
           if (all.count == 0) {
             model.isLoading = false

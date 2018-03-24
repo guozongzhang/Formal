@@ -53,6 +53,7 @@
     },
     methods:{
       init: function() {
+        model.goods = []
         let skip = ((parseInt(SITE.query.page) || 1) - 1) * model.pagesize;
         var param = {
           user_poi_users: SITE.session.mem.id,
@@ -71,7 +72,7 @@
             }
           ]
         }
-        Bureau.reset().where(param).skip(skip).all((all) => {
+        Bureau.reset().where(param).skip(skip).limit(model.pagesize).all((all) => {
           model.isLoading = false
           if (all.count == 0) {
             model.isLoading = false
@@ -98,16 +99,7 @@
       copywardrobe: function(obj){
         API.post('functions/bureau/copy_bureau',{id: obj.id}, (data)=> {
           Core.alert('success', '复制成功')
-          Bureau.reset().where(param).skip(skip).all((all) => {
-            model.isLoading = false
-            if (all.count == 0) {
-              model.isLoading = false
-            }else{
-              model.isLoading = true
-            }
-            model.goods = all.items
-            model.totalcount = all.count
-          })
+          model.init()
         },(msg)=> {
           Core.alert('danger', JSON.parse(msg.responseText).message)
         })
