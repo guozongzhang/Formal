@@ -71,7 +71,7 @@
             }
           ]
         }
-        Bureau.reset().where(param).skip(skip).all((all) => {
+        Bureau.reset().where(param).skip(skip).limit(model.pagesize).all((all) => {
           model.isLoading = false
           if (all.count == 0) {
             model.isLoading = false
