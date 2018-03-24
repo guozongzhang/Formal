@@ -36,6 +36,12 @@
             svg:'housetype'
           },
           {
+            link_url:'/personal/mywardrobe',
+            text:'我的柜体',
+            type:'mywardrobe',
+            svg:'wardrobe'
+          },
+          {
             link_url:'/personal/myrenderimg',
             text:'我的效果图',
             type:'myrenderimg',

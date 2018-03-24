@@ -18,8 +18,6 @@ let makeEntry = () => {
   entrys['common.js'] = Helper.walk('./app/assets/javascripts/common', 1)
   return entrys
 }
-
-console.log(makeEntry())
 module.exports = {
   makeEntry: makeEntry
 }

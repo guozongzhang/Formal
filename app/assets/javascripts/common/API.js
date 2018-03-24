@@ -88,15 +88,7 @@ window.API = {
       })
     }
   },
-  
-   /**
-  * 显示分页
-  * @param  {object}   data       请求返回的数据对象
-  * @param  {object}   option 分页配置对象
-  * @param  {string}   wraper     外部容器
-  * @param  {Function} callback   点击分页回调
-  */
-  /*pagination: (count, option, callback)=> {  
+  pagination: (count, option, callback)=> {
     let pagesize = option.pagesize || 15
     let page = option.page || 1
     let wraper = $(option.wraper || '#data-list')
@@ -108,44 +100,6 @@ window.API = {
 
     paper.wrap('<div class="pagination"></div>')
     paper.remove()
-
-    
-
-    let totalPages = Math.ceil(count / pagesize)
-    console.log(totalPages, page)
-    wraper.find('div.pagination').twbsPagination({
-      totalPages: totalPages,
-      visiblePages: 5,
-      startPage: page,
-      initiateStartPageClick: false,
-      first: '首页',
-      prev: '«',
-      next: '»',
-      last: '末页',
-      inputtext: 1,
-      goto: '跳转',
-      selectable: 15,
-      onPageClick: function (event, p) {
-        option.page = p
-        callback()
-      }
-    });
-  },*/
-   pagination: (count, option, callback)=> {
-    let pagesize = option.pagesize || 15
-    let page = option.page || 1
-    let wraper = $(option.wraper || '#data-list')
-
-    if(wraper.length < 1 || count < 1){ return }
-
-    let paper = wraper.find('div.pagination')
-    if (paper.length < 1) { return }
-
-    paper.wrap('<div class="pagination"></div>')
-    paper.remove()
-
-    
-
     let totalPages = Math.ceil(count / pagesize)
     wraper.find('div.pagination').twbsPagination({
       totalPages: totalPages,
@@ -163,7 +117,7 @@ window.API = {
         option.page = p
         callback(event, p)
       }
-    });
+    })
   },
 
    /**

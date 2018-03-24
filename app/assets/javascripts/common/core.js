@@ -101,6 +101,25 @@ window.Core = {
   },
 
   /**
+   * 文件上传
+   */
+  uploadForm: ($wraper, callback) => {
+    let url =  SITE.API.url + 'upload'
+    let $file = $('<input type="file"  name="files"/>')
+    // 解决模型上传页面 主色调图片上传不了的bug，为找到原因
+    if (!callback) {
+      $file = $('<input type="file"  name="files" onChange="Core.uploadChange(this)"/>')
+    }
+    $wraper.append($file)
+    console.log($wraper)
+    if (callback) {
+      $file.change(function () {
+        Core.uploadChange($file[0], callback)
+      })
+    }
+  },
+  
+  /**
    * 弹出提示框
    * @param  {string} typ 消息类型：success, info, warning, danger
    * @param  {string} msg 消息内容

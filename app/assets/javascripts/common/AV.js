@@ -40,9 +40,8 @@ let Helper = {
 
   // 解析 ["id > ? or age > 20"] => [{"id": {"gt": 1}}, {'age': {'$gt': 20}}]
   parseQ: (arr, val)=> {
-    console.log(arr)
     let paraIndex = 1
-    return arr.map((item)=> {
+    return arr.map((item) => {
       let oper = item.split(/\s+/)  // ["id", ">", "?"]
       if (oper[2] == '?') {
         oper[2] = Helper.paraVal(paraIndex, val)
@@ -260,7 +259,7 @@ class Table {
       url = APIUrl + 'search/search?clazz=' + this.table + '&' + params
     }
     
-    if(model.ismock){
+    if (model.ismock) {
       let data = window.MOCK.Table[model.table]
       if (pagination) {
         API.loading('hide', pagination.wraper)
@@ -271,23 +270,15 @@ class Table {
       }
       callback(data)
 
-    }else{
+    } else {
       API.ajax(url, 'get', {}, (data)=> {
         //- 分页
         if (pagination) {
-          console.log("进来了")
           API.loading('hide', pagination.wraper)
-          API.pagination(data.count, pagination, ()=> {
-            //this.skip(pagination.page - 1).limit(pagination.pagesize)
+          API.pagination(data.count, pagination, () => {
             this.all(callback, pagination)
           })
         }
-
-        // 将每条数据转换成 model 对象
-        //for(let i = 0; i < data.items.length; i++){
-        //  data.items[i] = model.new(data.items[i]) 
-        //}
-
         callback(data)
       })   
     } 
@@ -328,7 +319,6 @@ class Model {
 
   update(){
     let model = this
-    console.log(this.fields)
     let url = APIUrl + 'classes/'  + this.table + '/' + this.fields.id
     return  new Promise((resolve)=> {
       if (this.ismock) {

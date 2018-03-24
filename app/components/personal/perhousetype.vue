@@ -73,9 +73,7 @@
             apt_id:obj.id,
           }, (data)=> {
             obj.submit_disabled = false;
-            console.log('=====')
-            window.open(SITE.Ips.design + '/example/design?id=' + data.id);
-            //window.location.href = SITE.Ips.design + '/example/design?id=' + data.id
+            window.open(SITE.Ips.design + '/example/design?id=' + data.id)
         },(msg)=> {
           obj.submit_disabled = false;
           $(event.target).text('去设计');
