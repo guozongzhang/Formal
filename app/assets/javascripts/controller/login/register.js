@@ -111,7 +111,7 @@ class Register extends Basic {
       }
     })
     model = this
-    this.init();
+    this.init()
   }
 
   //初始数据
