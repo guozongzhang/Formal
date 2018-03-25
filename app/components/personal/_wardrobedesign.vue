@@ -15,7 +15,7 @@
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
-              a.go-draw(v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
+              a.go-draw(href="/personal/installwardrobe" v-on:click="intodesign(item)" target="_blank" style="cursor:pointer") 进入设计
               span.rename(v-on:click="editwardrobe(item)") 编辑
               span.delete(v-on:click="deletewardrobe(item)") 删除
               span.copy(v-on:click="copywardrobe(item)") 复制
