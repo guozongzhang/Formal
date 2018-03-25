@@ -24,7 +24,7 @@ class InstallWardrobe extends Basic {
     var time = setTimeout(model.countdowntime, 1000)
     if (model.mvvm.time === 0) {
       clearTimeout(time)
-      window.history.back(-1)
+      window.close()
     } else {
       model.mvvm.time--
     }
