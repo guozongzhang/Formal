@@ -15,7 +15,7 @@ function getLoginState(){
       if(!_.isEmpty(email) && !_.isEmpty(token)) {
         window.location.href = "/login/index?email=" + email + '&token=' + token;
       } else {
-        window.location.href = "/login/index?return_url=" + window.location.href
+        window.location.href = "/login/index?return_url=" + encodeURIComponent(window.location.href)
       }
     }
 

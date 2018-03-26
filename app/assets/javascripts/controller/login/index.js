@@ -109,7 +109,7 @@ class Index extends Basic {
       Core.alert('success','登录成功');
       setTimeout(()=> {
         if (!_.isEmpty(returnUrl)) {
-          window.location.href = returnUrl
+          window.location.href = decodeURIComponent(returnUrl)
         } else {
           if(!_.isEmpty(email) && !_.isEmpty(token)) {
             window.location.href = '/personal/settings?email=' + email + '&token=' + token;
