@@ -108,10 +108,15 @@ class Index extends Basic {
       Cookies.set('dpjia', data.token, { domain: SITE.domain});
       Core.alert('success','登录成功');
       setTimeout(()=> {
-        if(!_.isEmpty(email) && !_.isEmpty(token)) {
-          window.location.href = '/personal/settings?email=' + email + '&token=' + token;
+        var preurl = Cookies.get('dpjia_preurl');
+        if (!_.isEmpty(preurl)) {
+          window.location.href = preurl
         } else {
-          window.location.href = '/personal/index'
+          if(!_.isEmpty(email) && !_.isEmpty(token)) {
+            window.location.href = '/personal/settings?email=' + email + '&token=' + token;
+          } else {
+            window.location.href = '/personal/index'
+          }
         }
       }, 1000)
     },(msg)=> {

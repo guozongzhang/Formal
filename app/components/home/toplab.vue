@@ -108,6 +108,7 @@
       Exit: function() {
         if(confirm('确定要退出登录吗？')) {
           Cookies.set('dpjia', '', { domain: SITE.domain});
+          Cookies.set('dpjia_preurl', '', { domain: SITE.domain});
           Core.alert('success','退出登录');
           window.location.href = '/'
         }
