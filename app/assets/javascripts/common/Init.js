@@ -8,14 +8,14 @@ window.SITE.Init = () => {
  */
 function getLoginState(){
   return new Promise((resolve)=> {
-    var email  = SITE.query.email ? SITE.query.email : '';
-    var token  = SITE.query.token ? SITE.query.token : '';
+    var email  = SITE.query.email ? SITE.query.email : ''
+    var token  = SITE.query.token ? SITE.query.token : ''
     // 未登录进入个人中心页面
     if(!Cookies.get('dpjia') && SITE.router.controller === 'personal') {
       if(!_.isEmpty(email) && !_.isEmpty(token)) {
         window.location.href = "/login/index?email=" + email + '&token=' + token;
       } else {
-        window.location.href = "/login/index";
+        window.location.href = "/login/index?return_url=" + encodeURIComponent(window.location.href)
       }
     }
 
