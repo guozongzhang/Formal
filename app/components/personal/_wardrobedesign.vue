@@ -40,7 +40,7 @@
     data() {
       return {
         mall_url: SITE.Ips.mall + '/home/goodsdetail?id=',
-        pagesize: 8,
+        pagesize: 6,
         isLoading: true,
         totalcount: 0,
         deleteinfo:{
