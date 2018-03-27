@@ -30,14 +30,16 @@
       return {
         settings:{
           type:'mywardrobe',
-          subtype: 'wardrobebox'
+          subtype:  Cookies.get('changType') || 'wardrobebox'
         }
       }
     },
     methods:{
       switchBtn: function(str){
         if(this.settings.subtype == str){ return;}
-        this.settings.subtype = str
+        Cookies.set('changType', str)
+        SITE.query.page = 1
+        window.location.href = '/personal/mywardrobe'
       }
     }
   }

@@ -10,7 +10,7 @@
         ul.list-style(v-show="examples.length != 0")
           li.list-style.clear(v-for="item in examples")
             div.left
-              img(:src="item.icon_url")
+              img(:src="item.icon_url + '?x-oss-process=image/resize,m_pad,h_200,w_200,color_FF0000'")
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
@@ -24,9 +24,11 @@
   let model;
   let Bureau = AV.extend('c2m_bureau')
   import CancelconfirmVue from '../common/cancelconfirm.vue';
+  import Pagination from '../common/pagination.vue'
   export default {
     components: { 
       'vue-cancelconfirm': CancelconfirmVue,
+      'vue-pagination': Pagination
     },
     data() {
       return {
@@ -53,6 +55,8 @@
           }
           model.examples = all.items
           model.totalcount = all.count
+          console.log(model.totalcount)
+          
         })
       },
       //  进入设计

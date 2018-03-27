@@ -11,7 +11,7 @@
         ul.list-style(v-show="goods.length != 0")
           li.list-style.clear(v-for="item in goods")
             div.left
-              img(:src="item.icon_url")
+              img(:src="item.icon_url + '?x-oss-process=image/resize,m_pad,h_200,w_200,color_FF0000'")
             div.subright
               label {{item.name}}
               p.update-time 最后修改时间：{{item.update_time | localDate}}
@@ -40,7 +40,7 @@
     data() {
       return {
         mall_url: SITE.Ips.mall + '/home/goodsdetail?id=',
-        pagesize: 8,
+        pagesize: 6,
         isLoading: true,
         totalcount: 0,
         deleteinfo:{
